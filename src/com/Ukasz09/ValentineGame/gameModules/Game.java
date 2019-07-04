@@ -577,7 +577,7 @@ public class Game extends Application {
         ukasz.render(gc);
 
         if (antiCollisionTimer.getValue() > 0)
-            antiCollisionTimer.removeValue(100);
+            antiCollisionTimer.decValue(100);
 
         //Potwory
 

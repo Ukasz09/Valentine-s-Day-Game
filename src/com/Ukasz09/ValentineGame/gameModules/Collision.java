@@ -47,7 +47,7 @@ public class Collision {
                     collectSound.playSound(0.1,false);
 
                     moneybagIter.remove();
-                    score.addValue(moneybag.getValue());
+                    score.incValue(moneybag.getValue());
                     collectedMoneyBags.incValue();
                 }
             }

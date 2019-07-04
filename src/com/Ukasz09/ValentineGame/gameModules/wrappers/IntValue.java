@@ -1,43 +1,33 @@
 package com.Ukasz09.ValentineGame.gameModules.wrappers;
 
 public class IntValue {
-
     private int value;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Konstruktor */
-
-    public IntValue(int value){
-
-        this.value=value;
+    public IntValue(int value) {
+        this.value = value;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Gettery */
+    public void decValue(int decAmount) {
+        this.value -= decAmount;
+    }
+
+    public void incValue(int value) {
+        this.value += value;
+    }
+
+    public void incValue() {
+        value++;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public int getValue() {
         return value;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Settery */
-
     public void setValue(int value) {
         this.value = value;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Metody */
-
-    public void incValue(){
-        value++;
-    }
-
-    public void addValue(int value){
-        this.value+=value;
-    }
-
-    public void removeValue(int howMany){
-        this.value-=howMany;
     }
 }
