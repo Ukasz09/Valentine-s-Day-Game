@@ -10,22 +10,22 @@ package com.Ukasz09.ValentineGame.gameModules;
 
 //pakiety
 
-import com.Ukasz09.ValentineGame.levels.AllLevel;
-import com.Ukasz09.ValentineGame.levels.Level_1;
-import com.Ukasz09.ValentineGame.levels.Level_2;
-import com.Ukasz09.ValentineGame.sounds.SoundsPath;
-import com.Ukasz09.ValentineGame.sprites.*;
-import com.Ukasz09.ValentineGame.sprites.creatures.FishMonsterMiniboss;
-import com.Ukasz09.ValentineGame.sprites.creatures.Monster;
-import com.Ukasz09.ValentineGame.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.sprites.creatures.Ukasz;
-import com.Ukasz09.ValentineGame.sprites.others.MoneyBag;
-import com.Ukasz09.ValentineGame.sprites.weapons.BombSprite;
-import com.Ukasz09.ValentineGame.sprites.weapons.BulletSprite;
-import com.Ukasz09.ValentineGame.sprites.weapons.ShootSprite;
-import com.Ukasz09.ValentineGame.wrappers.IntValue;
-import com.Ukasz09.ValentineGame.wrappers.LongValue;
-import com.Ukasz09.ValentineGame.sounds.Sounds;
+import com.Ukasz09.ValentineGame.gameModules.levels.AllLevel;
+import com.Ukasz09.ValentineGame.gameModules.levels.Level_1;
+import com.Ukasz09.ValentineGame.gameModules.levels.Level_2;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
+import com.Ukasz09.ValentineGame.gameModules.sprites.*;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonsterMiniboss;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Ukasz;
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShootSprite;
+import com.Ukasz09.ValentineGame.gameModules.wrappers.IntValue;
+import com.Ukasz09.ValentineGame.gameModules.wrappers.LongValue;
+import com.Ukasz09.ValentineGame.soundsModule.Sounds;
 
 //javaFx
 import javafx.animation.AnimationTimer;

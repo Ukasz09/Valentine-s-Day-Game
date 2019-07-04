@@ -7,7 +7,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f9ff56b-6d18-4e2f-871d-36bb47c8212c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/background1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/background1.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/background2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/background2.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/background3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/background3.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/endImage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/endImage.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/startPage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/startPage.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/battery1.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/battery1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/battery2.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/battery2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/battery3.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/battery3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/battery4.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/battery4.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/battery5.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/battery5.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/coinNormal.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/coinNormal.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/coinSmall.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/coinSmall.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/fishMinibossShield.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/fishMinibossShield.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/fishMonsterMinibossBottom.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/fishMonsterMinibossBottom.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/fishMonsterMinibossLeft.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/fishMonsterMinibossLeft.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/fishMonsterMinibossRight.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/fishMonsterMinibossRight.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/fishMonsterMinibossTop.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/fishMonsterMinibossTop.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/fishMonsterSmallBottom.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/fishMonsterSmallBottom.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/fishMonsterSmallLeft.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/fishMonsterSmallLeft.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/fishMonsterSmallRight.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/fishMonsterSmallRight.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/fishMonsterSmallTop.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/fishMonsterSmallTop.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/heartEmpty.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/heartEmpty.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/heartFlare.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/heartFlare.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/heartFull.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/heartFull.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/heartHalf.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/heartHalf.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/iceBallSmall.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/iceBallSmall.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/kasiaHoly.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/kasiaHoly.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/legoHeartSmall.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/legoHeartSmall.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/legoStarSmall.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/legoStarSmall.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/littleMonster1.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/littleMonster1.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/protectionRing - Kopia.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/protectionRing - Kopia.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/protectionRing.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/protectionRing.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/ukaszAngelLeftHoly.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/ukaszAngelLeftHoly.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/ukaszAngelRightHoly.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/ukaszAngelRightHoly.gif" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/wings3.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/wings3.gif" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -105,18 +139,31 @@
       <usages-collector id="statistics.lifecycle.project">
         <counts>
           <entry key="project.closed" value="2" />
+          <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="1" />
+          <entry key="project.opened" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="dummy" value="1" />
           <entry key="java" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="1" />
+          <entry key="PLAIN_TEXT" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -124,41 +171,60 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/levels/Level_2.java">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/background3.jpg">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/endImage.jpg">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/Collision.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+            <state relative-caret-position="128">
+              <caret line="122" column="60" selection-start-line="122" selection-start-column="60" selection-end-line="122" selection-end-column="60" />
               <folding>
-                <element signature="method#Level_2#0;class#Level_2#0" />
-                <element signature="method#setLittleMonsterImages#0;class#Level_2#0" />
-                <element signature="method#setMinibossMonsterImages#0;class#Level_2#0" />
-                <element signature="method#spawnLittleMonsters#0;class#Level_2#0" />
-                <element signature="method#spawnMiniboss#0;class#Level_2#0" />
-                <element signature="method#setPositionMonsters#0;class#Level_2#0" />
-                <element signature="method#makeLevel#0;class#Level_2#0" />
+                <element signature="imports" expanded="true" />
+                <element signature="method#collisionWithMonstersFromLeft#0;class#Collision#0" />
+                <element signature="method#collisionWithMonstersFromRight#0;class#Collision#0" />
+                <element signature="method#collisionWithMonstersFromTop#0;class#Collision#0" />
+                <element signature="method#collisionWithMonstersFromBottom#0;class#Collision#0" />
+                <element signature="method#collisionFromAllDirection#0;class#Collision#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/background1.jpg">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/sprites/creatures/FishMonster.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-346">
+              <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/background2.jpg">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/background3.jpg">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/Game.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-415">
+              <caret line="114" column="38" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/endImage.jpg">
-          <provider selected="true" editor-type-id="images" />
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/imagesPaths.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -223,7 +289,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/levels/Level0.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/levels/makeMoneyBags.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/wrappers/LongValue.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/sounds/sounds.java" />
@@ -274,6 +339,7 @@
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/sounds/SoundsPath.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/Game.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/levels/Level_2.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/imagesPaths.java" />
       </list>
     </option>
   </component>
@@ -315,8 +381,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -342,6 +408,43 @@
               <item name="ValentineGame" type="462c0819:PsiDirectoryNode" />
               <item name="gameModules" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollectMoneyForValentinesDay" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ValentineGame" type="462c0819:PsiDirectoryNode" />
+              <item name="graphicModule" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollectMoneyForValentinesDay" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ValentineGame" type="462c0819:PsiDirectoryNode" />
+              <item name="graphicModule" type="462c0819:PsiDirectoryNode" />
+              <item name="texturesPath" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollectMoneyForValentinesDay" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ValentineGame" type="462c0819:PsiDirectoryNode" />
+              <item name="levels" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollectMoneyForValentinesDay" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ValentineGame" type="462c0819:PsiDirectoryNode" />
+              <item name="sprites" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollectMoneyForValentinesDay" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ValentineGame" type="462c0819:PsiDirectoryNode" />
+              <item name="sprites" type="462c0819:PsiDirectoryNode" />
+              <item name="creatures" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -366,6 +469,9 @@
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Pulpit\Dev\Projekty\CollectMoneyForValentinesDay\src\com\Ukasz09\ValentineGame\gameModules\textures\images" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\Pulpit\Java\FX\CollectMoneyForValentinesDay\src\com\Ukasz09\ValentineGame\spritesImage" />
     </key>
@@ -461,11 +567,12 @@
       <workItem from="1551634248926" duration="220000" />
       <workItem from="1552563894179" duration="947000" />
       <workItem from="1562013307539" duration="1222000" />
+      <workItem from="1562234895176" duration="530000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="256921000" />
+    <option name="totallyTimeSpent" value="257451000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -479,7 +586,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="886" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14845759" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19344473" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -498,6 +605,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.4242021" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5012854" side_tool="true" weight="0.108897746" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3257979" />
+      <window_info anchor="right" id="Codota" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -579,13 +687,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2295">
           <caret line="178" column="5" selection-start-line="178" selection-start-column="5" selection-end-line="178" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/sprites/creatures/FishMonster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -687,16 +788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/Game.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="114" column="38" lean-forward="true" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/sprites/ImagesPath.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -704,32 +795,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/Collision.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1836">
-          <caret line="122" column="60" selection-start-line="122" selection-start-column="60" selection-end-line="122" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#collisionWithMonstersFromLeft#0;class#Collision#0" />
-            <element signature="method#collisionWithMonstersFromRight#0;class#Collision#0" />
-            <element signature="method#collisionWithMonstersFromTop#0;class#Collision#0" />
-            <element signature="method#collisionWithMonstersFromBottom#0;class#Collision#0" />
-            <element signature="method#collisionFromAllDirection#0;class#Collision#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/sounds/Sounds.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="19" column="53" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/levels/Level_2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="method#Level_2#0;class#Level_2#0" />
+            <element signature="method#setLittleMonsterImages#0;class#Level_2#0" />
+            <element signature="method#setMinibossMonsterImages#0;class#Level_2#0" />
+            <element signature="method#spawnLittleMonsters#0;class#Level_2#0" />
+            <element signature="method#spawnMiniboss#0;class#Level_2#0" />
+            <element signature="method#setPositionMonsters#0;class#Level_2#0" />
+            <element signature="method#makeLevel#0;class#Level_2#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/background1.jpg">
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/background1.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/background2.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/background3.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/Boundary.java">
@@ -763,24 +858,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/levels/Level_2.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/images/endImage.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/Collision.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+        <state relative-caret-position="128">
+          <caret line="122" column="60" selection-start-line="122" selection-start-column="60" selection-end-line="122" selection-end-column="60" />
           <folding>
-            <element signature="method#Level_2#0;class#Level_2#0" />
-            <element signature="method#setLittleMonsterImages#0;class#Level_2#0" />
-            <element signature="method#setMinibossMonsterImages#0;class#Level_2#0" />
-            <element signature="method#spawnLittleMonsters#0;class#Level_2#0" />
-            <element signature="method#spawnMiniboss#0;class#Level_2#0" />
-            <element signature="method#setPositionMonsters#0;class#Level_2#0" />
-            <element signature="method#makeLevel#0;class#Level_2#0" />
+            <element signature="imports" expanded="true" />
+            <element signature="method#collisionWithMonstersFromLeft#0;class#Collision#0" />
+            <element signature="method#collisionWithMonstersFromRight#0;class#Collision#0" />
+            <element signature="method#collisionWithMonstersFromTop#0;class#Collision#0" />
+            <element signature="method#collisionWithMonstersFromBottom#0;class#Collision#0" />
+            <element signature="method#collisionFromAllDirection#0;class#Collision#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/images/endImage.jpg">
-      <provider selected="true" editor-type-id="images" />
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/sprites/creatures/FishMonster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-346">
+          <caret line="16" column="36" selection-start-line="16" selection-start-column="36" selection-end-line="16" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-415">
+          <caret line="114" column="38" selection-start-line="114" selection-start-column="38" selection-end-line="114" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/imagesPaths.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
     </entry>
   </component>
   <component name="masterDetails">

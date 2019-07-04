@@ -1,9 +1,9 @@
 package com.Ukasz09.ValentineGame.gameModules;
 
-import com.Ukasz09.ValentineGame.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.sprites.weapons.BombSprite;
-import com.Ukasz09.ValentineGame.sprites.weapons.BulletSprite;
-import com.Ukasz09.ValentineGame.sprites.weapons.ShootSprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShootSprite;
 import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
