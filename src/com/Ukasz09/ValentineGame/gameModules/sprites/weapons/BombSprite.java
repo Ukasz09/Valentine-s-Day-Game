@@ -1,6 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Ukasz;
@@ -17,7 +17,7 @@ public class BombSprite extends ShootSprite {
     private final String bombBoomSoundPath3=SoundsPath.bombBoomSoundPath3;
     private final String bombBoomSoundPath4=SoundsPath.bombBoomSoundPath4;
 
-    private Sounds[] bombBoomSound;
+    private SoundsPlayer[] bombBoomSound;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Konstruktor */
@@ -27,21 +27,21 @@ public class BombSprite extends ShootSprite {
         super(image,shotVelocity);
         setHowManyLivesTake(howManyLiveTakes);
 
-        bombBoomSound=new Sounds[4];
-        bombBoomSound[0]=new Sounds(bombBoomSoundPath1);
-        bombBoomSound[1]=new Sounds(bombBoomSoundPath2);
-        bombBoomSound[2]=new Sounds(bombBoomSoundPath3);
-        bombBoomSound[3]=new Sounds(bombBoomSoundPath4);
+        bombBoomSound=new SoundsPlayer[4];
+        bombBoomSound[0]=new SoundsPlayer(bombBoomSoundPath1);
+        bombBoomSound[1]=new SoundsPlayer(bombBoomSoundPath2);
+        bombBoomSound[2]=new SoundsPlayer(bombBoomSoundPath3);
+        bombBoomSound[3]=new SoundsPlayer(bombBoomSoundPath4);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Gettery */
 
-    public Sounds[] getBombBoomSound() {
+    public SoundsPlayer[] getBombBoomSound() {
         return bombBoomSound;
     }
 
-    public Sounds getRandomBoomSound(){
+    public SoundsPlayer getRandomBoomSound(){
 
         int random=(int)(Math.random()*bombBoomSound.length);
 

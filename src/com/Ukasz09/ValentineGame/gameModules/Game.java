@@ -13,8 +13,6 @@ package com.Ukasz09.ValentineGame.gameModules;
 import com.Ukasz09.ValentineGame.gameModules.levels.AllLevel;
 import com.Ukasz09.ValentineGame.gameModules.levels.Level_1;
 import com.Ukasz09.ValentineGame.gameModules.levels.Level_2;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
-import com.Ukasz09.ValentineGame.gameModules.sprites.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonsterMiniboss;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
@@ -25,7 +23,13 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShootSprite;
 import com.Ukasz09.ValentineGame.gameModules.wrappers.IntValue;
 import com.Ukasz09.ValentineGame.gameModules.wrappers.LongValue;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
+
 
 //javaFx
 import javafx.animation.AnimationTimer;
@@ -77,13 +81,13 @@ public class Game extends Application {
     private Image fishMinibossShieldImage;
 
     //dzwiek
-    private Sounds ukaszWingsSound;
-    private Sounds backgroundSound;
-    private Sounds backgroundStartSound;
-    private Sounds collectMoneySound;
-    private Sounds backgroundEndSound;
-    private Sounds bulletShotSound;
-    private Sounds bombShotSound;
+    private SoundsPlayer ukaszWingsSound;
+    private SoundsPlayer backgroundSound;
+    private SoundsPlayer backgroundStartSound;
+    private SoundsPlayer collectMoneySound;
+    private SoundsPlayer backgroundEndSound;
+    private SoundsPlayer bulletShotSound;
+    private SoundsPlayer bombShotSound;
 
     //fx components
     Scene theScene;
@@ -121,72 +125,56 @@ public class Game extends Application {
     private boolean testMode;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Konstruktor */
-
     public Game() {
 
-        // obrazki, sprites
+        //Player
+        ukaszLeftImage= SpritesImages.ukaszLeftImage;
+        ukaszRightImage = SpritesImages.ukaszRightImage;
+        ukaszShieldImage = SpritesImages.ukaszShieldImage;
+        ukaszShotImage = SpritesImages.ukaszShotImage;
+        ukaszBombShotImages = SpritesImages.getUkaszBombShotImages();
+        heartFullImage = SpritesImages.heartFullImage;
+        heartHalfImage = SpritesImages.heartHalfImage;
+        heartEmptyImage = SpritesImages.heartEmptyImage;
+        batteryImages = SpritesImages.getBatteryImages();
 
-        //player
+        //Other
+        moneyBagImage1 = SpritesImages.moneyBagImage1;
+        moneyBagImage2 = SpritesImages.moneyBagImage2;
 
-        ukaszLeftImage = new Image(getClass().getResourceAsStream(ImagesPath.ukaszLeftPath));
-        ukaszRightImage = new Image(getClass().getResourceAsStream(ImagesPath.ukaszRightPath));
-        ukaszShieldImage = new Image(getClass().getResourceAsStream(ImagesPath.protectionOrbitPath));
-        ukaszShotImage = new Image(getClass().getResourceAsStream(ImagesPath.ukaszBulletShotPath));
-        ukaszBombShotImages = new Image[2];
-        ukaszBombShotImages[0] = new Image(getClass().getResourceAsStream(ImagesPath.ukaszBombShotPath1));
-        ukaszBombShotImages[1] = new Image(getClass().getResourceAsStream(ImagesPath.ukaszBombShotPath2));
+        kasiaImage = SpritesImages.kasiaImage;
+        heartFlareImage = SpritesImages.heartFlareImage;
+        kasiaWingsImage = SpritesImages.kasiaWingsImage;
 
-        //inne
+        //Background
+        startImage = BackgroundImages.startImage;
+        backgroundImage = BackgroundImages.backgroundImage1;
+        endImage = BackgroundImages.endImage;
 
-        moneyBagImage1 = new Image(getClass().getResourceAsStream(ImagesPath.moneyBagPath1));
-        moneyBagImage2 = new Image(getClass().getResourceAsStream(ImagesPath.moneyBagPath2));
-        heartFullImage = new Image(getClass().getResourceAsStream(ImagesPath.heartFullPath));
-        heartHalfImage = new Image(getClass().getResourceAsStream(ImagesPath.heartHalfPath));
-        heartEmptyImage = new Image(getClass().getResourceAsStream(ImagesPath.heartEmptyPath));
-        batteryImages = new Image[5];
+        //Enemy's
+        littleMonsterImage = SpritesImages.littleMonsterImage;
 
-        for (int i = 0; i < batteryImages.length; i++) {
-            batteryImages[i] = new Image(getClass().getResourceAsStream(ImagesPath.batteryPrefix + (i + 1) + ".png"));
-        }
+        fishMonsterRightImage = SpritesImages.fishMonsterRightImage;
+        fishMonsterLeftImage = SpritesImages.fishMonsterLeftImage;
+        fishMonsterTopImage = SpritesImages.fishMonsterTopImage;
+        fishMonsterBottomImage = SpritesImages.fishMonsterBottomImage;
 
-        fishMinibossShieldImage = new Image(getClass().getResourceAsStream(ImagesPath.fishMinibossShield));
+        fishMonsterMinibossRightImage = SpritesImages.fishMonsterMinibossRightImage;
+        fishMonsterMinibossLeftImage = SpritesImages.fishMonsterMinibossLeftImage;
+        fishMonsterMinibossTopImage = SpritesImages.fishMonsterMinibossTopImage;
+        fishMonsterMinibossBottomImage = SpritesImages.fishMonsterMinibossBottomImage;
+        fishMinibossShieldImage = SpritesImages.fishMinibossShieldImage;
 
-        //grafiki koncowe/startowe/komunikaty
+        //Sounds
+        ukaszWingsSound = Sounds.ukaszWingsSound;
+        backgroundSound = Sounds.backgroundSound;
+        backgroundStartSound = Sounds.backgroundStartSound;
+        collectMoneySound = Sounds.collectMoneySound;
+        backgroundEndSound = Sounds.backgroundEndSound;
+        bulletShotSound = Sounds.bulletShotSound;
+        bombShotSound = Sounds.bombShotSound;
 
-        startImage = new Image(getClass().getResourceAsStream(ImagesPath.startImagePath));
-        backgroundImage = new Image(getClass().getResourceAsStream(ImagesPath.backgroudImagePath_l0));
-        endImage = new Image(getClass().getResourceAsStream(ImagesPath.endImagePath));
-        kasiaImage = new Image(getClass().getResourceAsStream(ImagesPath.kasiaImagePath));
-        heartFlareImage = new Image(getClass().getResourceAsStream(ImagesPath.heartFlarePath));
-        kasiaWingsImage = new Image(getClass().getResourceAsStream(ImagesPath.wingsPath));
-
-
-        //potwory
-
-        littleMonsterImage = new Image(getClass().getResourceAsStream(ImagesPath.littleMonster_1Path));
-
-        fishMonsterRightImage = new Image(getClass().getResourceAsStream(ImagesPath.fishMonsterRightPath));
-        fishMonsterLeftImage = new Image(getClass().getResourceAsStream(ImagesPath.fishMonsterLeftPath));
-        fishMonsterTopImage = new Image(getClass().getResourceAsStream(ImagesPath.fishMonsterTopPath));
-        fishMonsterBottomImage = new Image(getClass().getResourceAsStream(ImagesPath.fishMonsterBottomPath));
-
-        fishMonsterMinibossRightImage = new Image(getClass().getResourceAsStream(ImagesPath.fishMonsterMinibossRightPath));
-        fishMonsterMinibossLeftImage = new Image(getClass().getResourceAsStream(ImagesPath.fishMonsterMinibossLeftPath));
-        fishMonsterMinibossTopImage = new Image(getClass().getResourceAsStream(ImagesPath.fishMonsterMinibossTopPath));
-        fishMonsterMinibossBottomImage = new Image(getClass().getResourceAsStream(ImagesPath.fishMonsterMinibossBottomPath));
-
-
-        //dzwiek
-
-        ukaszWingsSound = new Sounds(SoundsPath.ukaszWingsSoundPath);
-        backgroundSound = new Sounds(SoundsPath.backgroundSoundPath1);
-        backgroundStartSound = new Sounds(SoundsPath.startSoundPath);
-        collectMoneySound = new Sounds(SoundsPath.collectMoneySoundPath);
-        backgroundEndSound = new Sounds(SoundsPath.endSoundPath);
-        bulletShotSound = new Sounds(SoundsPath.bulletShotSoundPath);
-        bombShotSound = new Sounds(SoundsPath.bombShotSoundPath);
-
+        //TODO: tu skonczylem
         //komponenty gry
 
         input = new ArrayList<String>();
@@ -304,7 +292,7 @@ public class Game extends Application {
                             //Przygotowanie nastepnego poziomu
 
                             endLevel();
-                            backgroundImage = new Image(getClass().getResourceAsStream(ImagesPath.backgroudImagePath_l1));
+                            backgroundImage = new Image(getClass().getResourceAsStream(BackgroundPath.backgroudImagePath_l1));
 
                             level2 = new Level_2(moneyBagImage1, moneyBagImage2, canvas);
                             level2.setLittleMonsterImages(fishMonsterLeftImage, fishMonsterRightImage, fishMonsterBottomImage, fishMonsterTopImage);

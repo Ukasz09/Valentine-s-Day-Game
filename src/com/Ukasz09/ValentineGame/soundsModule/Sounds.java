@@ -1,43 +1,11 @@
 package com.Ukasz09.ValentineGame.soundsModule;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
-import java.net.URL;
-
 public class Sounds {
-
-    String backgroundSoundPath;
-
-    private  MediaPlayer mediaPlayer;
-    private  Media media;
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Konstruktor */
-
-    public Sounds(String backgroundSoundPath){
-
-        this.backgroundSoundPath = backgroundSoundPath;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Metody */
-
-    public void playSound(double volume, boolean inLoop){
-
-        URL resource=getClass().getResource(backgroundSoundPath);
-        media = new Media(resource.toString());
-
-        mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setVolume(volume);
-
-        if(inLoop)
-            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-
-        mediaPlayer.play();
-    }
-
-    public void stopSound(){
-        mediaPlayer.stop();
-    }
+    public static SoundsPlayer ukaszWingsSound = new SoundsPlayer(SoundsPath.ukaszWingsSoundPath);
+    public static SoundsPlayer backgroundSound = new SoundsPlayer(SoundsPath.backgroundSoundPath1);
+    public static SoundsPlayer backgroundStartSound = new SoundsPlayer(SoundsPath.startSoundPath);
+    public static SoundsPlayer collectMoneySound = new SoundsPlayer(SoundsPath.collectMoneySoundPath);
+    public static SoundsPlayer backgroundEndSound = new SoundsPlayer(SoundsPath.endSoundPath);
+    public static SoundsPlayer bulletShotSound = new SoundsPlayer(SoundsPath.bulletShotSoundPath);
+    public static SoundsPlayer bombShotSound = new SoundsPlayer(SoundsPath.bombShotSoundPath);
 }

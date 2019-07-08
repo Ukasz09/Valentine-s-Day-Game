@@ -1,7 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.FishMinibossShield;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.HealthStatusBar;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.Shield;
@@ -45,9 +45,9 @@ public class FishMonsterMiniboss extends Monster {
         setProtectionTime(0);
         shield=new FishMinibossShield(defaultShieldTimer,defaultShieldDuration,shieldImage,this);
 
-        setHitSound(new Sounds(hitSoundPath));
-        setDeathSound(new Sounds(deathSoundPath));
-        setMissSound(new Sounds(missSoundPath));
+        setHitSound(new SoundsPlayer(hitSoundPath));
+        setDeathSound(new SoundsPlayer(deathSoundPath));
+        setMissSound(new SoundsPlayer(missSoundPath));
         setHowBigKickSize(howBigKickSize);
         setHowManyLivesTake(howManyLivesTake);
         setVelocity(velocityX,velocityY);

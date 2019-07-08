@@ -1,7 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public class LittleMonster extends Monster{
@@ -22,8 +22,8 @@ public class LittleMonster extends Monster{
         super(image);
         setLives(3);
 
-        setHitSound(new Sounds(hitSoundPath));
-        setDeathSound(new Sounds(deathSoundPath));
+        setHitSound(new SoundsPlayer(hitSoundPath));
+        setDeathSound(new SoundsPlayer(deathSoundPath));
         setHowBigKickSize(howBigKickSize);
         setHowManyLivesTake(howManyLivesTake);
         setVelocity(velocityX,velocityY);

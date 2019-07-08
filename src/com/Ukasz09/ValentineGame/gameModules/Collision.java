@@ -1,6 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules;
 
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Ukasz;
@@ -29,7 +29,7 @@ public class Collision {
     /* Metody */
 
     //sprawdza kolizje sprita z monetami
-    public static void checkMoneybagsCollisions(ArrayList<MoneyBag> moneybagList, Sprite sprite, IntValue score, IntValue collectedMoneyBags, Sounds collectSound){
+    public static void checkMoneybagsCollisions(ArrayList<MoneyBag> moneybagList, Sprite sprite, IntValue score, IntValue collectedMoneyBags, SoundsPlayer collectSound){
 
         Iterator<MoneyBag> moneybagIter = moneybagList.iterator();
 

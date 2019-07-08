@@ -2,7 +2,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.Boundary;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.Shield;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.UkaszShield;
@@ -19,9 +19,8 @@ public class Ukasz extends Sprite {
 
     private final String hitSoundPath1=SoundsPath.ukaszHitSoundPath1;
     private final String hitSoundPath2=SoundsPath.ukaszHitSoundPath2;
-    private final String hitSoundPath3=SoundsPath.ukaszHitSoundPath3;
 
-    private Sounds[] ukaszHitSounds;
+    private SoundsPlayer[] ukaszHitSounds;
 
     private String lastDirectionX;
     private String lastDirectionY;
@@ -37,10 +36,9 @@ public class Ukasz extends Sprite {
         setLives(defaultLives);
         setMaxLives(defaultLives);
 
-        ukaszHitSounds=new Sounds[3];
-        ukaszHitSounds[0]=new Sounds(hitSoundPath1);
-        ukaszHitSounds[1]=new Sounds(hitSoundPath2);
-        ukaszHitSounds[2]=new Sounds(hitSoundPath3);
+        ukaszHitSounds=new SoundsPlayer[3];
+        ukaszHitSounds[0]=new SoundsPlayer(hitSoundPath1);
+        ukaszHitSounds[1]=new SoundsPlayer(hitSoundPath2);
 
         lastDirectionX="D";
         lastDirectionY="W";
@@ -52,13 +50,13 @@ public class Ukasz extends Sprite {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Gettery */
 
-    public Sounds[] getUkaszHitSounds() {
+    public SoundsPlayer[] getUkaszHitSounds() {
         return ukaszHitSounds;
     }
 
-    public Sounds getUkaszRandomHitSound(){
+    public SoundsPlayer getUkaszRandomHitSound(){
 
-        int random=(int)(Math.random()*3);
+        int random=(int)(Math.random()*2);
         System.out.println(random);
         return ukaszHitSounds[random];
     }

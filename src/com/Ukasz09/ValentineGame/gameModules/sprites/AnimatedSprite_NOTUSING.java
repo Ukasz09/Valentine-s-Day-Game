@@ -5,7 +5,7 @@
 
 package com.Ukasz09.ValentineGame.gameModules.sprites;
 
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -25,8 +25,8 @@ public class AnimatedSprite_NOTUSING {
 
     private double lives;
     private double maxLives;
-    private Sounds hitSound;
-    private Sounds deathSound;
+    private SoundsPlayer hitSound;
+    private SoundsPlayer deathSound;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Konstruktor */
@@ -69,11 +69,11 @@ public class AnimatedSprite_NOTUSING {
         this.lives = lives;
     }
 
-    public void setHitSound(Sounds hitSound) {
+    public void setHitSound(SoundsPlayer hitSound) {
         this.hitSound = hitSound;
     }
 
-    public void setDeathSound(Sounds deathSound) {
+    public void setDeathSound(SoundsPlayer deathSound) {
         this.deathSound = deathSound;
     }
 
@@ -107,11 +107,11 @@ public class AnimatedSprite_NOTUSING {
         return lives;
     }
 
-    public Sounds getHitSound() {
+    public SoundsPlayer getHitSound() {
         return hitSound;
     }
 
-    public Sounds getDeathSound() {
+    public SoundsPlayer getDeathSound() {
         return deathSound;
     }
 
