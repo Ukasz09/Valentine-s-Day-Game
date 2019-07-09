@@ -6,6 +6,9 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickByBigMonster;
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickByLittleMonster;
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.TeleportKick;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
@@ -17,7 +20,7 @@ public class Level_1 extends AllLevel{
     private final int howManySmallCoins=8;
     private final int smallCoinValue=50;
     private final int normalCoinValue=100;
-    private final int howManyLittleMonsters=5;
+    private final int howManyLittleMonsters=1;
     private final int howManyAllMonsters=howManyLittleMonsters;
 
     private Image littleMonsterImage;
@@ -48,7 +51,7 @@ public class Level_1 extends AllLevel{
     public void spawnLittleMonsters(ArrayList<Monster> monsters){
 
         for (int i=0; i<getHowManyLittleMonsters(); i++)
-            monsters.add(new LittleMonster(littleMonsterImage));
+            monsters.add(new LittleMonster(littleMonsterImage, new KickByLittleMonster(new TeleportKick())));
 
     }
 

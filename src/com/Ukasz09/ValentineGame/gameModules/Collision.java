@@ -3,7 +3,7 @@ package com.Ukasz09.ValentineGame.gameModules;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Ukasz;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
@@ -16,7 +16,7 @@ import java.util.Iterator;
 
 public class Collision {
 
-    private static final int defaultAntiCollisionsTimer=2000/(Ukasz.getDefaultVelocity()/400);
+    private static final int defaultAntiCollisionsTimer=2000/(Player.getDefaultVelocity()/400);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Gettery */
@@ -42,7 +42,7 @@ public class Collision {
 
                 //jesli sprawdzamy kolizje gracza
 
-                if(sprite instanceof Ukasz){
+                if(sprite instanceof Player){
 
                     collectSound.playSound(0.1,false);
 
@@ -108,7 +108,7 @@ public class Collision {
     }
 
     //zwraca czy nastapila kolizja gracza z potworem
-    public static boolean playerCollisionWithMonster(ArrayList<Monster> monsters, Ukasz ukasz, Canvas canvas){
+    public static boolean playerCollisionWithMonster(ArrayList<Monster> monsters, Player ukasz, Canvas canvas){
 
         for(Sprite m: monsters){
 
@@ -117,7 +117,7 @@ public class Collision {
                   if (ukasz.getProtectionTime()<=0){
 
                       if(((Monster)m).getHowBigKickSize()>0)
-                        ukasz.kickPlayerByMonsterPostion(((Monster)m),canvas);
+                          ((Monster) m).kickPlayer(ukasz,canvas);
 
                       ukasz.removeLives(((Monster)m).getHowManyLivesTake());
                       ukasz.getUkaszRandomHitSound().playSound(0.5,false);

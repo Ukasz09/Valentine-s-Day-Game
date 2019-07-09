@@ -7,6 +7,8 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonsterMinibo
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickByBigMonster;
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.TeleportKick;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
@@ -77,12 +79,12 @@ public class Level_2 extends AllLevel{
     public void spawnLittleMonsters(ArrayList<Monster> monsters){
 
         for (int i = 0; i< howManyLittleMonsters; i++)
-            monsters.add(new FishMonster(littleMonsterLeftImage, littleMonsterRightImage, littleMonsterBottomImage, littleMonsterTopImage));
+            monsters.add(new FishMonster(littleMonsterLeftImage, littleMonsterRightImage, littleMonsterBottomImage, littleMonsterTopImage, new KickByBigMonster(new TeleportKick())));
     }
 
     public void spawnMiniboss(ArrayList<Monster> monsters){
 
-            FishMonsterMiniboss miniBoss=new FishMonsterMiniboss(minibossLeftImage, minibossRightImage, minibossBottomImage, minibossTopImage,minibossShieldImage);
+            FishMonsterMiniboss miniBoss=new FishMonsterMiniboss(minibossLeftImage, minibossRightImage, minibossBottomImage, minibossTopImage,minibossShieldImage, new KickByBigMonster(new TeleportKick()));
 
             int random=(int)(Math.random()*2);
 

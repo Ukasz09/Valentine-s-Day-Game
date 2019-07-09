@@ -8,15 +8,13 @@
 
 package com.Ukasz09.ValentineGame.gameModules;
 
-//pakiety
-
 import com.Ukasz09.ValentineGame.gameModules.levels.AllLevel;
 import com.Ukasz09.ValentineGame.gameModules.levels.Level_1;
 import com.Ukasz09.ValentineGame.gameModules.levels.Level_2;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonsterMiniboss;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Ukasz;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
@@ -28,10 +26,7 @@ import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.Sounds;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
 
-
-//javaFx
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -46,14 +41,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-//pozostale
 import java.util.ArrayList;
 
 public class Game extends Application {
 
-    //sprites
-    private Image ukaszLeftImage;
-    private Image ukaszRightImage;
+    //Sprites
+    private Image playerLeftImage;
+    private Image playerRightImage;
     private Image backgroundImage;
     private Image moneyBagImage1;
     private Image moneyBagImage2;
@@ -62,7 +56,7 @@ public class Game extends Application {
     private Image startImage;
     private Image heartFlareImage;
     private Image kasiaWingsImage;
-    private Image ukaszShotImage;           //Bullet
+    private Image ukaszShotImage;
     private Image[] ukaszBombShotImages;
     private Image littleMonsterImage;
     private Image fishMonsterRightImage;
@@ -80,8 +74,8 @@ public class Game extends Application {
     private Image[] batteryImages;
     private Image fishMinibossShieldImage;
 
-    //dzwiek
-    private SoundsPlayer ukaszWingsSound;
+    //Sounds
+    private SoundsPlayer playerWingsSound;
     private SoundsPlayer backgroundSound;
     private SoundsPlayer backgroundStartSound;
     private SoundsPlayer collectMoneySound;
@@ -89,17 +83,15 @@ public class Game extends Application {
     private SoundsPlayer bulletShotSound;
     private SoundsPlayer bombShotSound;
 
-    //fx components
     Scene theScene;
     GraphicsContext gc;
     Canvas canvas;
     Group root;
 
-    //komponenty gry
     private ArrayList<MoneyBag> moneybagList;
     private ArrayList<Monster> monsters;
-    private ArrayList<String> input;            //Przechowuje wybrane klawisze (bez powtorek)
-    private ArrayList<ShootSprite> ukaszShots;  //oddane strzaly gracza
+    private ArrayList<String> input;
+    private ArrayList<ShootSprite> playerShots;
 
     private double elapsedTime;
     private LongValue lastNanoTime;
@@ -118,18 +110,13 @@ public class Game extends Application {
     private boolean showTutorialPage;
     private boolean playerReadyToGame;
 
-    private Ukasz ukasz;
+    private Player player;
     private ShootSprite ukaszShotSprite;
-
-    //na czas testow
-    private boolean testMode;
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
-
         //Player
-        ukaszLeftImage= SpritesImages.ukaszLeftImage;
-        ukaszRightImage = SpritesImages.ukaszRightImage;
+        playerLeftImage = SpritesImages.ukaszLeftImage;
+        playerRightImage = SpritesImages.ukaszRightImage;
         ukaszShieldImage = SpritesImages.ukaszShieldImage;
         ukaszShotImage = SpritesImages.ukaszShotImage;
         ukaszBombShotImages = SpritesImages.getUkaszBombShotImages();
@@ -166,7 +153,7 @@ public class Game extends Application {
         fishMinibossShieldImage = SpritesImages.fishMinibossShieldImage;
 
         //Sounds
-        ukaszWingsSound = Sounds.ukaszWingsSound;
+        playerWingsSound = Sounds.ukaszWingsSound;
         backgroundSound = Sounds.backgroundSound;
         backgroundStartSound = Sounds.backgroundStartSound;
         collectMoneySound = Sounds.collectMoneySound;
@@ -174,39 +161,34 @@ public class Game extends Application {
         bulletShotSound = Sounds.bulletShotSound;
         bombShotSound = Sounds.bombShotSound;
 
-        //TODO: tu skonczylem
-        //komponenty gry
-
-        input = new ArrayList<String>();
+        //Game components
+        input = new ArrayList<>();
         lastNanoTime = new LongValue(System.nanoTime());
 
-        ukasz = new Ukasz(ukaszRightImage, ukaszShieldImage);
-        ukaszShots = new ArrayList<ShootSprite>();
+        //todo: wyrzucic skladowe do poszczegolnych klas (np image playera do playera itd)
+        player = new Player(playerRightImage, ukaszShieldImage);
+        playerShots = new ArrayList<>();
         antiCollisionTimer = new IntValue(0);
 
-        moneybagList = new ArrayList<MoneyBag>();
+        moneybagList = new ArrayList<>();
         collectedMoneybags = new IntValue(0);
 
-        monsters = new ArrayList<Monster>();
+        monsters = new ArrayList<>();
         killedMonstersOnLevel = new IntValue(0);
 
         levelNumber = 0;
         bulletOverheating = 0;
         bombOverheating = 0;
         playerFightWithBoss = false;
-        testMode = false;
         showTutorialPage = false;
         playerReadyToGame = false;
     }
 
+    //TODO: tu skonczylem
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Metody */
 
-    //Glowna metoda gry
+    //TODO zrobic view manager
     public void start(Stage theStage) {
-
-        // Utworzenie okna, komponentow
-
         theStage.setTitle("Valentines_Game");
         theStage.setWidth(1600);
         theStage.setHeight(900);
@@ -260,21 +242,21 @@ public class Game extends Application {
                             //Ustawienia dla poziomu 1
 
                             score = new IntValue(0);
-                            double centerPositionX = Boundary.getAtRightBorder(canvas) / 2 - ukasz.getWidth();
-                            double centerPositionY = Boundary.getAtBottomBorder(canvas) / 2 - ukasz.getHeight();
+                            double centerPositionX = Boundary.getAtRightBorder(canvas) / 2 - player.getWidth();
+                            double centerPositionY = Boundary.getAtBottomBorder(canvas) / 2 - player.getHeight();
 
-                            ukasz.setPosition(centerPositionX, centerPositionY);
+                            player.setPosition(centerPositionX, centerPositionY);
 
                             level1 = new Level_1(moneyBagImage1, moneyBagImage2, littleMonsterImage, canvas);
                             level1.makeLevel(moneybagList, monsters);
 
                             collectedMoneybags.setValue(0);
-                            ukaszShots.clear();
+                            playerShots.clear();
 
                             levelNumber++;
 
                             backgroundStartSound.stopSound();
-                            ukaszWingsSound.playSound(1, true);
+                            playerWingsSound.playSound(1, true);
                             backgroundSound.playSound(0.1, true);
                         }
 
@@ -284,7 +266,7 @@ public class Game extends Application {
                     //POZIOM 1
                     case 1: {
 
-                        if ((!levelIsEnd(level1)) && (testMode == false))
+                        if (!levelIsEnd(level1))
                             play(theStage, currentNanoTime, level1);
 
                         else {
@@ -307,7 +289,7 @@ public class Game extends Application {
                     //POZIOM2
                     case 2: {
 
-                        if ((!levelIsEnd(level2)) && (testMode == false)) {
+                        if (!levelIsEnd(level2)) {
 
                             if (playerFightWithBoss == false) {
 
@@ -336,7 +318,7 @@ public class Game extends Application {
 
                             endLevel();
 
-                            ukaszWingsSound.stopSound();
+                            playerWingsSound.stopSound();
                             backgroundSound.stopSound();
 
                             backgroundEndSound.playSound(0.3, false);
@@ -365,22 +347,21 @@ public class Game extends Application {
     public void endLevel() {
 
         levelNumber++;
-        ukasz.addTotalScore(score.getValue());
+        player.addTotalScore(score.getValue());
         score.setValue(0);
         collectedMoneybags.setValue(0);
         moneybagList.clear();
         monsters.clear();
-        ukaszShots.clear();
+        playerShots.clear();
         killedMonstersOnLevel.setValue(0);
         playerFightWithBoss = false;
-        testMode = false;
     }
 
     //sprawdza klikniety klawisz i wykonuje akcje dla niego
     public void checkPlayerMove(int velocity) {
 
-        ukasz.setVelocity(0, 0);
-        boolean playerCantDoAnyMove = Collision.collisionFromAllDirection(monsters, ukasz, canvas);
+        player.setVelocity(0, 0);
+        boolean playerCantDoAnyMove = Collision.collisionFromAllDirection(monsters, player, canvas);
 
         if (playerCantDoAnyMove)
             antiCollisionTimer.setValue(Collision.getDefaultAntiCollisionsTimer());
@@ -388,13 +369,13 @@ public class Game extends Application {
         if (input.contains("A")) {
 
             //kolizja z ramka
-            if (Boundary.boundaryCollisionFromLeft(canvas, ukasz) == false) {
+            if (Boundary.boundaryCollisionFromLeft(canvas, player) == false) {
 
-                ukasz.setImage(ukaszLeftImage);
-                ukasz.setLastDirectionX("A");
+                player.setImage(playerLeftImage);
+                player.setLastDirectionX("A");
 
-                if ((Collision.collisionWithMonstersFromRight(monsters, ukasz) == false) || (antiCollisionTimer.getValue() > 0))
-                    ukasz.addVelocity(-velocity, 0);
+                if ((Collision.collisionWithMonstersFromRight(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
+                    player.addVelocity(-velocity, 0);
 
             }
         }
@@ -402,13 +383,13 @@ public class Game extends Application {
         if (input.contains("D")) {
 
             //kolizja z ramka
-            if (Boundary.boundaryCollisionFromRight(canvas, ukasz) == false) {
+            if (Boundary.boundaryCollisionFromRight(canvas, player) == false) {
 
-                ukasz.setImage(ukaszRightImage);
-                ukasz.setLastDirectionX("D");
+                player.setImage(playerRightImage);
+                player.setLastDirectionX("D");
 
-                if ((Collision.collisionWithMonstersFromLeft(monsters, ukasz) == false) || (antiCollisionTimer.getValue() > 0))
-                    ukasz.addVelocity(velocity, 0);
+                if ((Collision.collisionWithMonstersFromLeft(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
+                    player.addVelocity(velocity, 0);
 
             }
         }
@@ -416,24 +397,24 @@ public class Game extends Application {
         if (input.contains("W")) {
 
             //kolizja z ramka
-            if (Boundary.boundaryCollisionFromTop(canvas, ukasz) == false) {
+            if (Boundary.boundaryCollisionFromTop(canvas, player) == false) {
 
-                ukasz.setLastDirectionY("W");
+                player.setLastDirectionY("W");
 
-                if ((Collision.collisionWithMonstersFromBottom(monsters, ukasz) == false) || (antiCollisionTimer.getValue() > 0))
-                    ukasz.addVelocity(0, -velocity);
+                if ((Collision.collisionWithMonstersFromBottom(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
+                    player.addVelocity(0, -velocity);
             }
         }
 
         if (input.contains("S")) {
 
             //kolizja z ramka
-            if (Boundary.boundaryCollisionFromBottom(canvas, ukasz) == false) {
+            if (Boundary.boundaryCollisionFromBottom(canvas, player) == false) {
 
-                ukasz.setLastDirectionY("W");
+                player.setLastDirectionY("W");
 
-                if ((Collision.collisionWithMonstersFromTop(monsters, ukasz) == false) || (antiCollisionTimer.getValue() > 0))
-                    ukasz.addVelocity(0, velocity);
+                if ((Collision.collisionWithMonstersFromTop(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
+                    player.addVelocity(0, velocity);
             }
         }
 
@@ -442,11 +423,11 @@ public class Game extends Application {
 
             if (bulletOverheating <= 0) {
 
-                ukaszShotSprite = new BulletSprite(ukaszShotImage, ukasz.getLastDirectionX(), BulletSprite.getDefaultShotVelocity());
-                ((BulletSprite) ukaszShotSprite).setPosition(ukasz);
+                ukaszShotSprite = new BulletSprite(ukaszShotImage, player.getLastDirectionX(), BulletSprite.getDefaultShotVelocity());
+                ((BulletSprite) ukaszShotSprite).setPosition(player);
                 ukaszShotSprite.setVelocity(ukaszShotSprite.getShotVelocity(), 0);
 
-                ukaszShots.add(ukaszShotSprite);
+                playerShots.add(ukaszShotSprite);
 
                 bulletShotSound.playSound(0.2, false);
 
@@ -460,20 +441,15 @@ public class Game extends Application {
             if (bombOverheating <= 0) {
 
                 ukaszShotSprite = new BombSprite(ukaszBombShotImages[(int) (Math.random() * 2)], BombSprite.getDefaultShotVelocity());
-                ((BombSprite) ukaszShotSprite).setPosition(ukasz);
+                ((BombSprite) ukaszShotSprite).setPosition(player);
                 ukaszShotSprite.setVelocity(0, ukaszShotSprite.getShotVelocity());
 
-                ukaszShots.add(ukaszShotSprite);
+                playerShots.add(ukaszShotSprite);
 
                 bombShotSound.playSound(0.5, false);
 
                 bombOverheating = ((BombSprite) ukaszShotSprite).getMaxOverheating();
             }
-        }
-
-        //tryb testowy
-        if (input.contains("T")) {
-            testMode = true;
         }
     }
 
@@ -524,21 +500,21 @@ public class Game extends Application {
         elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
         lastNanoTime.setValue(currentNanoTime);
 
-        checkPlayerMove(Ukasz.getDefaultVelocity());
-        ukasz.update(elapsedTime);
+        checkPlayerMove(Player.getDefaultVelocity());
+        player.update(elapsedTime);
 
         //detekcja kolizji z pieniedzmi
-        Collision.checkMoneybagsCollisions(moneybagList, ukasz, score, collectedMoneybags, collectMoneySound);
+        Collision.checkMoneybagsCollisions(moneybagList, player, score, collectedMoneybags, collectMoneySound);
 
         //render tla
         gc.drawImage(backgroundImage, 0, 0);
 
         //render napisu
-        String pointsText = "Kasa na walentynki: $" + (ukasz.getTotalScore() + (score.getValue()));
+        String pointsText = "Kasa na walentynki: $" + (player.getTotalScore() + (score.getValue()));
         gc.setFill(Color.TAN);
         gc.fillText(pointsText, theStage.getWidth() - 450, 70);
 
-        ukasz.getShield().updateAndDrawShield(gc);
+        player.getShield().updateAndDrawShield(gc);
 
         //Dla strzalu
         if (bulletOverheating > 0)
@@ -549,7 +525,7 @@ public class Game extends Application {
             bombOverheating -= 50;
 
         //render serc
-        AllLevel.drawHearts(gc, canvas, ukasz, heartFullImage, heartHalfImage, heartEmptyImage);
+        AllLevel.drawHearts(gc, canvas, player, heartFullImage, heartHalfImage, heartEmptyImage);
 
         //render baterii
         AllLevel.drawBattery(gc, canvas, bombOverheating, BombSprite.getMaxOverheating(), batteryImages);
@@ -559,10 +535,10 @@ public class Game extends Application {
             moneyBag.render(gc);
 
         //sprawdzenie czy pociski wylatuja poza mape, update i render
-        Boundary.updateAndBoundaryActionForShots(gc, ukaszShots, elapsedTime, canvas);
+        Boundary.updateAndBoundaryActionForShots(gc, playerShots, elapsedTime, canvas);
 
         //render gracza
-        ukasz.render(gc);
+        player.render(gc);
 
         if (antiCollisionTimer.getValue() > 0)
             antiCollisionTimer.decValue(100);
@@ -573,12 +549,12 @@ public class Game extends Application {
         level.renderMonsters(monsters, gc);
 
         //kolizja z graczem
-        Collision.playerCollisionWithMonster(monsters, ukasz, canvas);
+        Collision.playerCollisionWithMonster(monsters, player, canvas);
 
         //kolizja z pociskami
-        Collision.playerShotCollision(monsters, ukaszShots, killedMonstersOnLevel);
+        Collision.playerShotCollision(monsters, playerShots, killedMonstersOnLevel);
 
-        level.updateMonsters(ukasz, monsters);
+        level.updateMonsters(player, monsters);
 
     }
 

@@ -3,7 +3,7 @@ import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Ukasz;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import javafx.scene.image.Image;
 
 public class BombSprite extends ShootSprite {
@@ -71,7 +71,7 @@ public class BombSprite extends ShootSprite {
         double centerPositionRightX=ukasz.getBoundary().getMaxX()-ukasz.getWidth()/2;
         double centerPositionLeftX=ukasz.getBoundary().getMaxX()-ukasz.getWidth()/1.5;
 
-        if(((Ukasz)ukasz).getLastDirectionX().equals("D"))
+        if(((Player)ukasz).getLastDirectionX().equals("D"))
             setPosition(centerPositionRightX,ukasz.getBoundary().getMaxY()-50);
         else  setPosition(centerPositionLeftX,ukasz.getBoundary().getMaxY()-50);
     }

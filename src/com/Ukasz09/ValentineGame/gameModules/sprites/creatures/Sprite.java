@@ -4,8 +4,9 @@ import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
-public class Sprite {
+public abstract class Sprite {
 
     private Image image;
     private double positionX;
@@ -151,7 +152,8 @@ public class Sprite {
 
     public void render(GraphicsContext gc){
 
-        gc.drawImage(image, positionX, positionY);
+        //gc.drawImage(image, positionX, positionY);
+        gc.fillRect(positionX,positionY,getWidth(),getHeight());
     }
 
     //pobiera prostokat do ustalania kolizji

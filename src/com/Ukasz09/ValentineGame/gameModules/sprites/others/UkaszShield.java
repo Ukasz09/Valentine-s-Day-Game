@@ -1,7 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.others;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Ukasz;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -35,7 +35,7 @@ public class UkaszShield extends Shield {
             //opoznienie by bylo widac ze tarcza znika przed kolejnym uderzeniem
             if(sprite.getProtectionTime()>750){
 
-                Ukasz ukasz=(Ukasz) sprite;
+                Player ukasz=(Player) sprite;
 
                 if(ukasz.getLastDirectionX().equals("D"))
                     gc.drawImage(getShieldImage(), ukasz.getPositionX(), ukasz.getPositionY());

@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import javafx.scene.image.Image;
@@ -24,9 +25,9 @@ public class FishMonster extends Monster {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Konstruktory */
 
-    public FishMonster(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop){
+    public FishMonster(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, KickPlayer kickMethod){
 
-        super(imageLeft);
+        super(imageLeft, kickMethod);
         setLives(2);
 
         setHitSound(new SoundsPlayer(hitSoundPath));
