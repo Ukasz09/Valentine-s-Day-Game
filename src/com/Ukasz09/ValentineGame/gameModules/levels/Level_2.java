@@ -9,39 +9,40 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickByBigMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.TeleportKick;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Level_2 extends AllLevel{
+public class Level_2 extends AllLevel {
+    private static final Image FISH_MONSTER_LEFT_IMAGE = SpritesImages.fishMonsterLeftImage;
+    private static final Image FISH_MONSTER_RIGHT_IMAGE = SpritesImages.fishMonsterRightImage;
+    private static final Image FISH_MONSTER_BOTTOM_IMAGE = SpritesImages.fishMonsterBottomImage;
+    private static final Image FISH_MONSTER_TOP_IMAGE = SpritesImages.fishMonsterTopImage;
 
-    private final int howManyMoneybags=8;
-    private final int howManySmallCoins=5;
-    private final int smallCoinValue=50;
-    private final int normalCoinValue=100;
+    private static final Image FISH_MONSTER_MINIBOSS_LEFT_IMAGE = SpritesImages.fishMonsterMinibossLeftImage;
+    private static final Image FISH_MONSTER_MINIBOSS_RIGHT_IMAGE = SpritesImages.fishMonsterMinibossRightImage;
+    private static final Image FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE = SpritesImages.fishMonsterMinibossBottomImage;
+    private static final Image FISH_MONSTER_MINIBOSS_TOP_IMAGE = SpritesImages.fishMonsterMinibossTopImage;
 
-    private final int howManyLittleMonsters=10;
-    private final int howManyAllMonsters=howManyLittleMonsters+1; //male potworki+boss
+    private static final Image FISH_MINIBOSS_SHIELD_IMAGE = SpritesImages.fishMinibossShieldImage;
 
-    private Image littleMonsterLeftImage;
-    private Image littleMonsterRightImage;
-    private Image littleMonsterBottomImage;
-    private Image littleMonsterTopImage;
+    private static final Image MONEY_BAG_IMAGE_1 = SpritesImages.moneyBagImage1;
+    private static final Image MONEY_BAG_IMAGE_2 = SpritesImages.moneyBagImage2;
+    private final int howManyMoneybags = 8;
+    private final int howManySmallCoins = 5;
+    private final int smallCoinValue = 50;
+    private final int normalCoinValue = 100;
 
-    private Image minibossLeftImage;
-    private Image minibossRightImage;
-    private Image minibossBottomImage;
-    private Image minibossTopImage;
-    private Image minibossShieldImage;
+    private final int howManyLittleMonsters = 10;
+    private final int howManyAllMonsters = howManyLittleMonsters + 1; //male potworki+boss
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Konstruktory */
+    public Level_2(Canvas canvas) {
 
-    public Level_2( Image moneyBagImage1, Image moneyBagImage2, Canvas canvas){
-
-        setMoneyBagImage1(moneyBagImage1);
-        setMoneyBagImage2(moneyBagImage2);
+        setMoneyBagImage1(MONEY_BAG_IMAGE_1);
+        setMoneyBagImage2(MONEY_BAG_IMAGE_2);
         setHowManyMoneybags(howManyMoneybags);
         setSmallCoinValue(smallCoinValue);
         setNormalCoinValue(normalCoinValue);
@@ -54,80 +55,61 @@ public class Level_2 extends AllLevel{
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Settery */
-
-    public void setLittleMonsterImages(Image littleMonsterLeftImage, Image littleMonsterRightImage, Image littleMonsterBottomImage, Image littleMonsterTopImage){
-
-        this.littleMonsterLeftImage=littleMonsterLeftImage;
-        this.littleMonsterRightImage=littleMonsterRightImage;
-        this.littleMonsterBottomImage=littleMonsterBottomImage;
-        this.littleMonsterTopImage=littleMonsterTopImage;
-    }
-
-    public void setMinibossMonsterImages(Image minibossLeftImage, Image minibossRightImage, Image minibossBottomImage, Image minibossTopImage, Image minibossShieldImage){
-
-        this.minibossLeftImage=minibossLeftImage;
-        this.minibossRightImage=minibossRightImage;
-        this.minibossBottomImage=minibossBottomImage;
-        this.minibossTopImage=minibossTopImage;
-        this.minibossShieldImage=minibossShieldImage;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Metody */
 
-    public void spawnLittleMonsters(ArrayList<Monster> monsters){
+    public void spawnLittleMonsters(ArrayList<Monster> monsters) {
 
-        for (int i = 0; i< howManyLittleMonsters; i++)
-            monsters.add(new FishMonster(littleMonsterLeftImage, littleMonsterRightImage, littleMonsterBottomImage, littleMonsterTopImage, new KickByBigMonster(new TeleportKick())));
+        for (int i = 0; i < howManyLittleMonsters; i++)
+            monsters.add(new FishMonster(FISH_MONSTER_LEFT_IMAGE, FISH_MONSTER_RIGHT_IMAGE, FISH_MONSTER_BOTTOM_IMAGE, FISH_MONSTER_TOP_IMAGE, new KickByBigMonster(new TeleportKick())));
     }
 
-    public void spawnMiniboss(ArrayList<Monster> monsters){
+    public void spawnMiniboss(ArrayList<Monster> monsters) {
 
-            FishMonsterMiniboss miniBoss=new FishMonsterMiniboss(minibossLeftImage, minibossRightImage, minibossBottomImage, minibossTopImage,minibossShieldImage, new KickByBigMonster(new TeleportKick()));
+        FishMonsterMiniboss miniBoss = new FishMonsterMiniboss(FISH_MONSTER_MINIBOSS_LEFT_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_IMAGE, FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE, FISH_MONSTER_MINIBOSS_TOP_IMAGE, FISH_MINIBOSS_SHIELD_IMAGE, new KickByBigMonster(new TeleportKick()));
 
-            int random=(int)(Math.random()*2);
+        int random = (int) (Math.random() * 2);
 
-            //pokaz z lewej strony
-            if(random==0)
-                miniBoss.setPosition(Boundary.getAtLeftBorder(canvas)-miniBoss.getWidth(),Boundary.getAtBottomBorder(canvas)/2);
+        //pokaz z lewej strony
+        if (random == 0)
+            miniBoss.setPosition(Boundary.getAtLeftBorder(canvas) - miniBoss.getWidth(), Boundary.getAtBottomBorder(canvas) / 2);
             //pokaz z prawej strony
-            else  miniBoss.setPosition(Boundary.getAtRightBorder(canvas)+miniBoss.getWidth(),Boundary.getAtBottomBorder(canvas)/2);
+        else
+            miniBoss.setPosition(Boundary.getAtRightBorder(canvas) + miniBoss.getWidth(), Boundary.getAtBottomBorder(canvas) / 2);
 
-            monsters.add(miniBoss);
+        monsters.add(miniBoss);
     }
 
-    public void setPositionMonsters(ArrayList<Monster> monsters){
+    public void setPositionMonsters(ArrayList<Monster> monsters) {
 
-        for(Sprite m: monsters){
+        for (Sprite m : monsters) {
 
-            int random=(int)(Math.random()*4+1);
-            int spawnPositionY=(int)(Math.random()* Boundary.getAtBottomBorder(canvas));
-            int spawnPositionX=(int)(Math.random()*Boundary.getAtRightBorder(canvas));
+            int random = (int) (Math.random() * 4 + 1);
+            int spawnPositionY = (int) (Math.random() * Boundary.getAtBottomBorder(canvas));
+            int spawnPositionX = (int) (Math.random() * Boundary.getAtRightBorder(canvas));
 
             //spawn na lewym brzegu
-            if(random==1)
-                m.setPosition(Boundary.getAtLeftBorder(canvas),spawnPositionY);
+            if (random == 1)
+                m.setPosition(Boundary.getAtLeftBorder(canvas), spawnPositionY);
 
             //spawn na prawym brzegu
-            if(random==2)
-                m.setPosition(Boundary.getAtRightBorder(canvas),spawnPositionY);
+            if (random == 2)
+                m.setPosition(Boundary.getAtRightBorder(canvas), spawnPositionY);
 
             //spawn na gornym brzegu
-            if(random==3)
-                m.setPosition(spawnPositionX,Boundary.getAtTopBorder(canvas));
+            if (random == 3)
+                m.setPosition(spawnPositionX, Boundary.getAtTopBorder(canvas));
 
             //spawn na dolnym brzegu
-            if(random==4)
-                m.setPosition(spawnPositionX,Boundary.getAtBottomBorder(canvas));
+            if (random == 4)
+                m.setPosition(spawnPositionX, Boundary.getAtBottomBorder(canvas));
         }
 
     }
 
     @Override
-    public void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters){
+    public void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters) {
 
-        super.makeLevel(moneybagList,monsters);
+        super.makeLevel(moneybagList, monsters);
         spawnLittleMonsters(monsters);
         setPositionMonsters(monsters);
     }

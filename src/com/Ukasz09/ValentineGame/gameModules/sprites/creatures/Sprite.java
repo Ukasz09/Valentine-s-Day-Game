@@ -152,8 +152,8 @@ public abstract class Sprite {
 
     public void render(GraphicsContext gc){
 
-        //gc.drawImage(image, positionX, positionY);
-        gc.fillRect(positionX,positionY,getWidth(),getHeight());
+        gc.drawImage(image, positionX, positionY);
+        //gc.fillRect(positionX,positionY,getWidth(),getHeight());
     }
 
     //pobiera prostokat do ustalania kolizji

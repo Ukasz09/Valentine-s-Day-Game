@@ -4,8 +4,8 @@ import javafx.scene.image.Image;
 
 public class SpritesImages {
     //Player
-    public static Image ukaszLeftImage = new Image(SpritesPath.ukaszLeftPath);
-    public static Image ukaszRightImage = new Image(SpritesPath.ukaszRightPath);
+    public static Image playerLeftImage = new Image(SpritesPath.ukaszLeftPath);
+    public static Image playerRightImage = new Image(SpritesPath.ukaszRightPath);
 
     //Enemy's
     public static Image littleMonsterImage = new Image(SpritesPath.littleMonster_1Path);
@@ -21,7 +21,7 @@ public class SpritesImages {
     public static Image fishMonsterMinibossBottomImage = new Image(SpritesPath.fishMonsterMinibossBottomPath);
 
     //Other
-    public static Image ukaszShieldImage = new Image(SpritesPath.protectionOrbitPath);
+    public static Image playerShieldImage = new Image(SpritesPath.protectionOrbitPath);
     public static Image ukaszShotImage = new Image(SpritesPath.ukaszBulletShotPath);
     private static Image[] ukaszBombShotImages = new Image[2];
     public static Image heartFullImage = new Image(SpritesPath.heartFullPath);

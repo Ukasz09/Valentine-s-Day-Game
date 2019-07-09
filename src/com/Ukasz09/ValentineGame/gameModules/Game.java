@@ -46,33 +46,31 @@ import java.util.ArrayList;
 public class Game extends Application {
 
     //Sprites
-    private Image playerLeftImage;
-    private Image playerRightImage;
-    private Image backgroundImage;
-    private Image moneyBagImage1;
-    private Image moneyBagImage2;
-    private Image endImage;
-    private Image kasiaImage;
-    private Image startImage;
-    private Image heartFlareImage;
-    private Image kasiaWingsImage;
-    private Image ukaszShotImage;
-    private Image[] ukaszBombShotImages;
-    private Image littleMonsterImage;
-    private Image fishMonsterRightImage;
-    private Image fishMonsterLeftImage;
-    private Image fishMonsterBottomImage;
-    private Image fishMonsterTopImage;
-    private Image fishMonsterMinibossRightImage;
-    private Image fishMonsterMinibossLeftImage;
-    private Image fishMonsterMinibossBottomImage;
-    private Image fishMonsterMinibossTopImage;
-    private Image ukaszShieldImage;
-    private Image heartFullImage;
-    private Image heartHalfImage;
-    private Image heartEmptyImage;
-    private Image[] batteryImages;
-    private Image fishMinibossShieldImage;
+//    private Image backgroundImage;
+//    private Image moneyBagImage1;
+//    private Image moneyBagImage2;
+//    private Image endImage;
+//    private Image kasiaImage;
+//    private Image startImage;
+//    private Image heartFlareImage;
+//    private Image kasiaWingsImage;
+//    private Image ukaszShotImage;
+//    private Image[] ukaszBombShotImages;
+//    private Image littleMonsterImage;
+//    private Image fishMonsterRightImage;
+//    private Image fishMonsterLeftImage;
+//    private Image fishMonsterBottomImage;
+//    private Image fishMonsterTopImage;
+//    private Image fishMonsterMinibossRightImage;
+//    private Image fishMonsterMinibossLeftImage;
+//    private Image fishMonsterMinibossBottomImage;
+//    private Image fishMonsterMinibossTopImage;
+//    //private Image ukaszShieldImage;
+//    private Image heartFullImage;
+//    private Image heartHalfImage;
+//    private Image heartEmptyImage;
+//    private Image[] batteryImages;
+//    private Image fishMinibossShieldImage;
 
     //Sounds
     private SoundsPlayer playerWingsSound;
@@ -112,45 +110,43 @@ public class Game extends Application {
 
     private Player player;
     private ShootSprite ukaszShotSprite;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
         //Player
-        playerLeftImage = SpritesImages.ukaszLeftImage;
-        playerRightImage = SpritesImages.ukaszRightImage;
-        ukaszShieldImage = SpritesImages.ukaszShieldImage;
-        ukaszShotImage = SpritesImages.ukaszShotImage;
-        ukaszBombShotImages = SpritesImages.getUkaszBombShotImages();
-        heartFullImage = SpritesImages.heartFullImage;
-        heartHalfImage = SpritesImages.heartHalfImage;
-        heartEmptyImage = SpritesImages.heartEmptyImage;
-        batteryImages = SpritesImages.getBatteryImages();
-
-        //Other
-        moneyBagImage1 = SpritesImages.moneyBagImage1;
-        moneyBagImage2 = SpritesImages.moneyBagImage2;
-
-        kasiaImage = SpritesImages.kasiaImage;
-        heartFlareImage = SpritesImages.heartFlareImage;
-        kasiaWingsImage = SpritesImages.kasiaWingsImage;
-
-        //Background
-        startImage = BackgroundImages.startImage;
-        backgroundImage = BackgroundImages.backgroundImage1;
-        endImage = BackgroundImages.endImage;
-
-        //Enemy's
-        littleMonsterImage = SpritesImages.littleMonsterImage;
-
-        fishMonsterRightImage = SpritesImages.fishMonsterRightImage;
-        fishMonsterLeftImage = SpritesImages.fishMonsterLeftImage;
-        fishMonsterTopImage = SpritesImages.fishMonsterTopImage;
-        fishMonsterBottomImage = SpritesImages.fishMonsterBottomImage;
-
-        fishMonsterMinibossRightImage = SpritesImages.fishMonsterMinibossRightImage;
-        fishMonsterMinibossLeftImage = SpritesImages.fishMonsterMinibossLeftImage;
-        fishMonsterMinibossTopImage = SpritesImages.fishMonsterMinibossTopImage;
-        fishMonsterMinibossBottomImage = SpritesImages.fishMonsterMinibossBottomImage;
-        fishMinibossShieldImage = SpritesImages.fishMinibossShieldImage;
+//        ukaszShotImage = SpritesImages.ukaszShotImage;
+//        ukaszBombShotImages = SpritesImages.getUkaszBombShotImages();
+//        heartFullImage = SpritesImages.heartFullImage;
+//        heartHalfImage = SpritesImages.heartHalfImage;
+//        heartEmptyImage = SpritesImages.heartEmptyImage;
+//        batteryImages = SpritesImages.getBatteryImages();
+//
+//        //Other
+//        moneyBagImage1 = SpritesImages.moneyBagImage1;
+//        moneyBagImage2 = SpritesImages.moneyBagImage2;
+//
+//        kasiaImage = SpritesImages.kasiaImage;
+//        heartFlareImage = SpritesImages.heartFlareImage;
+//        kasiaWingsImage = SpritesImages.kasiaWingsImage;
+//
+//        //Background
+//        startImage = BackgroundImages.startImage;
+//        backgroundImage = BackgroundImages.backgroundImage1;
+//        endImage = BackgroundImages.endImage;
+//
+//        //Enemy's
+//        littleMonsterImage = SpritesImages.littleMonsterImage;
+//
+//        fishMonsterRightImage = SpritesImages.fishMonsterRightImage;
+//        fishMonsterLeftImage = SpritesImages.fishMonsterLeftImage;
+//        fishMonsterTopImage = SpritesImages.fishMonsterTopImage;
+//        fishMonsterBottomImage = SpritesImages.fishMonsterBottomImage;
+//
+//        fishMonsterMinibossRightImage = SpritesImages.fishMonsterMinibossRightImage;
+//        fishMonsterMinibossLeftImage = SpritesImages.fishMonsterMinibossLeftImage;
+//        fishMonsterMinibossTopImage = SpritesImages.fishMonsterMinibossTopImage;
+//        fishMonsterMinibossBottomImage = SpritesImages.fishMonsterMinibossBottomImage;
+//        fishMinibossShieldImage = SpritesImages.fishMinibossShieldImage;
 
         //Sounds
         playerWingsSound = Sounds.ukaszWingsSound;
@@ -165,8 +161,7 @@ public class Game extends Application {
         input = new ArrayList<>();
         lastNanoTime = new LongValue(System.nanoTime());
 
-        //todo: wyrzucic skladowe do poszczegolnych klas (np image playera do playera itd)
-        player = new Player(playerRightImage, ukaszShieldImage);
+        player = new Player(SpritesImages.playerRightImage, SpritesImages.playerShieldImage);
         playerShots = new ArrayList<>();
         antiCollisionTimer = new IntValue(0);
 
@@ -183,11 +178,9 @@ public class Game extends Application {
         showTutorialPage = false;
         playerReadyToGame = false;
     }
-
-    //TODO: tu skonczylem
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //TODO zrobic view manager
+    //TODO zrobic view manager, tu skonczylem
     public void start(Stage theStage) {
         theStage.setTitle("Valentines_Game");
         theStage.setWidth(1600);
@@ -247,7 +240,7 @@ public class Game extends Application {
 
                             player.setPosition(centerPositionX, centerPositionY);
 
-                            level1 = new Level_1(moneyBagImage1, moneyBagImage2, littleMonsterImage, canvas);
+                            level1 = new Level_1(canvas);
                             level1.makeLevel(moneybagList, monsters);
 
                             collectedMoneybags.setValue(0);
@@ -276,9 +269,7 @@ public class Game extends Application {
                             endLevel();
                             backgroundImage = new Image(getClass().getResourceAsStream(BackgroundPath.backgroudImagePath_l1));
 
-                            level2 = new Level_2(moneyBagImage1, moneyBagImage2, canvas);
-                            level2.setLittleMonsterImages(fishMonsterLeftImage, fishMonsterRightImage, fishMonsterBottomImage, fishMonsterTopImage);
-                            level2.setMinibossMonsterImages(fishMonsterMinibossLeftImage, fishMonsterMinibossRightImage, fishMonsterMinibossBottomImage, fishMonsterMinibossTopImage, fishMinibossShieldImage);
+                            level2 = new Level_2(canvas);
                             level2.makeLevel(moneybagList, monsters);
                         }
 
@@ -371,7 +362,7 @@ public class Game extends Application {
             //kolizja z ramka
             if (Boundary.boundaryCollisionFromLeft(canvas, player) == false) {
 
-                player.setImage(playerLeftImage);
+                player.setImage(SpritesImages.playerLeftImage);
                 player.setLastDirectionX("A");
 
                 if ((Collision.collisionWithMonstersFromRight(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
@@ -385,7 +376,7 @@ public class Game extends Application {
             //kolizja z ramka
             if (Boundary.boundaryCollisionFromRight(canvas, player) == false) {
 
-                player.setImage(playerRightImage);
+                player.setImage(SpritesImages.playerRightImage);
                 player.setLastDirectionX("D");
 
                 if ((Collision.collisionWithMonstersFromLeft(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
