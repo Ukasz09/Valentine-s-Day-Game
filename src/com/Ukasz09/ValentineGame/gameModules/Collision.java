@@ -29,7 +29,7 @@ public class Collision {
     /* Metody */
 
     //sprawdza kolizje sprita z monetami
-    public static void checkMoneybagsCollisions(ArrayList<MoneyBag> moneybagList, Sprite sprite, IntValue score, IntValue collectedMoneyBags, SoundsPlayer collectSound){
+    public static void checkMoneybagsCollisions(ArrayList<MoneyBag> moneybagList, Sprite sprite, IntValue score, IntValue collectedMoneyBags){
 
         Iterator<MoneyBag> moneybagIter = moneybagList.iterator();
 
@@ -44,8 +44,7 @@ public class Collision {
 
                 if(sprite instanceof Player){
 
-                    collectSound.playSound(0.1,false);
-
+                    moneybag.playCollectSound();
                     moneybagIter.remove();
                     score.incValue(moneybag.getValue());
                     collectedMoneyBags.incValue();

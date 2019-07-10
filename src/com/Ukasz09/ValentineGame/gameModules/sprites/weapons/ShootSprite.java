@@ -1,6 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public abstract class ShootSprite extends Sprite {
@@ -37,4 +38,10 @@ public abstract class ShootSprite extends Sprite {
     /* Metody */
 
     public abstract void update(double time);
+
+    protected void playSound(SoundsPlayer shotSound, double volume){
+        shotSound.playSound(volume,false);
+    }
+
+    public abstract void playSound();
 }

@@ -8,16 +8,25 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickByLittleMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.TeleportKick;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
+import com.Ukasz09.ValentineGame.soundsModule.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Level_1 extends AllLevel {
+public class Level_1 extends Levels {
     private static final Image LITTLE_MONSTER_IMAGE = SpritesImages.littleMonsterImage;
     private static final Image MONEY_BAG_IMAGE_1 = SpritesImages.moneyBagImage1;
     private static final Image MONEY_BAG_IMAGE_2 = SpritesImages.moneyBagImage2;
+    private static final Image BACKGROUND_IMAGE = BackgroundImages.backgroundImage1;
+
+    private static final SoundsPlayer BACKGROUND_SOUND=Sounds.backgroundSound;
+    private static final double BACKGROUND_SOUND_VOLUME = 0.1;
+
 
     private final int howManyMoneybags = 10;
     private final int howManySmallCoins = 8;
@@ -75,11 +84,25 @@ public class Level_1 extends AllLevel {
     }
 
     @Override
-    public void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters) {
+    public void endLevel() {
+        //nothing to do
+    }
 
-        super.makeLevel(moneybagList, monsters);
+    @Override
+    public void renderLevel(GraphicsContext gc, ArrayList<Monster> monsters) {
+        drawBackground(gc, BACKGROUND_IMAGE);
+        renderMonsters(monsters,gc);
+    }
+
+    @Override
+    public void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters) {
+        makeMoneyBags(moneybagList);
         spawnLittleMonsters(monsters);
         setPositionMonsters(monsters);
+        setBackgroundSound(BACKGROUND_SOUND);
+        Levels.playBackgroundSound(BACKGROUND_SOUND_VOLUME,true);
+        Levels.playWingsSound();
+
     }
 
 

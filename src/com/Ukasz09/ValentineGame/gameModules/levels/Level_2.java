@@ -9,27 +9,30 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickByBigMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.TeleportKick;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Level_2 extends AllLevel {
+public class Level_2 extends Levels {
     private static final Image FISH_MONSTER_LEFT_IMAGE = SpritesImages.fishMonsterLeftImage;
     private static final Image FISH_MONSTER_RIGHT_IMAGE = SpritesImages.fishMonsterRightImage;
     private static final Image FISH_MONSTER_BOTTOM_IMAGE = SpritesImages.fishMonsterBottomImage;
     private static final Image FISH_MONSTER_TOP_IMAGE = SpritesImages.fishMonsterTopImage;
-
     private static final Image FISH_MONSTER_MINIBOSS_LEFT_IMAGE = SpritesImages.fishMonsterMinibossLeftImage;
     private static final Image FISH_MONSTER_MINIBOSS_RIGHT_IMAGE = SpritesImages.fishMonsterMinibossRightImage;
     private static final Image FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE = SpritesImages.fishMonsterMinibossBottomImage;
     private static final Image FISH_MONSTER_MINIBOSS_TOP_IMAGE = SpritesImages.fishMonsterMinibossTopImage;
-
     private static final Image FISH_MINIBOSS_SHIELD_IMAGE = SpritesImages.fishMinibossShieldImage;
 
     private static final Image MONEY_BAG_IMAGE_1 = SpritesImages.moneyBagImage1;
     private static final Image MONEY_BAG_IMAGE_2 = SpritesImages.moneyBagImage2;
+
+    private static final Image BACKGROUND_IMAGE = BackgroundImages.backgroundImage2;
+
     private final int howManyMoneybags = 8;
     private final int howManySmallCoins = 5;
     private final int smallCoinValue = 50;
@@ -40,7 +43,6 @@ public class Level_2 extends AllLevel {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_2(Canvas canvas) {
-
         setMoneyBagImage1(MONEY_BAG_IMAGE_1);
         setMoneyBagImage2(MONEY_BAG_IMAGE_2);
         setHowManyMoneybags(howManyMoneybags);
@@ -106,10 +108,29 @@ public class Level_2 extends AllLevel {
 
     }
 
+    public boolean needToSpawnMiniboss(int collectedMoneyBags, boolean killedAllMonsters) {
+        if ((collectedMoneyBags >= howManyMoneybags) && (killedAllMonsters))
+            return true;
+
+        return false;
+    }
+
+
+
+    @Override
+    public void endLevel() {
+        //nothing to do yet
+    }
+
+    @Override
+    public void renderLevel(GraphicsContext gc, ArrayList<Monster> monsters) {
+        drawBackground(gc, BACKGROUND_IMAGE);
+        renderMonsters(monsters, gc);
+    }
+
     @Override
     public void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters) {
-
-        super.makeLevel(moneybagList, monsters);
+        makeMoneyBags(moneybagList);
         spawnLittleMonsters(monsters);
         setPositionMonsters(monsters);
     }

@@ -8,9 +8,7 @@
 
 package com.Ukasz09.ValentineGame.gameModules;
 
-import com.Ukasz09.ValentineGame.gameModules.levels.AllLevel;
-import com.Ukasz09.ValentineGame.gameModules.levels.Level_1;
-import com.Ukasz09.ValentineGame.gameModules.levels.Level_2;
+import com.Ukasz09.ValentineGame.gameModules.levels.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonsterMiniboss;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
@@ -21,11 +19,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShootSprite;
 import com.Ukasz09.ValentineGame.gameModules.wrappers.IntValue;
 import com.Ukasz09.ValentineGame.gameModules.wrappers.LongValue;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -45,41 +39,14 @@ import java.util.ArrayList;
 
 public class Game extends Application {
 
-    //Sprites
-//    private Image backgroundImage;
-//    private Image moneyBagImage1;
-//    private Image moneyBagImage2;
-//    private Image endImage;
-//    private Image kasiaImage;
-//    private Image startImage;
-//    private Image heartFlareImage;
-//    private Image kasiaWingsImage;
-//    private Image ukaszShotImage;
-//    private Image[] ukaszBombShotImages;
-//    private Image littleMonsterImage;
-//    private Image fishMonsterRightImage;
-//    private Image fishMonsterLeftImage;
-//    private Image fishMonsterBottomImage;
-//    private Image fishMonsterTopImage;
-//    private Image fishMonsterMinibossRightImage;
-//    private Image fishMonsterMinibossLeftImage;
-//    private Image fishMonsterMinibossBottomImage;
-//    private Image fishMonsterMinibossTopImage;
-//    //private Image ukaszShieldImage;
-//    private Image heartFullImage;
-//    private Image heartHalfImage;
-//    private Image heartEmptyImage;
-//    private Image[] batteryImages;
-//    private Image fishMinibossShieldImage;
-
     //Sounds
-    private SoundsPlayer playerWingsSound;
-    private SoundsPlayer backgroundSound;
-    private SoundsPlayer backgroundStartSound;
-    private SoundsPlayer collectMoneySound;
-    private SoundsPlayer backgroundEndSound;
-    private SoundsPlayer bulletShotSound;
-    private SoundsPlayer bombShotSound;
+//    private SoundsPlayer playerWingsSound;
+//    private SoundsPlayer backgroundSound;
+//    private SoundsPlayer backgroundStartSound;
+//    private SoundsPlayer collectMoneySound;
+//    private SoundsPlayer backgroundEndSound;
+//    private SoundsPlayer bulletShotSound;
+//    private SoundsPlayer bombShotSound;
 
     Scene theScene;
     GraphicsContext gc;
@@ -98,8 +65,8 @@ public class Game extends Application {
     private double bombOverheating;
 
     private int levelNumber;                //numer okreslajacy level
-    private Level_1 level1;
-    private Level_2 level2;
+    private Levels actualLevel;
+    private Panels actualPanel;
     private IntValue score;                  //wynik czesciowy za poziom
     private IntValue antiCollisionTimer;     //czas w jakim gracz moze przelatywac przez potwory (zapobiega zablokowaniu ruchu gracza)
     private IntValue killedMonstersOnLevel;
@@ -113,49 +80,15 @@ public class Game extends Application {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
-        //Player
-//        ukaszShotImage = SpritesImages.ukaszShotImage;
-//        ukaszBombShotImages = SpritesImages.getUkaszBombShotImages();
-//        heartFullImage = SpritesImages.heartFullImage;
-//        heartHalfImage = SpritesImages.heartHalfImage;
-//        heartEmptyImage = SpritesImages.heartEmptyImage;
-//        batteryImages = SpritesImages.getBatteryImages();
-//
-//        //Other
-//        moneyBagImage1 = SpritesImages.moneyBagImage1;
-//        moneyBagImage2 = SpritesImages.moneyBagImage2;
-//
-//        kasiaImage = SpritesImages.kasiaImage;
-//        heartFlareImage = SpritesImages.heartFlareImage;
-//        kasiaWingsImage = SpritesImages.kasiaWingsImage;
-//
-//        //Background
-//        startImage = BackgroundImages.startImage;
-//        backgroundImage = BackgroundImages.backgroundImage1;
-//        endImage = BackgroundImages.endImage;
-//
-//        //Enemy's
-//        littleMonsterImage = SpritesImages.littleMonsterImage;
-//
-//        fishMonsterRightImage = SpritesImages.fishMonsterRightImage;
-//        fishMonsterLeftImage = SpritesImages.fishMonsterLeftImage;
-//        fishMonsterTopImage = SpritesImages.fishMonsterTopImage;
-//        fishMonsterBottomImage = SpritesImages.fishMonsterBottomImage;
-//
-//        fishMonsterMinibossRightImage = SpritesImages.fishMonsterMinibossRightImage;
-//        fishMonsterMinibossLeftImage = SpritesImages.fishMonsterMinibossLeftImage;
-//        fishMonsterMinibossTopImage = SpritesImages.fishMonsterMinibossTopImage;
-//        fishMonsterMinibossBottomImage = SpritesImages.fishMonsterMinibossBottomImage;
-//        fishMinibossShieldImage = SpritesImages.fishMinibossShieldImage;
 
         //Sounds
-        playerWingsSound = Sounds.ukaszWingsSound;
-        backgroundSound = Sounds.backgroundSound;
-        backgroundStartSound = Sounds.backgroundStartSound;
-        collectMoneySound = Sounds.collectMoneySound;
-        backgroundEndSound = Sounds.backgroundEndSound;
-        bulletShotSound = Sounds.bulletShotSound;
-        bombShotSound = Sounds.bombShotSound;
+//        playerWingsSound = Sounds.ukaszWingsSound;
+//        backgroundSound = Sounds.backgroundSound;
+//        backgroundStartSound = Sounds.backgroundStartSound;
+//        collectMoneySound = Sounds.collectMoneySound;
+//        backgroundEndSound = Sounds.backgroundEndSound;
+//        bulletShotSound = Sounds.bulletShotSound;
+//        bombShotSound = Sounds.bombShotSound;
 
         //Game components
         input = new ArrayList<>();
@@ -201,8 +134,8 @@ public class Game extends Application {
 
         setFont("Helvetica", FontWeight.BOLD, 34, Color.TAN);
 
-        // Przygotowanie ekranu startowego
-        backgroundStartSound.playSound(0.6, true);
+        actualPanel = new StartPanel();
+        actualPanel.makeLevel();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         class AnimationTimer2 extends AnimationTimer {
@@ -214,11 +147,9 @@ public class Game extends Application {
                     //EKRAN STARTOWY
                     case 0: {
 
-                        //TODO: Przetestowac
-
                         if (playerReadyToGame == false) {
 
-                            gc.drawImage(startImage, 0, 0);
+                            actualPanel.renderLevel(gc);
 
                             if (input.contains("ENTER"))
                                 playerReadyToGame = true;
@@ -233,6 +164,8 @@ public class Game extends Application {
                         else {
 
                             //Ustawienia dla poziomu 1
+                            actualPanel.endLevel();
+                            actualPanel=null;
 
                             score = new IntValue(0);
                             double centerPositionX = Boundary.getAtRightBorder(canvas) / 2 - player.getWidth();
@@ -240,17 +173,13 @@ public class Game extends Application {
 
                             player.setPosition(centerPositionX, centerPositionY);
 
-                            level1 = new Level_1(canvas);
-                            level1.makeLevel(moneybagList, monsters);
+                            actualLevel = new Level_1(canvas);
+                            actualLevel.makeLevel(moneybagList, monsters);
 
                             collectedMoneybags.setValue(0);
                             playerShots.clear();
 
                             levelNumber++;
-
-                            backgroundStartSound.stopSound();
-                            playerWingsSound.playSound(1, true);
-                            backgroundSound.playSound(0.1, true);
                         }
 
                     }
@@ -259,18 +188,16 @@ public class Game extends Application {
                     //POZIOM 1
                     case 1: {
 
-                        if (!levelIsEnd(level1))
-                            play(theStage, currentNanoTime, level1);
+                        if (!levelIsEnd(actualLevel))
+                            play(theStage, currentNanoTime, actualLevel);
 
                         else {
 
                             //Przygotowanie nastepnego poziomu
 
-                            endLevel();
-                            backgroundImage = new Image(getClass().getResourceAsStream(BackgroundPath.backgroudImagePath_l1));
-
-                            level2 = new Level_2(canvas);
-                            level2.makeLevel(moneybagList, monsters);
+                            endLevel(actualLevel);
+                            actualLevel = new Level_2(canvas);
+                            actualLevel.makeLevel(moneybagList, monsters);
                         }
 
 
@@ -278,22 +205,23 @@ public class Game extends Application {
                     break;
 
                     //POZIOM2
+                    //todo: render boss fight
                     case 2: {
 
-                        if (!levelIsEnd(level2)) {
+                        if (!levelIsEnd(actualLevel)) {
 
                             if (playerFightWithBoss == false) {
 
-                                play(theStage, currentNanoTime, level2);
+                                play(theStage, currentNanoTime, actualLevel);
 
-                                if (needToSpawnBoss(level2))
-                                    level2.spawnMiniboss(monsters);
+                                if (needToSpawnBoss(actualLevel))
+                                    actualLevel.spawnMiniboss(monsters);
                             }
 
                             //gracz walczy z bossem
                             else {
 
-                                play(theStage, currentNanoTime, level2);
+                                play(theStage, currentNanoTime, actualLevel);
 
                                 //jesli boss zyje
                                 if (monsters.isEmpty() == false) {
@@ -307,12 +235,10 @@ public class Game extends Application {
 
                             //Przygotowanie do uruchomienia ekranu koncowego
 
-                            endLevel();
-
-                            playerWingsSound.stopSound();
-                            backgroundSound.stopSound();
-
-                            backgroundEndSound.playSound(0.3, false);
+                            endLevel(actualLevel);
+                            actualLevel=null;
+                            actualPanel = new EndPanel();
+                            actualPanel.makeLevel();
                         }
 
                     }
@@ -321,7 +247,7 @@ public class Game extends Application {
                     //EKRAN KONCOWY
                     default: {
 
-                        endGame();
+                        actualPanel.renderLevel(gc);
                     }
                 } //zamyka switcha
 
@@ -335,8 +261,8 @@ public class Game extends Application {
     }
 
     //ustawia odpowiednio zmienne przed rozpoczeciem nowego levelu
-    public void endLevel() {
-
+    public void endLevel(Levels level) {
+        level.endLevel();
         levelNumber++;
         player.addTotalScore(score.getValue());
         score.setValue(0);
@@ -414,13 +340,13 @@ public class Game extends Application {
 
             if (bulletOverheating <= 0) {
 
-                ukaszShotSprite = new BulletSprite(ukaszShotImage, player.getLastDirectionX(), BulletSprite.getDefaultShotVelocity());
+                ukaszShotSprite = new BulletSprite(SpritesImages.ukaszShotImage, player.getLastDirectionX());
                 ((BulletSprite) ukaszShotSprite).setPosition(player);
                 ukaszShotSprite.setVelocity(ukaszShotSprite.getShotVelocity(), 0);
 
                 playerShots.add(ukaszShotSprite);
 
-                bulletShotSound.playSound(0.2, false);
+                ukaszShotSprite.playSound();
 
                 bulletOverheating = ((BulletSprite) ukaszShotSprite).getMaxOverheating();
             }
@@ -431,13 +357,13 @@ public class Game extends Application {
 
             if (bombOverheating <= 0) {
 
-                ukaszShotSprite = new BombSprite(ukaszBombShotImages[(int) (Math.random() * 2)], BombSprite.getDefaultShotVelocity());
+                ukaszShotSprite = new BombSprite(SpritesImages.getUkaszBombShotImages()[(int) (Math.random() * 2)]);
                 ((BombSprite) ukaszShotSprite).setPosition(player);
                 ukaszShotSprite.setVelocity(0, ukaszShotSprite.getShotVelocity());
 
                 playerShots.add(ukaszShotSprite);
 
-                bombShotSound.playSound(0.5, false);
+               ukaszShotSprite.playSound();
 
                 bombOverheating = ((BombSprite) ukaszShotSprite).getMaxOverheating();
             }
@@ -476,17 +402,8 @@ public class Game extends Application {
 
     }
 
-    //ustawia wszystko co trzeba by zakonczyc gre i wyswietla koncowe obrazki/animacje
-    public void endGame() {
-
-        gc.drawImage(endImage, 0, 0);
-        gc.drawImage(heartFlareImage, 10, 0);
-        gc.drawImage(kasiaWingsImage, 440, 500);
-        gc.drawImage(kasiaImage, 600, 230);
-    }
-
     //glowna metoda dla poszczegolnych poziomow
-    public void play(Stage theStage, long currentNanoTime, AllLevel level) {
+    public void play(Stage theStage, long currentNanoTime, Levels level) {
 
         elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
         lastNanoTime.setValue(currentNanoTime);
@@ -495,10 +412,10 @@ public class Game extends Application {
         player.update(elapsedTime);
 
         //detekcja kolizji z pieniedzmi
-        Collision.checkMoneybagsCollisions(moneybagList, player, score, collectedMoneybags, collectMoneySound);
+        Collision.checkMoneybagsCollisions(moneybagList, player, score, collectedMoneybags);
 
-        //render tla
-        gc.drawImage(backgroundImage, 0, 0);
+        //render poziomu (tlo, potwory)
+        level.renderLevel(gc, monsters);
 
         //render napisu
         String pointsText = "Kasa na walentynki: $" + (player.getTotalScore() + (score.getValue()));
@@ -516,10 +433,10 @@ public class Game extends Application {
             bombOverheating -= 50;
 
         //render serc
-        AllLevel.drawHearts(gc, canvas, player, heartFullImage, heartHalfImage, heartEmptyImage);
+        level.drawHearts(gc, canvas, player);
 
         //render baterii
-        AllLevel.drawBattery(gc, canvas, bombOverheating, BombSprite.getMaxOverheating(), batteryImages);
+        level.drawBattery(gc, canvas, bombOverheating);
 
         //render pieniedzy
         for (Sprite moneyBag : moneybagList)
@@ -533,11 +450,6 @@ public class Game extends Application {
 
         if (antiCollisionTimer.getValue() > 0)
             antiCollisionTimer.decValue(100);
-
-        //Potwory
-
-        //render
-        level.renderMonsters(monsters, gc);
 
         //kolizja z graczem
         Collision.playerCollisionWithMonster(monsters, player, canvas);
@@ -557,22 +469,22 @@ public class Game extends Application {
         gc.setFill(color);
     }
 
-    public boolean levelIsEnd(AllLevel level) {
+    public boolean levelIsEnd(Levels level) {
 
         if ((collectedMoneybags.getValue() < level.getHowManyMoneybags()) || (killedMonstersOnLevel.getValue() < level.getHowManyAllMonsters())) {
             return false;
         } else return true;
     }
 
-    //jesli zebrano cala kase z poziomu i zabito wszystkie potowry
-    public boolean needToSpawnBoss(AllLevel level) {
-
-        if ((collectedMoneybags.getValue() >= level.getHowManyMoneybags()) && (monsters.isEmpty())) {
-
-            playerFightWithBoss = true;
-            return true;
-        } else return false;
-    }
+//    //jesli zebrano cala kase z poziomu i zabito wszystkie potowry
+//    public boolean needToSpawnBoss(AllLevel level) {
+//
+//        if ((collectedMoneybags.getValue() >= level.getHowManyMoneybags()) && (monsters.isEmpty())) {
+//
+//            playerFightWithBoss = true;
+//            return true;
+//        } else return false;
+//    }
 
     //wyswietla strony z tutorialem dla gracza
     public void showTutorialPage(Image[] tutorialPages, int howManyPages) {

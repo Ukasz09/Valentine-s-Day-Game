@@ -1,4 +1,5 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
+import com.Ukasz09.ValentineGame.soundsModule.Sounds;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 
@@ -10,7 +11,10 @@ public class BombSprite extends ShootSprite {
 
     private final double howManyLiveTakes=2;
     private static final double maxOverheating=10000;
-    private static final double defaultShotVelocity=300;
+    public static final double DEFAULT_SHOT_VELOCITY =300;
+
+    private static final SoundsPlayer SHOT_SOUND= Sounds.bombShotSound;
+    private static final double SOUND_VOLUME= 0.5;
 
     private final String bombBoomSoundPath1=SoundsPath.bombBoomSoundPath1;
     private final String bombBoomSoundPath2=SoundsPath.bombBoomSoundPath2;
@@ -20,7 +24,11 @@ public class BombSprite extends ShootSprite {
     private SoundsPlayer[] bombBoomSound;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Konstruktor */
+
+    public BombSprite(Image image){
+        this(image,DEFAULT_SHOT_VELOCITY);
+    }
+
 
     public BombSprite(Image image, double shotVelocity){
 
@@ -54,7 +62,7 @@ public class BombSprite extends ShootSprite {
     }
 
     public static double getDefaultShotVelocity() {
-        return defaultShotVelocity;
+        return DEFAULT_SHOT_VELOCITY;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -76,4 +84,8 @@ public class BombSprite extends ShootSprite {
         else  setPosition(centerPositionLeftX,ukasz.getBoundary().getMaxY()-50);
     }
 
+    @Override
+    public void playSound() {
+        playSound(SHOT_SOUND,SOUND_VOLUME);
+    }
 }

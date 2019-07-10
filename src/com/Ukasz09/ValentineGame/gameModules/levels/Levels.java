@@ -5,13 +5,20 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
+import com.Ukasz09.ValentineGame.soundsModule.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public abstract class AllLevel {
+public abstract class Levels {
+
+    private static final double WINGS_SOUND_VOLUME = 1;
+    private static SoundsPlayer backgroundSound;
 
     private int howManyMoneybags;
     private Image moneyBagImage1;
@@ -23,6 +30,11 @@ public abstract class AllLevel {
 
     private int howManyLittleMonsters;   //potworki
     private int howManyAllMonsters;      //potworki + (bossy / minibossy)
+
+    private Image heartFull = SpritesImages.heartFullImage;
+    private Image heartHalf = SpritesImages.heartHalfImage;
+    private Image heartEmpty = SpritesImages.heartEmptyImage;
+    private Image[] batteryImages=SpritesImages.getBatteryImages();
 
     Canvas canvas;
 
@@ -63,6 +75,10 @@ public abstract class AllLevel {
 
     public void setHowManySmallCoins(int howManySmallCoins) {
         this.howManySmallCoins = howManySmallCoins;
+    }
+
+    public static void setBackgroundSound(SoundsPlayer backgroundSound) {
+        Levels.backgroundSound = backgroundSound;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,14 +129,13 @@ public abstract class AllLevel {
             m.update(target, monsters);
     }
 
-    public void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters) {
-        makeMoneyBags(moneybagList);
-    }
+    public abstract void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters);
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Metody Statyczne */
+    public abstract void endLevel();
 
-    public static void drawHearts(GraphicsContext gc, Canvas canvas, Sprite ukasz, Image heartFull, Image heartHalf, Image heartEmpty) {
+    public abstract void renderLevel(GraphicsContext gc, ArrayList<Monster> monsters);
+
+    public void drawHearts(GraphicsContext gc, Canvas canvas, Sprite ukasz) {
 
         double tmpLives = ukasz.getLives();
         double positionX = Boundary.getAtRightBorder(canvas) - ukasz.getMaxLives() * heartFull.getWidth();    //serca maja te sama dlugosc / wysokosc
@@ -151,9 +166,9 @@ public abstract class AllLevel {
 
     }
 
-    public static void drawBattery(GraphicsContext gc, Canvas canvas, double overheating, double maxOverheating, Image[] batteryImages) {
+    public void drawBattery(GraphicsContext gc, Canvas canvas, double overheating) {
 
-        double overheatingPercents = overheating / maxOverheating * 100;
+        double overheatingPercents = overheating / BombSprite.getMaxOverheating() * 100;
         double batteryPositionX = Boundary.getAtLeftBorder(canvas);
         double batteryPositionY = Boundary.getAtBottomBorder(canvas) - batteryImages[0].getHeight();
 
@@ -180,6 +195,26 @@ public abstract class AllLevel {
         //1 kreska
         else gc.drawImage(batteryImages[0], batteryPositionX, batteryPositionY);
 
+    }
+
+    protected void drawBackground(GraphicsContext gc, Image backgroundImage) {
+        gc.drawImage(backgroundImage, 0, 0);
+    }
+
+    public static void playWingsSound(){
+        Sounds.ukaszWingsSound.playSound(WINGS_SOUND_VOLUME,true);
+    }
+
+    public static void stopWingsSound(){
+        Sounds.ukaszWingsSound.stopSound();
+    }
+
+    public static void playBackgroundSound(double soundVolume, boolean inLoop) {
+        backgroundSound.playSound(soundVolume, inLoop);
+    }
+
+    public static void stopBackgroundSound() {
+        backgroundSound.stopSound();
     }
 
 }

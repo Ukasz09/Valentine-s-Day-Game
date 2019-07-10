@@ -1,18 +1,26 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
+import com.Ukasz09.ValentineGame.soundsModule.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public class BulletSprite extends ShootSprite {
 
     private final double howManyLiveTakes=1;
     private final double maxOverheating=1000;
-    private static final double defaultShotVelocity=600;
+    private static final double DEFAULT_SHOT_VELOCITY =600;
+
+    private static final SoundsPlayer SHOT_SOUND = Sounds.bulletShotSound;
+    private static final double SOUND_VOLUME= 0.2;
 
     private String shotDirection;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Konstruktor */
+
+    public BulletSprite(Image image, String shotDirection){
+        this(image,shotDirection,DEFAULT_SHOT_VELOCITY);
+    }
 
     public BulletSprite(Image image, String shotDirection, double shotVelocity){
 
@@ -29,7 +37,7 @@ public class BulletSprite extends ShootSprite {
     }
 
     public static double getDefaultShotVelocity() {
-        return defaultShotVelocity;
+        return DEFAULT_SHOT_VELOCITY;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,6 +61,11 @@ public class BulletSprite extends ShootSprite {
         if(shotDirection.equals("D"))
             setPosition(shotPositionRightX,shotPositionY);
         else  setPosition(shotPositionLeftX,shotPositionY);
+    }
+
+    @Override
+    public void playSound(){
+        playSound(SHOT_SOUND,SOUND_VOLUME);
     }
 
 }
