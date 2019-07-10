@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class FishMonster extends Monster {
 
-    private final String hitSoundPath= SoundsPath.fishMonsterHitSoundPath;
-    private final String deathSoundPath=SoundsPath.fishMonsterDeathSoundPath;
+    private final String hitSoundPath= SoundsPath.FISH_MONSTER_HIT_SOUND_PATH;
+    private final String deathSoundPath=SoundsPath.FISH_MONSTER_DEATH_SOUND_PATH;
 
     private final double howManyLivesTake=0.5;
     private final int howBigKickSize=0;

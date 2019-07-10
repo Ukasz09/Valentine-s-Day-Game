@@ -188,16 +188,16 @@ public abstract class Monster extends Sprite {
         double monsterMaxY = this.getBoundary().getMaxY();
 
         if (monsterMinX + 0.1 * monsterMinX > ukasz.getBoundary().getMaxX())
-            this.setImage(left);
-        else this.setImage(right);
+            this.setActualImage(left);
+        else this.setActualImage(right);
 
         //jesli potwor doklanie nad/pod graczem
         if ((monsterMinX > ukasz.getBoundary().getMinX()) && (monsterMaxX < ukasz.getBoundary().getMaxX())) {
 
             //ustawiona w dol
             if (monsterMaxY - 0.15 * monsterMaxY < ukasz.getBoundary().getMinY())
-                this.setImage(bottom);
-            else this.setImage(top);
+                this.setActualImage(bottom);
+            else this.setActualImage(top);
         }
     }
 

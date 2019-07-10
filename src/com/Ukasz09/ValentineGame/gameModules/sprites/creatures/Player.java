@@ -1,39 +1,75 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.shields.ShieldKindOfRender;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.Shield;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.UkaszShield;
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.shields.Shield;
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.shields.ManualActivateShield;
 
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Player extends Sprite {
+public class Player extends Sprite implements ShieldKindOfRender {
     private static final int DEFAULT_VELOCITY = 700;
     private static final int DEFAULT_LIVES = 5;
     private static final int DEFAULT_SHIELD_DURATION = 7500;
 
+    private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
+    private static final Image PLAYER_LEFT_IMAGE = SpritesImages.playerLeftImage;
+    private static final Image PLAYER_SHIELD_IMAGE = SpritesImages.playerShieldImage;
+
+    public static Image playerRightImage;
+    public static Image playerLeftImage;
+
     private Shield shield;
-    private SoundsPlayer[] ukaszHitSounds;
+    private SoundsPlayer[] playerHittedSound;
     private String lastDirectionX;
     private String lastDirectionY;
     private int totalScore;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Player(Image image, Image shieldImage) {
-        super(image);
+    public Player() {
+        this(PLAYER_RIGHT_IMAGE, PLAYER_LEFT_IMAGE, PLAYER_SHIELD_IMAGE);
+    }
 
-        shield = new UkaszShield(0, DEFAULT_SHIELD_DURATION, shieldImage, this);
-        setLives(DEFAULT_LIVES);
-        setMaxLives(DEFAULT_LIVES);
+    public Player(Image playerRightImage, Image playerLeftImage, Image shieldImage) {
+        super(playerRightImage);
 
-        ukaszHitSounds = new SoundsPlayer[2];
-        ukaszHitSounds[0] = new SoundsPlayer(SoundsPath.ukaszHitSoundPath1);
-        ukaszHitSounds[1] = new SoundsPlayer(SoundsPath.ukaszHitSoundPath2);
-
+        this.playerRightImage = playerRightImage;
+        this.playerLeftImage = playerLeftImage;
+        shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage, this);
+        lives = DEFAULT_LIVES;
+        maxLives = DEFAULT_LIVES;
+        playerHittedSound = new SoundsPlayer[2];
+        playerHittedSound[0] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_PATH_1);
+        playerHittedSound[1] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_PATH_2);
         lastDirectionX = "D";
         lastDirectionY = "W";
         totalScore = 0;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public void renderShield(GraphicsContext gc) {
+        //if shield is active, 750 - delay to see when sheild dissapear before another hit
+        if ((getProtectionTime() > 0) && (getProtectionTime() > 750)) {
+            if (lastDirectionX.equals("D"))
+                gc.drawImage(shield.getShieldImage(), getPositionX(), getPositionY());
+            else gc.drawImage(shield.getShieldImage(), getPositionX() - 50, getPositionY());
+        }
+    }
+
+    @Override
+    public void update(double time) {
+        super.update(time);
+        updateShield();
+    }
+
+    @Override
+    public void render(GraphicsContext gc) {
+        super.render(gc);
+        renderShield(gc);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,16 +77,18 @@ public class Player extends Sprite {
         totalScore += score;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public SoundsPlayer[] getUkaszHitSounds() {
-        return ukaszHitSounds;
+    public void updateShield() {
+        shield.updateShield();
     }
 
-    public SoundsPlayer getUkaszRandomHitSound() {
+    public void activateShield() {
+        shield.activateShield();
+    }
 
-        int random = (int) (Math.random() * 2);
-        System.out.println(random);
-        return ukaszHitSounds[random];
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public SoundsPlayer getUkaszRandomHitSound() {
+        int random = (int) (Math.random() * playerHittedSound.length);
+        return playerHittedSound[random];
     }
 
     public static int getDefaultVelocity() {
@@ -65,10 +103,6 @@ public class Player extends Sprite {
         return totalScore;
     }
 
-    public Shield getShield() {
-        return shield;
-    }
-
     public void setLastDirectionX(String lastDirectionX) {
         this.lastDirectionX = lastDirectionX;
     }
@@ -76,5 +110,10 @@ public class Player extends Sprite {
     public void setLastDirectionY(String lastDirectionY) {
         this.lastDirectionY = lastDirectionY;
     }
+
+    public void setShield(Shield shield) {
+        this.shield = shield;
+    }
+
 
 }

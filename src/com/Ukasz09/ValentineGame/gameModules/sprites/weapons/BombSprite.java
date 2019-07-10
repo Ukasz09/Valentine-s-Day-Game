@@ -16,10 +16,10 @@ public class BombSprite extends ShootSprite {
     private static final SoundsPlayer SHOT_SOUND= Sounds.bombShotSound;
     private static final double SOUND_VOLUME= 0.5;
 
-    private final String bombBoomSoundPath1=SoundsPath.bombBoomSoundPath1;
-    private final String bombBoomSoundPath2=SoundsPath.bombBoomSoundPath2;
-    private final String bombBoomSoundPath3=SoundsPath.bombBoomSoundPath3;
-    private final String bombBoomSoundPath4=SoundsPath.bombBoomSoundPath4;
+    private final String bombBoomSoundPath1=SoundsPath.BOMB_BOOM_SOUND_PATH_1;
+    private final String bombBoomSoundPath2=SoundsPath.BOMB_BOOM_SOUND_PATH_2;
+    private final String bombBoomSoundPath3=SoundsPath.BOMB_BOOM_SOUND_PATH_3;
+    private final String bombBoomSoundPath4=SoundsPath.BOMB_BOOM_SOUND_PATH_4;
 
     private SoundsPlayer[] bombBoomSound;
 

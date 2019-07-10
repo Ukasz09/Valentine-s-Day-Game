@@ -1,6 +1,5 @@
 package com.Ukasz09.ValentineGame.gameModules;
 
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
@@ -107,21 +106,21 @@ public class Collision {
     }
 
     //zwraca czy nastapila kolizja gracza z potworem
-    public static boolean playerCollisionWithMonster(ArrayList<Monster> monsters, Player ukasz, Canvas canvas){
+    public static boolean playerCollisionWithMonster(ArrayList<Monster> monsters, Player player, Canvas canvas){
 
         for(Sprite m: monsters){
 
-            if(m.intersectsWithMonster(ukasz)){
+            if(m.intersectsWithMonster(player)){
 
-                  if (ukasz.getProtectionTime()<=0){
+                  if (player.getProtectionTime()<=0){
 
                       if(((Monster)m).getHowBigKickSize()>0)
-                          ((Monster) m).kickPlayer(ukasz,canvas);
+                          ((Monster) m).kickPlayer(player,canvas);
 
-                      ukasz.removeLives(((Monster)m).getHowManyLivesTake());
-                      ukasz.getUkaszRandomHitSound().playSound(0.5,false);
+                      player.removeLives(((Monster)m).getHowManyLivesTake());
+                      player.getUkaszRandomHitSound().playSound(0.5,false);
 
-                      ukasz.getShield().setActualShieldTimer(0);
+                      player.activateShield();
                 }
 
                 return true;

@@ -4,12 +4,14 @@
         - nowe levele
         - nowi przeciwnicy
         - ekrany tutorialowe (opis potworow, sterowanie, bonusy, tipy)
+
 */
+
+//Todo: LAST DIRECTION NA ENUM
 
 package com.Ukasz09.ValentineGame.gameModules;
 
 import com.Ukasz09.ValentineGame.gameModules.levels.*;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonsterMiniboss;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
@@ -38,16 +40,6 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class Game extends Application {
-
-    //Sounds
-//    private SoundsPlayer playerWingsSound;
-//    private SoundsPlayer backgroundSound;
-//    private SoundsPlayer backgroundStartSound;
-//    private SoundsPlayer collectMoneySound;
-//    private SoundsPlayer backgroundEndSound;
-//    private SoundsPlayer bulletShotSound;
-//    private SoundsPlayer bombShotSound;
-
     Scene theScene;
     GraphicsContext gc;
     Canvas canvas;
@@ -71,7 +63,6 @@ public class Game extends Application {
     private IntValue antiCollisionTimer;     //czas w jakim gracz moze przelatywac przez potwory (zapobiega zablokowaniu ruchu gracza)
     private IntValue killedMonstersOnLevel;
     private IntValue collectedMoneybags;
-    private boolean playerFightWithBoss;
     private boolean showTutorialPage;
     private boolean playerReadyToGame;
 
@@ -94,7 +85,7 @@ public class Game extends Application {
         input = new ArrayList<>();
         lastNanoTime = new LongValue(System.nanoTime());
 
-        player = new Player(SpritesImages.playerRightImage, SpritesImages.playerShieldImage);
+        player = new Player(SpritesImages.playerRightImage, SpritesImages.playerLeftImage, SpritesImages.playerShieldImage);
         playerShots = new ArrayList<>();
         antiCollisionTimer = new IntValue(0);
 
@@ -107,7 +98,6 @@ public class Game extends Application {
         levelNumber = 0;
         bulletOverheating = 0;
         bombOverheating = 0;
-        playerFightWithBoss = false;
         showTutorialPage = false;
         playerReadyToGame = false;
     }
@@ -165,7 +155,7 @@ public class Game extends Application {
 
                             //Ustawienia dla poziomu 1
                             actualPanel.endLevel();
-                            actualPanel=null;
+                            actualPanel = null;
 
                             score = new IntValue(0);
                             double centerPositionX = Boundary.getAtRightBorder(canvas) / 2 - player.getWidth();
@@ -210,35 +200,18 @@ public class Game extends Application {
 
                         if (!levelIsEnd(actualLevel)) {
 
-                            if (playerFightWithBoss == false) {
+                            if (((Level_2) actualLevel).needToSpawnMiniboss(collectedMoneybags.getValue(), monsters.isEmpty()))
+                                ((Level_2) actualLevel).spawnMiniboss(monsters);
 
-                                play(theStage, currentNanoTime, actualLevel);
-
-                                if (needToSpawnBoss(actualLevel))
-                                    actualLevel.spawnMiniboss(monsters);
-                            }
-
-                            //gracz walczy z bossem
-                            else {
-
-                                play(theStage, currentNanoTime, actualLevel);
-
-                                //jesli boss zyje
-                                if (monsters.isEmpty() == false) {
-
-                                    ((FishMonsterMiniboss) monsters.get(0)).getShield().updateAndDrawShield(gc);
-                                }
-                            }
-
+                            play(theStage, currentNanoTime, actualLevel);
 
                         } else {
 
                             //Przygotowanie do uruchomienia ekranu koncowego
-
-                            endLevel(actualLevel);
-                            actualLevel=null;
                             actualPanel = new EndPanel();
                             actualPanel.makeLevel();
+                            endLevel(actualLevel);
+                            actualLevel = null;
                         }
 
                     }
@@ -271,7 +244,6 @@ public class Game extends Application {
         monsters.clear();
         playerShots.clear();
         killedMonstersOnLevel.setValue(0);
-        playerFightWithBoss = false;
     }
 
     //sprawdza klikniety klawisz i wykonuje akcje dla niego
@@ -288,7 +260,7 @@ public class Game extends Application {
             //kolizja z ramka
             if (Boundary.boundaryCollisionFromLeft(canvas, player) == false) {
 
-                player.setImage(SpritesImages.playerLeftImage);
+                player.setActualImage(player.playerLeftImage);
                 player.setLastDirectionX("A");
 
                 if ((Collision.collisionWithMonstersFromRight(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
@@ -302,7 +274,7 @@ public class Game extends Application {
             //kolizja z ramka
             if (Boundary.boundaryCollisionFromRight(canvas, player) == false) {
 
-                player.setImage(SpritesImages.playerRightImage);
+                player.setActualImage(player.playerRightImage);
                 player.setLastDirectionX("D");
 
                 if ((Collision.collisionWithMonstersFromLeft(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
@@ -363,7 +335,7 @@ public class Game extends Application {
 
                 playerShots.add(ukaszShotSprite);
 
-               ukaszShotSprite.playSound();
+                ukaszShotSprite.playSound();
 
                 bombOverheating = ((BombSprite) ukaszShotSprite).getMaxOverheating();
             }
@@ -421,8 +393,6 @@ public class Game extends Application {
         String pointsText = "Kasa na walentynki: $" + (player.getTotalScore() + (score.getValue()));
         gc.setFill(Color.TAN);
         gc.fillText(pointsText, theStage.getWidth() - 450, 70);
-
-        player.getShield().updateAndDrawShield(gc);
 
         //Dla strzalu
         if (bulletOverheating > 0)

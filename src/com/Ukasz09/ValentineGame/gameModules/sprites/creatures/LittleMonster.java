@@ -7,8 +7,8 @@ import javafx.scene.image.Image;
 
 public class LittleMonster extends Monster{
 
-    private final String hitSoundPath= SoundsPath.littleMonsterHitSoundPath;
-    private final String deathSoundPath=SoundsPath.littleMonsterDeathSoundPath;
+    private final String hitSoundPath= SoundsPath.LITTLE_MONSTER_HIT_SOUND_PATH;
+    private final String deathSoundPath=SoundsPath.LITTLE_MONSTER_DEATH_SOUND_PATH;
 
     private final double howManyLivesTake=0.5;
     private final int howBigKickSize=200;

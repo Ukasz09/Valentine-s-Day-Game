@@ -115,8 +115,6 @@ public class Level_2 extends Levels {
         return false;
     }
 
-
-
     @Override
     public void endLevel() {
         //nothing to do yet
