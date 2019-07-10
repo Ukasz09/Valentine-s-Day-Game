@@ -1,4 +1,4 @@
-package com.Ukasz09.ValentineGame.gameModules.sprites.others.shields;
+package com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect;
 
 import javafx.scene.canvas.GraphicsContext;
 

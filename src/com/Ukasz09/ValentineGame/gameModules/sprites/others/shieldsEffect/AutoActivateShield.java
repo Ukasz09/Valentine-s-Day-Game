@@ -1,4 +1,4 @@
-package com.Ukasz09.ValentineGame.gameModules.sprites.others.shields;
+package com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 
@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 
 public class AutoActivateShield extends Shield {
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public AutoActivateShield(int shieldCooldown, int shieldDuration, Image shieldImage, Sprite sprite) {
         super(shieldCooldown, shieldDuration, shieldImage, sprite);
     }

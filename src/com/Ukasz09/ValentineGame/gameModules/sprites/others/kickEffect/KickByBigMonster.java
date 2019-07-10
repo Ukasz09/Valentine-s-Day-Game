@@ -15,7 +15,7 @@ public class KickByBigMonster implements KickPlayer {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void kickPlayerByMonsterPostion(Monster m, Player p, Canvas canvas) {
-        kindOfKick.kick(m, p, canvas, getKickDirection(m, p));
+        kindOfKick.kick(m, p, getKickDirection(m, p));
     }
 
     /**

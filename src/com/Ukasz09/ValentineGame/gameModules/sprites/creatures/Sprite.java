@@ -195,4 +195,25 @@ public abstract class Sprite {
         protectionTime -= value;
     }
 
+    public boolean boundaryCollisionFromLeft(double atLeftBorder) {
+        if ((this.getBoundary().getMinX()) <= atLeftBorder) return true;
+        else return false;
+    }
+
+    public boolean boundaryCollisionFromRight(double atRightBorder) {
+        if ((this.getBoundary().getMaxX()) >= atRightBorder) return true;
+        else return false;
+    }
+
+    public boolean boundaryCollisionFromBottom(double atBottomBorder) {
+        if ((this.getBoundary().getMaxY()) >= atBottomBorder) return true;
+        else return false;
+
+    }
+
+    public boolean boundaryCollisionFromTop(double atTopBorder) {
+        if ((this.getBoundary().getMinY()) <= atTopBorder) return true;
+        else return false;
+    }
+
 }

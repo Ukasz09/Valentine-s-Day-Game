@@ -2,21 +2,22 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
+
 import javafx.scene.canvas.Canvas;
 
 public class KickByLittleMonster implements KickPlayer {
 
     KindOfKick kickMethod;
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public KickByLittleMonster(KindOfKick kickMethod) {
         this.kickMethod = kickMethod;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     @Override
     public void kickPlayerByMonsterPostion(Monster m, Player p, Canvas canvas) {
-        kickMethod.kick(m, p, canvas, getKickDirection(m, p));
+        kickMethod.kick(m, p, getKickDirection(m, p));
     }
 
     /**
@@ -40,7 +41,7 @@ public class KickByLittleMonster implements KickPlayer {
         double playerMaxY = p.getBoundary().getMaxY();
 
         //up or down
-        if ((monsterMinX> playerMinX) && (monsterMaxX< playerMaxX)) {
+        if ((monsterMinX > playerMinX) && (monsterMaxX < playerMaxX)) {
             if (monsterMinY < playerMinY)
                 return "S";
             else return "W";
@@ -48,7 +49,7 @@ public class KickByLittleMonster implements KickPlayer {
 
         //right kick
         if (monsterMaxX < playerMaxX) {
-            if ((monsterMaxY < playerMaxY) && (monsterMinY> playerMinY))
+            if ((monsterMaxY < playerMaxY) && (monsterMinY > playerMinY))
                 return "D";
             else if (monsterMinY < playerMinY)
                 return "SD";
@@ -56,7 +57,7 @@ public class KickByLittleMonster implements KickPlayer {
         }
 
         //left kick
-        if ((monsterMaxY < playerMaxY) && (monsterMinY> playerMinY))
+        if ((monsterMaxY < playerMaxY) && (monsterMinY > playerMinY))
             return "A";
         else if (monsterMinY < playerMinY)
             return "SA";

@@ -1,6 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
 import com.Ukasz09.ValentineGame.gameModules.Boundary;
+import com.Ukasz09.ValentineGame.gameModules.Game;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.LittleMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
@@ -27,7 +28,6 @@ public class Level_1 extends Levels {
     private static final SoundsPlayer BACKGROUND_SOUND=Sounds.backgroundSound;
     private static final double BACKGROUND_SOUND_VOLUME = 0.1;
 
-
     private final int howManyMoneybags = 10;
     private final int howManySmallCoins = 8;
     private final int smallCoinValue = 50;
@@ -36,15 +36,13 @@ public class Level_1 extends Levels {
     private final int howManyAllMonsters = howManyLittleMonsters;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Level_1(Canvas canvas) {
+    public Level_1() {
         setMoneyBagImage1(MONEY_BAG_IMAGE_1);
         setMoneyBagImage2(MONEY_BAG_IMAGE_2);
         setHowManyMoneybags(howManyMoneybags);
         setSmallCoinValue(smallCoinValue);
         setNormalCoinValue(normalCoinValue);
         setHowManySmallCoins(howManySmallCoins);
-
-        setCanvas(canvas);
 
         setHowManyLittleMonsters(howManyLittleMonsters);
         setHowManyAllMonsters(howManyAllMonsters);
@@ -65,20 +63,20 @@ public class Level_1 extends Levels {
         for (Sprite m : monsters) {
 
             int random = (int) (Math.random() * 3 + 1);
-            int spawnPositionY = (int) (Math.random() * Boundary.getAtBottomBorder(canvas));
-            int spawnPositionX = (int) (Math.random() * Boundary.getAtRightBorder(canvas));
+            int spawnPositionY = (int) (Math.random() * Game.boundary.getAtBottomBorder());
+            int spawnPositionX = (int) (Math.random() * Game.boundary.getAtRightBorder());
 
             //spawn na lewym brzegu
             if (random == 1)
-                m.setPosition(Boundary.getAtLeftBorder(canvas), spawnPositionY);
+                m.setPosition(Game.boundary.getAtLeftBorder(), spawnPositionY);
 
             //spawn na prawym brzegu
             if (random == 2)
-                m.setPosition(Boundary.getAtRightBorder(canvas), spawnPositionY);
+                m.setPosition(Game.boundary.getAtRightBorder(), spawnPositionY);
 
             //spawn na gornym brzegu
             if (random == 3)
-                m.setPosition(spawnPositionX, Boundary.getAtTopBorder(canvas));
+                m.setPosition(spawnPositionX, Game.boundary.getAtTopBorder());
         }
 
     }

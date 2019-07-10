@@ -4,7 +4,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import javafx.scene.image.Image;
 
-public abstract class ShootSprite extends Sprite {
+public abstract class ShotSprite extends Sprite {
 
     private double howManyLivesTake;
     private double shotVelocity;
@@ -12,10 +12,9 @@ public abstract class ShootSprite extends Sprite {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Konstruktor */
 
-    public ShootSprite(Image image, double shotVelocity){
-
+    public ShotSprite(Image image, double shotVelocity, double howManyLivesTake){
         super(image);
-        howManyLivesTake=1;
+        this.howManyLivesTake=howManyLivesTake;
         this.shotVelocity=shotVelocity;
     }
 
@@ -30,18 +29,16 @@ public abstract class ShootSprite extends Sprite {
         return shotVelocity;
     }
 
-    public void setHowManyLivesTake(double howManyLivesTake) {
-        this.howManyLivesTake = howManyLivesTake;
-    }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Metody */
 
     public abstract void update(double time);
 
-    protected void playSound(SoundsPlayer shotSound, double volume){
-        shotSound.playSound(volume,false);
+    protected void playSound(SoundsPlayer sound, double volume){
+        sound.playSound(volume,false);
     }
 
-    public abstract void playSound();
+    public abstract void playShotSound();
+
+    public abstract void playBoomSound();
 }

@@ -6,16 +6,18 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShootSprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.wrappers.IntValue;
+import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
+//todo: popsul sie antiblock
 public class Collision {
 
-    private static final int defaultAntiCollisionsTimer=2000/(Player.getDefaultVelocity()/400);
+    private static final int defaultAntiCollisionsTimer = 2000 / (Player.getDefaultVelocity() / 400);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Gettery */
@@ -28,7 +30,7 @@ public class Collision {
     /* Metody */
 
     //sprawdza kolizje sprita z monetami
-    public static void checkMoneybagsCollisions(ArrayList<MoneyBag> moneybagList, Sprite sprite, IntValue score, IntValue collectedMoneyBags){
+    public static void checkMoneybagsCollisions(ArrayList<MoneyBag> moneybagList, Sprite sprite, IntValue score, IntValue collectedMoneyBags) {
 
         Iterator<MoneyBag> moneybagIter = moneybagList.iterator();
 
@@ -41,7 +43,7 @@ public class Collision {
 
                 //jesli sprawdzamy kolizje gracza
 
-                if(sprite instanceof Player){
+                if (sprite instanceof Player) {
 
                     moneybag.playCollectSound();
                     moneybagIter.remove();
@@ -54,7 +56,7 @@ public class Collision {
     }
 
     //sprawdza kolizje z pociskami gracza
-    public static void playerShotCollision(ArrayList<Monster> monsters, ArrayList<ShootSprite> shots, IntValue monsterKilledOnLevel){
+    public static void playerShotCollision(ArrayList<Monster> monsters, ArrayList<ShotSprite> shots, IntValue monsterKilledOnLevel) {
 
         Iterator<Monster> monstersIter = monsters.iterator();
 
@@ -62,17 +64,17 @@ public class Collision {
 
             Monster monster = monstersIter.next();
 
-            Iterator<ShootSprite> shootIter=shots.iterator();
+            Iterator<ShotSprite> shootIter = shots.iterator();
 
             //iteracja na strzaly
-            while (shootIter.hasNext()){
+            while (shootIter.hasNext()) {
 
-                ShootSprite shot=shootIter.next();
+                ShotSprite shot = shootIter.next();
 
                 if (monster.intersects(shot)) {
 
                     //jesli potwor nie jest chroniony tarcza
-                    if(monster.getProtectionTime()<=0) {
+                    if (monster.getProtectionTime() <= 0) {
 
                         //jesli dostal bomba
                         if (shot instanceof BombSprite) {
@@ -95,8 +97,8 @@ public class Collision {
                             monsterKilledOnLevel.incValue();
                         } else monster.getHitSound().playSound(0.5, false);
 
-                    } else if(monster.getMissSound()!=null)
-                                monster.getMissSound().playSound(1,false);
+                    } else if (monster.getMissSound() != null)
+                        monster.getMissSound().playSound(1, false);
 
                     shootIter.remove();
                 }
@@ -106,21 +108,21 @@ public class Collision {
     }
 
     //zwraca czy nastapila kolizja gracza z potworem
-    public static boolean playerCollisionWithMonster(ArrayList<Monster> monsters, Player player, Canvas canvas){
+    public static boolean playerCollisionWithMonster(ArrayList<Monster> monsters, Player player, Canvas canvas) {
 
-        for(Sprite m: monsters){
+        for (Sprite m : monsters) {
 
-            if(m.intersectsWithMonster(player)){
+            if (m.intersectsWithMonster(player)) {
 
-                  if (player.getProtectionTime()<=0){
+                if (player.getProtectionTime() <= 0) {
 
-                      if(((Monster)m).getHowBigKickSize()>0)
-                          ((Monster) m).kickPlayer(player,canvas);
+                    if (((Monster) m).getHowBigKickSize() > 0)
+                        ((Monster) m).kickPlayer(player, canvas);
 
-                      player.removeLives(((Monster)m).getHowManyLivesTake());
-                      player.getUkaszRandomHitSound().playSound(0.5,false);
+                    player.removeLives(((Monster) m).getHowManyLivesTake());
+                    player.getUkaszRandomHitSound().playSound(0.5, false);
 
-                      player.activateShield();
+                    player.activateShield();
                 }
 
                 return true;
@@ -131,13 +133,13 @@ public class Collision {
     }
 
     //sprawdza kolizje gracza z lewym brzegiem potwora
-    public static boolean collisionWithMonstersFromLeft(ArrayList<Monster> monsters, Sprite sprite){
+    public static boolean collisionWithMonstersFromLeft(ArrayList<Monster> monsters, Sprite sprite) {
 
-        for(Sprite m: monsters) {
+        for (Sprite m : monsters) {
 
-            if(m!=sprite){
+            if (m != sprite) {
 
-                if ((m.getBoundary().getMinX()<sprite.getBoundary().getMaxX())&&(m.getBoundary().getMaxX()>sprite.getBoundary().getMaxX())&&(m.intersectsWithMonster(sprite)))
+                if ((m.getBoundary().getMinX() < sprite.getBoundary().getMaxX()) && (m.getBoundary().getMaxX() > sprite.getBoundary().getMaxX()) && (m.intersectsWithMonster(sprite)))
                     return true;
             }
         }
@@ -146,13 +148,13 @@ public class Collision {
     }
 
     //sprawdza kolizje gracza z lewym brzegiem potwora
-    public static boolean collisionWithMonstersFromRight(ArrayList<Monster> monsters, Sprite ukasz){
+    public static boolean collisionWithMonstersFromRight(ArrayList<Monster> monsters, Sprite ukasz) {
 
-        for(Sprite m: monsters) {
+        for (Sprite m : monsters) {
 
-            if(m!=ukasz){
+            if (m != ukasz) {
 
-                if ((m.getBoundary().getMaxX()>ukasz.getBoundary().getMinX())&&(m.getBoundary().getMinX()<ukasz.getBoundary().getMinX())&&(m.intersectsWithMonster(ukasz)))
+                if ((m.getBoundary().getMaxX() > ukasz.getBoundary().getMinX()) && (m.getBoundary().getMinX() < ukasz.getBoundary().getMinX()) && (m.intersectsWithMonster(ukasz)))
                     return true;
             }
         }
@@ -161,24 +163,23 @@ public class Collision {
     }
 
     //sprawdza kolizje gracza z gornym brzegiem potwora
-    public static boolean collisionWithMonstersFromTop(ArrayList<Monster> monsters, Sprite ukasz){
+    public static boolean collisionWithMonstersFromTop(ArrayList<Monster> monsters, Sprite ukasz) {
 
-        for(Sprite m: monsters) {
+        for (Sprite m : monsters) {
 
-            if ((m.getBoundary().getMinY()<ukasz.getBoundary().getMaxY())&&(m.getBoundary().getMinY()>ukasz.getBoundary().getMinY())&&(m.intersectsWithMonster(ukasz)))
+            if ((m.getBoundary().getMinY() < ukasz.getBoundary().getMaxY()) && (m.getBoundary().getMinY() > ukasz.getBoundary().getMinY()) && (m.intersectsWithMonster(ukasz)))
                 return true;
         }
-
 
 
         return false;
     }
 
     //sprawdza kolizje gracza z dolnym brzegiem potwora
-    public static boolean collisionWithMonstersFromBottom(ArrayList<Monster> monsters, Sprite ukasz){
+    public static boolean collisionWithMonstersFromBottom(ArrayList<Monster> monsters, Sprite ukasz) {
 
-        for(Sprite m: monsters) {
-            if ((m.getBoundary().getMaxY()>ukasz.getBoundary().getMinY())&&(m.getBoundary().getMinY()<ukasz.getBoundary().getMinY())&&(m.intersectsWithMonster(ukasz)))
+        for (Sprite m : monsters) {
+            if ((m.getBoundary().getMaxY() > ukasz.getBoundary().getMinY()) && (m.getBoundary().getMinY() < ukasz.getBoundary().getMinY()) && (m.intersectsWithMonster(ukasz)))
                 return true;
         }
 
@@ -186,16 +187,16 @@ public class Collision {
     }
 
     //zwraca czy gracz ma kolizje z potworem/ramka z kazdej strony
-    public static boolean collisionFromAllDirection(ArrayList<Monster> monsters, Sprite ukasz, Canvas canvas){
+    public static boolean collisionFromAllDirection(ArrayList<Monster> monsters, Sprite player) {
 
         if (
-                ((collisionWithMonstersFromBottom(monsters, ukasz))||(Boundary.boundaryCollisionFromTop(canvas,ukasz)))&&
-                        ((collisionWithMonstersFromTop(monsters, ukasz))||(Boundary.boundaryCollisionFromBottom(canvas,ukasz)))&&
-                            ((collisionWithMonstersFromLeft(monsters, ukasz))||(Boundary.boundaryCollisionFromRight(canvas,ukasz)))&&
-                                ((collisionWithMonstersFromRight(monsters, ukasz))||(Boundary.boundaryCollisionFromLeft(canvas,ukasz)))
+                ((collisionWithMonstersFromBottom(monsters, player)) || (player.boundaryCollisionFromBottom(Game.boundary.getAtBottomBorder()))) &&
+                        ((collisionWithMonstersFromTop(monsters, player)) || (player.boundaryCollisionFromTop(Game.boundary.getAtTopBorder()))) &&
+                        ((collisionWithMonstersFromLeft(monsters, player)) || (player.boundaryCollisionFromLeft(Game.boundary.getAtLeftBorder()))) &&
+                        ((collisionWithMonstersFromRight(monsters, player)) || (player.boundaryCollisionFromRight(Game.boundary.getAtRightBorder())))
         ) return true;
 
-         return false;
+        return false;
     }
 
 }
