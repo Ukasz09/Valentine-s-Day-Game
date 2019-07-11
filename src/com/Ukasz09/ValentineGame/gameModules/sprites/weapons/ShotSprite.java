@@ -31,6 +31,8 @@ public abstract class ShotSprite extends Sprite {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Metody */
 
+    public abstract void setPosition(Sprite sprite);
+
     public abstract void update(double time);
 
     protected void playSound(SoundsPlayer sound, double volume) {

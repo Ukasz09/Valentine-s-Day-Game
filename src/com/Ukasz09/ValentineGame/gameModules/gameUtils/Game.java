@@ -33,14 +33,12 @@ import java.util.ArrayList;
 public class Game extends Application {
     private ViewManager manager;
     private ArrayList<MoneyBag> moneybagList;
-    private ArrayList<Monster> monsters;
-    private ArrayList<String> input;
-    private ArrayList<ShotSprite> playerShots;
+    private ArrayList<Monster> monstersList;
+    private ArrayList<String> inputsList;
+    private ArrayList<ShotSprite> playerShotsList;
 
     private double elapsedTime;
     private LongValue lastNanoTime;
-
-    private double bulletOverheating;
 
     private int levelNumber;                //numer okreslajacy level
     private Levels actualLevel;
@@ -53,28 +51,27 @@ public class Game extends Application {
     private boolean playerReadyToGame;
 
     private Player player;
-    private ShotSprite ukaszShotSprite;
+    private ShotSprite playerShotSprite;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
         manager = new ViewManager(); //do NOT touch
 
         //Game components
-        input = new ArrayList<>();
+        inputsList = new ArrayList<>();
         lastNanoTime = new LongValue(System.nanoTime());
 
         player = new Player(SpritesImages.playerRightImage, SpritesImages.playerLeftImage, SpritesImages.playerShieldImage, manager);
-        playerShots = new ArrayList<>();
+        playerShotsList = new ArrayList<>();
         antiCollisionTimer = new IntValue(0);
 
         moneybagList = new ArrayList<>();
         collectedMoneybags = new IntValue(0);
 
-        monsters = new ArrayList<>();
+        monstersList = new ArrayList<>();
         killedMonstersOnLevel = new IntValue(0);
 
         levelNumber = 0;
-        bulletOverheating = 0;
         showTutorialPage = false;
         playerReadyToGame = false;
     }
@@ -83,7 +80,7 @@ public class Game extends Application {
     public void start(Stage theStage) {
         manager.initialize("Valentines Game", true); //do NOT touch
         theStage = manager.getMainStage();  //do NOT touch
-        manager.readKeyboardAction(input);
+        manager.readKeyboardAction(inputsList);
 
         actualPanel = new StartPanel(manager);
         actualPanel.makeLevel();
@@ -103,7 +100,7 @@ public class Game extends Application {
 
                             actualPanel.renderLevel();
 
-                            if (input.contains("ENTER"))
+                            if (inputsList.contains("ENTER"))
                                 playerReadyToGame = true;
                         }
 //                                else showTutorialPage=true;
@@ -126,10 +123,10 @@ public class Game extends Application {
                             player.setPosition(centerPositionX, centerPositionY);
 
                             actualLevel = new Level_1(manager);
-                            actualLevel.makeLevel(moneybagList, monsters);
+                            actualLevel.makeLevel(moneybagList, monstersList);
 
                             collectedMoneybags.setValue(0);
-                            playerShots.clear();
+                            playerShotsList.clear();
 
                             levelNumber++;
                         }
@@ -149,7 +146,7 @@ public class Game extends Application {
 
                             endLevel(actualLevel);
                             actualLevel = new Level_2(manager);
-                            actualLevel.makeLevel(moneybagList, monsters);
+                            actualLevel.makeLevel(moneybagList, monstersList);
                         }
 
 
@@ -161,8 +158,8 @@ public class Game extends Application {
 
                         if (!levelIsEnd(actualLevel)) {
 
-                            if (((Level_2) actualLevel).needToSpawnMiniboss(collectedMoneybags.getValue(), monsters.isEmpty()))
-                                ((Level_2) actualLevel).spawnMiniboss(monsters);
+                            if (((Level_2) actualLevel).needToSpawnMiniboss(collectedMoneybags.getValue(), monstersList.isEmpty()))
+                                ((Level_2) actualLevel).spawnMiniboss(monstersList);
 
                             play(currentNanoTime, actualLevel);
 
@@ -202,8 +199,8 @@ public class Game extends Application {
         score.setValue(0);
         collectedMoneybags.setValue(0);
         moneybagList.clear();
-        monsters.clear();
-        playerShots.clear();
+        monstersList.clear();
+        playerShotsList.clear();
         killedMonstersOnLevel.setValue(0);
     }
 
@@ -211,87 +208,83 @@ public class Game extends Application {
     public void checkPlayerMove(int velocity) {
 
         player.setVelocity(0, 0);
-        boolean playerCantDoAnyMove = Collision.collisionFromAllDirection(monsters, player, manager);
+        boolean playerCantDoAnyMove = Collision.collisionFromAllDirection(monstersList, player, manager);
 
         if (playerCantDoAnyMove)
             antiCollisionTimer.setValue(Collision.getDefaultAntiCollisionsTimer());
 
-        if (input.contains("A")) {
+        if (inputsList.contains("A")) {
 
             //kolizja z ramka
             if (!player.boundaryCollisionFromLeft(manager.getLeftBorder())) {
                 player.setActualImage(player.playerLeftImage);
                 player.setLastDirectionX("A");
 
-                if ((Collision.collisionWithMonstersFromRight(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
+                if ((Collision.collisionWithMonstersFromRight(monstersList, player) == false) || (antiCollisionTimer.getValue() > 0))
                     player.addVelocity(-velocity, 0);
             }
         }
 
-        if (input.contains("D")) {
+        if (inputsList.contains("D")) {
 
             //kolizja z ramka
             if (!player.boundaryCollisionFromRight(manager.getRightBorder())) {
                 player.setActualImage(player.playerRightImage);
                 player.setLastDirectionX("D");
 
-                if ((Collision.collisionWithMonstersFromLeft(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
+                if ((Collision.collisionWithMonstersFromLeft(monstersList, player) == false) || (antiCollisionTimer.getValue() > 0))
                     player.addVelocity(velocity, 0);
             }
         }
 
-        if (input.contains("W")) {
+        if (inputsList.contains("W")) {
 
             //kolizja z ramka
             if (!player.boundaryCollisionFromTop(manager.getTopBorder())) {
                 player.setLastDirectionY("W");
 
-                if ((Collision.collisionWithMonstersFromBottom(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
+                if ((Collision.collisionWithMonstersFromBottom(monstersList, player) == false) || (antiCollisionTimer.getValue() > 0))
                     player.addVelocity(0, -velocity);
             }
         }
 
-        if (input.contains("S")) {
+        if (inputsList.contains("S")) {
 
             //kolizja z ramka
             if (!player.boundaryCollisionFromBottom(manager.getBottomBorder())) {
                 player.setLastDirectionY("W");
 
-                if ((Collision.collisionWithMonstersFromTop(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
+                if ((Collision.collisionWithMonstersFromTop(monstersList, player) == false) || (antiCollisionTimer.getValue() > 0))
                     player.addVelocity(0, velocity);
             }
         }
 
         //dla dzialka
-        if (input.contains("SPACE")) {
+        if (inputsList.contains("SPACE")) {
 
-            if (bulletOverheating <= 0) {
+            if (player.getBulletOverheating() <= 0) {
 
-                ukaszShotSprite = new BulletSprite(player.getLastDirectionX(), manager);
-                ((BulletSprite) ukaszShotSprite).setPosition(player);
-                ukaszShotSprite.setVelocity(ukaszShotSprite.getShotVelocity(), 0);
+                playerShotSprite = new BulletSprite(player.getLastDirectionX(), manager);
+                playerShotSprite.setPosition(player);
+                playerShotSprite.setVelocity(playerShotSprite.getShotVelocity(), 0);
 
-                playerShots.add(ukaszShotSprite);
-
-                ukaszShotSprite.playShotSound();
-
-                bulletOverheating = ((BulletSprite) ukaszShotSprite).getMaxOverheating();
+                playerShotsList.add(playerShotSprite);
+                playerShotSprite.playShotSound();
+                player.overheatBullet();
             }
         }
 
         //Dla bomby
-        if (input.contains("P")) {
+        if (inputsList.contains("P")) {
 
             if (player.getBombOverheating() <= 0) {
 
-                ukaszShotSprite = new BombSprite(manager);
-                ((BombSprite) ukaszShotSprite).setPosition(player);
-                ukaszShotSprite.setVelocity(0, ukaszShotSprite.getShotVelocity());
+                playerShotSprite = new BombSprite(manager);
+                playerShotSprite.setPosition(player);
+                playerShotSprite.setVelocity(0, playerShotSprite.getShotVelocity());
 
-                playerShots.add(ukaszShotSprite);
-
-                ukaszShotSprite.playShotSound();
-
+                playerShotsList.add(playerShotSprite);
+                playerShotSprite.playShotSound();
                 player.overheatBomb();
             }
         }
@@ -299,7 +292,7 @@ public class Game extends Application {
 
     public boolean playerReadyToGame() {
 
-        if (input.contains("ENTER")) return true;
+        if (inputsList.contains("ENTER")) return true;
         else return false;
     }
 
@@ -339,19 +332,15 @@ public class Game extends Application {
         Collision.checkMoneybagsCollisions(moneybagList, player, score, collectedMoneybags);
 
         //render poziomu (tlo, potwory)
-        level.renderLevel(monsters);
+        level.renderLevel(monstersList);
 
         //render napisu
         String pointsText = "Kasa na walentynki: $" + (player.getTotalScore() + (score.getValue()));
         //gc.setFill(Color.TAN);
         manager.getGraphicContext().fillText(pointsText, ViewManager.WIDTH - 450, 70);
 
-        //Dla strzalu
-        if (bulletOverheating > 0)
-            bulletOverheating -= 50;
-
-        //render serc
-        level.drawHearts(player);
+//        //render serc
+//        level.drawHearts(player);
 
         //render pieniedzy
         for (Sprite moneyBag : moneybagList)
@@ -362,17 +351,17 @@ public class Game extends Application {
             antiCollisionTimer.decValue(100);
 
         //kolizja z graczem
-        Collision.playerCollisionWithMonster(monsters, player);
+        Collision.playerCollisionWithMonster(monstersList, player);
 
         //kolizja z pociskami
-        Collision.playerShotCollision(monsters, playerShots, killedMonstersOnLevel);
+        Collision.playerShotCollision(monstersList, playerShotsList, killedMonstersOnLevel);
 
         checkPlayerMove(Player.getDefaultVelocity());
         player.update(elapsedTime);
         player.render();
-        level.updateShots(playerShots, elapsedTime);
-        level.renderShots(playerShots);
-        level.updateMonsters(player, monsters);
+        level.updateShots(playerShotsList, elapsedTime);
+        level.renderShots(playerShotsList);
+        level.updateMonsters(player, monstersList);
 
     }
 
@@ -400,7 +389,7 @@ public class Game extends Application {
 
             manager.getGraphicContext().drawImage(tutorialPages[i], 0, 0);
 
-            if (input.contains("ENTER"))
+            if (inputsList.contains("ENTER"))
                 i++;
 
         }

@@ -6,7 +6,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.Shield
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.AutoActivateShield;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.HealthStatusBar;
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.healthStatusBars.HealthStatusBar;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.Shield;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

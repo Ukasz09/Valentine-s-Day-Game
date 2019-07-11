@@ -141,37 +141,10 @@ public abstract class Levels {
 
     public abstract void renderLevel(ArrayList<Monster> monsters);
 
-    public void drawHearts(Sprite ukasz) {
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        double tmpLives = ukasz.getLives();
-        double positionX = manager.getRightBorder() - ukasz.getMaxLives() * heartFull.getWidth();    //serca maja te sama dlugosc / wysokosc
-        double positionY = manager.getBottomBorder() - heartFull.getHeight();
 
-        for (int i = 0; i < ukasz.getMaxLives(); i++) {
-
-            //rysuj polowke
-            if (tmpLives == 0.5) {
-
-                manager.getGraphicContext().drawImage(heartHalf, positionX, positionY);
-                tmpLives = 0;
-            }
-
-            //rysuj cale
-            else if (tmpLives > 0) {
-
-                manager.getGraphicContext().drawImage(heartFull, positionX, positionY);
-                tmpLives--;
-            }
-
-            //rysuj puste
-            else manager.getGraphicContext().drawImage(heartEmpty, positionX, positionY);
-
-            positionX += heartFull.getWidth();
-
-        }
-
-    }
-
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     protected void drawBackground(GraphicsContext gc, Image backgroundImage) {
         gc.drawImage(backgroundImage, 0, 0);
     }

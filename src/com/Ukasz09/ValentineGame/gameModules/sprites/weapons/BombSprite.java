@@ -16,20 +16,20 @@ public class BombSprite extends ShotSprite {
     public static final double DEFAULT_SHOT_VELOCITY = 300;
 
     private static final SoundsPlayer SHOT_SOUND = Sounds.bombShotSound;
-    public static final double DEFAULT_BOMB_VOLUME =0.4;
+    public static final double DEFAULT_BOMB_VOLUME = 0.4;
     private static final double DEFAULT_SHOT_VOLUME = 0.5;
     private static final String BOMB_BOOM_SOUND_PATH_1 = SoundsPath.BOMB_BOOM_SOUND_PATH_1;
     private static final String BOMB_BOOM_SOUND_PATH_2 = SoundsPath.BOMB_BOOM_SOUND_PATH_2;
     private static final String BOMB_BOOM_SOUND_PATH_3 = SoundsPath.BOMB_BOOM_SOUND_PATH_3;
     private static final String BOMB_BOOM_SOUND_PATH_4 = SoundsPath.BOMB_BOOM_SOUND_PATH_4;
-    private static final Image[] DEFAULT_BOMB_IMAGES= SpritesImages.getUkaszBombShotImages();
+    private static final Image[] DEFAULT_BOMB_IMAGES = SpritesImages.getUkaszBombShotImages();
 
-    private static double maxOverheating=DEFAULT_MAX_OVERHEATING;
+    private static double maxOverheating = DEFAULT_MAX_OVERHEATING;
     private SoundsPlayer[] bombBoomSound;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public BombSprite(ViewManager manager){
-        this(DEFAULT_BOMB_IMAGES[(int) (Math.random() * 2)],manager);
+    public BombSprite(ViewManager manager) {
+        this(DEFAULT_BOMB_IMAGES[(int) (Math.random() * 2)], manager);
     }
 
     public BombSprite(Image image, ViewManager manager) {
@@ -49,6 +49,7 @@ public class BombSprite extends ShotSprite {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //todo: przerobic by byla uniwersalna
+    @Override
     public void setPosition(Sprite ukasz) {
         double centerPositionRightX = ukasz.getBoundary().getMaxX() - ukasz.getWidth() / 2;
         double centerPositionLeftX = ukasz.getBoundary().getMaxX() - ukasz.getWidth() / 1.5;
@@ -58,7 +59,6 @@ public class BombSprite extends ShotSprite {
         else setPosition(centerPositionLeftX, ukasz.getBoundary().getMaxY() - 50);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void update(double time) {
         addPositionY(getVelocityY() * time);
@@ -70,8 +70,8 @@ public class BombSprite extends ShotSprite {
     }
 
     @Override
-    public void playBoomSound(){
-        playSound(getRandomBoomSound(),DEFAULT_BOMB_VOLUME);
+    public void playBoomSound() {
+        playSound(getRandomBoomSound(), DEFAULT_BOMB_VOLUME);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

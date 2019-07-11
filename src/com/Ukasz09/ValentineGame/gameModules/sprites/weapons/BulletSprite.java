@@ -12,14 +12,15 @@ public class BulletSprite extends ShotSprite {
     public static final double DEFAULT_MAX_OVERHEATING = 1000;
     public static final double DEFAULT_SHOT_VELOCITY = 600;
 
-    private static final Image DEFAULT_SHOT_IMAGE= SpritesImages.playerShotImage;
+    private static final Image DEFAULT_SHOT_IMAGE = SpritesImages.playerShotImage;
     private static final SoundsPlayer SHOT_SOUND = Sounds.bulletShotSound;
     private static final double DEFAULT_SHOT_VOLUME = 0.2;
-    private static double maxOverheating;
+    private static double maxOverheating = DEFAULT_MAX_OVERHEATING;
+
     private String shotDirection;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public BulletSprite(String shotDirection, ViewManager manager){
+    public BulletSprite(String shotDirection, ViewManager manager) {
         this(DEFAULT_SHOT_IMAGE, shotDirection, manager);
     }
 
@@ -35,6 +36,7 @@ public class BulletSprite extends ShotSprite {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //todo: przerobic by byla uniwersalna
+    @Override
     public void setPosition(Sprite sprite) {
         double shotPositionY = sprite.getBoundary().getMinY() + 160;
         double shotPositionRightX = sprite.getBoundary().getMaxX();
@@ -64,7 +66,7 @@ public class BulletSprite extends ShotSprite {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public double getMaxOverheating() {
+    public static double getMaxOverheating() {
         return maxOverheating;
     }
 

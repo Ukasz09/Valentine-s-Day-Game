@@ -1,9 +1,12 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.Game;
 import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.healthStatusBars.HeartsRender;
+import com.Ukasz09.ValentineGame.gameModules.sprites.others.healthStatusBars.InCorner;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.ShieldKindOfRender;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
@@ -18,6 +21,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private static final int DEFAULT_LIVES = 5;
     private static final int DEFAULT_SHIELD_DURATION = 7500;
     private static final int DEFAULT_BATTERY_OVERHEATING_REDUCE = 50;
+    private static final int DEFAULT_BULLET_OVERHEATING_REDUCE = 50;
 
     private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
     private static final Image PLAYER_LEFT_IMAGE = SpritesImages.playerLeftImage;
@@ -33,6 +37,8 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private int totalScore;
     private Image[] batteryImages = SpritesImages.getBatteryImages();
     private double bombOverheating;
+    private double bulletOverheating;
+    private HeartsRender heartsRender;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
@@ -53,6 +59,8 @@ public class Player extends Sprite implements ShieldKindOfRender {
         lastDirectionY = "W";
         totalScore = 0;
         bombOverheating = 0;
+        bulletOverheating =0;
+        heartsRender=new InCorner(manager);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,6 +79,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         super.update(time);
         updateShield();
         updateBattery();
+        updateBulletOverheating();
     }
 
     @Override
@@ -78,6 +87,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         super.render();
         renderShield(getManager().getGraphicContext());
         renderBattery(getManager().getGraphicContext());
+        heartsRender.renderHearts(this);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,8 +133,17 @@ public class Player extends Sprite implements ShieldKindOfRender {
             bombOverheating = 0;
     }
 
+    public void updateBulletOverheating(){
+        if (bulletOverheating > 0)
+            bulletOverheating -= DEFAULT_BULLET_OVERHEATING_REDUCE;
+    }
+
     public void overheatBomb() {
         bombOverheating = BombSprite.getMaxOverheating();
+    }
+
+    public void overheatBullet(){
+        bulletOverheating = BulletSprite.getMaxOverheating();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -159,5 +178,9 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public double getBombOverheating() {
         return bombOverheating;
+    }
+
+    public double getBulletOverheating() {
+        return bulletOverheating;
     }
 }
