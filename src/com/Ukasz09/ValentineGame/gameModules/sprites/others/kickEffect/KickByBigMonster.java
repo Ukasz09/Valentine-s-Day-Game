@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import javafx.scene.canvas.Canvas;
@@ -14,8 +15,8 @@ public class KickByBigMonster implements KickPlayer {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public void kickPlayerByMonsterPostion(Monster m, Player p) {
-        kindOfKick.kick(m, p, getKickDirection(m, p));
+    public void kickPlayerByMonsterPostion(Monster m, Player p, ViewManager manager) {
+        kindOfKick.kick(m, p, getKickDirection(m, p), manager);
     }
 
     /**

@@ -116,8 +116,8 @@ public abstract class Levels {
                 moneybag = new MoneyBag(moneyBagImage1, smallCoinValue, manager);
             else moneybag = new MoneyBag(moneyBagImage2, normalCoinValue, manager);
 
-            double px = Game.boundary.getAtRightBorder() * 9 / 10 * Math.random();
-            double py = Game.boundary.getAtBottomBorder() * 8 / 10 * Math.random();
+            double px = manager.getRightBorder() * 9 / 10 * Math.random();
+            double py = manager.getBottomBorder() * 8 / 10 * Math.random();
 
             moneybag.setPosition(px, py);
             moneybagList.add(moneybag);
@@ -144,27 +144,27 @@ public abstract class Levels {
     public void drawHearts(Sprite ukasz) {
 
         double tmpLives = ukasz.getLives();
-        double positionX = Game.boundary.getAtRightBorder() - ukasz.getMaxLives() * heartFull.getWidth();    //serca maja te sama dlugosc / wysokosc
-        double positionY = Game.boundary.getAtBottomBorder() - heartFull.getHeight();
+        double positionX = manager.getRightBorder() - ukasz.getMaxLives() * heartFull.getWidth();    //serca maja te sama dlugosc / wysokosc
+        double positionY = manager.getBottomBorder() - heartFull.getHeight();
 
         for (int i = 0; i < ukasz.getMaxLives(); i++) {
 
             //rysuj polowke
             if (tmpLives == 0.5) {
 
-                getManager().getGraphicContext().drawImage(heartHalf, positionX, positionY);
+                manager.getGraphicContext().drawImage(heartHalf, positionX, positionY);
                 tmpLives = 0;
             }
 
             //rysuj cale
             else if (tmpLives > 0) {
 
-                getManager().getGraphicContext().drawImage(heartFull, positionX, positionY);
+                manager.getGraphicContext().drawImage(heartFull, positionX, positionY);
                 tmpLives--;
             }
 
             //rysuj puste
-            else getManager().getGraphicContext().drawImage(heartEmpty, positionX, positionY);
+            else manager.getGraphicContext().drawImage(heartEmpty, positionX, positionY);
 
             positionX += heartFull.getWidth();
 
@@ -205,11 +205,11 @@ public abstract class Levels {
             shot.update(elapsedTime);
 
             if (shot instanceof BulletSprite)
-                if ((shot.getPositionX() > Game.boundary.getAtRightBorder()) || (shot.getPositionX() < Game.boundary.getAtLeftBorder()))
+                if ((shot.getPositionX() > manager.getRightBorder()) || (shot.getPositionX() < manager.getLeftBorder()))
                     shotIter.remove();
 
             if (shot instanceof BombSprite)
-                if ((shot.getBoundary().getMaxY() > Game.boundary.getAtBottomBorder())) {
+                if ((shot.getBoundary().getMaxY() > manager.getBottomBorder())) {
                     shot.playBoomSound();
                     shotIter.remove();
                 }

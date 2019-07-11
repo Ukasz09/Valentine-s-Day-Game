@@ -187,13 +187,13 @@ public class Collision {
     }
 
     //zwraca czy gracz ma kolizje z potworem/ramka z kazdej strony
-    public static boolean collisionFromAllDirection(ArrayList<Monster> monsters, Sprite player) {
+    public static boolean collisionFromAllDirection(ArrayList<Monster> monsters, Sprite player, ViewManager manager) {
 
         if (
-                ((collisionWithMonstersFromBottom(monsters, player)) || (player.boundaryCollisionFromBottom(Game.boundary.getAtBottomBorder()))) &&
-                        ((collisionWithMonstersFromTop(monsters, player)) || (player.boundaryCollisionFromTop(Game.boundary.getAtTopBorder()))) &&
-                        ((collisionWithMonstersFromLeft(monsters, player)) || (player.boundaryCollisionFromLeft(Game.boundary.getAtLeftBorder()))) &&
-                        ((collisionWithMonstersFromRight(monsters, player)) || (player.boundaryCollisionFromRight(Game.boundary.getAtRightBorder())))
+                ((collisionWithMonstersFromBottom(monsters, player)) || (player.boundaryCollisionFromBottom(manager.getBottomBorder()))) &&
+                        ((collisionWithMonstersFromTop(monsters, player)) || (player.boundaryCollisionFromTop(manager.getTopBorder()))) &&
+                        ((collisionWithMonstersFromLeft(monsters, player)) || (player.boundaryCollisionFromLeft(manager.getLeftBorder()))) &&
+                        ((collisionWithMonstersFromRight(monsters, player)) || (player.boundaryCollisionFromRight(manager.getRightBorder())))
         ) return true;
 
         return false;

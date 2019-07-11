@@ -95,8 +95,8 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public void renderBattery(GraphicsContext gc) {
         double overheatingPercents = bombOverheating / BombSprite.getMaxOverheating() * 100;
-        double batteryPositionX = Game.boundary.getAtLeftBorder();
-        double batteryPositionY = Game.boundary.getAtBottomBorder() - batteryImages[0].getHeight();
+        double batteryPositionX = getManager().getLeftBorder();
+        double batteryPositionY = getManager().getBottomBorder() - batteryImages[0].getHeight();
 
         //100% charge
         if (overheatingPercents == 0)

@@ -31,14 +31,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class Game extends Application {
-    public static Boundary boundary; //todo: wrzucic do managera
     private ViewManager manager;
-//    private Stage theStage;
-//    private Scene theScene;
-//    private GraphicsContext gc;
-//    private Canvas canvas;
-//    private Group root;
-
     private ArrayList<MoneyBag> moneybagList;
     private ArrayList<Monster> monsters;
     private ArrayList<String> input;
@@ -64,7 +57,7 @@ public class Game extends Application {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
-        manager=new ViewManager();
+        manager = new ViewManager(); //do NOT touch
 
         //Game components
         input = new ArrayList<>();
@@ -86,31 +79,11 @@ public class Game extends Application {
         playerReadyToGame = false;
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //TODO zrobic view manager, tu skonczylem
     @Override
     public void start(Stage theStage) {
-        //manager = new ViewManager();
-        manager.initialize("Valentines Game",true);
-        manager.setDefaultFont();
-        theStage = manager.getMainStage();
-//        theStage.setTitle("Valentines_Game");
-//        theStage.setWidth(1600);
-//        theStage.setHeight(900);
-//        theStage.setFullScreen(true);
-
-//        root = new Group();
-//        theScene = new Scene(root);
-//        theStage.setScene(theScene);
-
-//        canvas = new Canvas(theStage.getWidth(), theStage.getHeight());
-//        root.getChildren().add(canvas);
-        boundary = new Boundary(manager.getCanvas());
+        manager.initialize("Valentines Game", true); //do NOT touch
+        theStage = manager.getMainStage();  //do NOT touch
         manager.readKeyboardAction(input);
-
-//        gc = canvas.getGraphicsContext2D();
-
-        //setFont("Helvetica", FontWeight.BOLD, 34, Color.TAN);
 
         actualPanel = new StartPanel(manager);
         actualPanel.makeLevel();
@@ -147,8 +120,8 @@ public class Game extends Application {
                             actualPanel = null;
 
                             score = new IntValue(0);
-                            double centerPositionX = boundary.getAtRightBorder() / 2 - player.getWidth();
-                            double centerPositionY = boundary.getAtBottomBorder() / 2 - player.getHeight();
+                            double centerPositionX = manager.getRightBorder() / 2 - player.getWidth();
+                            double centerPositionY = manager.getBottomBorder() / 2 - player.getHeight();
 
                             player.setPosition(centerPositionX, centerPositionY);
 
@@ -238,7 +211,7 @@ public class Game extends Application {
     public void checkPlayerMove(int velocity) {
 
         player.setVelocity(0, 0);
-        boolean playerCantDoAnyMove = Collision.collisionFromAllDirection(monsters, player);
+        boolean playerCantDoAnyMove = Collision.collisionFromAllDirection(monsters, player, manager);
 
         if (playerCantDoAnyMove)
             antiCollisionTimer.setValue(Collision.getDefaultAntiCollisionsTimer());
@@ -246,7 +219,7 @@ public class Game extends Application {
         if (input.contains("A")) {
 
             //kolizja z ramka
-            if (!player.boundaryCollisionFromLeft(boundary.getAtLeftBorder())) {
+            if (!player.boundaryCollisionFromLeft(manager.getLeftBorder())) {
                 player.setActualImage(player.playerLeftImage);
                 player.setLastDirectionX("A");
 
@@ -258,7 +231,7 @@ public class Game extends Application {
         if (input.contains("D")) {
 
             //kolizja z ramka
-            if (!player.boundaryCollisionFromRight(boundary.getAtRightBorder())) {
+            if (!player.boundaryCollisionFromRight(manager.getRightBorder())) {
                 player.setActualImage(player.playerRightImage);
                 player.setLastDirectionX("D");
 
@@ -270,7 +243,7 @@ public class Game extends Application {
         if (input.contains("W")) {
 
             //kolizja z ramka
-            if (!player.boundaryCollisionFromTop(boundary.getAtTopBorder())) {
+            if (!player.boundaryCollisionFromTop(manager.getTopBorder())) {
                 player.setLastDirectionY("W");
 
                 if ((Collision.collisionWithMonstersFromBottom(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))
@@ -281,7 +254,7 @@ public class Game extends Application {
         if (input.contains("S")) {
 
             //kolizja z ramka
-            if (!player.boundaryCollisionFromBottom(boundary.getAtBottomBorder())) {
+            if (!player.boundaryCollisionFromBottom(manager.getBottomBorder())) {
                 player.setLastDirectionY("W");
 
                 if ((Collision.collisionWithMonstersFromTop(monsters, player) == false) || (antiCollisionTimer.getValue() > 0))

@@ -201,6 +201,6 @@ public abstract class Monster extends Sprite {
     }
 
     public void kickPlayer(Player p) {
-        kickMethod.kickPlayerByMonsterPostion(this, p);
+        kickMethod.kickPlayerByMonsterPostion(this, p, getManager());
     }
 }

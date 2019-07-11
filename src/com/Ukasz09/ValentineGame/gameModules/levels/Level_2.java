@@ -73,10 +73,10 @@ public class Level_2 extends Levels {
 
         //pokaz z lewej strony
         if (random == 0)
-            miniBoss.setPosition(Game.boundary.getAtLeftBorder() - miniBoss.getWidth(), Game.boundary.getAtBottomBorder() / 2);
+            miniBoss.setPosition(getManager().getLeftBorder() - miniBoss.getWidth(), getManager().getBottomBorder() / 2);
             //pokaz z prawej strony
         else
-            miniBoss.setPosition(Game.boundary.getAtRightBorder() + miniBoss.getWidth(), Game.boundary.getAtBottomBorder() / 2);
+            miniBoss.setPosition(getManager().getRightBorder() + miniBoss.getWidth(), getManager().getBottomBorder() / 2);
 
         monsters.add(miniBoss);
     }
@@ -86,24 +86,23 @@ public class Level_2 extends Levels {
         for (Sprite m : monsters) {
 
             int random = (int) (Math.random() * 4 + 1);
-            int spawnPositionY = (int) (Math.random() * Game.boundary.getAtBottomBorder());
-            int spawnPositionX = (int) (Math.random() * Game.boundary.getAtRightBorder());
+            int spawnPositionY = (int) (Math.random() * getManager().getBottomBorder());
+            int spawnPositionX = (int) (Math.random() * getManager().getRightBorder());
 
             //spawn na lewym brzegu
             if (random == 1)
-                m.setPosition(Game.boundary.getAtLeftBorder(), spawnPositionY);
+                m.setPosition(getManager().getLeftBorder(), spawnPositionY);
 
             //spawn na prawym brzegu
             if (random == 2)
-                m.setPosition(Game.boundary.getAtRightBorder(), spawnPositionY);
-
+                m.setPosition(getManager().getRightBorder(), spawnPositionY);
             //spawn na gornym brzegu
             if (random == 3)
-                m.setPosition(spawnPositionX, Game.boundary.getAtTopBorder());
+                m.setPosition(spawnPositionX, getManager().getTopBorder());
 
             //spawn na dolnym brzegu
             if (random == 4)
-                m.setPosition(spawnPositionX, Game.boundary.getAtBottomBorder());
+                m.setPosition(spawnPositionX, getManager().getBottomBorder());
         }
 
     }

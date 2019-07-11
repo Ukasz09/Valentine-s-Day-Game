@@ -64,20 +64,20 @@ public class Level_1 extends Levels {
         for (Sprite m : monsters) {
 
             int random = (int) (Math.random() * 3 + 1);
-            int spawnPositionY = (int) (Math.random() * Game.boundary.getAtBottomBorder());
-            int spawnPositionX = (int) (Math.random() * Game.boundary.getAtRightBorder());
+            int spawnPositionY = (int) (Math.random() * getManager().getBottomBorder());
+            int spawnPositionX = (int) (Math.random() * getManager().getRightBorder());
 
             //spawn na lewym brzegu
             if (random == 1)
-                m.setPosition(Game.boundary.getAtLeftBorder(), spawnPositionY);
+                m.setPosition(getManager().getLeftBorder(), spawnPositionY);
 
             //spawn na prawym brzegu
             if (random == 2)
-                m.setPosition(Game.boundary.getAtRightBorder(), spawnPositionY);
+                m.setPosition(getManager().getRightBorder(), spawnPositionY);
 
             //spawn na gornym brzegu
             if (random == 3)
-                m.setPosition(spawnPositionX, Game.boundary.getAtTopBorder());
+                m.setPosition(spawnPositionX, getManager().getTopBorder());
         }
 
     }
