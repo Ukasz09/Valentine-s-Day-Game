@@ -1,10 +1,10 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 

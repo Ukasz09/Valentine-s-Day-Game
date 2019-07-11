@@ -1,10 +1,10 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.canvas.GraphicsContext;
 
 public class EndPanel extends Panels {

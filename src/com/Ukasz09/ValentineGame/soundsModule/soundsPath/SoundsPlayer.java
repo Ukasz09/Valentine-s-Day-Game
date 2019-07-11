@@ -1,4 +1,4 @@
-package com.Ukasz09.ValentineGame.soundsModule;
+package com.Ukasz09.ValentineGame.soundsModule.soundsPath;
 
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;

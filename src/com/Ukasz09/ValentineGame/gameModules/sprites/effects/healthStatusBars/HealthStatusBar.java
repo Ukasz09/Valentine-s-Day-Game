@@ -1,4 +1,4 @@
-package com.Ukasz09.ValentineGame.gameModules.sprites.others.healthStatusBars;
+package com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;

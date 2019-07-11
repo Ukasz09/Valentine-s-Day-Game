@@ -3,9 +3,9 @@
     Tymczasowo nieuzywana
  */
 
-package com.Ukasz09.ValentineGame.gameModules.sprites;
+package com.Ukasz09.ValentineGame.tmp;
 
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;

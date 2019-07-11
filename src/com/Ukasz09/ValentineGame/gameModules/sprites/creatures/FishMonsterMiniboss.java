@@ -1,13 +1,13 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickPlayer;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.ShieldKindOfRender;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.AutoActivateShield;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.healthStatusBars.HealthStatusBar;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.Shield;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ShieldKindOfRender;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.AutoActivateShield;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HealthStatusBar;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.Shield;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

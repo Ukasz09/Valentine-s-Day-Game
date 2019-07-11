@@ -1,17 +1,16 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.healthStatusBars.HeartsRender;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.healthStatusBars.InCorner;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.ShieldKindOfRender;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HeartsRender;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.InCorner;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ShieldKindOfRender;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.Shield;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.ManualActivateShield;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.Shield;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ManualActivateShield;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

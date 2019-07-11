@@ -1,4 +1,4 @@
-package com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect;
+package com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 

@@ -1,4 +1,4 @@
-package com.Ukasz09.ValentineGame.gameModules.gameUtils;
+package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;

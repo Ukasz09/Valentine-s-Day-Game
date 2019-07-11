@@ -1,9 +1,9 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickPlayer;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public class LittleMonster extends Monster{

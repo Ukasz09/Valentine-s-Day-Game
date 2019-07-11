@@ -1,4 +1,4 @@
-package com.Ukasz09.ValentineGame.soundsModule;
+package com.Ukasz09.ValentineGame.soundsModule.soundsPath;
 
 public class Sounds {
     public static SoundsPlayer ukaszWingsSound = new SoundsPlayer(SoundsPath.PLAYER_WINGS_SOUND_PATH);

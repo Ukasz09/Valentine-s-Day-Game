@@ -9,18 +9,18 @@
 
 //Todo: LAST DIRECTION NA ENUM
 
-package com.Ukasz09.ValentineGame.gameModules.gameUtils;
+package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
 import com.Ukasz09.ValentineGame.gameModules.levels.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
-import com.Ukasz09.ValentineGame.gameModules.wrappers.IntValue;
-import com.Ukasz09.ValentineGame.gameModules.wrappers.LongValue;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.wrappers.IntValue;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.wrappers.LongValue;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 
 import javafx.animation.AnimationTimer;

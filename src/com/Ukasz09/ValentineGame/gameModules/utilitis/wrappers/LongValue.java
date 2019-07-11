@@ -1,4 +1,4 @@
-package com.Ukasz09.ValentineGame.gameModules.wrappers;
+package com.Ukasz09.ValentineGame.gameModules.utilitis.wrappers;
 
 public class LongValue {
     private long value;

@@ -1,8 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.Game;
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 
@@ -10,9 +9,8 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
-import javafx.scene.canvas.Canvas;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

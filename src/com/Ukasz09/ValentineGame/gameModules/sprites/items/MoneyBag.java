@@ -1,9 +1,9 @@
-package com.Ukasz09.ValentineGame.gameModules.sprites.others;
+package com.Ukasz09.ValentineGame.gameModules.sprites.items;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.soundsModule.Sounds;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public class MoneyBag extends Sprite {

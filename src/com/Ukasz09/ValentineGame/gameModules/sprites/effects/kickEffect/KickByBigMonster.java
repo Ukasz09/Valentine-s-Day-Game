@@ -1,9 +1,8 @@
-package com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect;
+package com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
-import javafx.scene.canvas.Canvas;
 
 public class KickByBigMonster implements KickPlayer {
 

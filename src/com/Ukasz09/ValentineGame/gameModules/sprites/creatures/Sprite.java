@@ -1,9 +1,8 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
-import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class Sprite {

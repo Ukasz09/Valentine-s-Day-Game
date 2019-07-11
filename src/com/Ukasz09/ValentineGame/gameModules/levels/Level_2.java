@@ -1,18 +1,15 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.Game;
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonsterMiniboss;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickByBigMonster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.TeleportKick;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickByBigMonster;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.TeleportKick;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;

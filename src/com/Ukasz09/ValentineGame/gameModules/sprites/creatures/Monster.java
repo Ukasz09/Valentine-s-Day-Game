@@ -1,8 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickPlayer;
-import javafx.scene.canvas.Canvas;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;

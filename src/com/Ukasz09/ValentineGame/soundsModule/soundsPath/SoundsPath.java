@@ -1,4 +1,4 @@
-package com.Ukasz09.ValentineGame.soundsModule;
+package com.Ukasz09.ValentineGame.soundsModule.soundsPath;
 
 public class SoundsPath {
     public static final String BACKGROUND_SOUND_PATH_1 = "soundsModel\\level_1-2.mp3";

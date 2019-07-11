@@ -1,6 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
-import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
