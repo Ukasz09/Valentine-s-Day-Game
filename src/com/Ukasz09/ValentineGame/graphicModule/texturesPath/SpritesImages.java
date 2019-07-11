@@ -22,7 +22,7 @@ public class SpritesImages {
 
     //Other
     public static Image playerShieldImage = new Image(SpritesPath.PROTECTION_ORBIT_PATH);
-    public static Image ukaszShotImage = new Image(SpritesPath.PLAYER_BULLET_SHOT_PATH);
+    public static Image playerShotImage = new Image(SpritesPath.PLAYER_BULLET_SHOT_PATH);
     private static Image[] ukaszBombShotImages = new Image[2];
     public static Image heartFullImage = new Image(SpritesPath.HEART_FULL_PATH);
     public static Image heartHalfImage = new Image(SpritesPath.HEART_HALF_PATH);

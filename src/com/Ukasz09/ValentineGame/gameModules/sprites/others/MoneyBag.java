@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.others;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.soundsModule.Sounds;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
@@ -16,17 +17,17 @@ public class MoneyBag extends Sprite {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public MoneyBag(Image image, int value) {
+    public MoneyBag(Image image, int value, ViewManager manager) {
 
-        super(image);
+        super(image, manager);
         this.value = value;
         collectSound = DEFAULT_COLLECT_SOUND;
         soundVolume = 0.1;
     }
 
-    public MoneyBag(Image image, int value, SoundsPlayer collectSound, double soundVolume) {
+    public MoneyBag(Image image, int value, SoundsPlayer collectSound, double soundVolume, ViewManager manager) {
 
-        this(image, value);
+        this(image, value, manager);
         this.collectSound = collectSound;
         this.soundVolume = soundVolume;
     }

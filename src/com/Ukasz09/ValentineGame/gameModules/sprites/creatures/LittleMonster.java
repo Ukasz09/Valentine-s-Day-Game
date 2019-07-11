@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
@@ -16,11 +17,8 @@ public class LittleMonster extends Monster{
     private final double velocityY=1;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Konstruktor */
-
-    public LittleMonster(Image image, KickPlayer kickMethod){
-
-        super(image, kickMethod);
+    public LittleMonster(Image image, KickPlayer kickMethod, ViewManager manager){
+        super(image, kickMethod, manager);
         setLives(3);
 
         setHitSound(new SoundsPlayer(hitSoundPath));

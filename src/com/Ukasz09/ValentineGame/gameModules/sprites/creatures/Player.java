@@ -1,6 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.Game;
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.Game;
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.ShieldKindOfRender;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
@@ -34,13 +35,12 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private double bombOverheating;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Player() {
-        this(PLAYER_RIGHT_IMAGE, PLAYER_LEFT_IMAGE, PLAYER_SHIELD_IMAGE);
+    public Player(ViewManager manager) {
+        this(PLAYER_RIGHT_IMAGE, PLAYER_LEFT_IMAGE, PLAYER_SHIELD_IMAGE, manager);
     }
 
-    public Player(Image playerRightImage, Image playerLeftImage, Image shieldImage) {
-        super(playerRightImage);
-
+    public Player(Image playerRightImage, Image playerLeftImage, Image shieldImage, ViewManager manager) {
+        super(playerRightImage, manager);
         this.playerRightImage = playerRightImage;
         this.playerLeftImage = playerLeftImage;
         shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage, this);
@@ -74,10 +74,10 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     @Override
-    public void render(GraphicsContext gc) {
-        super.render(gc);
-        renderShield(gc);
-        renderBattery(gc);
+    public void render() {
+        super.render();
+        renderShield(getManager().getGraphicContext());
+        renderBattery(getManager().getGraphicContext());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

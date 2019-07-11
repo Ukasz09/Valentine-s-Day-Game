@@ -1,17 +1,31 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class Panels {
+    ViewManager manager;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public Panels(ViewManager manager) {
+        this.manager = manager;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public abstract void makeLevel();
 
     public abstract void endLevel();
 
-    public abstract void renderLevel(GraphicsContext gc);
+    public abstract void renderLevel();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     protected void drawBackground(GraphicsContext gc, Image background) {
         gc.drawImage(background, 0, 0);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public ViewManager getManager() {
+        return manager;
     }
 }

@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -23,11 +24,11 @@ public abstract class Sprite {
     private SoundsPlayer deathSound;
     private SoundsPlayer missSound;
 
+    private ViewManager manager;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Konstruktory */
-
-    public Sprite(Image actualImage) {
-
+    public Sprite(Image actualImage, ViewManager manager) {
+        this.manager = manager;
         this.actualImage = actualImage;
         width = actualImage.getWidth();
         height = actualImage.getHeight();
@@ -86,7 +87,9 @@ public abstract class Sprite {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Gettery */
+    public ViewManager getManager() {
+        return manager;
+    }
 
     public Image getActualImage() {
         return actualImage;
@@ -149,9 +152,8 @@ public abstract class Sprite {
         positionY += velocityY * time;
     }
 
-    public void render(GraphicsContext gc) {
-
-        gc.drawImage(actualImage, positionX, positionY);
+    public void render() {
+        manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
         //gc.fillRect(positionX,positionY,getWidth(),getHeight());
     }
 

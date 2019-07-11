@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.shieldsEffect.ShieldKindOfRender;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
@@ -37,9 +38,8 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     private HealthStatusBar healthBar;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public FishMonsterMiniboss(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, Image shieldImage, KickPlayer kickMethod) {
-
-        super(imageLeft, kickMethod);
+    public FishMonsterMiniboss(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, Image shieldImage, KickPlayer kickMethod, ViewManager manager) {
+        super(imageLeft, kickMethod, manager);
         setLives(maxLive);
         //shieldTimer=0;
         setProtectionTime(0);
@@ -103,10 +103,10 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     }
 
     @Override
-    public void render(GraphicsContext gc) {
-        super.render(gc);
-        healthBar.draw(gc);
-        renderShield(gc);
+    public void render() {
+        super.render();
+        healthBar.draw(getManager().getGraphicContext());
+        renderShield(getManager().getGraphicContext());
     }
 
     @Override

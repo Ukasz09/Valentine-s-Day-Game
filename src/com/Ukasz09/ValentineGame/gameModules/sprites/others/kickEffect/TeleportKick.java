@@ -1,6 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect;
 
-import com.Ukasz09.ValentineGame.gameModules.Game;
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.Game;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 

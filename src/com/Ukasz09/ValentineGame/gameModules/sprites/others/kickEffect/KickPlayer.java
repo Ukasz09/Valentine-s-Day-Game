@@ -6,7 +6,7 @@ import javafx.scene.canvas.Canvas;
 
 public interface KickPlayer {
 
-    void kickPlayerByMonsterPostion(Monster m, Player p, Canvas canvas);
+    void kickPlayerByMonsterPostion(Monster m, Player p);
 
     String getKickDirection(Monster m, Player p);
 }

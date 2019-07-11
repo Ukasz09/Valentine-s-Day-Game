@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
 import com.Ukasz09.ValentineGame.soundsModule.Sounds;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
@@ -11,8 +12,9 @@ public class StartPanel extends Panels {
     private static final SoundsPlayer BACKGROUND_SOUND = Sounds.backgroundStartSound;
     private static final double SOUND_VOLUME = 0.6;
 
-    public StartPanel() {
-        //nothing to do
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public StartPanel(ViewManager manager) {
+        super(manager);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +29,7 @@ public class StartPanel extends Panels {
     }
 
     @Override
-    public void renderLevel(GraphicsContext gc) {
-        drawBackground(gc, BACKGROUND_IMAGE);
+    public void renderLevel() {
+        drawBackground(getManager().getGraphicContext(), BACKGROUND_IMAGE);
     }
 }

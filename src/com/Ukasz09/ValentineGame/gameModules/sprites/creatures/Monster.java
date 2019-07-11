@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.kickEffect.KickPlayer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
@@ -13,10 +14,8 @@ public abstract class Monster extends Sprite {
     private KickPlayer kickMethod;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Konstruktor */
-    public Monster(Image image, KickPlayer kickMethod) {
-
-        super(image);
+    public Monster(Image image, KickPlayer kickMethod, ViewManager manager) {
+        super(image, manager);
         howManyLivesTake = 0;
         howBigKickSize = 0;
         setVelocity(0, 0);
@@ -201,7 +200,7 @@ public abstract class Monster extends Sprite {
         }
     }
 
-    public void kickPlayer(Player p, Canvas canvas) {
-        kickMethod.kickPlayerByMonsterPostion(this, p, canvas);
+    public void kickPlayer(Player p) {
+        kickMethod.kickPlayerByMonsterPostion(this, p);
     }
 }

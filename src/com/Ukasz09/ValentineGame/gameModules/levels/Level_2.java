@@ -1,8 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
-import com.Ukasz09.ValentineGame.gameModules.Boundary;
-
-import com.Ukasz09.ValentineGame.gameModules.Game;
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.Game;
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonsterMiniboss;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
@@ -43,7 +42,8 @@ public class Level_2 extends Levels {
     private final int howManyAllMonsters = howManyLittleMonsters + 1; //male potworki+boss
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Level_2(Canvas canvas) {
+    public Level_2(ViewManager manager) {
+        super(manager);
         setMoneyBagImage1(MONEY_BAG_IMAGE_1);
         setMoneyBagImage2(MONEY_BAG_IMAGE_2);
         setHowManyMoneybags(howManyMoneybags);
@@ -59,13 +59,15 @@ public class Level_2 extends Levels {
 
     public void spawnLittleMonsters(ArrayList<Monster> monsters) {
 
-        for (int i = 0; i < howManyLittleMonsters; i++)
-            monsters.add(new FishMonster(FISH_MONSTER_LEFT_IMAGE, FISH_MONSTER_RIGHT_IMAGE, FISH_MONSTER_BOTTOM_IMAGE, FISH_MONSTER_TOP_IMAGE, new KickByBigMonster(new TeleportKick())));
+        for (int i = 0; i < howManyLittleMonsters; i++) {
+            FishMonster m = new FishMonster(FISH_MONSTER_LEFT_IMAGE, FISH_MONSTER_RIGHT_IMAGE, FISH_MONSTER_BOTTOM_IMAGE, FISH_MONSTER_TOP_IMAGE, new KickByBigMonster(new TeleportKick()), getManager());
+            monsters.add(m);
+        }
     }
 
     public void spawnMiniboss(ArrayList<Monster> monsters) {
 
-        FishMonsterMiniboss miniBoss = new FishMonsterMiniboss(FISH_MONSTER_MINIBOSS_LEFT_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_IMAGE, FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE, FISH_MONSTER_MINIBOSS_TOP_IMAGE, FISH_MINIBOSS_SHIELD_IMAGE, new KickByBigMonster(new TeleportKick()));
+        FishMonsterMiniboss miniBoss = new FishMonsterMiniboss(FISH_MONSTER_MINIBOSS_LEFT_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_IMAGE, FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE, FISH_MONSTER_MINIBOSS_TOP_IMAGE, FISH_MINIBOSS_SHIELD_IMAGE, new KickByBigMonster(new TeleportKick()), getManager());
 
         int random = (int) (Math.random() * 2);
 
@@ -119,9 +121,9 @@ public class Level_2 extends Levels {
     }
 
     @Override
-    public void renderLevel(GraphicsContext gc, ArrayList<Monster> monsters) {
-        drawBackground(gc, BACKGROUND_IMAGE);
-        renderMonsters(monsters, gc);
+    public void renderLevel(ArrayList<Monster> monsters) {
+        drawBackground(getManager().getGraphicContext(), BACKGROUND_IMAGE);
+        renderMonsters(monsters);
     }
 
     @Override

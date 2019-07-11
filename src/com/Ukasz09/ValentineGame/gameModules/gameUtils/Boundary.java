@@ -1,4 +1,4 @@
-package com.Ukasz09.ValentineGame.gameModules;
+package com.Ukasz09.ValentineGame.gameModules.gameUtils;
 
 import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
@@ -15,7 +15,6 @@ public class Boundary {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     private void checkWindowBoundary(Canvas canvas) {
         Bounds bounds = canvas.getBoundsInLocal();
         atRightBorder = bounds.getMaxX();
@@ -23,8 +22,6 @@ public class Boundary {
         atBottomBorder = bounds.getMaxY();
         atTopBorder = bounds.getMinY();
     }
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public double getAtRightBorder() {

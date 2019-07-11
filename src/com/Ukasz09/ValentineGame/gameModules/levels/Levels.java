@@ -1,7 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
-import com.Ukasz09.ValentineGame.gameModules.Boundary;
-import com.Ukasz09.ValentineGame.gameModules.Game;
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.Game;
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
@@ -39,8 +39,14 @@ public abstract class Levels {
     private Image heartHalf = SpritesImages.heartHalfImage;
     private Image heartEmpty = SpritesImages.heartEmptyImage;
 
+    private ViewManager manager;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Settery */
+    public Levels(ViewManager manager) {
+        this.manager = manager;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void setHowManyMoneybags(int howManyMoneybags) {
         this.howManyMoneybags = howManyMoneybags;
@@ -93,6 +99,10 @@ public abstract class Levels {
         return howManyAllMonsters;
     }
 
+    public ViewManager getManager() {
+        return manager;
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Metody */
 
@@ -103,8 +113,8 @@ public abstract class Levels {
             MoneyBag moneybag;
 
             if (i < howManySmallCoins)
-                moneybag = new MoneyBag(moneyBagImage1, smallCoinValue);
-            else moneybag = new MoneyBag(moneyBagImage2, normalCoinValue);
+                moneybag = new MoneyBag(moneyBagImage1, smallCoinValue, manager);
+            else moneybag = new MoneyBag(moneyBagImage2, normalCoinValue, manager);
 
             double px = Game.boundary.getAtRightBorder() * 9 / 10 * Math.random();
             double py = Game.boundary.getAtBottomBorder() * 8 / 10 * Math.random();
@@ -114,9 +124,9 @@ public abstract class Levels {
         }
     }
 
-    public void renderMonsters(ArrayList<Monster> monsters, GraphicsContext gc) {
+    public void renderMonsters(ArrayList<Monster> monsters) {
         for (Sprite m : monsters)
-            m.render(gc);
+            m.render();
     }
 
     public void updateMonsters(Sprite target, ArrayList<Monster> monsters) {
@@ -129,9 +139,9 @@ public abstract class Levels {
 
     public abstract void endLevel();
 
-    public abstract void renderLevel(GraphicsContext gc, ArrayList<Monster> monsters);
+    public abstract void renderLevel(ArrayList<Monster> monsters);
 
-    public void drawHearts(GraphicsContext gc, Canvas canvas, Sprite ukasz) {
+    public void drawHearts(Sprite ukasz) {
 
         double tmpLives = ukasz.getLives();
         double positionX = Game.boundary.getAtRightBorder() - ukasz.getMaxLives() * heartFull.getWidth();    //serca maja te sama dlugosc / wysokosc
@@ -142,19 +152,19 @@ public abstract class Levels {
             //rysuj polowke
             if (tmpLives == 0.5) {
 
-                gc.drawImage(heartHalf, positionX, positionY);
+                getManager().getGraphicContext().drawImage(heartHalf, positionX, positionY);
                 tmpLives = 0;
             }
 
             //rysuj cale
             else if (tmpLives > 0) {
 
-                gc.drawImage(heartFull, positionX, positionY);
+                getManager().getGraphicContext().drawImage(heartFull, positionX, positionY);
                 tmpLives--;
             }
 
             //rysuj puste
-            else gc.drawImage(heartEmpty, positionX, positionY);
+            else getManager().getGraphicContext().drawImage(heartEmpty, positionX, positionY);
 
             positionX += heartFull.getWidth();
 
@@ -182,10 +192,10 @@ public abstract class Levels {
         backgroundSound.stopSound();
     }
 
-    public void renderShots(ArrayList<ShotSprite> shotSprites, GraphicsContext gc) {
+    public void renderShots(ArrayList<ShotSprite> shotSprites) {
         Iterator<ShotSprite> shotIter = shotSprites.iterator();
         while (shotIter.hasNext())
-            shotIter.next().render(gc);
+            shotIter.next().render();
     }
 
     public void updateShots(ArrayList<ShotSprite> shotSprites, double elapsedTime) {

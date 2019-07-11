@@ -1,7 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
-import com.Ukasz09.ValentineGame.gameModules.Boundary;
-import com.Ukasz09.ValentineGame.gameModules.Game;
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.Game;
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.LittleMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.others.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
@@ -13,8 +13,6 @@ import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.Sounds;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -36,7 +34,8 @@ public class Level_1 extends Levels {
     private final int howManyAllMonsters = howManyLittleMonsters;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Level_1() {
+    public Level_1(ViewManager manager) {
+        super(manager);
         setMoneyBagImage1(MONEY_BAG_IMAGE_1);
         setMoneyBagImage2(MONEY_BAG_IMAGE_2);
         setHowManyMoneybags(howManyMoneybags);
@@ -53,8 +52,10 @@ public class Level_1 extends Levels {
 
     public void spawnLittleMonsters(ArrayList<Monster> monsters) {
 
-        for (int i = 0; i < getHowManyLittleMonsters(); i++)
-            monsters.add(new LittleMonster(LITTLE_MONSTER_IMAGE, new KickByLittleMonster(new TeleportKick())));
+        for (int i = 0; i < getHowManyLittleMonsters(); i++){
+            LittleMonster m=new LittleMonster(LITTLE_MONSTER_IMAGE, new KickByLittleMonster(new TeleportKick()),getManager());
+            monsters.add(m);
+        }
 
     }
 
@@ -87,9 +88,9 @@ public class Level_1 extends Levels {
     }
 
     @Override
-    public void renderLevel(GraphicsContext gc, ArrayList<Monster> monsters) {
-        drawBackground(gc, BACKGROUND_IMAGE);
-        renderMonsters(monsters,gc);
+    public void renderLevel(ArrayList<Monster> monsters) {
+        drawBackground(getManager().getGraphicContext(), BACKGROUND_IMAGE);
+        renderMonsters(monsters);
     }
 
     @Override

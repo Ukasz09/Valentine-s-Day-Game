@@ -1,6 +1,8 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.Sounds;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
 import javafx.scene.image.Image;
@@ -10,18 +12,23 @@ public class BulletSprite extends ShotSprite {
     public static final double DEFAULT_MAX_OVERHEATING = 1000;
     public static final double DEFAULT_SHOT_VELOCITY = 600;
 
+    private static final Image DEFAULT_SHOT_IMAGE= SpritesImages.playerShotImage;
     private static final SoundsPlayer SHOT_SOUND = Sounds.bulletShotSound;
     private static final double DEFAULT_SHOT_VOLUME = 0.2;
     private static double maxOverheating;
     private String shotDirection;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public BulletSprite(Image image, String shotDirection) {
-        this(image, shotDirection, DEFAULT_SHOT_VELOCITY, DEFAULT_LIVES_TAKES, DEFAULT_MAX_OVERHEATING);
+    public BulletSprite(String shotDirection, ViewManager manager){
+        this(DEFAULT_SHOT_IMAGE, shotDirection, manager);
     }
 
-    public BulletSprite(Image image, String shotDirection, double shotVelocity, double howManyLiveTakes, double maxOverheating) {
-        super(image, shotVelocity, howManyLiveTakes);
+    public BulletSprite(Image image, String shotDirection, ViewManager manager) {
+        this(image, shotDirection, DEFAULT_SHOT_VELOCITY, DEFAULT_LIVES_TAKES, DEFAULT_MAX_OVERHEATING, manager);
+    }
+
+    public BulletSprite(Image image, String shotDirection, double shotVelocity, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
+        super(image, shotVelocity, howManyLiveTakes, manager);
         this.shotDirection = shotDirection;
         this.maxOverheating = maxOverheating;
     }

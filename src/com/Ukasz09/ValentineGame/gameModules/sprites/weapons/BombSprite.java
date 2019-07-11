@@ -1,5 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.ViewManager;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.Sounds;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.SoundsPlayer;
@@ -20,17 +22,22 @@ public class BombSprite extends ShotSprite {
     private static final String BOMB_BOOM_SOUND_PATH_2 = SoundsPath.BOMB_BOOM_SOUND_PATH_2;
     private static final String BOMB_BOOM_SOUND_PATH_3 = SoundsPath.BOMB_BOOM_SOUND_PATH_3;
     private static final String BOMB_BOOM_SOUND_PATH_4 = SoundsPath.BOMB_BOOM_SOUND_PATH_4;
+    private static final Image[] DEFAULT_BOMB_IMAGES= SpritesImages.getUkaszBombShotImages();
 
     private static double maxOverheating=DEFAULT_MAX_OVERHEATING;
     private SoundsPlayer[] bombBoomSound;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public BombSprite(Image image) {
-        this(image, DEFAULT_SHOT_VELOCITY, DEFAULT_LIVES_TAKES, DEFAULT_MAX_OVERHEATING);
+    public BombSprite(ViewManager manager){
+        this(DEFAULT_BOMB_IMAGES[(int) (Math.random() * 2)],manager);
     }
 
-    public BombSprite(Image image, double shotVelocity, double howManyLiveTakes, double maxOverheating) {
-        super(image, shotVelocity, howManyLiveTakes);
+    public BombSprite(Image image, ViewManager manager) {
+        this(image, DEFAULT_SHOT_VELOCITY, DEFAULT_LIVES_TAKES, DEFAULT_MAX_OVERHEATING, manager);
+    }
+
+    public BombSprite(Image image, double shotVelocity, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
+        super(image, shotVelocity, howManyLiveTakes, manager);
         this.maxOverheating = maxOverheating;
 
         bombBoomSound = new SoundsPlayer[4];

@@ -16,7 +16,7 @@ public class KickByLittleMonster implements KickPlayer {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public void kickPlayerByMonsterPostion(Monster m, Player p, Canvas canvas) {
+    public void kickPlayerByMonsterPostion(Monster m, Player p) {
         kickMethod.kick(m, p, getKickDirection(m, p));
     }
 

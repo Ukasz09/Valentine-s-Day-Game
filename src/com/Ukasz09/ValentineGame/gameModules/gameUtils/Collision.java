@@ -1,5 +1,6 @@
-package com.Ukasz09.ValentineGame.gameModules;
+package com.Ukasz09.ValentineGame.gameModules.gameUtils;
 
+import com.Ukasz09.ValentineGame.gameModules.gameUtils.Game;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
@@ -8,7 +9,6 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.wrappers.IntValue;
-import javafx.geometry.Bounds;
 import javafx.scene.canvas.Canvas;
 
 import java.util.ArrayList;
@@ -108,7 +108,7 @@ public class Collision {
     }
 
     //zwraca czy nastapila kolizja gracza z potworem
-    public static boolean playerCollisionWithMonster(ArrayList<Monster> monsters, Player player, Canvas canvas) {
+    public static boolean playerCollisionWithMonster(ArrayList<Monster> monsters, Player player) {
 
         for (Sprite m : monsters) {
 
@@ -117,7 +117,7 @@ public class Collision {
                 if (player.getProtectionTime() <= 0) {
 
                     if (((Monster) m).getHowBigKickSize() > 0)
-                        ((Monster) m).kickPlayer(player, canvas);
+                        ((Monster) m).kickPlayer(player);
 
                     player.removeLives(((Monster) m).getHowManyLivesTake());
                     player.getUkaszRandomHitSound().playSound(0.5, false);

@@ -9,7 +9,7 @@
 
 //Todo: LAST DIRECTION NA ENUM
 
-package com.Ukasz09.ValentineGame.gameModules;
+package com.Ukasz09.ValentineGame.gameModules.gameUtils;
 
 import com.Ukasz09.ValentineGame.gameModules.levels.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
@@ -25,26 +25,19 @@ import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class Game extends Application {
-    public static Boundary boundary;
-    private Scene theScene;
-    private GraphicsContext gc;
-    private Canvas canvas;
-    private Group root;
+    public static Boundary boundary; //todo: wrzucic do managera
+    private ViewManager manager;
+//    private Stage theStage;
+//    private Scene theScene;
+//    private GraphicsContext gc;
+//    private Canvas canvas;
+//    private Group root;
 
     private ArrayList<MoneyBag> moneybagList;
     private ArrayList<Monster> monsters;
@@ -71,12 +64,13 @@ public class Game extends Application {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
+        manager=new ViewManager();
 
         //Game components
         input = new ArrayList<>();
         lastNanoTime = new LongValue(System.nanoTime());
 
-        player = new Player(SpritesImages.playerRightImage, SpritesImages.playerLeftImage, SpritesImages.playerShieldImage);
+        player = new Player(SpritesImages.playerRightImage, SpritesImages.playerLeftImage, SpritesImages.playerShieldImage, manager);
         playerShots = new ArrayList<>();
         antiCollisionTimer = new IntValue(0);
 
@@ -94,33 +88,37 @@ public class Game extends Application {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //TODO zrobic view manager, tu skonczylem
+    @Override
     public void start(Stage theStage) {
-        theStage.setTitle("Valentines_Game");
-        theStage.setWidth(1600);
-        theStage.setHeight(900);
-        theStage.setFullScreen(true);
+        //manager = new ViewManager();
+        manager.initialize("Valentines Game",true);
+        manager.setDefaultFont();
+        theStage = manager.getMainStage();
+//        theStage.setTitle("Valentines_Game");
+//        theStage.setWidth(1600);
+//        theStage.setHeight(900);
+//        theStage.setFullScreen(true);
 
-        root = new Group();
-        theScene = new Scene(root);
-        theStage.setScene(theScene);
+//        root = new Group();
+//        theScene = new Scene(root);
+//        theStage.setScene(theScene);
 
-        canvas = new Canvas(theStage.getWidth(), theStage.getHeight());
-        boundary = new Boundary(canvas);
-        root.getChildren().add(canvas);
+//        canvas = new Canvas(theStage.getWidth(), theStage.getHeight());
+//        root.getChildren().add(canvas);
+        boundary = new Boundary(manager.getCanvas());
+        manager.readKeyboardAction(input);
 
-        //keyboard listener
-        readKeyboardAction();
+//        gc = canvas.getGraphicsContext2D();
 
-        gc = canvas.getGraphicsContext2D();
+        //setFont("Helvetica", FontWeight.BOLD, 34, Color.TAN);
 
-        setFont("Helvetica", FontWeight.BOLD, 34, Color.TAN);
-
-        actualPanel = new StartPanel();
+        actualPanel = new StartPanel(manager);
         actualPanel.makeLevel();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         class AnimationTimer2 extends AnimationTimer {
 
+            @Override
             public void handle(long currentNanoTime) {
 
                 switch (levelNumber) {
@@ -130,7 +128,7 @@ public class Game extends Application {
 
                         if (playerReadyToGame == false) {
 
-                            actualPanel.renderLevel(gc);
+                            actualPanel.renderLevel();
 
                             if (input.contains("ENTER"))
                                 playerReadyToGame = true;
@@ -154,7 +152,7 @@ public class Game extends Application {
 
                             player.setPosition(centerPositionX, centerPositionY);
 
-                            actualLevel = new Level_1();
+                            actualLevel = new Level_1(manager);
                             actualLevel.makeLevel(moneybagList, monsters);
 
                             collectedMoneybags.setValue(0);
@@ -170,14 +168,14 @@ public class Game extends Application {
                     case 1: {
 
                         if (!levelIsEnd(actualLevel))
-                            play(theStage, currentNanoTime, actualLevel);
+                            play(currentNanoTime, actualLevel);
 
                         else {
 
                             //Przygotowanie nastepnego poziomu
 
                             endLevel(actualLevel);
-                            actualLevel = new Level_2(canvas);
+                            actualLevel = new Level_2(manager);
                             actualLevel.makeLevel(moneybagList, monsters);
                         }
 
@@ -186,7 +184,6 @@ public class Game extends Application {
                     break;
 
                     //POZIOM2
-                    //todo: render boss fight
                     case 2: {
 
                         if (!levelIsEnd(actualLevel)) {
@@ -194,12 +191,12 @@ public class Game extends Application {
                             if (((Level_2) actualLevel).needToSpawnMiniboss(collectedMoneybags.getValue(), monsters.isEmpty()))
                                 ((Level_2) actualLevel).spawnMiniboss(monsters);
 
-                            play(theStage, currentNanoTime, actualLevel);
+                            play(currentNanoTime, actualLevel);
 
                         } else {
 
                             //Przygotowanie do uruchomienia ekranu koncowego
-                            actualPanel = new EndPanel();
+                            actualPanel = new EndPanel(manager);
                             actualPanel.makeLevel();
                             endLevel(actualLevel);
                             actualLevel = null;
@@ -211,7 +208,7 @@ public class Game extends Application {
                     //EKRAN KONCOWY
                     default: {
 
-                        actualPanel.renderLevel(gc);
+                        actualPanel.renderLevel();
                     }
                 } //zamyka switcha
 
@@ -297,7 +294,7 @@ public class Game extends Application {
 
             if (bulletOverheating <= 0) {
 
-                ukaszShotSprite = new BulletSprite(SpritesImages.ukaszShotImage, player.getLastDirectionX());
+                ukaszShotSprite = new BulletSprite(player.getLastDirectionX(), manager);
                 ((BulletSprite) ukaszShotSprite).setPosition(player);
                 ukaszShotSprite.setVelocity(ukaszShotSprite.getShotVelocity(), 0);
 
@@ -314,7 +311,7 @@ public class Game extends Application {
 
             if (player.getBombOverheating() <= 0) {
 
-                ukaszShotSprite = new BombSprite(SpritesImages.getUkaszBombShotImages()[(int) (Math.random() * 2)]);
+                ukaszShotSprite = new BombSprite(manager);
                 ((BombSprite) ukaszShotSprite).setPosition(player);
                 ukaszShotSprite.setVelocity(0, ukaszShotSprite.getShotVelocity());
 
@@ -333,34 +330,34 @@ public class Game extends Application {
         else return false;
     }
 
-    //keyboard listner
-    public void readKeyboardAction() {
-
-        //wcisniety klawisz
-        theScene.setOnKeyPressed(
-                new EventHandler<KeyEvent>() {
-                    public void handle(KeyEvent e) {
-                        String code = e.getCode().toString();
-
-                        // only add once... prevent duplicates
-                        if (!input.contains(code))
-                            input.add(code);
-                    }
-                });
-
-        //zwolniony klawisz
-        theScene.setOnKeyReleased(
-                new EventHandler<KeyEvent>() {
-                    public void handle(KeyEvent e) {
-                        String code = e.getCode().toString();
-                        input.remove(code);
-                    }
-                });
-
-    }
+//    //keyboard listner
+//    public void readKeyboardAction() {
+//
+//        //wcisniety klawisz
+//        theScene.setOnKeyPressed(
+//                new EventHandler<KeyEvent>() {
+//                    public void handle(KeyEvent e) {
+//                        String code = e.getCode().toString();
+//
+//                        // only add once... prevent duplicates
+//                        if (!input.contains(code))
+//                            input.add(code);
+//                    }
+//                });
+//
+//        //zwolniony klawisz
+//        theScene.setOnKeyReleased(
+//                new EventHandler<KeyEvent>() {
+//                    public void handle(KeyEvent e) {
+//                        String code = e.getCode().toString();
+//                        input.remove(code);
+//                    }
+//                });
+//
+//    }
 
     //glowna metoda dla poszczegolnych poziomow
-    public void play(Stage theStage, long currentNanoTime, Levels level) {
+    public void play(long currentNanoTime, Levels level) {
         elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
         lastNanoTime.setValue(currentNanoTime);
 
@@ -369,50 +366,50 @@ public class Game extends Application {
         Collision.checkMoneybagsCollisions(moneybagList, player, score, collectedMoneybags);
 
         //render poziomu (tlo, potwory)
-        level.renderLevel(gc, monsters);
+        level.renderLevel(monsters);
 
         //render napisu
         String pointsText = "Kasa na walentynki: $" + (player.getTotalScore() + (score.getValue()));
-        gc.setFill(Color.TAN);
-        gc.fillText(pointsText, theStage.getWidth() - 450, 70);
+        //gc.setFill(Color.TAN);
+        manager.getGraphicContext().fillText(pointsText, ViewManager.WIDTH - 450, 70);
 
         //Dla strzalu
         if (bulletOverheating > 0)
             bulletOverheating -= 50;
 
         //render serc
-        level.drawHearts(gc, canvas, player);
+        level.drawHearts(player);
 
         //render pieniedzy
         for (Sprite moneyBag : moneybagList)
-            moneyBag.render(gc);
+            moneyBag.render();
 
 
         if (antiCollisionTimer.getValue() > 0)
             antiCollisionTimer.decValue(100);
 
         //kolizja z graczem
-        Collision.playerCollisionWithMonster(monsters, player, canvas);
+        Collision.playerCollisionWithMonster(monsters, player);
 
         //kolizja z pociskami
         Collision.playerShotCollision(monsters, playerShots, killedMonstersOnLevel);
 
         checkPlayerMove(Player.getDefaultVelocity());
         player.update(elapsedTime);
-        player.render(gc);
+        player.render();
         level.updateShots(playerShots, elapsedTime);
-        level.renderShots(playerShots, gc);
+        level.renderShots(playerShots);
         level.updateMonsters(player, monsters);
 
     }
 
-    public void setFont(String family, FontWeight weight, int size, Color color) {
-
-        Font font = Font.font(family, weight, size);
-
-        gc.setFont(font);
-        gc.setFill(color);
-    }
+//    public void setFont(String family, FontWeight weight, int size, Color color) {
+//
+//        Font font = Font.font(family, weight, size);
+//
+//        gc.setFont(font);
+//        gc.setFill(color);
+//    }
 
     public boolean levelIsEnd(Levels level) {
 
@@ -428,7 +425,7 @@ public class Game extends Application {
 
         while (i < howManyPages) {
 
-            gc.drawImage(tutorialPages[i], 0, 0);
+            manager.getGraphicContext().drawImage(tutorialPages[i], 0, 0);
 
             if (input.contains("ENTER"))
                 i++;
