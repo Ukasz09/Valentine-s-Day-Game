@@ -7,59 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f9ff56b-6d18-4e2f-871d-36bb47c8212c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/NotUsed.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/gameUtils/Collision.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/gameUtils/Game$1AnimationTimer2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/gameUtils/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/gameUtils/ViewManager$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/gameUtils/ViewManager$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/gameUtils/ViewManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/EndPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/EndPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/Level_1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/Level_1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/Levels.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/Levels.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/Panels.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/Panels.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/StartPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/StartPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/AnimatedSprite_NOTUSING.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/MoneyBag.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/healthStatusBars/HealthStatusBar.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/healthStatusBars/HeartsRender.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/healthStatusBars/IHeartsPosition.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/healthStatusBars/InCorner.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/kickEffect/KickByBigMonster.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/kickEffect/KickByLittleMonster.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/kickEffect/KickPlayer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/kickEffect/KindOfKick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/kickEffect/TeleportKick.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/shieldsEffect/AutoActivateShield.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/shieldsEffect/ManualActivateShield.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/shieldsEffect/Shield.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/others/shieldsEffect/ShieldKindOfRender.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BombSprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BombSprite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BulletSprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BulletSprite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/ShotSprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/ShotSprite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/wrappers/IntValue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/wrappers/LongValue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/soundsModule/Sounds.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/soundsModule/SoundsPath.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/soundsModule/SoundsPlayer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/EndPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/EndPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Levels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Levels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Panels.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Panels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/StartPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/StartPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/soundsModule/soundsPath/SoundsPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/soundsModule/soundsPath/SoundsPath.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/soundsModule/soundsPath/SoundsPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/soundsModule/soundsPath/SoundsPlayer.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -91,7 +39,7 @@
               <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java">
                 <provider selected="true" editor-type-id="text-editor">
                   <state relative-caret-position="282">
-                    <caret line="134" column="40" selection-start-line="134" selection-start-column="40" selection-end-line="134" selection-end-column="40" />
+                    <caret line="116" column="40" selection-start-line="116" selection-start-column="40" selection-end-line="116" selection-end-column="40" />
                     <folding>
                       <element signature="e#2098#2915#0" />
                       <element signature="e#6632#9773#0" />
@@ -228,12 +176,12 @@
           <entry key="Learning" value="5" />
           <entry key="dummy" value="81" />
           <entry key="gitignore" value="38" />
-          <entry key="java" value="20155" />
+          <entry key="java" value="20208" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="20155" />
+          <entry key="JAVA" value="20208" />
           <entry key="PLAIN_TEXT" value="119" />
           <entry key="Scratch" value="5" />
         </counts>
@@ -262,16 +210,18 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="163">
-              <caret line="95" column="41" selection-start-line="95" selection-start-column="41" selection-end-line="95" selection-end-column="41" />
+            <state relative-caret-position="1241">
+              <caret line="291" column="27" lean-forward="true" selection-start-line="291" selection-start-column="27" selection-end-line="291" selection-end-column="27" />
               <folding>
                 <element signature="e#6857#7266#0" />
                 <element signature="e#7272#10413#0" />
                 <element signature="e#10419#10544#0" />
                 <element signature="e#11409#12861#0" />
                 <element signature="e#12110#12133#0" />
+                <element signature="e#13079#13328#0" />
+                <element signature="e#12574#12911#0" />
+                <element signature="e#12917#13089#0" />
                 <element signature="e#12122#12170#0" />
-                <element signature="e#13832#13937#0" />
               </folding>
             </state>
           </provider>
@@ -567,7 +517,7 @@
     <property name="SearchEverywhereHistoryKey" value="plugins&#9;ACTION&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562934799107" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1562935297917" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -686,7 +636,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="339259000" />
+    <option name="totallyTimeSpent" value="339782000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -720,7 +670,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.34973404" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5012854" side_tool="true" weight="0.3882979" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3257979" />
-      <window_info active="true" anchor="bottom" x="28" y="343" width="1544" height="183" id="Run" order="11" sideWeight="0.49871466" visible="true" weight="0.3257979" />
+      <window_info anchor="bottom" x="28" y="343" width="1544" height="183" id="Run" order="11" sideWeight="0.49871466" weight="0.3257979" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -1197,16 +1147,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="95" column="41" selection-start-line="95" selection-start-column="41" selection-end-line="95" selection-end-column="41" />
+        <state relative-caret-position="1241">
+          <caret line="291" column="27" lean-forward="true" selection-start-line="291" selection-start-column="27" selection-end-line="291" selection-end-column="27" />
           <folding>
             <element signature="e#6857#7266#0" />
             <element signature="e#7272#10413#0" />
             <element signature="e#10419#10544#0" />
             <element signature="e#11409#12861#0" />
             <element signature="e#12110#12133#0" />
+            <element signature="e#13079#13328#0" />
+            <element signature="e#12574#12911#0" />
+            <element signature="e#12917#13089#0" />
             <element signature="e#12122#12170#0" />
-            <element signature="e#13832#13937#0" />
           </folding>
         </state>
       </provider>

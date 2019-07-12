@@ -25,12 +25,12 @@ public class StartPanel extends Panels {
     }
 
     @Override
-    public void endLevel() {
+    public void endPanel() {
         BACKGROUND_SOUND.stopSound();
     }
 
     @Override
-    public void renderLevel() {
+    public void renderPanel() {
         drawBackground(getManager().getGraphicContext(), BACKGROUND_IMAGE);
     }
 }

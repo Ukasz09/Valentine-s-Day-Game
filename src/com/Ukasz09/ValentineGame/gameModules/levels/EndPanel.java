@@ -26,12 +26,12 @@ public class EndPanel extends Panels {
     }
 
     @Override
-    public void endLevel() {
+    public void endPanel() {
         //nothing to do
     }
 
     @Override
-    public void renderLevel() {
+    public void renderPanel() {
         drawElements(getManager().getGraphicContext());
     }
 

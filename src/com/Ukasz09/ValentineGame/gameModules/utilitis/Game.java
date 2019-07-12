@@ -39,14 +39,13 @@ public class Game extends Application {
     private double elapsedTime;
     private LongValue lastNanoTime;
 
-    //    private int levelNumber;                //numer okreslajacy level
     private Levels actualLevel;
     private Panels actualPanel;
     private IntValue score;                  //wynik czesciowy za poziom
     private IntValue antiCollisionTimer;     //czas w jakim gracz moze przelatywac przez potwory (zapobiega zablokowaniu ruchu gracza)
     private IntValue killedMonstersOnLevel;
     private IntValue collectedMoneybags;
-    private boolean showTutorialPage;
+//    private boolean showTutorialPage;
 
     private Player player;
     private ShotSprite playerShotSprite;
@@ -58,6 +57,7 @@ public class Game extends Application {
         player = new Player(SpritesImages.playerRightImage, SpritesImages.playerLeftImage, SpritesImages.playerShieldImage, manager);
         collectedMoneybags = new IntValue(0);
         killedMonstersOnLevel = new IntValue(0);
+        score=new IntValue(0);
 
         inputsList = new ArrayList<>();
         playerShotsList = new ArrayList<>();
@@ -65,8 +65,6 @@ public class Game extends Application {
         monstersList = new ArrayList<>();
 
         antiCollisionTimer = new IntValue(0); //todo: wrzucic do playera
-
-        showTutorialPage = false;//todo: zmienic
     }
 
     @Override
@@ -88,9 +86,9 @@ public class Game extends Application {
                 switch (player.getLevelNumber()) {
                     case 0: {
                         if (!playerReadyToGame())
-                            actualPanel.renderLevel();
+                            actualPanel.renderPanel();
                         else {
-                            actualPanel.endLevel();
+                            actualPanel.endPanel();
                             actualPanel = null;
                             startGame(1);
                         }
@@ -125,7 +123,7 @@ public class Game extends Application {
                     break;
 
                     default: {
-                        actualPanel.renderLevel();
+                        actualPanel.renderPanel();
                     }
                 }
             }
@@ -136,7 +134,7 @@ public class Game extends Application {
     }
 
     //ustawia odpowiednio zmienne przed rozpoczeciem nowego levelu
-    public void endLevel(Levels level) {
+    private void endLevel(Levels level) {
         level.endLevel();
         player.setNextLevel();
         player.addTotalScore(score.getValue());
@@ -149,7 +147,7 @@ public class Game extends Application {
     }
 
     //sprawdza klikniety klawisz i wykonuje akcje dla niego
-    public void checkPlayerMove(int velocity) {
+    private void checkPlayerMove(int velocity) {
 
         player.setVelocity(0, 0);
         boolean playerCantDoAnyMove = Collision.collisionFromAllDirection(monstersList, player, manager);
@@ -234,14 +232,14 @@ public class Game extends Application {
         }
     }
 
-    public boolean playerReadyToGame() {
+    private boolean playerReadyToGame() {
 
         if (inputsList.contains("ENTER")) return true;
         else return false;
     }
 
     //glowna metoda dla poszczegolnych poziomow
-    public void play(long currentNanoTime, Levels level) {
+    private void play(long currentNanoTime, Levels level) {
         elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
         lastNanoTime.setValue(currentNanoTime);
 
@@ -283,7 +281,7 @@ public class Game extends Application {
 
     }
 
-    public boolean levelIsEnd(Levels level) {
+    private boolean levelIsEnd(Levels level) {
 
         if ((collectedMoneybags.getValue() < level.getHowManyMoneybags()) || (killedMonstersOnLevel.getValue() < level.getHowManyAllMonsters())) {
             return false;
@@ -291,12 +289,12 @@ public class Game extends Application {
     }
 
     private void prepareGame(Levels startLevel) {
-        score = new IntValue(0);
+//        score = new IntValue(0);
         double playerPositionX = startLevel.playerStartPosition().getX();
         double playerPositionY = startLevel.playerStartPosition().getY();
         player.setPosition(playerPositionX, playerPositionY);
-        collectedMoneybags.setValue(0);
-        playerShotsList.clear();
+//        collectedMoneybags.setValue(0);
+//        playerShotsList.clear();
         startLevel.makeLevel(moneybagList, monstersList);
         startLevel.playBackgroundSound();
         Levels.playWingsSound();
@@ -319,7 +317,7 @@ public class Game extends Application {
         }
     }
 
-    public void startGame(int levelNumber) {
+    private void startGame(int levelNumber) {
         actualLevel = chooseLevel(levelNumber);
         prepareGame(actualLevel);
     }
