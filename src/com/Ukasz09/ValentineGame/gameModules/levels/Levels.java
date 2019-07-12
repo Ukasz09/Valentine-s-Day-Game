@@ -11,6 +11,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -32,10 +33,6 @@ public abstract class Levels {
 
     private int howManyLittleMonsters;   //potworki
     private int howManyAllMonsters;      //potworki + (bossy / minibossy)
-
-    private Image heartFull = SpritesImages.heartFullImage;
-    private Image heartHalf = SpritesImages.heartHalfImage;
-    private Image heartEmpty = SpritesImages.heartEmptyImage;
 
     private ViewManager manager;
 
@@ -139,6 +136,15 @@ public abstract class Levels {
 
     public abstract void renderLevel(ArrayList<Monster> monsters);
 
+    public abstract Point2D playerStartPosition();
+
+    protected Point2D playerDefaultStartPosition() {
+        double positionX = manager.getRightBorder() / 2;
+        double positionY = manager.getBottomBorder() / 2;
+        return new Point2D(positionY,positionY);
+    }
+
+    public abstract void playBackgroundSound();
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -186,4 +192,5 @@ public abstract class Levels {
                 }
         }
     }
+
 }

@@ -25,7 +25,6 @@ import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class Game extends Application {
     private double elapsedTime;
     private LongValue lastNanoTime;
 
-    private int levelNumber;                //numer okreslajacy level
+    //    private int levelNumber;                //numer okreslajacy level
     private Levels actualLevel;
     private Panels actualPanel;
     private IntValue score;                  //wynik czesciowy za poziom
@@ -48,7 +47,6 @@ public class Game extends Application {
     private IntValue killedMonstersOnLevel;
     private IntValue collectedMoneybags;
     private boolean showTutorialPage;
-    private boolean playerReadyToGame;
 
     private Player player;
     private ShotSprite playerShotSprite;
@@ -56,145 +54,91 @@ public class Game extends Application {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
         manager = new ViewManager(); //do NOT touch
-
-        //Game components
-        inputsList = new ArrayList<>();
         lastNanoTime = new LongValue(System.nanoTime());
-
         player = new Player(SpritesImages.playerRightImage, SpritesImages.playerLeftImage, SpritesImages.playerShieldImage, manager);
-        playerShotsList = new ArrayList<>();
-        antiCollisionTimer = new IntValue(0);
-
-        moneybagList = new ArrayList<>();
         collectedMoneybags = new IntValue(0);
-
-        monstersList = new ArrayList<>();
         killedMonstersOnLevel = new IntValue(0);
 
-        levelNumber = 0;
-        showTutorialPage = false;
-        playerReadyToGame = false;
+        inputsList = new ArrayList<>();
+        playerShotsList = new ArrayList<>();
+        moneybagList = new ArrayList<>();
+        monstersList = new ArrayList<>();
+
+        antiCollisionTimer = new IntValue(0); //todo: wrzucic do playera
+
+        showTutorialPage = false;//todo: zmienic
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     @Override
     public void start(Stage theStage) {
         manager.initialize("Valentines Game", true); //do NOT touch
         theStage = manager.getMainStage();  //do NOT touch
         manager.readKeyboardAction(inputsList);
 
-        actualPanel = new StartPanel(manager);
-        actualPanel.makeLevel();
+        //todo: dodac mozliwosc wczytwywania ostatniego poziomu z pliku
+        int levelNumber = 0;
+        if(levelNumber==0){
+            actualPanel=new StartPanel(manager);
+            actualPanel.makePanel();
+        } else startGame(levelNumber);
 
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        class AnimationTimer2 extends AnimationTimer {
-
+        class gameAnimationTimer extends AnimationTimer {
             @Override
             public void handle(long currentNanoTime) {
-
-                switch (levelNumber) {
-
-                    //EKRAN STARTOWY
+                switch (player.getLevelNumber()) {
                     case 0: {
-
-                        if (playerReadyToGame == false) {
-
+                        if (!playerReadyToGame())
                             actualPanel.renderLevel();
-
-                            if (inputsList.contains("ENTER"))
-                                playerReadyToGame = true;
-                        }
-//                                else showTutorialPage=true;
-//
-//                                if(showTutorialPage==true){
-//
-//                                    //  showTutorialPage(tutorialImages[], amountOfTutPage);
-//                                }
-
                         else {
-
-                            //Ustawienia dla poziomu 1
                             actualPanel.endLevel();
                             actualPanel = null;
-
-                            score = new IntValue(0);
-                            double centerPositionX = manager.getRightBorder() / 2 - player.getWidth();
-                            double centerPositionY = manager.getBottomBorder() / 2 - player.getHeight();
-
-                            player.setPosition(centerPositionX, centerPositionY);
-
-                            actualLevel = new Level_1(manager);
-                            actualLevel.makeLevel(moneybagList, monstersList);
-
-                            collectedMoneybags.setValue(0);
-                            playerShotsList.clear();
-
-                            levelNumber++;
+                            startGame(1);
                         }
 
                     }
                     break;
 
-                    //POZIOM 1
                     case 1: {
-
                         if (!levelIsEnd(actualLevel))
                             play(currentNanoTime, actualLevel);
-
                         else {
-
-                            //Przygotowanie nastepnego poziomu
-
                             endLevel(actualLevel);
                             actualLevel = new Level_2(manager);
                             actualLevel.makeLevel(moneybagList, monstersList);
                         }
-
-
                     }
                     break;
 
-                    //POZIOM2
                     case 2: {
-
                         if (!levelIsEnd(actualLevel)) {
-
                             if (((Level_2) actualLevel).needToSpawnMiniboss(collectedMoneybags.getValue(), monstersList.isEmpty()))
                                 ((Level_2) actualLevel).spawnMiniboss(monstersList);
 
                             play(currentNanoTime, actualLevel);
-
                         } else {
-
-                            //Przygotowanie do uruchomienia ekranu koncowego
                             actualPanel = new EndPanel(manager);
-                            actualPanel.makeLevel();
+                            actualPanel.makePanel();
                             endLevel(actualLevel);
                             actualLevel = null;
                         }
-
                     }
                     break;
 
-                    //EKRAN KONCOWY
                     default: {
-
                         actualPanel.renderLevel();
                     }
-                } //zamyka switcha
+                }
+            }
+        }
 
-            } //zamyka handle
-
-        } //zamyka wewnetrzna klase
-
-        new AnimationTimer2().start();
+        new gameAnimationTimer().start();
         theStage.show();
-
     }
 
     //ustawia odpowiednio zmienne przed rozpoczeciem nowego levelu
     public void endLevel(Levels level) {
         level.endLevel();
-        levelNumber++;
+        player.setNextLevel();
         player.addTotalScore(score.getValue());
         score.setValue(0);
         collectedMoneybags.setValue(0);
@@ -296,32 +240,6 @@ public class Game extends Application {
         else return false;
     }
 
-//    //keyboard listner
-//    public void readKeyboardAction() {
-//
-//        //wcisniety klawisz
-//        theScene.setOnKeyPressed(
-//                new EventHandler<KeyEvent>() {
-//                    public void handle(KeyEvent e) {
-//                        String code = e.getCode().toString();
-//
-//                        // only add once... prevent duplicates
-//                        if (!input.contains(code))
-//                            input.add(code);
-//                    }
-//                });
-//
-//        //zwolniony klawisz
-//        theScene.setOnKeyReleased(
-//                new EventHandler<KeyEvent>() {
-//                    public void handle(KeyEvent e) {
-//                        String code = e.getCode().toString();
-//                        input.remove(code);
-//                    }
-//                });
-//
-//    }
-
     //glowna metoda dla poszczegolnych poziomow
     public void play(long currentNanoTime, Levels level) {
         elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
@@ -365,14 +283,6 @@ public class Game extends Application {
 
     }
 
-//    public void setFont(String family, FontWeight weight, int size, Color color) {
-//
-//        Font font = Font.font(family, weight, size);
-//
-//        gc.setFont(font);
-//        gc.setFill(color);
-//    }
-
     public boolean levelIsEnd(Levels level) {
 
         if ((collectedMoneybags.getValue() < level.getHowManyMoneybags()) || (killedMonstersOnLevel.getValue() < level.getHowManyAllMonsters())) {
@@ -380,22 +290,56 @@ public class Game extends Application {
         } else return true;
     }
 
-    //wyswietla strony z tutorialem dla gracza
-    public void showTutorialPage(Image[] tutorialPages, int howManyPages) {
-
-        int i = 0;
-
-        while (i < howManyPages) {
-
-            manager.getGraphicContext().drawImage(tutorialPages[i], 0, 0);
-
-            if (inputsList.contains("ENTER"))
-                i++;
-
-        }
-
-        showTutorialPage = false;
+    private void prepareGame(Levels startLevel) {
+        score = new IntValue(0);
+        double playerPositionX = startLevel.playerStartPosition().getX();
+        double playerPositionY = startLevel.playerStartPosition().getY();
+        player.setPosition(playerPositionX, playerPositionY);
+        collectedMoneybags.setValue(0);
+        playerShotsList.clear();
+        startLevel.makeLevel(moneybagList, monstersList);
+        startLevel.playBackgroundSound();
+        Levels.playWingsSound();
     }
+
+    private Levels chooseLevel(int levelNumber) {
+        player.setLevelNumber(levelNumber);
+        switch (levelNumber) {
+            case 1: {
+                return new Level_1(manager);
+            }
+            case 2: {
+                return new Level_2(manager);
+            }
+
+            default: {
+                player.setLevelNumber(1);
+                return new Level_1(manager);
+            }
+        }
+    }
+
+    public void startGame(int levelNumber) {
+        actualLevel = chooseLevel(levelNumber);
+        prepareGame(actualLevel);
+    }
+
+//    //wyswietla strony z tutorialem dla gracza
+//    public void showTutorialPage(Image[] tutorialPages, int howManyPages) {
+//
+//        int i = 0;
+//
+//        while (i < howManyPages) {
+//
+//            manager.getGraphicContext().drawImage(tutorialPages[i], 0, 0);
+//
+//            if (inputsList.contains("ENTER"))
+//                i++;
+//
+//        }
+//
+//        showTutorialPage = false;
+//    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

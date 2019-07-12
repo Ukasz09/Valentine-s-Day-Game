@@ -12,6 +12,7 @@ import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ public class Level_1 extends Levels {
     private static final Image MONEY_BAG_IMAGE_2 = SpritesImages.moneyBagImage2;
     private static final Image BACKGROUND_IMAGE = BackgroundImages.backgroundImage1;
 
-    private static final SoundsPlayer BACKGROUND_SOUND=Sounds.backgroundSound;
-    private static final double BACKGROUND_SOUND_VOLUME = 0.1;
+    public static final SoundsPlayer BACKGROUND_SOUND=Sounds.backgroundSound;
+    public static final double BACKGROUND_SOUND_VOLUME = 0.1;
 
     private final int howManyMoneybags = 10;
     private final int howManySmallCoins = 8;
@@ -97,11 +98,17 @@ public class Level_1 extends Levels {
         makeMoneyBags(moneybagList);
         spawnLittleMonsters(monsters);
         setPositionMonsters(monsters);
-        setBackgroundSound(BACKGROUND_SOUND);
-        Levels.playBackgroundSound(BACKGROUND_SOUND_VOLUME,true);
-        Levels.playWingsSound();
-
+        playBackgroundSound();
     }
 
+    @Override
+    public Point2D playerStartPosition() {
+        return playerDefaultStartPosition();
+    }
 
+    @Override
+    public void playBackgroundSound(){
+        setBackgroundSound(BACKGROUND_SOUND);
+        Levels.playBackgroundSound(BACKGROUND_SOUND_VOLUME,true);
+    }
 }

@@ -5,7 +5,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class Panels {
-    ViewManager manager;
+    private ViewManager manager;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Panels(ViewManager manager) {
@@ -13,7 +13,7 @@ public abstract class Panels {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public abstract void makeLevel();
+    public abstract void makePanel();
 
     public abstract void endLevel();
 

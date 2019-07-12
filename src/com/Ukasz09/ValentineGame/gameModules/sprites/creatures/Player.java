@@ -38,6 +38,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private double bombOverheating;
     private double bulletOverheating;
     private HeartsRender heartsRender;
+    private int levelNumber;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
@@ -59,6 +60,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         totalScore = 0;
         bombOverheating = 0;
         bulletOverheating =0;
+        levelNumber=0;
         heartsRender=new InCorner(manager);
     }
 
@@ -181,5 +183,17 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public double getBulletOverheating() {
         return bulletOverheating;
+    }
+
+    public int getLevelNumber() {
+        return levelNumber;
+    }
+
+    public void setLevelNumber(int levelNumber) {
+        this.levelNumber = levelNumber;
+    }
+
+    public void setNextLevel(){
+        levelNumber++;
     }
 }

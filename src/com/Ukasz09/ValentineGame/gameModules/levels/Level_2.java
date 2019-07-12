@@ -10,6 +10,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickByBi
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.TeleportKick;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -129,4 +130,14 @@ public class Level_2 extends Levels {
         setPositionMonsters(monsters);
     }
 
+    @Override
+    public Point2D playerStartPosition() {
+        return playerDefaultStartPosition();
+    }
+
+    @Override
+    public void playBackgroundSound() {
+        setBackgroundSound(Level_1.BACKGROUND_SOUND);
+        Levels.playBackgroundSound(Level_1.BACKGROUND_SOUND_VOLUME,true);
+    }
 }

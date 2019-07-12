@@ -7,18 +7,20 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public class StartPanel extends Panels {
-    private static final Image BACKGROUND_IMAGE = BackgroundImages.startImage;
-    private static final SoundsPlayer BACKGROUND_SOUND = Sounds.backgroundStartSound;
-    private static final double SOUND_VOLUME = 0.6;
+    private Image BACKGROUND_IMAGE;
+    private SoundsPlayer BACKGROUND_SOUND;
+    private final double SOUND_VOLUME = 0.6;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public StartPanel(ViewManager manager) {
         super(manager);
+        BACKGROUND_IMAGE = BackgroundImages.startImage;
+        BACKGROUND_SOUND = Sounds.backgroundStartSound;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public void makeLevel() {
+    public void makePanel() {
         BACKGROUND_SOUND.playSound(SOUND_VOLUME, true);
     }
 
