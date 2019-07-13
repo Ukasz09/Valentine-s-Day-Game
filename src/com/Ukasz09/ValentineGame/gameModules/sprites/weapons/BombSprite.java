@@ -69,9 +69,21 @@ public class BombSprite extends ShotSprite {
         playSound(SHOT_SOUND, DEFAULT_SHOT_VOLUME);
     }
 
-    @Override
     public void playBoomSound() {
         playSound(getRandomBoomSound(), DEFAULT_BOMB_VOLUME);
+    }
+
+    @Override
+    public boolean isOutOfBoundary() {
+        if ((getBoundary().getMaxY() > getManager().getBottomBorder()))
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public void doOutOfBoundaryAction() {
+        playBoomSound();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

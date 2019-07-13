@@ -13,7 +13,6 @@ package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
 import com.Ukasz09.ValentineGame.gameModules.levels.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
@@ -34,7 +33,7 @@ public class Game extends Application {
     private ArrayList<MoneyBag> moneybagList;
     private ArrayList<Monster> monstersList;
     private ArrayList<String> inputsList;
-    private ArrayList<ShotSprite> playerShotsList;
+    private ArrayList<ShotSprite> shotsList;
 
     private double elapsedTime;
     private LongValue lastNanoTime;
@@ -57,7 +56,7 @@ public class Game extends Application {
         killedMonstersOnLevel = new IntValue(0);
 
         inputsList = new ArrayList<>();
-        playerShotsList = new ArrayList<>();
+        shotsList = new ArrayList<>();
         moneybagList = new ArrayList<>();
         monstersList = new ArrayList<>();
 
@@ -137,7 +136,7 @@ public class Game extends Application {
         collectedMoneybags.setValue(0);
         moneybagList.clear();
         monstersList.clear();
-        playerShotsList.clear();
+        shotsList.clear();
         killedMonstersOnLevel.setValue(0);
     }
 
@@ -205,7 +204,7 @@ public class Game extends Application {
                 playerShotSprite.setPosition(player);
                 playerShotSprite.setVelocity(playerShotSprite.getShotVelocity(), 0);
 
-                playerShotsList.add(playerShotSprite);
+                shotsList.add(playerShotSprite);
                 playerShotSprite.playShotSound();
                 player.overheatBullet();
             }
@@ -220,7 +219,7 @@ public class Game extends Application {
                 playerShotSprite.setPosition(player);
                 playerShotSprite.setVelocity(0, playerShotSprite.getShotVelocity());
 
-                playerShotsList.add(playerShotSprite);
+                shotsList.add(playerShotSprite);
                 playerShotSprite.playShotSound();
                 player.overheatBomb();
             }
@@ -234,35 +233,29 @@ public class Game extends Application {
     }
 
     private void play(long currentNanoTime, Levels level) {
-        elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
-        lastNanoTime.setValue(currentNanoTime);
+            calculateTime(currentNanoTime);
 
-        //detekcja kolizji z pieniedzmi
         Collision.checkMoneybagsCollisions(moneybagList, player, collectedMoneybags);
 
-        //render poziomu (tlo, potwory)
-        level.renderLevel(monstersList, player.getTotalScore());
-
-        for (Sprite moneyBag : moneybagList)
-            moneyBag.render();
-
+            level.renderLevel(monstersList, moneybagList, shotsList, player.getTotalScore());
 
         if (antiCollisionTimer.getValue() > 0)
             antiCollisionTimer.decValue(100);
 
-        //kolizja z graczem
         Collision.playerCollisionWithMonster(monstersList, player);
-
-        //kolizja z pociskami
-        Collision.playerShotCollision(monstersList, playerShotsList, killedMonstersOnLevel);
+        Collision.playerShotCollision(monstersList, shotsList, killedMonstersOnLevel);
 
         checkPlayerMove(Player.getDefaultVelocity());
-        player.update(elapsedTime);
-        player.render();
-        level.updateShots(playerShotsList, elapsedTime);
-        level.renderShots(playerShotsList);
+            player.update(elapsedTime);
+            player.render();
+        level.updateShots(shotsList, elapsedTime);
         level.updateMonsters(player, monstersList);
 
+    }
+
+    private void calculateTime(long currentNanoTime){
+        elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
+        lastNanoTime.setValue(currentNanoTime);
     }
 
     private boolean levelIsEnd(Levels level) {

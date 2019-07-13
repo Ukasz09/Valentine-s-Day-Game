@@ -56,13 +56,21 @@ public class BulletSprite extends ShotSprite {
     }
 
     @Override
-    public void playBoomSound() {
-        playShotSound();
+    public void playShotSound() {
+        playSound(SHOT_SOUND, DEFAULT_SHOT_VOLUME);
     }
 
     @Override
-    public void playShotSound() {
-        playSound(SHOT_SOUND, DEFAULT_SHOT_VOLUME);
+    public boolean isOutOfBoundary() {
+        if ((getPositionX() > getManager().getRightBorder()) || (getPositionX() < getManager().getLeftBorder()))
+            return true;
+
+        return false;
+    }
+
+    @Override
+    public void doOutOfBoundaryAction() {
+        //nothing to do
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

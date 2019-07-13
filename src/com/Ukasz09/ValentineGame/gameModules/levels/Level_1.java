@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.LittleMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
@@ -88,10 +89,8 @@ public class Level_1 extends Levels {
     }
 
     @Override
-    public void renderLevel(ArrayList<Monster> monsters, int score) {
-        drawBackground(getManager().getGraphicContext(), BACKGROUND_IMAGE);
-        renderMonsters(monsters);
-        renderScoreText(score);
+    public void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, int score) {
+        defaultRenderLevel(monsters,moneyBags, shots, score,BACKGROUND_IMAGE);
     }
 
     @Override

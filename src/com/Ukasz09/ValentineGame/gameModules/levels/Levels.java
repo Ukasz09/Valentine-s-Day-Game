@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public abstract class Levels {
-    private static final double POINTS_TEXT_OFFSET_X =450;
-    private static final double POINTS_TEXT_OFFSET_Y =70;
+    private static final double POINTS_TEXT_OFFSET_X = 450;
+    private static final double POINTS_TEXT_OFFSET_Y = 70;
     private static final double WINGS_SOUND_VOLUME = 1;
     private static SoundsPlayer backgroundSound;
 
@@ -122,8 +122,18 @@ public abstract class Levels {
     }
 
     public void renderMonsters(ArrayList<Monster> monsters) {
-        for (Sprite m : monsters)
-            m.render();
+        if (monsters != null) {
+            for (Sprite m : monsters)
+                m.render();
+        }
+    }
+
+    public void renderMoneyBags(ArrayList<MoneyBag> moneyBags) {
+        if (moneyBags != null) {
+            for (MoneyBag m : moneyBags)
+                m.render();
+        }
+
     }
 
     public void updateMonsters(Sprite target, ArrayList<Monster> monsters) {
@@ -136,17 +146,25 @@ public abstract class Levels {
 
     public abstract void endLevel();
 
-    public abstract void renderLevel(ArrayList<Monster> monsters, int score);
+    public abstract void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, int score);
 
     public abstract Point2D playerStartPosition();
 
     protected Point2D playerDefaultStartPosition() {
         double positionX = manager.getRightBorder() / 2;
         double positionY = manager.getBottomBorder() / 2;
-        return new Point2D(positionY,positionY);
+        return new Point2D(positionY, positionY);
     }
 
     public abstract void playBackgroundSound();
+
+    public void defaultRenderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, int score, Image backgroundImage) {
+        drawBackground(getManager().getGraphicContext(), backgroundImage);
+        renderMonsters(monsters);
+        renderMoneyBags(moneyBags);
+        renderScoreText(score);
+        renderShots(shots);
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -172,34 +190,29 @@ public abstract class Levels {
     }
 
     public void renderShots(ArrayList<ShotSprite> shotSprites) {
-        Iterator<ShotSprite> shotIter = shotSprites.iterator();
-        while (shotIter.hasNext())
-            shotIter.next().render();
+        Iterator<ShotSprite> shots = shotSprites.iterator();
+        while (shots.hasNext())
+            shots.next().render();
     }
 
     public void updateShots(ArrayList<ShotSprite> shotSprites, double elapsedTime) {
-        Iterator<ShotSprite> shotIter = shotSprites.iterator();
-        while (shotIter.hasNext()) {
-            ShotSprite shot = shotIter.next();
+        Iterator<ShotSprite> shotsIterator = shotSprites.iterator();
+        while (shotsIterator.hasNext()) {
+            ShotSprite shot = shotsIterator.next();
             shot.update(elapsedTime);
 
-            if (shot instanceof BulletSprite)
-                if ((shot.getPositionX() > manager.getRightBorder()) || (shot.getPositionX() < manager.getLeftBorder()))
-                    shotIter.remove();
-
-            if (shot instanceof BombSprite)
-                if ((shot.getBoundary().getMaxY() > manager.getBottomBorder())) {
-                    shot.playBoomSound();
-                    shotIter.remove();
-                }
+            if (shot.isOutOfBoundary()){
+                shot.doOutOfBoundaryAction();
+                shotsIterator.remove();
+            }
         }
     }
 
-    public void renderText(String text, int posX, int posY){
-        manager.getGraphicContext().fillText(text,posX,posY);
+    public void renderText(String text, int posX, int posY) {
+        manager.getGraphicContext().fillText(text, posX, posY);
     }
 
-    public void renderScoreText(int score){
+    public void renderScoreText(int score) {
         String pointsText = "Kasa na walentynki: $" + score;
         manager.getGraphicContext().setFill(Color.TAN);
         manager.getGraphicContext().fillText(pointsText, ViewManager.WIDTH - POINTS_TEXT_OFFSET_X, POINTS_TEXT_OFFSET_Y);

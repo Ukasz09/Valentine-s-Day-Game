@@ -41,5 +41,7 @@ public abstract class ShotSprite extends Sprite {
 
     public abstract void playShotSound();
 
-    public abstract void playBoomSound();
+    public abstract boolean isOutOfBoundary();
+
+    public abstract void doOutOfBoundaryAction();
 }
