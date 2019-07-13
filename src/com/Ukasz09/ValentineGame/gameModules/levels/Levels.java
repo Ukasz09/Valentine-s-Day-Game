@@ -14,12 +14,14 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public abstract class Levels {
-
+    private static final double POINTS_TEXT_OFFSET_X =450;
+    private static final double POINTS_TEXT_OFFSET_Y =70;
     private static final double WINGS_SOUND_VOLUME = 1;
     private static SoundsPlayer backgroundSound;
 
@@ -134,7 +136,7 @@ public abstract class Levels {
 
     public abstract void endLevel();
 
-    public abstract void renderLevel(ArrayList<Monster> monsters);
+    public abstract void renderLevel(ArrayList<Monster> monsters, int score);
 
     public abstract Point2D playerStartPosition();
 
@@ -191,6 +193,16 @@ public abstract class Levels {
                     shotIter.remove();
                 }
         }
+    }
+
+    public void renderText(String text, int posX, int posY){
+        manager.getGraphicContext().fillText(text,posX,posY);
+    }
+
+    public void renderScoreText(int score){
+        String pointsText = "Kasa na walentynki: $" + score;
+        manager.getGraphicContext().setFill(Color.TAN);
+        manager.getGraphicContext().fillText(pointsText, ViewManager.WIDTH - POINTS_TEXT_OFFSET_X, POINTS_TEXT_OFFSET_Y);
     }
 
 }

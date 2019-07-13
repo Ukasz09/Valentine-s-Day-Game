@@ -41,11 +41,9 @@ public class Game extends Application {
 
     private Levels actualLevel;
     private Panels actualPanel;
-    private IntValue score;                  //wynik czesciowy za poziom
     private IntValue antiCollisionTimer;     //czas w jakim gracz moze przelatywac przez potwory (zapobiega zablokowaniu ruchu gracza)
     private IntValue killedMonstersOnLevel;
     private IntValue collectedMoneybags;
-//    private boolean showTutorialPage;
 
     private Player player;
     private ShotSprite playerShotSprite;
@@ -57,7 +55,6 @@ public class Game extends Application {
         player = new Player(SpritesImages.playerRightImage, SpritesImages.playerLeftImage, SpritesImages.playerShieldImage, manager);
         collectedMoneybags = new IntValue(0);
         killedMonstersOnLevel = new IntValue(0);
-        score=new IntValue(0);
 
         inputsList = new ArrayList<>();
         playerShotsList = new ArrayList<>();
@@ -73,7 +70,7 @@ public class Game extends Application {
         theStage = manager.getMainStage();  //do NOT touch
         manager.readKeyboardAction(inputsList);
 
-        //todo: dodac mozliwosc wczytwywania ostatniego poziomu z pliku
+        //todo: dodac mozliwosc wczytwywania poziomu z pliku
         int levelNumber = 0;
         if(levelNumber==0){
             actualPanel=new StartPanel(manager);
@@ -114,10 +111,10 @@ public class Game extends Application {
 
                             play(currentNanoTime, actualLevel);
                         } else {
-                            actualPanel = new EndPanel(manager);
-                            actualPanel.makePanel();
                             endLevel(actualLevel);
                             actualLevel = null;
+                            actualPanel = new EndPanel(manager);
+                            actualPanel.makePanel();
                         }
                     }
                     break;
@@ -137,8 +134,6 @@ public class Game extends Application {
     private void endLevel(Levels level) {
         level.endLevel();
         player.setNextLevel();
-        player.addTotalScore(score.getValue());
-        score.setValue(0);
         collectedMoneybags.setValue(0);
         moneybagList.clear();
         monstersList.clear();
@@ -238,27 +233,16 @@ public class Game extends Application {
         else return false;
     }
 
-    //glowna metoda dla poszczegolnych poziomow
     private void play(long currentNanoTime, Levels level) {
         elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
         lastNanoTime.setValue(currentNanoTime);
 
-
         //detekcja kolizji z pieniedzmi
-        Collision.checkMoneybagsCollisions(moneybagList, player, score, collectedMoneybags);
+        Collision.checkMoneybagsCollisions(moneybagList, player, collectedMoneybags);
 
         //render poziomu (tlo, potwory)
-        level.renderLevel(monstersList);
+        level.renderLevel(monstersList, player.getTotalScore());
 
-        //render napisu
-        String pointsText = "Kasa na walentynki: $" + (player.getTotalScore() + (score.getValue()));
-        //gc.setFill(Color.TAN);
-        manager.getGraphicContext().fillText(pointsText, ViewManager.WIDTH - 450, 70);
-
-//        //render serc
-//        level.drawHearts(player);
-
-        //render pieniedzy
         for (Sprite moneyBag : moneybagList)
             moneyBag.render();
 
@@ -321,23 +305,6 @@ public class Game extends Application {
         actualLevel = chooseLevel(levelNumber);
         prepareGame(actualLevel);
     }
-
-//    //wyswietla strony z tutorialem dla gracza
-//    public void showTutorialPage(Image[] tutorialPages, int howManyPages) {
-//
-//        int i = 0;
-//
-//        while (i < howManyPages) {
-//
-//            manager.getGraphicContext().drawImage(tutorialPages[i], 0, 0);
-//
-//            if (inputsList.contains("ENTER"))
-//                i++;
-//
-//        }
-//
-//        showTutorialPage = false;
-//    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

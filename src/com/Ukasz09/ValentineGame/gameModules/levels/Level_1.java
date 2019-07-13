@@ -88,9 +88,10 @@ public class Level_1 extends Levels {
     }
 
     @Override
-    public void renderLevel(ArrayList<Monster> monsters) {
+    public void renderLevel(ArrayList<Monster> monsters, int score) {
         drawBackground(getManager().getGraphicContext(), BACKGROUND_IMAGE);
         renderMonsters(monsters);
+        renderScoreText(score);
     }
 
     @Override
