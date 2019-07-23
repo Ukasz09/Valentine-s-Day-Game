@@ -76,21 +76,21 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //korekta wyswietlania obrazkow dla minibossa
     @Override
-    public void setImageByPosition(Image left, Image right, Image bottom, Image top, Sprite ukasz) {
+    public void setImageByPosition(Image left, Image right, Image bottom, Image top, Sprite target) {
 
         double monsterMinX = this.getBoundary().getMinX();
         double monsterMaxX = this.getBoundary().getMaxX();
         double monsterMaxY = this.getBoundary().getMaxY();
 
-        if (monsterMinX + 0.1 * monsterMinX > ukasz.getBoundary().getMaxX())
+        if (monsterMinX + 0.1 * monsterMinX > target.getBoundary().getMaxX())
             this.setActualImage(left);
         else this.setActualImage(right);
 
         //jesli potwor doklanie nad/pod graczem (korekta bo potwor wiekszy niz gracz)
-        if ((monsterMinX + 0.25 * monsterMinX > ukasz.getBoundary().getMinX()) && (monsterMaxX - 0.25 * monsterMaxX < ukasz.getBoundary().getMaxX())) {
+        if ((monsterMinX + 0.25 * monsterMinX > target.getBoundary().getMinX()) && (monsterMaxX - 0.25 * monsterMaxX < target.getBoundary().getMaxX())) {
 
             //ustawiona w dol
-            if (monsterMaxY - 0.15 * monsterMaxY < ukasz.getBoundary().getMinY())
+            if (monsterMaxY - 0.15 * monsterMaxY < target.getBoundary().getMinY())
                 this.setActualImage(bottom);
             else this.setActualImage(top);
 

@@ -1,6 +1,5 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import javafx.scene.image.Image;
@@ -8,7 +7,6 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 public abstract class Monster extends Sprite {
-
     private double howManyLivesTake;
     private double howBigKickSize;
     private KickPlayer kickMethod;
@@ -23,61 +21,33 @@ public abstract class Monster extends Sprite {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Settery */
+    public abstract void isDeadAction();
 
-    public void setHowManyLivesTake(double howManyLivesTake) {
-        this.howManyLivesTake = howManyLivesTake;
-    }
+    public abstract void isHitAction();
 
-    public void setHowBigKickSize(double howBigKickSize) {
-        this.howBigKickSize = howBigKickSize;
-    }
+    public abstract void missHitAction();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Gettery */
-
-    public double getHowBigKickSize() {
-        return howBigKickSize;
-    }
-
-    public double getHowManyLivesTake() {
-        return howManyLivesTake;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Metody */
-
-    //todo: dodac pozniej
-//    public abstract void checkCollision(ArrayList<MoneyBag> moneyBagsList, ArrayList<Monster> monsters);
-
-    public boolean doKickPlayer() {
+    public boolean kickAfterHit() {
         if (howBigKickSize > 0) return true;
 
         return false;
     }
 
-    public void update(Sprite target, ArrayList<Monster> monsters) {
-
-        //jesli nie dopadly juz gracza/celu
-        if (this.intersectsWithMonster(target) == false) {
-
+    //    //todo: refactor
+    public void newupdate(Sprite target, ArrayList<Monster> monsters) {
+        if (!this.intersects(target)) {
             boolean doFixPosition;
 
-            //ustawienie kierunku renderu z uwzglednieniem predkosci
             double dx = this.getPositionX();
             double dy = this.getPositionY();
-
             double diffX = target.getPositionX() - dx;
             double diffY = target.getPositionY() - dy;
-
             float angle = (float) Math.atan2(diffY, diffX);
-
             dx += this.getVelocityX() * Math.cos(angle);
             dy += this.getVelocityY() * Math.sin(angle);
-
             this.setPosition(dx, dy);
 
-            //kolizje z graczem i innymi potworami
             for (Sprite m : monsters) {
 
                 doFixPosition = false;
@@ -94,7 +64,6 @@ public abstract class Monster extends Sprite {
 
                             //kolizja z dolem
                             if ((m.getBoundary().getMaxY() > this.getBoundary().getMinY()) && (m.getBoundary().getMinY() < this.getBoundary().getMinY()) && (m.intersects(this)) && (doFixPosition == false)) {
-
                                 dy = m.getBoundary().getMinY() + m.getHeight();
                                 doFixPosition = true;
                             }
@@ -106,7 +75,6 @@ public abstract class Monster extends Sprite {
 
                             //kolizja z gora
                             if ((m.getBoundary().getMinY() < this.getBoundary().getMaxY()) && (m.getBoundary().getMinY() > this.getBoundary().getMinY()) && (m.intersects(this)) && (doFixPosition == false)) {
-
                                 dy = m.getBoundary().getMinY() - m.getHeight();
                                 doFixPosition = true;
                             }
@@ -127,14 +95,12 @@ public abstract class Monster extends Sprite {
 
                             //kolizja z dolem
                             if ((m.getBoundary().getMaxY() > this.getBoundary().getMinY()) && (m.getBoundary().getMinY() < this.getBoundary().getMinY()) && (m.intersects(this)) && (doFixPosition == false)) {
-
                                 dy = m.getBoundary().getMinY() + m.getHeight();
                                 doFixPosition = true;
                             }
 
                             //kolizja z gora
                             if ((m.getBoundary().getMinY() < this.getBoundary().getMaxY()) && (m.getBoundary().getMinY() > this.getBoundary().getMinY()) && (m.intersects(this)) && (doFixPosition == false)) {
-
                                 dy = m.getBoundary().getMinY() - m.getHeight();
                                 doFixPosition = true;
                             }
@@ -145,19 +111,16 @@ public abstract class Monster extends Sprite {
 
                             //kolizja z gora
                             if ((m.getBoundary().getMinY() < this.getBoundary().getMaxY()) && (m.getBoundary().getMinY() > this.getBoundary().getMinY()) && (m.intersects(this)) && (doFixPosition == false)) {
-
                                 dy = m.getBoundary().getMinY() - m.getHeight();
                                 doFixPosition = true;
                             }
 
                             //kolizja z dolem
                             if ((m.getBoundary().getMaxY() > this.getBoundary().getMinY()) && (m.getBoundary().getMinY() < this.getBoundary().getMinY()) && (m.intersects(this)) && (doFixPosition == false)) {
-
                                 dy = m.getBoundary().getMinY() + m.getHeight();
                                 doFixPosition = true;
                             }
                         } else {
-
                             dx = m.getBoundary().getMinX() + m.getWidth();
                             doFixPosition = true;
                         }
@@ -188,49 +151,142 @@ public abstract class Monster extends Sprite {
         }
     }
 
-    public void setImageByPosition(Image left, Image right, Image bottom, Image top, Sprite ukasz) {
+    /////////////
+    public void update(Sprite target, ArrayList<Monster> monsters) {
+        if (!this.intersects(target)) {
+            updateByVelocity(target);
+            double dx = getPositionX();
+            double dy = getPositionY();
 
+            for (Monster m : monsters) {
+                if (this != m) {
+                    if (m.intersects(this)) {
+                        //nad lub pod
+                        if (this.underOrAboveTarget(m)) { //todo: zrobic poziomami wysokosc
+                            if (this.exactlyAboveTarget(m)) { //todo: zrobic jesli nad i pod. jesli pod to dac w prawo lub lewo (pionami)
+                                dy += this.getBoundary().getMinY() - this.getHeight();
+                            } else dy += this.getBoundary().getMinY() + this.getHeight();
+                        }
+                        //po bokach
+                        else {  //todo: zrobic jesli z boku to w gore albo w dol niech leci (poziomami)
+                            //dy += this.getBoundary().getMinY() - this.getHeight();
+//                        //na lewo
+//                        if (this.leftSideToTarget(m) && m.intersects(this)) {
+//
+//                        }
+//
+//                        //na prawo
+//                        else {
+//
+//                        }
+                        }
+                        this.setPosition(dx, dy);
+                        return;
+                    }
+
+                }
+            }
+        }
+    }
+
+    private void updateByVelocity(Sprite target) {
+        double dx = this.getPositionX();
+        double dy = this.getPositionY();
+        double diffX = target.getPositionX() - dx;
+        double diffY = target.getPositionY() - dy;
+        float angle = (float) Math.atan2(diffY, diffX);
+
+        dx += this.getVelocityX() * Math.cos(angle);
+        dy += this.getVelocityY() * Math.sin(angle);
+        this.setPosition(dx, dy);
+    }
+
+    ////////
+    public void setImageByPosition(Image left, Image right, Image bottom, Image top, Sprite target) {
+        if (rightSideToTarget(target))
+            this.setActualImage(left);
+        else this.setActualImage(right);
+
+        if (underOrAboveTarget(target)) {
+            if (exactlyAboveTarget(target))
+                this.setActualImage(bottom);
+            else this.setActualImage(top);
+        }
+    }
+
+    private boolean rightSideToTarget(Sprite target) {
+        double monsterMinX = this.getBoundary().getMinX();
+        if (monsterMinX + 0.1 * monsterMinX > target.getBoundary().getMaxX())
+            return true;
+
+        return false;
+    }
+
+    private boolean leftSideToTarget(Sprite target) {
+        double monsterMaxX = this.getBoundary().getMaxX();
+        if (monsterMaxX + 0.1 * monsterMaxX < target.getBoundary().getMinX())
+            return true;
+
+        return false;
+    }
+
+    private boolean underOrAboveTarget(Sprite target) {
+        double monsterMinX = this.getBoundary().getMinX();
+        double monsterMaxX = this.getBoundary().getMaxX();
+
+        if ((monsterMinX > target.getBoundary().getMinX()) && (monsterMaxX < target.getBoundary().getMaxX()))
+            return true;
+
+        return false;
+    }
+
+    private boolean exactlyAboveTarget(Sprite target) {
         double monsterMinX = this.getBoundary().getMinX();
         double monsterMaxX = this.getBoundary().getMaxX();
         double monsterMaxY = this.getBoundary().getMaxY();
 
-        if (monsterMinX + 0.1 * monsterMinX > ukasz.getBoundary().getMaxX())
-            this.setActualImage(left);
-        else this.setActualImage(right);
+        if (underOrAboveTarget(target))
+            if (monsterMaxY - 0.15 * monsterMaxY < target.getBoundary().getMinY())
+                return true;
 
-        //jesli potwor doklanie nad/pod graczem
-        if ((monsterMinX > ukasz.getBoundary().getMinX()) && (monsterMaxX < ukasz.getBoundary().getMaxX())) {
-
-            //ustawiona w dol
-            if (monsterMaxY - 0.15 * monsterMaxY < ukasz.getBoundary().getMinY())
-                this.setActualImage(bottom);
-            else this.setActualImage(top);
-        }
+        return false;
     }
 
     public void kickPlayer(Player p) {
         kickMethod.kickPlayerByMonsterPostion(this, p, getManager());
     }
 
-    public abstract void isDeadAction();
-
-    public abstract void isHitAction();
-
-    public abstract void missHitAction();
-
-    public void defaultIsDeadAction(double soundsVolume) {
+    protected void defaultIsDeadAction(double soundsVolume) {
         getDeathSound().playSound(soundsVolume, false);
     }
 
-    public void defaultIsHitAction(double soundsVolume) {
+    protected void defaultIsHitAction(double soundsVolume) {
         getHitSound().playSound(soundsVolume, false);
     }
 
-    public void defaultMissHitAction(double soundsVolume) {
+    protected void defaultMissHitAction(double soundsVolume) {
         getMissSound().playSound(soundsVolume, false);
     }
 
     public boolean isDead() {
         return (getLives() <= 0);
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public void setHowManyLivesTake(double howManyLivesTake) {
+        this.howManyLivesTake = howManyLivesTake;
+    }
+
+    public void setHowBigKickSize(double howBigKickSize) {
+        this.howBigKickSize = howBigKickSize;
+    }
+
+    public double getHowBigKickSize() {
+        return howBigKickSize;
+    }
+
+    public double getHowManyLivesTake() {
+        return howManyLivesTake;
+    }
+
 }

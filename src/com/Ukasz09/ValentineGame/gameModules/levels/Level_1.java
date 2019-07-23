@@ -32,7 +32,7 @@ public class Level_1 extends Levels {
     private final int howManySmallCoins = 8;
     private final int smallCoinValue = 50;
     private final int normalCoinValue = 100;
-    private final int howManyLittleMonsters = 1;
+    private final int howManyLittleMonsters = 4;
     private final int howManyAllMonsters = howManyLittleMonsters;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

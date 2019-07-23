@@ -198,7 +198,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
                 ShotSprite shot = shotIterator.next();
                 //monster is hitted
                 if (monster.intersects(shot)) {
-                    if (!monster.haveShieldActive()) {
+                    if (!monster.shieldIsActive()) {
                         shot.hitMonster(monster);
                         if (monster.isDead()) {
                             monster.isDeadAction();
@@ -215,9 +215,9 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     private void checkIntersectsWithMonsters(ArrayList<Monster> monsters) {
         for (Monster m : monsters) {
-            if (this.intersectsWithMonster(m)) {
-                if (!haveShieldActive()) {
-                    if (m.doKickPlayer())
+            if (this.intersects(m)) {
+                if (!shieldIsActive()) {
+                    if (m.kickAfterHit())
                         m.kickPlayer(this);
 
                     removeLives(m.getHowManyLivesTake());
@@ -305,14 +305,14 @@ public class Player extends Sprite implements ShieldKindOfRender {
         else setActualImage(playerRightImage);
     }
 
+    private void playRandomHitSound() {
+        getRandomHitSound().playSound(DEFAULT_HIT_SOUND_VOLUME, false);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private SoundsPlayer getRandomHitSound() {
         int random = (int) (Math.random() * playerHitSounds.length);
         return playerHitSounds[random];
-    }
-
-    public void playRandomHitSound() {
-        getRandomHitSound().playSound(DEFAULT_HIT_SOUND_VOLUME, false);
     }
 
     public static int getDefaultVelocity() {

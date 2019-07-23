@@ -1,15 +1,11 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
-import java.util.ArrayList;
-
 public abstract class Sprite {
-
     private Image actualImage;
     private double positionX;
     private double positionY;
@@ -17,7 +13,6 @@ public abstract class Sprite {
     private double velocityY;
     private double width;
     private double height;
-
     protected double lives;
     protected double maxLives;
     private int protectionTime;
@@ -41,8 +36,68 @@ public abstract class Sprite {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Settery */
+    public boolean shieldIsActive() {
+        if (getProtectionTime() <= 0) return false;
 
+        return true;
+    }
+
+    public void update(double time) {
+        positionX += velocityX * time;
+        positionY += velocityY * time;
+    }
+
+    public void render() {
+        manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
+        //manager.getGraphicContext().fillRect(positionX,positionY,getWidth(),getHeight());
+    }
+
+    public Rectangle2D getBoundary() {
+        return new Rectangle2D(positionX, positionY, width, height);
+    }
+
+    public boolean intersects(Sprite s) {
+        return (s.getBoundary().intersects(this.getBoundary()));
+    }
+
+    public void addPositionX(double offset) {
+        positionX += offset;
+    }
+
+    public void addPositionY(double offset) {
+        positionY += offset;
+    }
+
+    public void removeLives(double howMany) {
+        lives -= howMany;
+    }
+
+    public void removeProtectionTime(int value) {
+        protectionTime -= value;
+    }
+
+    public boolean boundaryCollisionFromLeftSide(double atLeftBorder) {
+        if ((this.getBoundary().getMinX()) <= atLeftBorder) return true;
+        else return false;
+    }
+
+    public boolean boundaryCollisionFromRightSide(double atRightBorder) {
+        if ((this.getBoundary().getMaxX()) >= atRightBorder) return true;
+        else return false;
+    }
+
+    public boolean boundaryCollisionFromBottom(double atBottomBorder) {
+        if ((this.getBoundary().getMaxY()) >= atBottomBorder) return true;
+        else return false;
+
+    }
+
+    public boolean boundaryCollisionFromTop(double atTopBorder) {
+        if ((this.getBoundary().getMinY()) <= atTopBorder) return true;
+        else return false;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setActualImage(Image actualImage) {
         this.actualImage = actualImage;
     }
@@ -80,15 +135,10 @@ public abstract class Sprite {
         this.missSound = missSound;
     }
 
-    public void setMaxLives(double maxLives) {
-        this.maxLives = maxLives;
-    }
-
     public void setProtectionTime(int protectionTime) {
         this.protectionTime = protectionTime;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public ViewManager getManager() {
         return manager;
     }
@@ -144,87 +194,4 @@ public abstract class Sprite {
     public int getProtectionTime() {
         return protectionTime;
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Metody */
-
-    public boolean haveShieldActive(){
-        if (getProtectionTime()<=0) return false;
-
-        return true;
-    }
-
-    public void update(double time) {
-
-        positionX += velocityX * time;
-        positionY += velocityY * time;
-    }
-
-    public void render() {
-        manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
-        //manager.getGraphicContext().fillRect(positionX,positionY,getWidth(),getHeight());
-    }
-
-    //pobiera prostokat do ustalania kolizji
-    public Rectangle2D getBoundary() {
-
-        return new Rectangle2D(positionX, positionY, width, height);
-    }
-//
-//    //pobiera pomniejszony prostokat (korekta do nie nachodzenia na siebie postaci, lepszego lapania hita przez potwora)
-//    public Rectangle2D getBoundaryForMonster() {
-//
-//        return new Rectangle2D(positionX + 40, positionY + 40, width - 40, height - 40);
-//    }
-
-    public boolean intersects(Sprite s) {
-
-        return (s.getBoundary().intersects(this.getBoundary()));
-    }
-
-    //todo: zmienic
-    //zwraca kolizyjnosc ze zmniejszonymi granicami obrazka
-    public boolean intersectsWithMonster(Sprite s) {
-
-        return (s.getBoundary().intersects(this.getBoundary()));
-    }
-
-    public void addPositionX(double offset) {
-        positionX += offset;
-    }
-
-    public void addPositionY(double offset) {
-        positionY += offset;
-    }
-
-    public void removeLives(double howMany) {
-
-        lives -= howMany;
-    }
-
-    public void removeProtectionTime(int value) {
-        protectionTime -= value;
-    }
-
-    public boolean boundaryCollisionFromLeftSide(double atLeftBorder) {
-        if ((this.getBoundary().getMinX()) <= atLeftBorder) return true;
-        else return false;
-    }
-
-    public boolean boundaryCollisionFromRightSide(double atRightBorder) {
-        if ((this.getBoundary().getMaxX()) >= atRightBorder) return true;
-        else return false;
-    }
-
-    public boolean boundaryCollisionFromBottom(double atBottomBorder) {
-        if ((this.getBoundary().getMaxY()) >= atBottomBorder) return true;
-        else return false;
-
-    }
-
-    public boolean boundaryCollisionFromTop(double atTopBorder) {
-        if ((this.getBoundary().getMinY()) <= atTopBorder) return true;
-        else return false;
-    }
-
 }
