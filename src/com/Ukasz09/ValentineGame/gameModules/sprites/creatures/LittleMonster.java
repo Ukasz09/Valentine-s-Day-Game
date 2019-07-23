@@ -15,7 +15,7 @@ public class LittleMonster extends Monster{
     private final double hitSoundVolume=1;
 
     private final double howManyLivesTake=0.5;
-    private final int howBigKickSize=200;
+    private final int howBigKickSize=0;
     private final double velocityX=1;
     private final double velocityY=1;
 

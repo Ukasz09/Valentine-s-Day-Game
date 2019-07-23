@@ -50,7 +50,12 @@ public abstract class Monster extends Sprite {
     //todo: dodac pozniej
 //    public abstract void checkCollision(ArrayList<MoneyBag> moneyBagsList, ArrayList<Monster> monsters);
 
-    //podazanie za celem z ustalona predkoscia
+    public boolean doKickPlayer() {
+        if (howBigKickSize > 0) return true;
+
+        return false;
+    }
+
     public void update(Sprite target, ArrayList<Monster> monsters) {
 
         //jesli nie dopadly juz gracza/celu
@@ -213,25 +218,19 @@ public abstract class Monster extends Sprite {
 
     public abstract void missHitAction();
 
-    public boolean haveShieldActive(){
-        if (getProtectionTime()<=0) return false;
-
-        return true;
+    public void defaultIsDeadAction(double soundsVolume) {
+        getDeathSound().playSound(soundsVolume, false);
     }
 
-    public void defaultIsDeadAction(double soundsVolume){
-        getDeathSound().playSound(soundsVolume,false);
-    }
-
-    public void defaultIsHitAction(double soundsVolume){
+    public void defaultIsHitAction(double soundsVolume) {
         getHitSound().playSound(soundsVolume, false);
     }
 
-    public void defaultMissHitAction(double soundsVolume){
+    public void defaultMissHitAction(double soundsVolume) {
         getMissSound().playSound(soundsVolume, false);
     }
 
-    public boolean isDead(){
+    public boolean isDead() {
         return (getLives() <= 0);
     }
 }

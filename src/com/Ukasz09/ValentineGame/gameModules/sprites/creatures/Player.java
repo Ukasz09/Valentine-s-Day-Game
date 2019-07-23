@@ -21,34 +21,36 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Player extends Sprite implements ShieldKindOfRender {
-    private ArrayList<ShotSprite> shotsList;
-
-    private static final int DEFAULT_VELOCITY = 700;
-    private static final int DEFAULT_LIVES = 5;
-    private static final int DEFAULT_SHIELD_DURATION = 7500;
-    private static final int DEFAULT_BATTERY_OVERHEATING_REDUCE = 50;
-    private static final int DEFAULT_BULLET_OVERHEATING_REDUCE = 50;
-
+    public static final int DEFAULT_VELOCITY = 700;
+    public static final int DEFAULT_LIVES = 5;
+    public static final int DEFAULT_SHIELD_DURATION = 7500;
+    public static final int DEFAULT_BATTERY_OVERHEATING_REDUCE = 50;
+    public static final int DEFAULT_BULLET_OVERHEATING_REDUCE = 50;
+    public static final int DEFAULT_ANTICOLLISION_TIMER = 4000;
+    public static final double DEFAULT_HIT_SOUND_VOLUME = 1;
     private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
     private static final Image PLAYER_LEFT_IMAGE = SpritesImages.playerLeftImage;
     private static final Image PLAYER_SHIELD_IMAGE = SpritesImages.playerShieldImage;
 
-    public static Image playerRightImage;
-    public static Image playerLeftImage;
-
+    private Image playerRightImage;
+    private Image playerLeftImage;
+    private ArrayList<ShotSprite> shotsList;
     private Shield shield;
-    private SoundsPlayer[] playerHittedSound;
-    private String lastDirectionX;
-    private String lastDirectionY;
-    private int totalScore;
+    private SoundsPlayer[] playerHitSounds;
     private Image[] batteryImages = SpritesImages.getBatteryImages();
+    private String lastDirectionX;
+    private int totalScore;
     private double bombOverheating;
     private double bulletOverheating;
     private HeartsRender heartsRender;
     private int levelNumber;
-
     private int collectedMoneyBagsOnLevel;
     private int killedMonstersOnLevel;
+    private boolean collisionFromRightSide;
+    private boolean collisionFromLeftSide;
+    private boolean collisionFromUpSide;
+    private boolean collisionFromDownSide;
+    private int anticollisionTimer; //to avoid jammed
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
@@ -62,11 +64,12 @@ public class Player extends Sprite implements ShieldKindOfRender {
         shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage, this);
         lives = DEFAULT_LIVES;
         maxLives = DEFAULT_LIVES;
-        playerHittedSound = new SoundsPlayer[2];
-        playerHittedSound[0] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_PATH_1);
-        playerHittedSound[1] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_PATH_2);
+
+        playerHitSounds = new SoundsPlayer[2];
+        playerHitSounds[0] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_PATH_1);
+        playerHitSounds[1] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_PATH_2);
+
         lastDirectionX = "D";
-        lastDirectionY = "W";
         totalScore = 0;
         bombOverheating = 0;
         bulletOverheating = 0;
@@ -75,6 +78,11 @@ public class Player extends Sprite implements ShieldKindOfRender {
         killedMonstersOnLevel = 0;
         heartsRender = new InCorner(manager);
         shotsList = new ArrayList<>();
+
+        collisionFromLeftSide = false;
+        collisionFromRightSide = false;
+        collisionFromUpSide = false;
+        collisionFromDownSide = false;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,6 +102,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         updateShield();
         updateBattery();
         updateBulletOverheating();
+        updateAnticollisionTimer();
     }
 
     @Override
@@ -105,11 +114,11 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void addTotalScore(int score) {
+    private void addTotalScore(int score) {
         totalScore += score;
     }
 
-    public void updateShield() {
+    private void updateShield() {
         shield.updateShield();
     }
 
@@ -117,7 +126,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         shield.activateShield();
     }
 
-    public void renderBattery(GraphicsContext gc) {
+    private void renderBattery(GraphicsContext gc) {
         double overheatingPercents = bombOverheating / BombSprite.getMaxOverheating() * 100;
         double batteryPositionX = getManager().getLeftBorder();
         double batteryPositionY = getManager().getBottomBorder() - batteryImages[0].getHeight();
@@ -140,14 +149,14 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     }
 
-    public void updateBattery() {
+    private void updateBattery() {
         if (bombOverheating > 0)
             bombOverheating -= DEFAULT_BATTERY_OVERHEATING_REDUCE;
         else if (bombOverheating < 0)
             bombOverheating = 0;
     }
 
-    public void updateBulletOverheating() {
+    private void updateBulletOverheating() {
         if (bulletOverheating > 0)
             bulletOverheating -= DEFAULT_BULLET_OVERHEATING_REDUCE;
     }
@@ -161,11 +170,12 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     public void checkCollision(ArrayList<MoneyBag> moneyBagsList, ArrayList<Monster> monsters) {
-        intersectsWithMoneyBags(moneyBagsList);
-        shotsIntersectsWithMonsters(monsters);
+        checkIntersectsWithMoneyBags(moneyBagsList);
+        checksShotsIntersectsWithMonsters(monsters);
+        checkIntersectsWithMonsters(monsters);
     }
 
-    public void intersectsWithMoneyBags(ArrayList<MoneyBag> moneyBagsList) {
+    private void checkIntersectsWithMoneyBags(ArrayList<MoneyBag> moneyBagsList) {
         Iterator<MoneyBag> moneyBagIterator = moneyBagsList.iterator();
         while (moneyBagIterator.hasNext()) {
             MoneyBag moneybag = moneyBagIterator.next();
@@ -178,7 +188,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         }
     }
 
-    public void shotsIntersectsWithMonsters(ArrayList<Monster> monsters) {
+    private void checksShotsIntersectsWithMonsters(ArrayList<Monster> monsters) {
         Iterator<Monster> monstersIterator = monsters.iterator();
         while (monstersIterator.hasNext()) {
             Monster monster = monstersIterator.next();
@@ -203,18 +213,106 @@ public class Player extends Sprite implements ShieldKindOfRender {
         }
     }
 
+    private void checkIntersectsWithMonsters(ArrayList<Monster> monsters) {
+        for (Monster m : monsters) {
+            if (this.intersectsWithMonster(m)) {
+                if (!haveShieldActive()) {
+                    if (m.doKickPlayer())
+                        m.kickPlayer(this);
+
+                    removeLives(m.getHowManyLivesTake());
+                    playRandomHitSound();
+                    activateShield();
+                }
+                return; //to avoid to much hitt in one moment
+            }
+        }
+    }
+
+    public boolean collisionWithMonstersFromRightSide(ArrayList<Monster> monsters) {
+        for (Sprite m : monsters) {
+            if ((m.getBoundary().getMinX() < this.getBoundary().getMaxX()) && (m.getBoundary().getMaxX() > this.getBoundary().getMaxX()) && (this.intersects(m)))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean collisionWithMonstersFromLeftSide(ArrayList<Monster> monsters) {
+        for (Sprite m : monsters) {
+            if ((m.getBoundary().getMaxX() > this.getBoundary().getMinX()) && (m.getBoundary().getMinX() < this.getBoundary().getMinX()) && (this.intersects(m)))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean collisionWithMonstersFromTop(ArrayList<Monster> monsters) {
+        for (Sprite m : monsters) {
+            if ((m.getBoundary().getMinY() < this.getBoundary().getMaxY()) && (m.getBoundary().getMinY() > this.getBoundary().getMinY()) && (this.intersects(m)))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean collisionWithMonstersFromBottom(ArrayList<Monster> monsters, Sprite ukasz) {
+        for (Sprite m : monsters) {
+            if ((m.getBoundary().getMaxY() > ukasz.getBoundary().getMinY()) && (m.getBoundary().getMinY() < ukasz.getBoundary().getMinY()) && (m.intersects(ukasz)))
+                return true;
+        }
+        return false;
+    }
+
     public void clearShotsList() {
         shotsList.clear();
     }
 
-    public void addShot(ShotSprite shot){
+    public void addShot(ShotSprite shot) {
         shotsList.add(shot);
     }
 
+    private boolean playerCantDoAnyMove() {
+        if (collisionFromDownSide && collisionFromUpSide && collisionFromLeftSide && collisionFromRightSide)
+            return true;
+        else return false;
+    }
+
+    public boolean checkPlayerCanDoAnyMove() {
+        if (playerCantDoAnyMove()) {
+            restoreAnticollisionTimer();
+            return true;
+        }
+
+        return false;
+    }
+
+    private void restoreAnticollisionTimer() {
+        anticollisionTimer = DEFAULT_ANTICOLLISION_TIMER;
+    }
+
+    private void reduceAnticollisionTimer() {
+        anticollisionTimer -= 100;
+        if (anticollisionTimer < 0)
+            anticollisionTimer = 0;
+    }
+
+    private void updateAnticollisionTimer() {
+        if (anticollisionTimer > 0)
+            reduceAnticollisionTimer();
+    }
+
+    public void setProperActualImage() {
+        if (lastDirectionX.equals("A"))
+            setActualImage(playerLeftImage);
+        else setActualImage(playerRightImage);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public SoundsPlayer getUkaszRandomHitSound() {
-        int random = (int) (Math.random() * playerHittedSound.length);
-        return playerHittedSound[random];
+    private SoundsPlayer getRandomHitSound() {
+        int random = (int) (Math.random() * playerHitSounds.length);
+        return playerHitSounds[random];
+    }
+
+    public void playRandomHitSound() {
+        getRandomHitSound().playSound(DEFAULT_HIT_SOUND_VOLUME, false);
     }
 
     public static int getDefaultVelocity() {
@@ -231,10 +329,6 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public void setLastDirectionX(String lastDirectionX) {
         this.lastDirectionX = lastDirectionX;
-    }
-
-    public void setLastDirectionY(String lastDirectionY) {
-        this.lastDirectionY = lastDirectionY;
     }
 
     public void setShield(Shield shield) {
@@ -279,5 +373,21 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public ArrayList<ShotSprite> getShotsList() {
         return shotsList;
+    }
+
+    public void setCollisionFromRightSide(boolean collisionFromRightSide) {
+        this.collisionFromRightSide = collisionFromRightSide;
+    }
+
+    public void setCollisionFromLeftSide(boolean collisionFromLeftSide) {
+        this.collisionFromLeftSide = collisionFromLeftSide;
+    }
+
+    public void setCollisionFromUpSide(boolean collisionFromUpSide) {
+        this.collisionFromUpSide = collisionFromUpSide;
+    }
+
+    public void setCollisionFromDownSide(boolean collisionFromDownSide) {
+        this.collisionFromDownSide = collisionFromDownSide;
     }
 }

@@ -25,7 +25,7 @@ public class Level_1 extends Levels {
     private static final Image MONEY_BAG_IMAGE_2 = SpritesImages.moneyBagImage2;
     private static final Image BACKGROUND_IMAGE = BackgroundImages.backgroundImage1;
 
-    public static final SoundsPlayer BACKGROUND_SOUND=Sounds.backgroundSound;
+    public static final SoundsPlayer BACKGROUND_SOUND = Sounds.backgroundSound;
     public static final double BACKGROUND_SOUND_VOLUME = 0.1;
 
     private final int howManyMoneybags = 10;
@@ -54,8 +54,8 @@ public class Level_1 extends Levels {
 
     public void spawnLittleMonsters(ArrayList<Monster> monsters) {
 
-        for (int i = 0; i < getHowManyLittleMonsters(); i++){
-            LittleMonster m=new LittleMonster(LITTLE_MONSTER_IMAGE, new KickByLittleMonster(new TeleportKick()),getManager());
+        for (int i = 0; i < getHowManyLittleMonsters(); i++) {
+            LittleMonster m = new LittleMonster(LITTLE_MONSTER_IMAGE, new KickByLittleMonster(new TeleportKick()), getManager());
             monsters.add(m);
         }
 
@@ -86,12 +86,12 @@ public class Level_1 extends Levels {
 
     @Override
     public boolean isEnd(Player player) {
-      return defaultLevelIsEnd(player);
+        return defaultLevelIsEnd(player);
     }
 
     @Override
-    public void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, int score) {
-        defaultRenderLevel(monsters,moneyBags, shots, score,BACKGROUND_IMAGE);
+    public void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, Player player) {
+        defaultRenderLevel(monsters, moneyBags, shots, player.getTotalScore(), BACKGROUND_IMAGE);
     }
 
     @Override
@@ -108,8 +108,8 @@ public class Level_1 extends Levels {
     }
 
     @Override
-    public void playBackgroundSound(){
+    public void playBackgroundSound() {
         setBackgroundSound(BACKGROUND_SOUND);
-        Levels.playBackgroundSound(BACKGROUND_SOUND_VOLUME,true);
+        Levels.playBackgroundSound(BACKGROUND_SOUND_VOLUME, true);
     }
 }

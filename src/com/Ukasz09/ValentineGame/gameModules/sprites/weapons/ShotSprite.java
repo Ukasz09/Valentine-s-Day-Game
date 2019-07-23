@@ -1,6 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
@@ -31,6 +32,8 @@ public abstract class ShotSprite extends Sprite {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Metody */
+
+    public abstract void prepareToShot(Player player);
 
     public abstract void setPosition(Sprite sprite);
 

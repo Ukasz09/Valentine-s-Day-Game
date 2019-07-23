@@ -93,6 +93,12 @@ public class BombSprite extends ShotSprite {
         monster.removeLives(getHowManyLivesTake());
     }
 
+    @Override
+    public void prepareToShot(Player player) {
+        setPosition(player);
+        setVelocity(0, getShotVelocity());
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public SoundsPlayer getRandomBoomSound() {
         int random = (int) (Math.random() * bombBoomSound.length);

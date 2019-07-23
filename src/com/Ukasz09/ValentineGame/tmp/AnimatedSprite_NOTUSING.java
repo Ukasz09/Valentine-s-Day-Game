@@ -159,11 +159,11 @@ public class AnimatedSprite_NOTUSING {
         return (s.getBoundary().intersects(this.getBoundary()));
     }
 
-    //zwraca kolizyjnosc ze zmniejszonymi granicami obrazka
-    public boolean intersectsWithMonster(Sprite s){
-
-        return (s.getBoundaryForMonster().intersects(this.getBoundary()));
-    }
+//    //zwraca kolizyjnosc ze zmniejszonymi granicami obrazka
+//    public boolean intersectsWithMonster(Sprite s){
+//
+//        return (s.getBoundaryForMonster().intersects(this.getBoundary()));
+//    }
 
     public void addPositionX(double offset){
         positionX+=offset;

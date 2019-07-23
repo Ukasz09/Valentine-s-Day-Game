@@ -18,7 +18,6 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
-import com.Ukasz09.ValentineGame.gameModules.utilitis.wrappers.IntValue;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.wrappers.LongValue;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 
@@ -33,36 +32,26 @@ public class Game extends Application {
     private ArrayList<MoneyBag> moneybagList;
     private ArrayList<Monster> monstersList;
     private ArrayList<String> inputsList;
-    // private ArrayList<ShotSprite> shotsList;
 
     private double elapsedTime;
     private LongValue lastNanoTime;
 
     private Levels actualLevel;
     private Panels actualPanel;
-    private IntValue antiCollisionTimer;     //czas w jakim gracz moze przelatywac przez potwory (zapobiega zablokowaniu ruchu gracza)
-    // private IntValue killedMonstersOnLevel;
-    //private IntValue collectedMoneybags; //todo: wrzucic do playera
 
     private Player player;
-    private ShotSprite playerShotSprite;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
         manager = new ViewManager(); //do NOT touch
         lastNanoTime = new LongValue(System.nanoTime());
         player = new Player(SpritesImages.playerRightImage, SpritesImages.playerLeftImage, SpritesImages.playerShieldImage, manager);
-        //collectedMoneybags = new IntValue(0);
-        //  killedMonstersOnLevel = new IntValue(0);
-
         inputsList = new ArrayList<>();
-        // shotsList = new ArrayList<>();
         moneybagList = new ArrayList<>();
         monstersList = new ArrayList<>();
-
-        antiCollisionTimer = new IntValue(0); //todo: wrzucic do playera
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void start(Stage theStage) {
         manager.initialize("Valentines Game", true); //do NOT touch
@@ -88,7 +77,6 @@ public class Game extends Application {
                             actualPanel = null;
                             startGame(1);
                         }
-
                     }
                     break;
 
@@ -96,7 +84,7 @@ public class Game extends Application {
                         if (!actualLevel.isEnd(player))
                             play(currentNanoTime, actualLevel);
                         else {
-                            endLevel(actualLevel);
+                            endLevel();
                             actualLevel = new Level_2(manager);
                             actualLevel.makeLevel(moneybagList, monstersList);
                         }
@@ -104,13 +92,10 @@ public class Game extends Application {
                     break;
 
                     case 2: {
-                        if (!actualLevel.isEnd(player)) {
-                            if (((Level_2) actualLevel).needToSpawnMiniboss(player.getCollectedMoneyBagsOnLevel(), monstersList.isEmpty()))
-                                ((Level_2) actualLevel).spawnMiniboss(monstersList);
-
+                        if (!actualLevel.isEnd(player))
                             play(currentNanoTime, actualLevel);
-                        } else {
-                            endLevel(actualLevel);
+                        else {
+                            endLevel();
                             actualLevel = null;
                             actualPanel = new EndPanel(manager);
                             actualPanel.makePanel();
@@ -140,106 +125,83 @@ public class Game extends Application {
 
     private void checkPlayerMove(int velocity) {
         player.setVelocity(0, 0);
-        boolean playerCantDoAnyMove = Collision.collisionFromAllDirection(monstersList, player, manager);
-
-        if (playerCantDoAnyMove)
-            antiCollisionTimer.setValue(Collision.getDefaultAntiCollisionsTimer());
 
         if (inputsList.contains("A")) {
+            if (!player.boundaryCollisionFromLeftSide(manager.getLeftBorder())) {
+                player.setLastDirectionX("A"); //must be before setting image
+                player.setProperActualImage();
 
-            //kolizja z ramka
-            if (!player.boundaryCollisionFromLeft(manager.getLeftBorder())) {
-                player.setActualImage(player.playerLeftImage);
-                player.setLastDirectionX("A");
-
-                if ((Collision.collisionWithMonstersFromRight(monstersList, player) == false) || (antiCollisionTimer.getValue() > 0))
+                if ((!player.collisionWithMonstersFromLeftSide(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(-velocity, 0);
-            }
+                    player.setCollisionFromLeftSide(false);
+                } else player.setCollisionFromLeftSide(true);
+            } else player.setCollisionFromLeftSide(true);
         }
 
         if (inputsList.contains("D")) {
-
-            //kolizja z ramka
-            if (!player.boundaryCollisionFromRight(manager.getRightBorder())) {
-                player.setActualImage(player.playerRightImage);
+            if (!player.boundaryCollisionFromRightSide(manager.getRightBorder())) {
                 player.setLastDirectionX("D");
+                player.setProperActualImage();
 
-                if ((Collision.collisionWithMonstersFromLeft(monstersList, player) == false) || (antiCollisionTimer.getValue() > 0))
+                if ((!player.collisionWithMonstersFromRightSide(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(velocity, 0);
-            }
+                    player.setCollisionFromRightSide(false);
+                } else player.setCollisionFromRightSide(true);
+            } else player.setCollisionFromRightSide(true);
         }
 
         if (inputsList.contains("W")) {
-
-            //kolizja z ramka
             if (!player.boundaryCollisionFromTop(manager.getTopBorder())) {
-                player.setLastDirectionY("W");
 
-                if ((Collision.collisionWithMonstersFromBottom(monstersList, player) == false) || (antiCollisionTimer.getValue() > 0))
+                if ((!player.collisionWithMonstersFromBottom(monstersList, player)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(0, -velocity);
-            }
+                    player.setCollisionFromUpSide(false);
+                } else player.setCollisionFromUpSide(true);
+            } else player.setCollisionFromUpSide(true);
         }
 
         if (inputsList.contains("S")) {
-
-            //kolizja z ramka
             if (!player.boundaryCollisionFromBottom(manager.getBottomBorder())) {
-                player.setLastDirectionY("W");
 
-                if ((Collision.collisionWithMonstersFromTop(monstersList, player) == false) || (antiCollisionTimer.getValue() > 0))
+                if ((!player.collisionWithMonstersFromTop(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(0, velocity);
-            }
+                    player.setCollisionFromDownSide(false);
+                } else player.setCollisionFromDownSide(true);
+            } else player.setCollisionFromDownSide(true);
         }
 
-        //dla dzialka
         if (inputsList.contains("SPACE")) {
-
             if (player.getBulletOverheating() <= 0) {
+                ShotSprite shotSprite = new BulletSprite(player.getLastDirectionX(), manager);
+                shotSprite.prepareToShot(player);
 
-                playerShotSprite = new BulletSprite(player.getLastDirectionX(), manager);
-                playerShotSprite.setPosition(player);
-                playerShotSprite.setVelocity(playerShotSprite.getShotVelocity(), 0);
-
-                player.addShot(playerShotSprite);
-                playerShotSprite.playShotSound();
+                player.addShot(shotSprite);
+                shotSprite.playShotSound();
                 player.overheatBullet();
             }
         }
 
-        //Dla bomby
         if (inputsList.contains("P")) {
-
             if (player.getBombOverheating() <= 0) {
+                ShotSprite shotSprite = new BombSprite(manager);
+                shotSprite.prepareToShot(player);
 
-                playerShotSprite = new BombSprite(manager);
-                playerShotSprite.setPosition(player);
-                playerShotSprite.setVelocity(0, playerShotSprite.getShotVelocity());
-
-                player.addShot(playerShotSprite);
-                playerShotSprite.playShotSound();
+                player.addShot(shotSprite);
+                shotSprite.playShotSound();
                 player.overheatBomb();
             }
         }
     }
 
     private boolean playerReadyToGame() {
-
         if (inputsList.contains("ENTER")) return true;
         else return false;
     }
 
     private void play(long currentNanoTime, Levels level) {
         calculateTime(currentNanoTime);
-        player.checkCollision(moneybagList,monstersList);
-//        Collision.checkMoneybagsCollisions(moneybagList, player);
-
-        level.renderLevel(monstersList, moneybagList, player.getShotsList(), player.getTotalScore());
-
-        if (antiCollisionTimer.getValue() > 0)
-            antiCollisionTimer.decValue(100);
-
-        Collision.playerCollisionWithMonster(monstersList, player);
-
+        player.checkCollision(moneybagList, monstersList);
+        level.renderLevel(monstersList, moneybagList, player.getShotsList(), player);
         checkPlayerMove(Player.getDefaultVelocity());
         player.update(elapsedTime);
         player.render();
@@ -254,12 +216,9 @@ public class Game extends Application {
     }
 
     private void prepareGame(Levels startLevel) {
-//        score = new IntValue(0);
         double playerPositionX = startLevel.playerStartPosition().getX();
         double playerPositionY = startLevel.playerStartPosition().getY();
         player.setPosition(playerPositionX, playerPositionY);
-//        collectedMoneybags.setValue(0);
-//        playerShotsList.clear();
         startLevel.makeLevel(moneybagList, monstersList);
         startLevel.playBackgroundSound();
         Levels.playWingsSound();
@@ -268,12 +227,11 @@ public class Game extends Application {
     private Levels chooseLevel(int levelNumber) {
         player.setLevelNumber(levelNumber);
         switch (levelNumber) {
-            case 1: {
+            case 1:
                 return new Level_1(manager);
-            }
-            case 2: {
+
+            case 2:
                 return new Level_2(manager);
-            }
 
             default: {
                 player.setLevelNumber(1);
@@ -288,9 +246,7 @@ public class Game extends Application {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public static void main(String[] args) {
-
         Game gameTest = new Game();
         launch(args);
     }

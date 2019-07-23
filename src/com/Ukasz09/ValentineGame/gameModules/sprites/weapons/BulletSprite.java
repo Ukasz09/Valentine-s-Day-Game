@@ -1,6 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
@@ -77,6 +78,12 @@ public class BulletSprite extends ShotSprite {
     @Override
     public void hitMonster(Monster monster) {
         monster.removeLives(getHowManyLivesTake());
+    }
+
+    @Override
+    public void prepareToShot(Player player) {
+        setPosition(player);
+        setVelocity(getShotVelocity(), 0);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -116,8 +116,10 @@ public class Level_2 extends Levels {
     }
 
     @Override
-    public void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, int score) {
-        defaultRenderLevel(monsters,moneyBags,shots,score,BACKGROUND_IMAGE);
+    public void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, Player player) {
+        defaultRenderLevel(monsters, moneyBags, shots, player.getTotalScore(), BACKGROUND_IMAGE);
+        if (needToSpawnMiniboss(player.getCollectedMoneyBagsOnLevel(), monsters.isEmpty()))
+            spawnMiniboss(monsters);
     }
 
     @Override

@@ -83,8 +83,6 @@ public abstract class Levels {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Gettery */
-
     public int getHowManyMoneybags() {
         return howManyMoneybags;
     }
@@ -102,8 +100,6 @@ public abstract class Levels {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Metody */
-
     public boolean defaultLevelIsEnd(Player player) {
         if ((player.getCollectedMoneyBagsOnLevel() < getHowManyMoneybags()) || (player.getKilledMonstersOnLevel() < getHowManyAllMonsters()))
             return false;
@@ -150,7 +146,7 @@ public abstract class Levels {
 
     public abstract void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters);
 
-    public abstract void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, int score);
+    public abstract void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, Player player);
 
     public abstract Point2D playerStartPosition();
 
@@ -171,9 +167,6 @@ public abstract class Levels {
     }
 
     public abstract boolean isEnd(Player player);
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     protected void drawBackground(GraphicsContext gc, Image backgroundImage) {

@@ -148,7 +148,11 @@ public abstract class Sprite {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Metody */
 
+    public boolean haveShieldActive(){
+        if (getProtectionTime()<=0) return false;
 
+        return true;
+    }
 
     public void update(double time) {
 
@@ -158,7 +162,7 @@ public abstract class Sprite {
 
     public void render() {
         manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
-        //gc.fillRect(positionX,positionY,getWidth(),getHeight());
+        //manager.getGraphicContext().fillRect(positionX,positionY,getWidth(),getHeight());
     }
 
     //pobiera prostokat do ustalania kolizji
@@ -166,22 +170,23 @@ public abstract class Sprite {
 
         return new Rectangle2D(positionX, positionY, width, height);
     }
-
-    //pobiera pomniejszony prostokat (korekta do nie nachodzenia na siebie postaci, lepszego lapania hita przez potwora)
-    public Rectangle2D getBoundaryForMonster() {
-
-        return new Rectangle2D(positionX + 40, positionY + 40, width - 40, height - 40);
-    }
+//
+//    //pobiera pomniejszony prostokat (korekta do nie nachodzenia na siebie postaci, lepszego lapania hita przez potwora)
+//    public Rectangle2D getBoundaryForMonster() {
+//
+//        return new Rectangle2D(positionX + 40, positionY + 40, width - 40, height - 40);
+//    }
 
     public boolean intersects(Sprite s) {
 
         return (s.getBoundary().intersects(this.getBoundary()));
     }
 
+    //todo: zmienic
     //zwraca kolizyjnosc ze zmniejszonymi granicami obrazka
     public boolean intersectsWithMonster(Sprite s) {
 
-        return (s.getBoundaryForMonster().intersects(this.getBoundary()));
+        return (s.getBoundary().intersects(this.getBoundary()));
     }
 
     public void addPositionX(double offset) {
@@ -201,12 +206,12 @@ public abstract class Sprite {
         protectionTime -= value;
     }
 
-    public boolean boundaryCollisionFromLeft(double atLeftBorder) {
+    public boolean boundaryCollisionFromLeftSide(double atLeftBorder) {
         if ((this.getBoundary().getMinX()) <= atLeftBorder) return true;
         else return false;
     }
 
-    public boolean boundaryCollisionFromRight(double atRightBorder) {
+    public boolean boundaryCollisionFromRightSide(double atRightBorder) {
         if ((this.getBoundary().getMaxX()) >= atRightBorder) return true;
         else return false;
     }
