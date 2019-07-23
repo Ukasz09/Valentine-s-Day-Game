@@ -129,10 +129,8 @@ public class Game extends Application {
         theStage.show();
     }
 
-    //ustawia odpowiednio zmienne przed rozpoczeciem nowego levelu
-    private void endLevel(Levels level) {
+    private void endLevel() {
         player.setNextLevel();
-        //collectedMoneybags.setValue(0);
         player.setCollectedMoneyBagsOnLevel(0);
         player.setKilledMonstersOnLevel(0);
         moneybagList.clear();
@@ -141,7 +139,6 @@ public class Game extends Application {
     }
 
     private void checkPlayerMove(int velocity) {
-
         player.setVelocity(0, 0);
         boolean playerCantDoAnyMove = Collision.collisionFromAllDirection(monstersList, player, manager);
 

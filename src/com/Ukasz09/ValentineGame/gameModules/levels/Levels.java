@@ -144,7 +144,6 @@ public abstract class Levels {
     }
 
     public void updateMonsters(Sprite target, ArrayList<Monster> monsters) {
-
         for (Monster m : monsters)
             m.update(target, monsters);
     }

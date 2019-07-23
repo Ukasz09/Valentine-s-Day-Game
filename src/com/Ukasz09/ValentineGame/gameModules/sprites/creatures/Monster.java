@@ -47,7 +47,7 @@ public abstract class Monster extends Sprite {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Metody */
 
-    //todo: dodac potem abstract check collision
+    //todo: dodac pozniej
 //    public abstract void checkCollision(ArrayList<MoneyBag> moneyBagsList, ArrayList<Monster> monsters);
 
     //podazanie za celem z ustalona predkoscia

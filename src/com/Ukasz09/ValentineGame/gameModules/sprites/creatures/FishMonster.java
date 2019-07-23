@@ -12,6 +12,8 @@ public class FishMonster extends Monster {
 
     private final String hitSoundPath= SoundsPath.FISH_MONSTER_HIT_SOUND_PATH;
     private final String deathSoundPath=SoundsPath.FISH_MONSTER_DEATH_SOUND_PATH;
+    private final double defaultDeathVolume=1;
+    private final double defaultHitVolume=1;
 
     private final double howManyLivesTake=0.5;
     private final int howBigKickSize=0;
@@ -48,5 +50,20 @@ public class FishMonster extends Monster {
 
         super.update(ukasz, monsters);
         setImageByPosition(imageLeft,imageRight,imageBottom,imageTop,ukasz);
+    }
+
+    @Override
+    public void isDeadAction() {
+        defaultIsDeadAction(defaultDeathVolume);
+    }
+
+    @Override
+    public void isHitAction() {
+        defaultIsHitAction(defaultHitVolume);
+    }
+
+    @Override
+    public void missHitAction() {
+        //nothing
     }
 }

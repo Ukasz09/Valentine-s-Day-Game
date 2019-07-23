@@ -19,6 +19,10 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     private final String deathSoundPath = SoundsPath.FISH_MINIBOSS_DEATH_SOUND_PATH;
     private final String missSoundPath = SoundsPath.FISH_MONSTER_MISS_SHOT_SOUND_PATH;
 
+    private final double deathSoundVolume=1;
+    private final double hitSoundVolume=1;
+    private final double missSoundVolume=1;
+
     private final double howManyLivesTake = 1.5;
     private final int howBigKickSize = 150;
     private final double maxLive = 20;
@@ -120,6 +124,21 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
 
             gc.drawImage(shield.getShieldImage(), centerPositionX, centerPositionY);
         }
+    }
+
+    @Override
+    public void isDeadAction() {
+        defaultIsDeadAction(deathSoundVolume);
+    }
+
+    @Override
+    public void isHitAction() {
+        defaultIsHitAction(hitSoundVolume);
+    }
+
+    @Override
+    public void missHitAction() {
+        defaultMissHitAction(missSoundVolume);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
