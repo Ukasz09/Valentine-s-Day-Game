@@ -1,9 +1,12 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
+
+import java.util.ArrayList;
 
 public abstract class Sprite {
 
@@ -144,6 +147,8 @@ public abstract class Sprite {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Metody */
+
+
 
     public void update(double time) {
 

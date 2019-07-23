@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
@@ -103,6 +104,12 @@ public abstract class Levels {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Metody */
 
+    public boolean defaultLevelIsEnd(Player player) {
+        if ((player.getCollectedMoneyBagsOnLevel() < getHowManyMoneybags()) || (player.getKilledMonstersOnLevel() < getHowManyAllMonsters()))
+            return false;
+        else return true;
+    }
+
     public void makeMoneyBags(ArrayList<MoneyBag> moneybagList) {
 
         for (int i = 0; i < howManyMoneybags; i++) {
@@ -144,8 +151,6 @@ public abstract class Levels {
 
     public abstract void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters);
 
-    public abstract void endLevel();
-
     public abstract void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, int score);
 
     public abstract Point2D playerStartPosition();
@@ -165,6 +170,9 @@ public abstract class Levels {
         renderScoreText(score);
         renderShots(shots);
     }
+
+    public abstract boolean isEnd(Player player);
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -201,7 +209,7 @@ public abstract class Levels {
             ShotSprite shot = shotsIterator.next();
             shot.update(elapsedTime);
 
-            if (shot.isOutOfBoundary()){
+            if (shot.isOutOfBoundary()) {
                 shot.doOutOfBoundaryAction();
                 shotsIterator.remove();
             }

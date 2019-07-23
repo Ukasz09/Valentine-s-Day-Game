@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.LittleMonster;
@@ -84,8 +85,8 @@ public class Level_1 extends Levels {
     }
 
     @Override
-    public void endLevel() {
-        //nothing to do
+    public boolean isEnd(Player player) {
+      return defaultLevelIsEnd(player);
     }
 
     @Override

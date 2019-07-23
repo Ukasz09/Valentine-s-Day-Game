@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
@@ -44,4 +45,6 @@ public abstract class ShotSprite extends Sprite {
     public abstract boolean isOutOfBoundary();
 
     public abstract void doOutOfBoundaryAction();
+
+    public abstract void hitMonster(Monster monster);
 }

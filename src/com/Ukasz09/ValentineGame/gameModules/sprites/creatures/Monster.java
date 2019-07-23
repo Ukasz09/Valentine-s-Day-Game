@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import javafx.scene.image.Image;
@@ -45,6 +46,9 @@ public abstract class Monster extends Sprite {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /* Metody */
+
+    //todo: dodac potem abstract check collision
+//    public abstract void checkCollision(ArrayList<MoneyBag> moneyBagsList, ArrayList<Monster> monsters);
 
     //podazanie za celem z ustalona predkoscia
     public void update(Sprite target, ArrayList<Monster> monsters) {
@@ -201,5 +205,33 @@ public abstract class Monster extends Sprite {
 
     public void kickPlayer(Player p) {
         kickMethod.kickPlayerByMonsterPostion(this, p, getManager());
+    }
+
+    public abstract void isDeadAction();
+
+    public abstract void isHitAction();
+
+    public abstract void missHitAction();
+
+    public boolean haveShieldActive(){
+        if (getProtectionTime()<=0) return false;
+
+        return true;
+    }
+
+    public void defaultIsDeadAction(double soundsVolume){
+        getDeathSound().playSound(soundsVolume,false);
+    }
+
+    public void defaultIsHitAction(double soundsVolume){
+        getHitSound().playSound(soundsVolume, false);
+    }
+
+    public void defaultMissHitAction(double soundsVolume){
+        getMissSound().playSound(soundsVolume, false);
+    }
+
+    public boolean isDead(){
+        return (getLives() <= 0);
     }
 }

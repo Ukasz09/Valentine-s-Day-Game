@@ -1,5 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
+import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HeartsRender;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.InCorner;
@@ -15,7 +17,12 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.Manua
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class Player extends Sprite implements ShieldKindOfRender {
+    private ArrayList<ShotSprite> shotsList;
+
     private static final int DEFAULT_VELOCITY = 700;
     private static final int DEFAULT_LIVES = 5;
     private static final int DEFAULT_SHIELD_DURATION = 7500;
@@ -40,6 +47,9 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private HeartsRender heartsRender;
     private int levelNumber;
 
+    private int collectedMoneyBagsOnLevel;
+    private int killedMonstersOnLevel;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
         this(PLAYER_RIGHT_IMAGE, PLAYER_LEFT_IMAGE, PLAYER_SHIELD_IMAGE, manager);
@@ -59,9 +69,12 @@ public class Player extends Sprite implements ShieldKindOfRender {
         lastDirectionY = "W";
         totalScore = 0;
         bombOverheating = 0;
-        bulletOverheating =0;
-        levelNumber=0;
-        heartsRender=new InCorner(manager);
+        bulletOverheating = 0;
+        levelNumber = 0;
+        collectedMoneyBagsOnLevel = 0;
+        killedMonstersOnLevel = 0;
+        heartsRender = new InCorner(manager);
+        shotsList = new ArrayList<>();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,7 +147,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
             bombOverheating = 0;
     }
 
-    public void updateBulletOverheating(){
+    public void updateBulletOverheating() {
         if (bulletOverheating > 0)
             bulletOverheating -= DEFAULT_BULLET_OVERHEATING_REDUCE;
     }
@@ -143,8 +156,59 @@ public class Player extends Sprite implements ShieldKindOfRender {
         bombOverheating = BombSprite.getMaxOverheating();
     }
 
-    public void overheatBullet(){
+    public void overheatBullet() {
         bulletOverheating = BulletSprite.getMaxOverheating();
+    }
+
+    public void checkCollision(ArrayList<MoneyBag> moneyBagsList, ArrayList<Monster> monsters) {
+        intersectsWithMoneyBags(moneyBagsList);
+        shotsIntersectsWithMonsters(monsters);
+    }
+
+    public void intersectsWithMoneyBags(ArrayList<MoneyBag> moneyBagsList) {
+        Iterator<MoneyBag> moneyBagIterator = moneyBagsList.iterator();
+        while (moneyBagIterator.hasNext()) {
+            MoneyBag moneybag = moneyBagIterator.next();
+            if (intersects(moneybag)) {
+                moneybag.playCollectSound();
+                moneyBagIterator.remove();
+                addTotalScore(moneybag.getValue());
+                collectedMoneyBagsOnLevel++;
+            }
+        }
+    }
+
+    public void shotsIntersectsWithMonsters(ArrayList<Monster> monsters) {
+        Iterator<Monster> monstersIterator = monsters.iterator();
+        while (monstersIterator.hasNext()) {
+            Monster monster = monstersIterator.next();
+
+            Iterator<ShotSprite> shotIterator = shotsList.iterator();
+            while (shotIterator.hasNext()) {
+                ShotSprite shot = shotIterator.next();
+                //monster is hitted
+                if (monster.intersects(shot)) {
+                    if (!monster.haveShieldActive()) {
+                        shot.hitMonster(monster);
+                        if (monster.isDead()) {
+                            monster.isDeadAction();
+                            monstersIterator.remove();
+                            killedMonstersOnLevel++;
+                        } else monster.isHitAction();
+                    } else monster.missHitAction();
+
+                    shotIterator.remove();
+                }
+            }
+        }
+    }
+
+    public void clearShotsList() {
+        shotsList.clear();
+    }
+
+    public void addShot(ShotSprite shot){
+        shotsList.add(shot);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -193,7 +257,27 @@ public class Player extends Sprite implements ShieldKindOfRender {
         this.levelNumber = levelNumber;
     }
 
-    public void setNextLevel(){
+    public void setNextLevel() {
         levelNumber++;
+    }
+
+    public int getCollectedMoneyBagsOnLevel() {
+        return collectedMoneyBagsOnLevel;
+    }
+
+    public void setCollectedMoneyBagsOnLevel(int collectedMoneyBagsOnLevel) {
+        this.collectedMoneyBagsOnLevel = collectedMoneyBagsOnLevel;
+    }
+
+    public int getKilledMonstersOnLevel() {
+        return killedMonstersOnLevel;
+    }
+
+    public void setKilledMonstersOnLevel(int killedMonstersOnLevel) {
+        this.killedMonstersOnLevel = killedMonstersOnLevel;
+    }
+
+    public ArrayList<ShotSprite> getShotsList() {
+        return shotsList;
     }
 }

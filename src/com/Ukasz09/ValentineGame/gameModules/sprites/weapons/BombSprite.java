@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
@@ -84,6 +85,12 @@ public class BombSprite extends ShotSprite {
     @Override
     public void doOutOfBoundaryAction() {
         playBoomSound();
+    }
+
+    @Override
+    public void hitMonster(Monster monster) {
+        playBoomSound();
+        monster.removeLives(getHowManyLivesTake());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

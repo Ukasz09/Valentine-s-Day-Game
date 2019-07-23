@@ -1,11 +1,8 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.FishMonsterMiniboss;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickByBigMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.TeleportKick;
@@ -114,8 +111,8 @@ public class Level_2 extends Levels {
     }
 
     @Override
-    public void endLevel() {
-        //nothing to do yet
+    public boolean isEnd(Player player) {
+        return defaultLevelIsEnd(player);
     }
 
     @Override

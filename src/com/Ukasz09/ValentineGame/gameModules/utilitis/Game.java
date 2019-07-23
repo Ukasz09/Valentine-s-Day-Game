@@ -33,7 +33,7 @@ public class Game extends Application {
     private ArrayList<MoneyBag> moneybagList;
     private ArrayList<Monster> monstersList;
     private ArrayList<String> inputsList;
-    private ArrayList<ShotSprite> shotsList;
+    // private ArrayList<ShotSprite> shotsList;
 
     private double elapsedTime;
     private LongValue lastNanoTime;
@@ -41,8 +41,8 @@ public class Game extends Application {
     private Levels actualLevel;
     private Panels actualPanel;
     private IntValue antiCollisionTimer;     //czas w jakim gracz moze przelatywac przez potwory (zapobiega zablokowaniu ruchu gracza)
-    private IntValue killedMonstersOnLevel;
-    private IntValue collectedMoneybags;
+    // private IntValue killedMonstersOnLevel;
+    //private IntValue collectedMoneybags; //todo: wrzucic do playera
 
     private Player player;
     private ShotSprite playerShotSprite;
@@ -52,11 +52,11 @@ public class Game extends Application {
         manager = new ViewManager(); //do NOT touch
         lastNanoTime = new LongValue(System.nanoTime());
         player = new Player(SpritesImages.playerRightImage, SpritesImages.playerLeftImage, SpritesImages.playerShieldImage, manager);
-        collectedMoneybags = new IntValue(0);
-        killedMonstersOnLevel = new IntValue(0);
+        //collectedMoneybags = new IntValue(0);
+        //  killedMonstersOnLevel = new IntValue(0);
 
         inputsList = new ArrayList<>();
-        shotsList = new ArrayList<>();
+        // shotsList = new ArrayList<>();
         moneybagList = new ArrayList<>();
         monstersList = new ArrayList<>();
 
@@ -71,8 +71,8 @@ public class Game extends Application {
 
         //todo: dodac mozliwosc wczytwywania poziomu z pliku
         int levelNumber = 0;
-        if(levelNumber==0){
-            actualPanel=new StartPanel(manager);
+        if (levelNumber == 0) {
+            actualPanel = new StartPanel(manager);
             actualPanel.makePanel();
         } else startGame(levelNumber);
 
@@ -93,7 +93,7 @@ public class Game extends Application {
                     break;
 
                     case 1: {
-                        if (!levelIsEnd(actualLevel))
+                        if (!actualLevel.isEnd(player))
                             play(currentNanoTime, actualLevel);
                         else {
                             endLevel(actualLevel);
@@ -104,8 +104,8 @@ public class Game extends Application {
                     break;
 
                     case 2: {
-                        if (!levelIsEnd(actualLevel)) {
-                            if (((Level_2) actualLevel).needToSpawnMiniboss(collectedMoneybags.getValue(), monstersList.isEmpty()))
+                        if (!actualLevel.isEnd(player)) {
+                            if (((Level_2) actualLevel).needToSpawnMiniboss(player.getCollectedMoneyBagsOnLevel(), monstersList.isEmpty()))
                                 ((Level_2) actualLevel).spawnMiniboss(monstersList);
 
                             play(currentNanoTime, actualLevel);
@@ -131,16 +131,15 @@ public class Game extends Application {
 
     //ustawia odpowiednio zmienne przed rozpoczeciem nowego levelu
     private void endLevel(Levels level) {
-        level.endLevel();
         player.setNextLevel();
-        collectedMoneybags.setValue(0);
+        //collectedMoneybags.setValue(0);
+        player.setCollectedMoneyBagsOnLevel(0);
+        player.setKilledMonstersOnLevel(0);
         moneybagList.clear();
         monstersList.clear();
-        shotsList.clear();
-        killedMonstersOnLevel.setValue(0);
+        player.clearShotsList();
     }
 
-    //sprawdza klikniety klawisz i wykonuje akcje dla niego
     private void checkPlayerMove(int velocity) {
 
         player.setVelocity(0, 0);
@@ -204,7 +203,7 @@ public class Game extends Application {
                 playerShotSprite.setPosition(player);
                 playerShotSprite.setVelocity(playerShotSprite.getShotVelocity(), 0);
 
-                shotsList.add(playerShotSprite);
+                player.addShot(playerShotSprite);
                 playerShotSprite.playShotSound();
                 player.overheatBullet();
             }
@@ -219,7 +218,7 @@ public class Game extends Application {
                 playerShotSprite.setPosition(player);
                 playerShotSprite.setVelocity(0, playerShotSprite.getShotVelocity());
 
-                shotsList.add(playerShotSprite);
+                player.addShot(playerShotSprite);
                 playerShotSprite.playShotSound();
                 player.overheatBomb();
             }
@@ -233,36 +232,28 @@ public class Game extends Application {
     }
 
     private void play(long currentNanoTime, Levels level) {
-            calculateTime(currentNanoTime);
+        calculateTime(currentNanoTime);
+        player.checkCollision(moneybagList,monstersList);
+//        Collision.checkMoneybagsCollisions(moneybagList, player);
 
-        Collision.checkMoneybagsCollisions(moneybagList, player, collectedMoneybags);
-
-            level.renderLevel(monstersList, moneybagList, shotsList, player.getTotalScore());
+        level.renderLevel(monstersList, moneybagList, player.getShotsList(), player.getTotalScore());
 
         if (antiCollisionTimer.getValue() > 0)
             antiCollisionTimer.decValue(100);
 
         Collision.playerCollisionWithMonster(monstersList, player);
-        Collision.playerShotCollision(monstersList, shotsList, killedMonstersOnLevel);
 
         checkPlayerMove(Player.getDefaultVelocity());
-            player.update(elapsedTime);
-            player.render();
-        level.updateShots(shotsList, elapsedTime);
+        player.update(elapsedTime);
+        player.render();
+        level.updateShots(player.getShotsList(), elapsedTime);
         level.updateMonsters(player, monstersList);
 
     }
 
-    private void calculateTime(long currentNanoTime){
+    private void calculateTime(long currentNanoTime) {
         elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
         lastNanoTime.setValue(currentNanoTime);
-    }
-
-    private boolean levelIsEnd(Levels level) {
-
-        if ((collectedMoneybags.getValue() < level.getHowManyMoneybags()) || (killedMonstersOnLevel.getValue() < level.getHowManyAllMonsters())) {
-            return false;
-        } else return true;
     }
 
     private void prepareGame(Levels startLevel) {
