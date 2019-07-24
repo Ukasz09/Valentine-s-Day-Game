@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
@@ -17,8 +18,8 @@ public class FishMonster extends Monster {
 
     private final double howManyLivesTake=0.5;
     private final int howBigKickSize=0;
-    private final double velocityX=3;
-    private final double velocityY=3;
+    private final double velocityX=2;
+    private final double velocityY=2;
 
     private Image imageLeft;
     private Image imageRight;
@@ -26,8 +27,8 @@ public class FishMonster extends Monster {
     private Image imageTop;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public FishMonster(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, KickPlayer kickMethod, ViewManager manager){
-        super(imageLeft, kickMethod, manager);
+    public FishMonster(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay){
+        super(imageLeft, kickMethod, manager, collisionAvoidWay);
         setLives(2);
 
         setHitSound(new SoundsPlayer(hitSoundPath));

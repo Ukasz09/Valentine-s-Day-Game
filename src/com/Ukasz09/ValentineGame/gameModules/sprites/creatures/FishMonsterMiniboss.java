@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ShieldKindOfRender;
@@ -42,8 +43,8 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     private HealthStatusBar healthBar;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public FishMonsterMiniboss(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, Image shieldImage, KickPlayer kickMethod, ViewManager manager) {
-        super(imageLeft, kickMethod, manager);
+    public FishMonsterMiniboss(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+        super(imageLeft, kickMethod, manager, collisionAvoidWay);
         setLives(maxLive);
         //shieldTimer=0;
         setProtectionTime(0);
