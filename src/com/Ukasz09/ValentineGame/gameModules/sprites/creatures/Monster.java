@@ -38,13 +38,7 @@ public abstract class Monster extends Sprite {
         return false;
     }
 
-//    //    //todo: refactor
-    public void newupdate(Sprite target, ArrayList<Monster> monsters) {
-
-    }
-
-
-
+    //todo: tu skonczylem
     public void update(Sprite target, ArrayList<Monster> monsters) {
         collisionAvoidWay.updateCords(target,this,monsters);
     }

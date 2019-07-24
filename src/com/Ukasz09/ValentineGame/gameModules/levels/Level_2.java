@@ -1,10 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.*;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.FastCollisionAvoid;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.NormalCollisionAvoid;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.OldNormalCollisonAvoid;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.SlowNormalCollisionAvoid;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;

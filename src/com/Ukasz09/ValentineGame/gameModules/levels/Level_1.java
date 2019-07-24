@@ -3,6 +3,7 @@ package com.Ukasz09.ValentineGame.gameModules.levels;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.NormalCollisionAvoid;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.SlowNormalCollisionAvoid;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.TeleportCollisionAvoid;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.LittleMonster;

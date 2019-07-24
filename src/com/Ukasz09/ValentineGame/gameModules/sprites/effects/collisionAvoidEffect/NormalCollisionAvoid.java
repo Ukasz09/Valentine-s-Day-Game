@@ -8,64 +8,6 @@ import java.util.ArrayList;
 
 public abstract class NormalCollisionAvoid implements ICollisionAvoidWay {
 
-//    @Override
-//    public void updateCords(Sprite target, Monster monster, ArrayList<Monster> monstersList) {
-//        if (!monster.intersects(target)) {
-//            monster.updateByVelocity(target);
-//            double dx = monster.getPositionX();
-//            double dy = monster.getPositionY();
-//
-//            double addX = 0;
-//            double addY = 0;
-//
-//            for (Monster m : monstersList)
-//                if (m.intersects(monster) && (monster != m)) {
-//                    //above
-//                    if (monster.isUpSideToTarget(m)) {
-//                        if (monster.isRightSideToTarget(target)) {
-//                            addX += -monster.getVelocityX();
-//                            addY += -monster.getVelocityY();
-//                        } else {
-//                            addX += monster.getVelocityX();
-//                            addY += -monster.getVelocityY();
-//                        }
-//                    }
-//                    //down
-//                    else if (monster.isDownSideToTarget(m)) {
-//                        if (monster.isRightSideToTarget(target)) {
-//                            addX += -monster.getVelocityX();
-//                            addY += monster.getVelocityY();
-//                        } else {
-//                            addX += monster.getVelocityX();
-//                            addY += monster.getVelocityY();
-//                        }
-//                    } //left
-//                    else if (monster.isLeftSideToTarget(m)) {
-//                        if (monster.isUpSideToTarget(target)) {
-//                            addY += monster.getVelocityY();
-//                            addX += -monster.getVelocityY();
-//                        } else {
-//                            addY += -monster.getVelocityY();
-//                            addX += -monster.getVelocityX();
-//                        }
-//                    } //right
-//                    else if (monster.isRightSideToTarget(m)) {
-//                        if (monster.isUpSideToTarget(target)) {
-//                            addY += monster.getVelocityY();
-//                            addX += monster.getVelocityX();
-//                        } else {
-//                            addY += -monster.getVelocityY();
-//                            addX += monster.getVelocityX();
-//                        }
-//                    }
-//
-//                    dx += addX / 1.5;
-//                    dy += addY / 1.5;
-//                    monster.setPosition(dx, dy);
-//                }
-//        }
-//    }
-
     public Point2D offsetAfterCollision(Monster m1, Monster m2, Sprite target, ArrayList<Monster> monstersList) {
         double addX = 0;
         double addY = 0;
@@ -113,7 +55,6 @@ public abstract class NormalCollisionAvoid implements ICollisionAvoidWay {
             }
 
             return new Point2D(addX,addY);
-
     }
 
 }
