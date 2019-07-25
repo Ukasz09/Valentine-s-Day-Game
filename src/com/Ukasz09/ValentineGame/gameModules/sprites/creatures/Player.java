@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.PropperImageSet;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
@@ -51,6 +52,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private boolean collisionFromUpSide;
     private boolean collisionFromDownSide;
     private int anticollisionTimer; //to avoid jammed
+    private PropperImageSet imageSetWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
@@ -78,6 +80,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         killedMonstersOnLevel = 0;
         heartsRender = new InCorner(manager);
         shotsList = new ArrayList<>();
+        imageSetWay=new PropperImageSet();
 
         collisionFromLeftSide = false;
         collisionFromRightSide = false;
@@ -300,9 +303,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     public void setProperActualImage() {
-        if (lastDirectionX.equals("A"))
-            setActualImage(playerLeftImage);
-        else setActualImage(playerRightImage);
+      imageSetWay.byLastDirection(PLAYER_LEFT_IMAGE,PLAYER_RIGHT_IMAGE,this,lastDirectionX);
     }
 
     private void playRandomHitSound() {

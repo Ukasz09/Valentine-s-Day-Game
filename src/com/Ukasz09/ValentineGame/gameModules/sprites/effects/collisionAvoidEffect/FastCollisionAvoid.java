@@ -17,8 +17,8 @@ public class FastCollisionAvoid extends NormalCollisionAvoid{
 
             for (Monster m: monstersList){
                 Point2D offsetPoint = offsetAfterCollision(monster, m, target, monstersList);
-                dx += offsetPoint.getX()*1.5;
-                dy += offsetPoint.getY()*1.5;
+                dx += offsetPoint.getX()*4;
+                dy += offsetPoint.getY()*4;
                 monster.setPosition(dx, dy);
             }
         }

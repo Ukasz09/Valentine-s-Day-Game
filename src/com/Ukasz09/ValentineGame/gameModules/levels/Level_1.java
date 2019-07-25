@@ -4,6 +4,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.NormalCollisionAvoid;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.SlowNormalCollisionAvoid;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.TeleportCollisionAvoid;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.PositionByLittleCreature;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.LittleMonster;
@@ -56,7 +57,7 @@ public class Level_1 extends Levels {
     public void spawnLittleMonsters(ArrayList<Monster> monsters) {
 
         for (int i = 0; i < getHowManyLittleMonsters(); i++) {
-            LittleMonster m = new LittleMonster(LITTLE_MONSTER_IMAGE, new KickByLittleMonster(new TeleportKick()), getManager(),new SlowNormalCollisionAvoid());
+            LittleMonster m = new LittleMonster(LITTLE_MONSTER_IMAGE, new KickByLittleMonster(new TeleportKick()), getManager(),new SlowNormalCollisionAvoid(), new PositionByLittleCreature());
             monsters.add(m);
         }
 

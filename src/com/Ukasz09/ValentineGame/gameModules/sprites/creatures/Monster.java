@@ -1,6 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.IPositionByTarget;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import javafx.geometry.Point2D;
@@ -13,15 +14,17 @@ public abstract class Monster extends Sprite {
     private double howBigKickSize;
     private KickPlayer kickMethod;
     private ICollisionAvoidWay collisionAvoidWay;
+    private IPositionByTarget positionByTarget;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Monster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+    public Monster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay, IPositionByTarget positionByTarget) {
         super(image, manager);
         howManyLivesTake = 0;
         howBigKickSize = 0;
         setVelocity(0, 0);
         this.kickMethod = kickMethod;
-        this.collisionAvoidWay=collisionAvoidWay;
+        this.collisionAvoidWay = collisionAvoidWay;
+        this.positionByTarget = positionByTarget;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -38,9 +41,8 @@ public abstract class Monster extends Sprite {
         return false;
     }
 
-    //todo: tu skonczylem
     public void update(Sprite target, ArrayList<Monster> monsters) {
-        collisionAvoidWay.updateCords(target,this,monsters);
+        collisionAvoidWay.updateCords(target, this, monsters);
     }
 
     public void updateByVelocity(Sprite target) {
@@ -53,73 +55,6 @@ public abstract class Monster extends Sprite {
         dx += this.getVelocityX() * Math.cos(angle);
         dy += this.getVelocityY() * Math.sin(angle);
         this.setPosition(dx, dy);
-    }
-
-    public void setImageByPosition(Image left, Image right, Image bottom, Image top, Sprite target) {
-        if (isRightSideToTarget(target))
-            this.setActualImage(left);
-        else this.setActualImage(right);
-
-        if (isExactlyUnderOrAboveTarget(target)) {
-            if (isExactlyAboveTarget(target))
-                this.setActualImage(bottom);
-            else this.setActualImage(top);
-        }
-    }
-
-    public boolean isRightSideToTarget(Sprite target) {
-        double monsterMinX = this.getBoundary().getMinX();
-        if (monsterMinX + 0.1 * monsterMinX > target.getBoundary().getMaxX())
-            return true;
-
-        return false;
-    }
-
-    public boolean isLeftSideToTarget(Sprite target) {
-        double monsterMaxX = this.getBoundary().getMaxX();
-        if (monsterMaxX - 0.1 * monsterMaxX < target.getBoundary().getMinX())
-            return true;
-
-        return false;
-    }
-
-    public boolean isUpSideToTarget(Sprite target) {
-        double monsterMaxY = this.getBoundary().getMaxY();
-        if (monsterMaxY - 0.1 * monsterMaxY < target.getBoundary().getMinY())
-            return true;
-
-        return false;
-    }
-
-    public boolean isDownSideToTarget(Sprite target) {
-        double monsterMinY = this.getBoundary().getMinY();
-        if (monsterMinY + 0.1 * monsterMinY > target.getBoundary().getMaxX())
-            return true;
-
-        return false;
-    }
-
-
-    private boolean isExactlyUnderOrAboveTarget(Sprite target) {
-        double monsterMinX = this.getBoundary().getMinX();
-        double monsterMaxX = this.getBoundary().getMaxX();
-
-        if ((monsterMinX > target.getBoundary().getMinX()) && (monsterMaxX < target.getBoundary().getMaxX()))
-            return true;
-
-        return false;
-    }
-
-    private boolean isExactlyAboveTarget(Sprite target) {
-        double monsterMinX = this.getBoundary().getMinX();
-        double monsterMaxX = this.getBoundary().getMaxX();
-        double monsterMaxY = this.getBoundary().getMaxY();
-
-        if (isExactlyUnderOrAboveTarget(target))
-            if (monsterMaxY - 0.15 * monsterMaxY < target.getBoundary().getMinY())
-                return true;
-
-        return false;
     }
 
     public void kickPlayer(Player p) {
@@ -140,6 +75,30 @@ public abstract class Monster extends Sprite {
 
     public boolean isDead() {
         return (getLives() <= 0);
+    }
+
+    public boolean isRightSideToTarget(Sprite target) {
+        return positionByTarget.isRightSideToTarget(this, target);
+    }
+
+    public boolean isLeftSideToTarget(Sprite target) {
+        return positionByTarget.isLeftSideToTarget(this, target);
+    }
+
+    public boolean isUpSideToTarget(Sprite target) {
+        return positionByTarget.isUpSideToTarget(this, target);
+    }
+
+    public boolean isDownSideToTarget(Sprite target) {
+        return positionByTarget.isDownSideToTarget(this, target);
+    }
+
+    public boolean isExactlyUnderOrAboveTarget(Sprite target) {
+        return positionByTarget.isExactlyUnderOrAboveTarget(this, target);
+    }
+
+    public boolean isExactlyAboveTarget(Sprite target) {
+        return positionByTarget.isExactlyAboveTarget(this, target);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
