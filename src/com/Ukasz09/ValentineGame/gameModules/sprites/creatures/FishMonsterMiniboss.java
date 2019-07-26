@@ -10,6 +10,7 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.AutoActivateShield;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HealthStatusBar;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.Shield;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -124,5 +125,11 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     @Override
     public void missHitAction() {
         defaultMissHitAction(MISS_SOUND_VOLUME);
+    }
+
+    @Override
+    public Rectangle2D getBoundaryForCollision() {
+        return getBoundary();
+        //todo: zmienic
     }
 }

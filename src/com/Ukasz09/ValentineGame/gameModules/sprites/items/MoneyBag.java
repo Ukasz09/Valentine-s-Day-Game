@@ -4,6 +4,7 @@ import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
 public class MoneyBag extends Sprite {
@@ -34,6 +35,13 @@ public class MoneyBag extends Sprite {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    @Override
+    public Rectangle2D getBoundaryForCollision() {
+        return getBoundary();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public int getValue() {
         return value;
     }

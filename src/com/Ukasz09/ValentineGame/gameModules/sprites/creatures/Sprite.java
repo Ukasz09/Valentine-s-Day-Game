@@ -4,6 +4,8 @@ import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public abstract class Sprite {
     private Image actualImage;
@@ -50,8 +52,17 @@ public abstract class Sprite {
     public void render() {
         manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
         //manager.getGraphicContext().fillRect(positionX,positionY,getWidth(),getHeight()); //todo: temp
-        manager.getGraphicContext().fillRect(getBoundary().getMinX(),getBoundary().getMinY(),getBoundary().getWidth(),getBoundary().getHeight());
+
+        double tmpPosX = getBoundaryForCollision().getMinX();
+        double tmpPosY = getBoundaryForCollision().getMinY();
+        double tmpWidth = getBoundaryForCollision().getWidth();
+        double tmpHeight = getBoundaryForCollision().getHeight();
+        Paint p=new Color(0.6,0.6,0.6,0.3);
+        manager.getGraphicContext().setFill(p);
+        manager.getGraphicContext().fillRect(tmpPosX, tmpPosY, tmpWidth, tmpHeight);
     }
+
+    public abstract Rectangle2D getBoundaryForCollision();
 
     public Rectangle2D getBoundary() {
         return new Rectangle2D(positionX, positionY, width, height);

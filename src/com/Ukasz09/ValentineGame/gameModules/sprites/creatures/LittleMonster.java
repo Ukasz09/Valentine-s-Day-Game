@@ -5,6 +5,7 @@ import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
 public class LittleMonster extends Monster {
@@ -44,5 +45,10 @@ public class LittleMonster extends Monster {
     @Override
     public void missHitAction() {
         //nothing
+    }
+
+    @Override
+    public Rectangle2D getBoundaryForCollision() {
+        return getBoundary();
     }
 }

@@ -6,6 +6,7 @@ import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -69,5 +70,11 @@ public class FishMonster extends Monster {
 
     private void setImageByPosition(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, Sprite target) {
         imageSetWay.byTargetPosition(imageLeft, imageRight, imageBottom, imageTop, this, target);
+    }
+
+    @Override
+    public Rectangle2D getBoundaryForCollision() {
+        return getBoundary();
+        //todo: zmienic
     }
 }

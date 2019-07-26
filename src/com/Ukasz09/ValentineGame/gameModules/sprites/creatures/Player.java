@@ -81,7 +81,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         killedMonstersOnLevel = 0;
         heartsRender = new InCorner(manager);
         shotsList = new ArrayList<>();
-        imageSetWay=new PropperImageSet();
+        imageSetWay = new PropperImageSet();
 
         collisionFromLeftSide = false;
         collisionFromRightSide = false;
@@ -118,17 +118,17 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //todo: psuje sie duzo
-
 
     @Override
-    public Rectangle2D getBoundary() {
-        double width=getWidth();
-        double height=getHeight();
-        return new Rectangle2D(getPositionX()+0.5*width, getPositionY()+0.25*height, width/2, height/2);
+    public Rectangle2D getBoundaryForCollision() {
+        double width = getWidth();
+        double height = getHeight();
+        if (lastDirectionX.equals("D"))
+            return new Rectangle2D(getPositionX() + width/3, getPositionY() + height/2.8, width / 2, height / 2);
+
+        return new Rectangle2D(getPositionX()+width/8, getPositionY()+height/2.8, width / 2, height / 2);
     }
 
-    //////////
     private void addTotalScore(int score) {
         totalScore += score;
     }
@@ -315,7 +315,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     public void setProperActualImage() {
-      imageSetWay.byLastDirection(PLAYER_LEFT_IMAGE,PLAYER_RIGHT_IMAGE,this,lastDirectionX);
+        imageSetWay.byLastDirection(PLAYER_LEFT_IMAGE, PLAYER_RIGHT_IMAGE, this, lastDirectionX);
     }
 
     private void playRandomHitSound() {

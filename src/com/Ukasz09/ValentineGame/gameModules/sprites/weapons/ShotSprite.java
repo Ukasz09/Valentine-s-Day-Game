@@ -5,6 +5,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
 public abstract class ShotSprite extends Sprite {
@@ -50,4 +51,9 @@ public abstract class ShotSprite extends Sprite {
     public abstract void doOutOfBoundaryAction();
 
     public abstract void hitMonster(Monster monster);
+
+    @Override
+    public Rectangle2D getBoundaryForCollision() {
+        return getBoundary();
+    }
 }
