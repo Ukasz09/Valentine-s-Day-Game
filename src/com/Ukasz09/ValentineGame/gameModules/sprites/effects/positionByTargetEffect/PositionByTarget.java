@@ -2,9 +2,8 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEf
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 
-public class PositionByLittleCreature implements IPositionByTarget {
+public class PositionByTarget {
 
-    @Override
     public boolean isRightSideToTarget(Sprite creature, Sprite target) {
         double creatureMinX = creature.getBoundary().getMinX();
         if (creatureMinX + 0.1 * creatureMinX > target.getBoundary().getMaxX())
@@ -13,7 +12,6 @@ public class PositionByLittleCreature implements IPositionByTarget {
         return false;
     }
 
-    @Override
     public boolean isLeftSideToTarget(Sprite creature, Sprite target) {
         double creatureMaxX = creature.getBoundary().getMaxX();
         if (creatureMaxX - 0.1 * creatureMaxX < target.getBoundary().getMinX())
@@ -22,7 +20,6 @@ public class PositionByLittleCreature implements IPositionByTarget {
         return false;
     }
 
-    @Override
     public boolean isUpSideToTarget(Sprite creature, Sprite target) {
         double creatureMaxY = creature.getBoundary().getMaxY();
         if (creatureMaxY - 0.1 * creatureMaxY < target.getBoundary().getMinY())
@@ -31,7 +28,6 @@ public class PositionByLittleCreature implements IPositionByTarget {
         return false;
     }
 
-    @Override
     public boolean isDownSideToTarget(Sprite creature, Sprite target) {
         double creatureMinY = creature.getBoundary().getMinY();
         if (creatureMinY + 0.1 * creatureMinY > target.getBoundary().getMaxX())
@@ -40,7 +36,6 @@ public class PositionByLittleCreature implements IPositionByTarget {
         return false;
     }
 
-    @Override
     public boolean isExactlyUnderOrAboveTarget(Sprite creature, Sprite target) {
         double creatureMinX = creature.getBoundary().getMinX();
         double creatureMaxX = creature.getBoundary().getMaxX();
@@ -51,7 +46,6 @@ public class PositionByLittleCreature implements IPositionByTarget {
         return false;
     }
 
-    @Override
     public boolean isExactlyAboveTarget(Sprite creature, Sprite target) {
         double creatureMaxY = creature.getBoundary().getMaxY();
 

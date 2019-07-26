@@ -14,7 +14,11 @@
       <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/FastCollisionAvoid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/FastCollisionAvoid.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/IPositionByTarget.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByLittleCreature.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesImages.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesImages.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesPath.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesPath.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java" afterDir="false" />
@@ -22,7 +26,12 @@
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/FastCollisionAvoid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/FastCollisionAvoid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/IPositionByTarget.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByLittleCreature.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesImages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesImages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesPath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesPath.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,16 +45,17 @@
       <content type="file-editors">
         <state>
           <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-            <file pinned="false" current-in-tab="false">
+            <file pinned="false" current-in-tab="true">
               <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="51">
-                    <caret line="3" column="86" selection-start-line="3" selection-start-column="86" selection-end-line="3" selection-end-column="86" />
+                  <state relative-caret-position="388">
+                    <caret line="80" column="55" lean-forward="true" selection-start-line="80" selection-start-column="55" selection-end-line="80" selection-end-column="55" />
                     <folding>
-                      <element signature="method#Monster#0;class#Monster#0" />
+                      <element signature="imports" expanded="true" />
                       <element signature="method#kickAfterHit#0;class#Monster#0" />
                       <element signature="method#update#0;class#Monster#0" />
                       <element signature="method#updateByVelocity#0;class#Monster#0" />
+                      <element signature="e#3048#3049#0" expanded="true" />
                       <element signature="method#isExactlyUnderOrAboveTarget#0;class#Monster#0" />
                     </folding>
                   </state>
@@ -55,7 +65,7 @@
             <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/ICollisionAvoidWay.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="153">
+                  <state relative-caret-position="102">
                     <caret line="9" column="82" selection-start-line="9" selection-start-column="82" selection-end-line="9" selection-end-column="82" />
                     <folding>
                       <element signature="imports" expanded="true" />
@@ -79,9 +89,10 @@
             <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_1.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="405">
-                    <caret line="59" column="190" selection-start-line="59" selection-start-column="190" selection-end-line="59" selection-end-column="190" />
+                  <state relative-caret-position="510">
+                    <caret line="56" column="158" selection-start-line="56" selection-start-column="158" selection-end-line="56" selection-end-column="158" />
                     <folding>
+                      <element signature="imports" expanded="true" />
                       <element signature="method#Level_1#0;class#Level_1#0" />
                       <element signature="method#setPositionMonsters#0;class#Level_1#0" />
                       <element signature="method#renderLevel#0;class#Level_1#0" />
@@ -95,8 +106,8 @@
             <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="442">
-                    <caret line="61" column="258" selection-start-line="61" selection-start-column="258" selection-end-line="61" selection-end-column="258" />
+                  <state relative-caret-position="469">
+                    <caret line="70" column="283" selection-start-line="70" selection-start-column="283" selection-end-line="70" selection-end-column="283" />
                     <folding>
                       <element signature="imports" expanded="true" />
                       <element signature="method#Level_2#0;class#Level_2#0" />
@@ -148,11 +159,11 @@
                 </provider>
               </entry>
             </file>
-            <file pinned="false" current-in-tab="true">
+            <file pinned="false" current-in-tab="false">
               <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java">
                 <provider selected="true" editor-type-id="text-editor">
-                  <state relative-caret-position="391">
-                    <caret line="23" column="77" selection-start-line="23" selection-start-column="77" selection-end-line="23" selection-end-column="77" />
+                  <state relative-caret-position="272">
+                    <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
                     <folding>
                       <element signature="imports" expanded="true" />
                       <element signature="method#missHitAction#0;class#LittleMonster#0" />
@@ -254,48 +265,49 @@
     <session id="187451895">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="14" />
+          <entry key="project.closed" value="15" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.17" value="3" />
           <entry key="project.open.time.18" value="2" />
           <entry key="project.open.time.19" value="1" />
-          <entry key="project.open.time.20" value="2" />
+          <entry key="project.open.time.20" value="3" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.23" value="2" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.29" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="15" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="Learning" value="5" />
-          <entry key="dummy" value="111" />
+          <entry key="dummy" value="144" />
           <entry key="gitignore" value="38" />
-          <entry key="java" value="29237" />
+          <entry key="java" value="30544" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="29237" />
-          <entry key="PLAIN_TEXT" value="149" />
+          <entry key="JAVA" value="30544" />
+          <entry key="PLAIN_TEXT" value="182" />
           <entry key="Scratch" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Learning" value="1" />
+          <entry key="gif" value="1" />
           <entry key="gitignore" value="2" />
-          <entry key="java" value="299" />
+          <entry key="java" value="308" />
           <entry key="jpg" value="3" />
           <entry key="png" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Image" value="8" />
-          <entry key="JAVA" value="299" />
+          <entry key="Image" value="9" />
+          <entry key="JAVA" value="308" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Scratch" value="1" />
         </counts>
@@ -308,29 +320,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-              <folding>
-                <element signature="method#FishMonster#0;class#FishMonster#0" />
-                <element signature="method#update#0;class#FishMonster#0" />
-                <element signature="method#missHitAction#0;class#FishMonster#0" />
-                <element signature="method#setImageByPosition#0;class#FishMonster#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+            <state relative-caret-position="214">
+              <caret line="82" column="27" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="36" />
               <folding>
-                <element signature="method#FishMonsterMiniboss#0;class#FishMonsterMiniboss#0" />
-                <element signature="method#setImageByPosition#0;class#FishMonsterMiniboss#0" />
-                <element signature="method#update#0;class#FishMonsterMiniboss#0" />
+                <element signature="imports" expanded="true" />
                 <element signature="method#render#0;class#FishMonsterMiniboss#0" />
                 <element signature="method#renderShield#0;class#FishMonsterMiniboss#0" />
               </folding>
@@ -339,10 +334,69 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/NormalCollisionAvoid.java">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesPath.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+            <state relative-caret-position="340">
+              <caret line="21" column="73" selection-start-line="21" selection-start-column="73" selection-end-line="21" selection-end-column="73" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesImages.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" column="120" selection-start-line="19" selection-start-column="120" selection-end-line="19" selection-end-column="120" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="113" column="17" lean-forward="true" selection-start-line="113" selection-start-column="17" selection-end-line="113" selection-end-column="17" />
+              <folding>
+                <element signature="e#3136#4251#0" />
+                <element signature="e#4257#4841#0" />
+                <element signature="e#4847#5048#0" />
+                <element signature="e#5628#6612#0" />
+                <element signature="e#6618#6825#0" />
+                <element signature="e#6831#6980#0" />
+                <element signature="e#7188#7439#0" />
+                <element signature="e#7445#7952#0" />
+                <element signature="e#7958#8965#0" />
+                <element signature="e#8971#9493#0" />
+                <element signature="e#9499#9844#0" />
+                <element signature="e#9850#10194#0" />
+                <element signature="e#10200#10539#0" />
+                <element signature="e#10545#10904#0" />
+                <element signature="e#11058#11264#0" />
+                <element signature="e#11270#11454#0" />
+                <element signature="e#11572#11726#0" />
+                <element signature="e#11732#11855#0" />
+                <element signature="e#11861#11996#0" />
+                <element signature="e#12121#12399#0" />
+                <element signature="e#13317#13464#0" />
+                <element signature="e#13559#13690#0" />
+                <element signature="e#13779#13918#0" />
+                <element signature="e#13924#14059#0" />
+                <element signature="e#14198#14333#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/ukaszAngelRightHoly.gif">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -351,53 +405,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="304" column="16" selection-start-line="304" selection-start-column="16" selection-end-line="304" selection-end-column="16" />
-              <folding>
-                <element signature="e#2899#2900#0" expanded="true" />
-                <element signature="e#2988#2989#0" expanded="true" />
-                <element signature="e#4073#4657#0" />
-                <element signature="e#4663#4864#0" />
-                <element signature="e#4870#5090#0" />
-                <element signature="e#5444#6428#0" />
-                <element signature="e#6434#6641#0" />
-                <element signature="e#6647#6796#0" />
-                <element signature="e#7004#7255#0" />
-                <element signature="e#7261#7768#0" />
-                <element signature="e#7774#8781#0" />
-                <element signature="e#8787#9309#0" />
-                <element signature="e#9315#9660#0" />
-                <element signature="e#9666#10010#0" />
-                <element signature="e#10016#10355#0" />
-                <element signature="e#10361#10720#0" />
-                <element signature="e#10874#11080#0" />
-                <element signature="e#11086#11270#0" />
-                <element signature="e#11388#11542#0" />
-                <element signature="e#11548#11671#0" />
-                <element signature="e#11976#12254#0" />
-                <element signature="e#12543#12544#0" expanded="true" />
-                <element signature="e#12595#12596#0" expanded="true" />
-                <element signature="e#13172#13319#0" />
-                <element signature="e#13414#13545#0" />
-                <element signature="e#13634#13773#0" />
-                <element signature="e#13779#13914#0" />
-                <element signature="e#14053#14188#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="98" selection-start-line="98" selection-end-line="98" />
+            <state relative-caret-position="206">
+              <caret line="51" column="104" selection-start-line="51" selection-start-column="104" selection-end-line="51" selection-end-column="104" />
               <folding>
                 <element signature="e#1189#1423#0" />
                 <element signature="e#1429#1546#0" />
-                <element signature="e#1552#1754#0" />
+                <element signature="e#1793#1794#0" expanded="true" />
+                <element signature="e#1868#1869#0" expanded="true" />
                 <element signature="e#2322#2495#0" />
                 <element signature="e#2501#2677#0" />
                 <element signature="e#2683#2859#0" />
@@ -405,18 +421,6 @@
                 <element signature="e#3257#3355#0" />
                 <element signature="e#3361#3459#0" />
                 <element signature="e#3465#3564#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -446,27 +450,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByLittleCreature.java">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByTarget.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+            <state relative-caret-position="357">
+              <caret line="56" column="5" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="56" selection-end-column="5" />
               <folding>
-                <element signature="method#isRightSideToTarget#0;class#positionByLittleCreature#0" />
-                <element signature="method#isLeftSideToTarget#0;class#positionByLittleCreature#0" />
-                <element signature="method#isUpSideToTarget#0;class#positionByLittleCreature#0" />
-                <element signature="method#isDownSideToTarget#0;class#positionByLittleCreature#0" />
-                <element signature="method#isExactlyUnderOrAboveTarget#0;class#positionByLittleCreature#0" />
-                <element signature="method#isExactlyAboveTarget#0;class#positionByLittleCreature#0" />
+                <element signature="method#isLeftSideToTarget#0;class#NormalPosition#0" />
+                <element signature="method#isUpSideToTarget#0;class#NormalPosition#0" />
+                <element signature="method#isDownSideToTarget#0;class#NormalPosition#0" />
+                <element signature="method#isExactlyUnderOrAboveTarget#0;class#NormalPosition#0" />
+                <element signature="method#isExactlyAboveTarget#0;class#NormalPosition#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/IPositionByTarget.java">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByBigTarget.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+            <state relative-caret-position="151">
+              <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -498,16 +501,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/others/kickEffect/KickPlayer.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/others/kickEffect/KickByBigMonster.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/gameUtils/Collision.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/others/healthStatusBars/IheartsPosition.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/others/healthStatusBars/tmp.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/others/healthStatusBars/inCorner.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/others/healthStatusBars/DrawHearts.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/others/healthStatusBars/InCorner.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/gameUtils/Game.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/others/healthStatusBars/HeartsRender.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/healthStatusBars/HeartsRender.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Panels.java" />
@@ -536,19 +529,29 @@
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/FastCollisionAvoid.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/positionByTarget.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/positionByLittleCreature.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/IImageSetWay.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ByTargetForSmallCreatures.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ByTargetForBigCreatures.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/ICollisionAvoidWay.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/IPositionByTarget.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByLittleCreature.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/NormalPosition.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByBigCreature.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByLittleCreature.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByBigCreature.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByTarget.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_1.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesPath.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesImages.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByBigTarget.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java" />
       </list>
     </option>
   </component>
@@ -595,6 +598,7 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -701,11 +705,42 @@
               <item name="gameModules" type="462c0819:PsiDirectoryNode" />
               <item name="utilitis" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollectMoneyForValentinesDay" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ValentineGame" type="462c0819:PsiDirectoryNode" />
+              <item name="graphicModule" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollectMoneyForValentinesDay" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ValentineGame" type="462c0819:PsiDirectoryNode" />
+              <item name="graphicModule" type="462c0819:PsiDirectoryNode" />
+              <item name="texturesModel" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollectMoneyForValentinesDay" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ValentineGame" type="462c0819:PsiDirectoryNode" />
+              <item name="graphicModule" type="462c0819:PsiDirectoryNode" />
+              <item name="texturesModel" type="462c0819:PsiDirectoryNode" />
+              <item name="sprites" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CollectMoneyForValentinesDay" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ValentineGame" type="462c0819:PsiDirectoryNode" />
+              <item name="graphicModule" type="462c0819:PsiDirectoryNode" />
+              <item name="texturesPath" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -716,7 +751,7 @@
     <property name="SearchEverywhereHistoryKey" value="plugins&#9;ACTION&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1564043783229" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1564144423404" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -837,12 +872,13 @@
       <workItem from="1563894430231" duration="12919000" />
       <workItem from="1563959255726" duration="12023000" />
       <workItem from="1563977621095" duration="1639000" />
-      <workItem from="1564035290072" duration="8080000" />
+      <workItem from="1564035290072" duration="8324000" />
+      <workItem from="1564133270445" duration="6050000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="390292000" />
+    <option name="totallyTimeSpent" value="396586000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -857,7 +893,7 @@
     <frame x="-7" y="0" width="1614" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.50067294" visible="true" weight="0.24388674" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.50067294" visible="true" weight="0.24710424" />
       <window_info id="Structure" order="1" sideWeight="0.49932706" side_tool="true" weight="0.16924067" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -867,7 +903,7 @@
       <window_info id="Favorites" order="7" sideWeight="0.49932706" side_tool="true" weight="0.16924067" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32712767" />
-      <window_info anchor="bottom" id="Debug" order="2" weight="0.3997344" />
+      <window_info anchor="bottom" id="Debug" order="2" weight="0.39973083" />
       <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="5" weight="0.08510638" />
@@ -876,7 +912,7 @@
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.3485868" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5012854" side_tool="true" weight="0.3882979" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.3257066" />
-      <window_info anchor="bottom" x="1656" y="287" width="1544" height="183" id="Run" order="11" sideWeight="0.49871466" weight="0.2395693" />
+      <window_info active="true" anchor="bottom" x="1656" y="287" width="1544" height="183" id="Run" order="11" sideWeight="0.49871466" visible="true" weight="0.2395693" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -954,42 +990,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/gameUtils/Boundary.java" />
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/kickEffect/KindOfKick.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="76" selection-start-line="8" selection-start-column="76" selection-end-line="8" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/kickEffect/TeleportKick.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="819">
-          <caret line="54" column="140" selection-start-line="54" selection-start-column="140" selection-end-line="54" selection-end-column="140" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/kickEffect/KickPlayer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="9" column="76" selection-start-line="9" selection-start-column="76" selection-end-line="9" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/kickEffect/KickByLittleMonster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="19" column="83" selection-start-line="19" selection-start-column="83" selection-end-line="19" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/kickEffect/KickByBigMonster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="18" column="61" selection-start-line="18" selection-start-column="61" selection-end-line="18" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/healthStatusBars/IHeartsPosition.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
@@ -1074,9 +1074,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesPath.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/soundsModule/soundsPath/SoundsPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
@@ -1131,19 +1128,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="407">
           <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
-          <folding>
-            <element signature="method#ViewManager#0;class#ViewManager#0" />
-            <element signature="docComment;method#initialize#0;class#ViewManager#0" />
-            <element signature="method#setDefaultFont#0;class#ViewManager#0" />
-            <element signature="method#setFont#0;class#ViewManager#0" />
-            <element signature="method#setFont#1;class#ViewManager#0" />
-            <element signature="method#readKeyboardAction#0;class#ViewManager#0" />
-            <element signature="class#2812:3089" />
-            <element signature="method#handle#0;class#2812:3089" />
-            <element signature="class#3148:3373" />
-            <element signature="method#handle#0;class#3148:3373" />
-            <element signature="method#checkWindowBoundary#0;class#ViewManager#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1151,6 +1135,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="21" column="26" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/FastCollisionAvoid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/IImageSetWay.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ByTargetForBigCreatures.java" />
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/NormalCollisionAvoid.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/ICollisionAvoidWay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="82" selection-start-line="9" selection-start-column="82" selection-end-line="9" selection-end-column="82" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1197,111 +1213,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/FastCollisionAvoid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="42" selection-start-line="19" selection-start-column="42" selection-end-line="19" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/IPositionByTarget.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="4" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
+        <state relative-caret-position="72">
+          <caret line="4" column="33" selection-start-line="4" selection-start-column="33" selection-end-line="4" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/IImageSetWay.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByBigCreature.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+          <folding>
+            <element signature="e#429#430#0" expanded="true" />
+            <element signature="e#457#458#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByLittleCreature.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="7" column="90" selection-start-line="7" selection-start-column="90" selection-end-line="7" selection-end-column="90" />
+          <caret line="7" column="27" lean-forward="true" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#604#605#0" expanded="true" />
+            <element signature="e#667#668#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByLittleCreature.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByBigCreature.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="23" lean-forward="true" selection-start-line="23" selection-end-line="23" />
+        <state relative-caret-position="459">
+          <caret line="27" column="65" selection-start-line="27" selection-start-column="65" selection-end-line="27" selection-end-column="65" />
           <folding>
-            <element signature="method#isRightSideToTarget#0;class#positionByLittleCreature#0" />
-            <element signature="method#isLeftSideToTarget#0;class#positionByLittleCreature#0" />
-            <element signature="method#isUpSideToTarget#0;class#positionByLittleCreature#0" />
-            <element signature="method#isDownSideToTarget#0;class#positionByLittleCreature#0" />
-            <element signature="method#isExactlyUnderOrAboveTarget#0;class#positionByLittleCreature#0" />
-            <element signature="method#isExactlyAboveTarget#0;class#positionByLittleCreature#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ByTargetForBigCreatures.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/NormalCollisionAvoid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="method#FishMonsterMiniboss#0;class#FishMonsterMiniboss#0" />
-            <element signature="method#setImageByPosition#0;class#FishMonsterMiniboss#0" />
-            <element signature="method#update#0;class#FishMonsterMiniboss#0" />
-            <element signature="method#render#0;class#FishMonsterMiniboss#0" />
-            <element signature="method#renderShield#0;class#FishMonsterMiniboss#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="86" selection-start-line="3" selection-start-column="86" selection-end-line="3" selection-end-column="86" />
-          <folding>
-            <element signature="method#Monster#0;class#Monster#0" />
-            <element signature="method#kickAfterHit#0;class#Monster#0" />
-            <element signature="method#update#0;class#Monster#0" />
-            <element signature="method#updateByVelocity#0;class#Monster#0" />
-            <element signature="method#isExactlyUnderOrAboveTarget#0;class#Monster#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/ICollisionAvoidWay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="82" selection-start-line="9" selection-start-column="82" selection-end-line="9" selection-end-column="82" />
-          <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#601#602#0" expanded="true" />
+            <element signature="e#664#665#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="59" column="190" selection-start-line="59" selection-start-column="190" selection-end-line="59" selection-end-column="190" />
+        <state relative-caret-position="510">
+          <caret line="56" column="158" selection-start-line="56" selection-start-column="158" selection-end-line="56" selection-end-column="158" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="method#Level_1#0;class#Level_1#0" />
             <element signature="method#setPositionMonsters#0;class#Level_1#0" />
             <element signature="method#renderLevel#0;class#Level_1#0" />
@@ -1311,10 +1268,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
-          <caret line="61" column="258" selection-start-line="61" selection-start-column="258" selection-end-line="61" selection-end-column="258" />
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#update#0;class#FishMonster#0" />
+            <element signature="method#missHitAction#0;class#FishMonster#0" />
+            <element signature="method#setImageByPosition#0;class#FishMonster#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesPath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="21" column="73" selection-start-line="21" selection-start-column="73" selection-end-line="21" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="469">
+          <caret line="70" column="283" selection-start-line="70" selection-start-column="283" selection-end-line="70" selection-end-column="283" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#Level_2#0;class#Level_2#0" />
@@ -1326,10 +1303,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesImages.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="120" selection-start-line="19" selection-start-column="120" selection-end-line="19" selection-end-column="120" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="77" selection-start-line="23" selection-start-column="77" selection-end-line="23" selection-end-column="77" />
+        <state relative-caret-position="272">
+          <caret line="16" column="41" lean-forward="true" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#missHitAction#0;class#LittleMonster#0" />
@@ -1337,44 +1321,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByTarget.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="98" selection-start-line="98" selection-end-line="98" />
+        <state relative-caret-position="357">
+          <caret line="56" column="5" lean-forward="true" selection-start-line="6" selection-start-column="4" selection-end-line="56" selection-end-column="5" />
           <folding>
-            <element signature="e#1189#1423#0" />
-            <element signature="e#1429#1546#0" />
-            <element signature="e#1552#1754#0" />
-            <element signature="e#2322#2495#0" />
-            <element signature="e#2501#2677#0" />
-            <element signature="e#2683#2859#0" />
-            <element signature="e#2865#3031#0" />
-            <element signature="e#3257#3355#0" />
-            <element signature="e#3361#3459#0" />
-            <element signature="e#3465#3564#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="22" column="38" selection-start-line="22" selection-start-column="38" selection-end-line="22" selection-end-column="38" />
-          <folding>
-            <element signature="method#FishMonster#0;class#FishMonster#0" />
-            <element signature="method#update#0;class#FishMonster#0" />
-            <element signature="method#missHitAction#0;class#FishMonster#0" />
-            <element signature="method#setImageByPosition#0;class#FishMonster#0" />
+            <element signature="method#isLeftSideToTarget#0;class#NormalPosition#0" />
+            <element signature="method#isUpSideToTarget#0;class#NormalPosition#0" />
+            <element signature="method#isDownSideToTarget#0;class#NormalPosition#0" />
+            <element signature="method#isExactlyUnderOrAboveTarget#0;class#NormalPosition#0" />
+            <element signature="method#isExactlyAboveTarget#0;class#NormalPosition#0" />
           </folding>
         </state>
       </provider>
@@ -1400,39 +1356,103 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="82" column="27" selection-start-line="82" selection-start-column="20" selection-end-line="82" selection-end-column="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#render#0;class#FishMonsterMiniboss#0" />
+            <element signature="method#renderShield#0;class#FishMonsterMiniboss#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="80" column="55" lean-forward="true" selection-start-line="80" selection-start-column="55" selection-end-line="80" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#kickAfterHit#0;class#Monster#0" />
+            <element signature="method#update#0;class#Monster#0" />
+            <element signature="method#updateByVelocity#0;class#Monster#0" />
+            <element signature="e#3048#3049#0" expanded="true" />
+            <element signature="method#isExactlyUnderOrAboveTarget#0;class#Monster#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByBigTarget.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="32" column="49" selection-start-line="32" selection-start-column="49" selection-end-line="32" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/ukaszAngelRightHoly.gif">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="304" column="16" selection-start-line="304" selection-start-column="16" selection-end-line="304" selection-end-column="16" />
+        <state relative-caret-position="172">
+          <caret line="113" column="17" lean-forward="true" selection-start-line="113" selection-start-column="17" selection-end-line="113" selection-end-column="17" />
           <folding>
-            <element signature="e#2899#2900#0" expanded="true" />
-            <element signature="e#2988#2989#0" expanded="true" />
-            <element signature="e#4073#4657#0" />
-            <element signature="e#4663#4864#0" />
-            <element signature="e#4870#5090#0" />
-            <element signature="e#5444#6428#0" />
-            <element signature="e#6434#6641#0" />
-            <element signature="e#6647#6796#0" />
-            <element signature="e#7004#7255#0" />
-            <element signature="e#7261#7768#0" />
-            <element signature="e#7774#8781#0" />
-            <element signature="e#8787#9309#0" />
-            <element signature="e#9315#9660#0" />
-            <element signature="e#9666#10010#0" />
-            <element signature="e#10016#10355#0" />
-            <element signature="e#10361#10720#0" />
-            <element signature="e#10874#11080#0" />
-            <element signature="e#11086#11270#0" />
-            <element signature="e#11388#11542#0" />
-            <element signature="e#11548#11671#0" />
-            <element signature="e#11976#12254#0" />
-            <element signature="e#12543#12544#0" expanded="true" />
-            <element signature="e#12595#12596#0" expanded="true" />
-            <element signature="e#13172#13319#0" />
-            <element signature="e#13414#13545#0" />
-            <element signature="e#13634#13773#0" />
-            <element signature="e#13779#13914#0" />
-            <element signature="e#14053#14188#0" />
+            <element signature="e#3136#4251#0" />
+            <element signature="e#4257#4841#0" />
+            <element signature="e#4847#5048#0" />
+            <element signature="e#5628#6612#0" />
+            <element signature="e#6618#6825#0" />
+            <element signature="e#6831#6980#0" />
+            <element signature="e#7188#7439#0" />
+            <element signature="e#7445#7952#0" />
+            <element signature="e#7958#8965#0" />
+            <element signature="e#8971#9493#0" />
+            <element signature="e#9499#9844#0" />
+            <element signature="e#9850#10194#0" />
+            <element signature="e#10200#10539#0" />
+            <element signature="e#10545#10904#0" />
+            <element signature="e#11058#11264#0" />
+            <element signature="e#11270#11454#0" />
+            <element signature="e#11572#11726#0" />
+            <element signature="e#11732#11855#0" />
+            <element signature="e#11861#11996#0" />
+            <element signature="e#12121#12399#0" />
+            <element signature="e#13317#13464#0" />
+            <element signature="e#13559#13690#0" />
+            <element signature="e#13779#13918#0" />
+            <element signature="e#13924#14059#0" />
+            <element signature="e#14198#14333#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="51" column="104" selection-start-line="51" selection-start-column="104" selection-end-line="51" selection-end-column="104" />
+          <folding>
+            <element signature="e#1189#1423#0" />
+            <element signature="e#1429#1546#0" />
+            <element signature="e#1793#1794#0" expanded="true" />
+            <element signature="e#1868#1869#0" expanded="true" />
+            <element signature="e#2322#2495#0" />
+            <element signature="e#2501#2677#0" />
+            <element signature="e#2683#2859#0" />
+            <element signature="e#2865#3031#0" />
+            <element signature="e#3257#3355#0" />
+            <element signature="e#3361#3459#0" />
+            <element signature="e#3465#3564#0" />
           </folding>
         </state>
       </provider>

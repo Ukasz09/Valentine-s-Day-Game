@@ -49,7 +49,8 @@ public abstract class Sprite {
 
     public void render() {
         manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
-        //manager.getGraphicContext().fillRect(positionX,positionY,getWidth(),getHeight());
+        //manager.getGraphicContext().fillRect(positionX,positionY,getWidth(),getHeight()); //todo: temp
+        manager.getGraphicContext().fillRect(getBoundary().getMinX(),getBoundary().getMinY(),getBoundary().getWidth(),getBoundary().getHeight());
     }
 
     public Rectangle2D getBoundary() {

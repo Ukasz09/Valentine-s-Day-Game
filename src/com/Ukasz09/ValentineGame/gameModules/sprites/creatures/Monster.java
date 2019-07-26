@@ -1,7 +1,8 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.IPositionByTarget;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.ByBigTarget;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.PositionByTarget;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import javafx.geometry.Point2D;
@@ -14,17 +15,17 @@ public abstract class Monster extends Sprite {
     private double howBigKickSize;
     private KickPlayer kickMethod;
     private ICollisionAvoidWay collisionAvoidWay;
-    private IPositionByTarget positionByTarget;
+    private PositionByTarget positionByTarget;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Monster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay, IPositionByTarget positionByTarget) {
+    public Monster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(image, manager);
         howManyLivesTake = 0;
         howBigKickSize = 0;
         setVelocity(0, 0);
         this.kickMethod = kickMethod;
         this.collisionAvoidWay = collisionAvoidWay;
-        this.positionByTarget = positionByTarget;
+        this.positionByTarget = new ByBigTarget();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

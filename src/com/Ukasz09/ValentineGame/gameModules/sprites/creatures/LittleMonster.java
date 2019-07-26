@@ -1,7 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.IPositionByTarget;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
@@ -20,8 +19,8 @@ public class LittleMonster extends Monster {
     private final double velocityY = 1;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public LittleMonster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay, IPositionByTarget positionByTarget) {
-        super(image, kickMethod, manager, collisionAvoidWay, positionByTarget);
+    public LittleMonster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+        super(image, kickMethod, manager, collisionAvoidWay);
         setLives(3);
 
         setHitSound(new SoundsPlayer(hitSoundPath));

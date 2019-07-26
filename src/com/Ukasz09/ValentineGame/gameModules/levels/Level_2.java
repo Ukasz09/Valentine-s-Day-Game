@@ -2,8 +2,6 @@ package com.Ukasz09.ValentineGame.gameModules.levels;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.*;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.PropperImageSet;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.PositionByLittleCreature;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
@@ -19,12 +17,16 @@ import java.util.ArrayList;
 public class Level_2 extends Levels {
     private static final Image FISH_MONSTER_LEFT_IMAGE = SpritesImages.fishMonsterLeftImage;
     private static final Image FISH_MONSTER_RIGHT_IMAGE = SpritesImages.fishMonsterRightImage;
-    private static final Image FISH_MONSTER_BOTTOM_IMAGE = SpritesImages.fishMonsterBottomImage;
-    private static final Image FISH_MONSTER_TOP_IMAGE = SpritesImages.fishMonsterTopImage;
+    private static final Image FISH_MONSTER_BOTTOM_IMAGE = SpritesImages.fishMonsterDownImage;
+    private static final Image FISH_MONSTER_TOP_IMAGE = SpritesImages.fishMonsterUpImage;
     private static final Image FISH_MONSTER_MINIBOSS_LEFT_IMAGE = SpritesImages.fishMonsterMinibossLeftImage;
+    private static final Image FISH_MONSTER_MINIBOSS_LEFT_UP_IMAGE = SpritesImages.fishMonsterMinibossLeftUpImage;
+    private static final Image FISH_MONSTER_MINIBOSS_LEFT_DOWN_IMAGE = SpritesImages.fishMonsterMinibossLeftDownImage;
     private static final Image FISH_MONSTER_MINIBOSS_RIGHT_IMAGE = SpritesImages.fishMonsterMinibossRightImage;
-    private static final Image FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE = SpritesImages.fishMonsterMinibossBottomImage;
-    private static final Image FISH_MONSTER_MINIBOSS_TOP_IMAGE = SpritesImages.fishMonsterMinibossTopImage;
+    private static final Image FISH_MONSTER_MINIBOSS_RIGHT_UP_IMAGE = SpritesImages.fishMonsterMinibossRightUpImage;
+    private static final Image FISH_MONSTER_MINIBOSS_RIGHT_DOWN_IMAGE = SpritesImages.fishMonsterMinibossRightDownImage;
+    private static final Image FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE = SpritesImages.fishMonsterMinibossDownImage;
+    private static final Image FISH_MONSTER_MINIBOSS_TOP_IMAGE = SpritesImages.fishMonsterMinibossUpImage;
     private static final Image FISH_MINIBOSS_SHIELD_IMAGE = SpritesImages.fishMinibossShieldImage;
 
     private static final Image MONEY_BAG_IMAGE_1 = SpritesImages.moneyBagImage1;
@@ -59,14 +61,14 @@ public class Level_2 extends Levels {
     public void spawnLittleMonsters(ArrayList<Monster> monsters) {
 
         for (int i = 0; i < howManyLittleMonsters; i++) {
-            FishMonster m = new FishMonster(FISH_MONSTER_LEFT_IMAGE, FISH_MONSTER_RIGHT_IMAGE, FISH_MONSTER_BOTTOM_IMAGE, FISH_MONSTER_TOP_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new FastCollisionAvoid(), new PositionByLittleCreature());
+            FishMonster m = new FishMonster(FISH_MONSTER_LEFT_IMAGE, FISH_MONSTER_RIGHT_IMAGE, FISH_MONSTER_BOTTOM_IMAGE, FISH_MONSTER_TOP_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new FastCollisionAvoid());
             monsters.add(m);
         }
     }
 
     public void spawnMiniboss(ArrayList<Monster> monsters) {
 
-        FishMonsterMiniboss miniBoss = new FishMonsterMiniboss(FISH_MONSTER_MINIBOSS_LEFT_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_IMAGE, FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE, FISH_MONSTER_MINIBOSS_TOP_IMAGE, FISH_MINIBOSS_SHIELD_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new FastCollisionAvoid(), new PositionByLittleCreature());
+        FishMonsterMiniboss miniBoss = new FishMonsterMiniboss(FISH_MONSTER_MINIBOSS_LEFT_IMAGE, FISH_MONSTER_MINIBOSS_LEFT_UP_IMAGE,FISH_MONSTER_MINIBOSS_LEFT_DOWN_IMAGE,FISH_MONSTER_MINIBOSS_RIGHT_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_UP_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_DOWN_IMAGE, FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE, FISH_MONSTER_MINIBOSS_TOP_IMAGE, FISH_MINIBOSS_SHIELD_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new FastCollisionAvoid());
 
         int random = (int) (Math.random() * 2);
 

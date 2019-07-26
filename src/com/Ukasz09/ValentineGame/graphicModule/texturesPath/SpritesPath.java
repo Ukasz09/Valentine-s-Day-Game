@@ -14,7 +14,11 @@ public class SpritesPath {
     public static final String FISH_MONSTER_TOP_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonsterSmallTop.gif";
 
     public static final String FISH_MONSTER_MINIBOSS_RIGHT_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonsterMinibossRight.gif";
+    public static final String FISH_MONSTER_MINIBOSS_RIGHT_UP_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonsterMinibossRightUp.gif";
+    public static final String FISH_MONSTER_MINIBOSS_RIGHT_DOWN__PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonsterMinibossRightDown.gif";
     public static final String FISH_MONSTER_MINIBOSS_LEFT_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonsterMinibossLeft.gif";
+    public static final String FISH_MONSTER_MINIBOSS_LEFT_UP_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonsterMinibossLeftUp.gif";
+    public static final String FISH_MONSTER_MINIBOSS_LEFT_DOWN_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonsterMinibossLeftDown.gif";
     public static final String FISH_MONSTER_MINIBOSS_BOTTOM_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonsterMinibossBottom.gif";
     public static final String FISH_MONSTER_MINIBOSS_TOP_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonsterMinibossTop.gif";
     public static final String FISH_MONSTER_MINIBOSS_SHIELD_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMinibossShield.gif";

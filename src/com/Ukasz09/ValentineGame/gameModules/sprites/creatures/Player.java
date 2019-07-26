@@ -15,6 +15,7 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.Shield;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ManualActivateShield;
 
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -28,7 +29,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     public static final int DEFAULT_BATTERY_OVERHEATING_REDUCE = 50;
     public static final int DEFAULT_BULLET_OVERHEATING_REDUCE = 50;
     public static final int DEFAULT_ANTICOLLISION_TIMER = 4000;
-    public static final double DEFAULT_HIT_SOUND_VOLUME = 1;
+    public static final double DEFAULT_HIT_SOUND_VOLUME = 0.2;
     private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
     private static final Image PLAYER_LEFT_IMAGE = SpritesImages.playerLeftImage;
     private static final Image PLAYER_SHIELD_IMAGE = SpritesImages.playerShieldImage;
@@ -117,6 +118,17 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //todo: psuje sie duzo
+
+
+    @Override
+    public Rectangle2D getBoundary() {
+        double width=getWidth();
+        double height=getHeight();
+        return new Rectangle2D(getPositionX()+0.5*width, getPositionY()+0.25*height, width/2, height/2);
+    }
+
+    //////////
     private void addTotalScore(int score) {
         totalScore += score;
     }

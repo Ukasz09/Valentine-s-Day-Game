@@ -2,7 +2,6 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.PropperImageSet;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.IPositionByTarget;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ShieldKindOfRender;
@@ -25,7 +24,7 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     private static final double MISS_SOUND_VOLUME = 1;
 
     private final double howManyLivesTake = 1.5;
-    private final int howBigKickSize = 150;
+    private final int howBigKickSize = 0; //todo: tmp
     private final double maxLive = 20;
     private final double velocityX = 3;
     private final double velocityY = 3;
@@ -34,15 +33,19 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
 
     private Shield shield;
     private Image imageLeft;
+    private Image imageLeftUp;
+    private Image imageLeftDown;
     private Image imageRight;
-    private Image imageBottom;
-    private Image imageTop;
+    private Image imageRightUp;
+    private Image imageRightDown;
+    private Image imageDown;
+    private Image imageUp;
     private HealthStatusBar healthBar;
     private PropperImageSet imageSetWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public FishMonsterMiniboss(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay, IPositionByTarget positionByTarget) {
-        super(imageLeft, kickMethod, manager, collisionAvoidWay, positionByTarget);
+    public FishMonsterMiniboss(Image left, Image leftUp, Image leftDown, Image right, Image rightUp, Image rightDown, Image down, Image up, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+        super(left, kickMethod, manager, collisionAvoidWay);
         setLives(maxLive);
         setProtectionTime(0);
         shield = new AutoActivateShield(defaultShieldTimer, defaultShieldDuration, shieldImage, this);
@@ -53,10 +56,14 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
         setHowManyLivesTake(howManyLivesTake);
         setVelocity(velocityX, velocityY);
 
-        this.imageLeft = imageLeft;
-        this.imageRight = imageRight;
-        this.imageBottom = imageBottom;
-        this.imageTop = imageTop;
+        this.imageLeft = left;
+        this.imageLeftUp = leftUp;
+        this.imageLeftDown = leftDown;
+        this.imageRight = right;
+        this.imageRightUp = rightUp;
+        this.imageRightDown = rightDown;
+        this.imageDown = down;
+        this.imageUp = up;
         healthBar = new HealthStatusBar(maxLive, getWidth(), getPositionX(), getPositionY());
         this.imageSetWay = new PropperImageSet();
     }
@@ -72,14 +79,14 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setImageByPosition(Image left, Image right, Image bottom, Image top, Sprite target) {
-        imageSetWay.byTargetPosition(left, right, bottom, top, this, target);
+    public void setImageByPosition(Image left, Image leftUp, Image leftDown, Image right, Image rightUp, Image rightDown, Image down, Image up, Sprite target) {
+        imageSetWay.byTargetPosition(left, leftUp, leftDown, right, rightUp, rightDown, down, up, this, target);
     }
 
     @Override
     public void update(Sprite player, ArrayList<Monster> monsters) {
         super.update(player, monsters);
-        setImageByPosition(imageLeft, imageRight, imageBottom, imageTop, player);
+        setImageByPosition(imageLeft, imageLeftUp, imageLeftDown, imageRight, imageRightUp,imageRightDown, imageDown, imageUp, player);
         healthBar.update(getLives(), getPositionX(), getPositionY());
         updateShield();
     }
