@@ -39,7 +39,7 @@ public class Level_2 extends Levels {
     private final int smallCoinValue = 50;
     private final int normalCoinValue = 100;
 
-    private final int howManyLittleMonsters = 10;
+    private final int howManyLittleMonsters = 5;
     private final int howManyAllMonsters = howManyLittleMonsters + 1; //male potworki+boss
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,14 +61,14 @@ public class Level_2 extends Levels {
     public void spawnLittleMonsters(ArrayList<Monster> monsters) {
 
         for (int i = 0; i < howManyLittleMonsters; i++) {
-            FishMonster m = new FishMonster(FISH_MONSTER_LEFT_IMAGE, FISH_MONSTER_RIGHT_IMAGE, FISH_MONSTER_BOTTOM_IMAGE, FISH_MONSTER_TOP_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new FastCollisionAvoid());
+            FishMonster m = new FishMonster(FISH_MONSTER_LEFT_IMAGE, FISH_MONSTER_RIGHT_IMAGE, FISH_MONSTER_BOTTOM_IMAGE, FISH_MONSTER_TOP_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
             monsters.add(m);
         }
     }
 
     public void spawnMiniboss(ArrayList<Monster> monsters) {
 
-        FishMonsterMiniboss miniBoss = new FishMonsterMiniboss(FISH_MONSTER_MINIBOSS_LEFT_IMAGE, FISH_MONSTER_MINIBOSS_LEFT_UP_IMAGE,FISH_MONSTER_MINIBOSS_LEFT_DOWN_IMAGE,FISH_MONSTER_MINIBOSS_RIGHT_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_UP_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_DOWN_IMAGE, FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE, FISH_MONSTER_MINIBOSS_TOP_IMAGE, FISH_MINIBOSS_SHIELD_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new FastCollisionAvoid());
+        FishMonsterMiniboss miniBoss = new FishMonsterMiniboss(FISH_MONSTER_MINIBOSS_LEFT_IMAGE, FISH_MONSTER_MINIBOSS_LEFT_UP_IMAGE,FISH_MONSTER_MINIBOSS_LEFT_DOWN_IMAGE,FISH_MONSTER_MINIBOSS_RIGHT_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_UP_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_DOWN_IMAGE, FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE, FISH_MONSTER_MINIBOSS_TOP_IMAGE, FISH_MINIBOSS_SHIELD_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
 
         int random = (int) (Math.random() * 2);
 

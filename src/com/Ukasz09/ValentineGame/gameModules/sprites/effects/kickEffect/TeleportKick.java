@@ -5,6 +5,10 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 
 public class TeleportKick implements KindOfKick {
+
+    /**
+     * Move player instantly by amount of pixels in kickDirection
+     */
     @Override
     public void kick(Monster m, Player player, String kickDirection, ViewManager manager) {
         switch (kickDirection) {

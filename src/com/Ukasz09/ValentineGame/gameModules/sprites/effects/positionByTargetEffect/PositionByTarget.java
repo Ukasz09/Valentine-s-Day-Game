@@ -6,7 +6,8 @@ public class PositionByTarget {
 
     public boolean isRightSideToTarget(Sprite creature, Sprite target) {
         double creatureMinX = creature.getBoundary().getMinX();
-        if (creatureMinX + 0.1 * creatureMinX > target.getBoundary().getMaxX())
+        double creatureWidth = creature.getWidth();
+        if (creatureMinX + creatureWidth / 10 > target.getBoundary().getMaxX())
             return true;
 
         return false;
@@ -14,7 +15,8 @@ public class PositionByTarget {
 
     public boolean isLeftSideToTarget(Sprite creature, Sprite target) {
         double creatureMaxX = creature.getBoundary().getMaxX();
-        if (creatureMaxX - 0.1 * creatureMaxX < target.getBoundary().getMinX())
+        double creatureWidth = creature.getWidth();
+        if (creatureMaxX - creatureWidth / 10 < target.getBoundary().getMinX())
             return true;
 
         return false;
@@ -22,7 +24,8 @@ public class PositionByTarget {
 
     public boolean isUpSideToTarget(Sprite creature, Sprite target) {
         double creatureMaxY = creature.getBoundary().getMaxY();
-        if (creatureMaxY - 0.1 * creatureMaxY < target.getBoundary().getMinY())
+        double creatureHeight = creature.getHeight();
+        if (creatureMaxY - creatureHeight / 10 < target.getBoundary().getMinY())
             return true;
 
         return false;
@@ -30,7 +33,8 @@ public class PositionByTarget {
 
     public boolean isDownSideToTarget(Sprite creature, Sprite target) {
         double creatureMinY = creature.getBoundary().getMinY();
-        if (creatureMinY + 0.1 * creatureMinY > target.getBoundary().getMaxX())
+        double creatureHeight = creature.getHeight();
+        if (creatureMinY + creatureHeight / 10 > target.getBoundary().getMaxX())
             return true;
 
         return false;
@@ -48,9 +52,10 @@ public class PositionByTarget {
 
     public boolean isExactlyAboveTarget(Sprite creature, Sprite target) {
         double creatureMaxY = creature.getBoundary().getMaxY();
+        double creatureHeight = creature.getHeight();
 
         if (isExactlyUnderOrAboveTarget(creature, target))
-            if (creatureMaxY - 0.15 * creatureMaxY < target.getBoundary().getMinY())
+            if (creatureMaxY - creatureHeight / 10 < target.getBoundary().getMinY())
                 return true;
 
         return false;

@@ -72,6 +72,10 @@ public abstract class Sprite {
         return (s.getBoundary().intersects(this.getBoundary()));
     }
 
+    public boolean intersectsForCollision(Sprite s) {
+        return (s.getBoundaryForCollision().intersects(this.getBoundaryForCollision()));
+    }
+
     public void addPositionX(double offset) {
         positionX += offset;
     }
