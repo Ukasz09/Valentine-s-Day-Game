@@ -19,8 +19,8 @@ public class FishMonster extends Monster {
 
     private final double howManyLivesTake = 0.5;
     private final int howBigKickSize = 0;
-    private final double velocityX = 2;
-    private final double velocityY = 2;
+    private final double velocityX = 2.5;
+    private final double velocityY = 2.5;
 
     private Image imageLeft;
     private Image imageRight;

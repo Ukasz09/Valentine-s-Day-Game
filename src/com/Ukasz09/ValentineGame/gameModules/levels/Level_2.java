@@ -39,7 +39,7 @@ public class Level_2 extends Levels {
     private final int smallCoinValue = 50;
     private final int normalCoinValue = 100;
 
-    private final int howManyLittleMonsters = 5;
+    private final int howManyLittleMonsters = 12;
     private final int howManyAllMonsters = howManyLittleMonsters + 1; //male potworki+boss
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

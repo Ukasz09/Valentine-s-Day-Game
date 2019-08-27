@@ -4,47 +4,37 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 
 public class PositionByTarget {
 
-    public boolean isRightSideToTarget(Sprite creature, Sprite target) {
-        double creatureMinX = creature.getBoundary().getMinX();
-        double creatureWidth = creature.getWidth();
-        if (creatureMinX + creatureWidth / 10 > target.getBoundary().getMaxX())
-            return true;
-
-        return false;
-    }
-
     public boolean isLeftSideToTarget(Sprite creature, Sprite target) {
-        double creatureMaxX = creature.getBoundary().getMaxX();
-        double creatureWidth = creature.getWidth();
-        if (creatureMaxX - creatureWidth / 10 < target.getBoundary().getMinX())
+        double creatureMinX = creature.getBoundary().getMinX();
+        if (creatureMinX <= target.getBoundary().getMinX())
             return true;
 
         return false;
     }
+
+    public boolean isRightSideToTarget(Sprite creature, Sprite target) {
+        return !isLeftSideToTarget(creature, target);
+    }
+
 
     public boolean isUpSideToTarget(Sprite creature, Sprite target) {
-        double creatureMaxY = creature.getBoundary().getMaxY();
-        double creatureHeight = creature.getHeight();
-        if (creatureMaxY - creatureHeight / 10 < target.getBoundary().getMinY())
+        double creatureMinY = creature.getBoundary().getMinY();
+        if (creatureMinY <= target.getBoundary().getMinY())
             return true;
 
         return false;
     }
 
     public boolean isDownSideToTarget(Sprite creature, Sprite target) {
-        double creatureMinY = creature.getBoundary().getMinY();
-        double creatureHeight = creature.getHeight();
-        if (creatureMinY + creatureHeight / 10 > target.getBoundary().getMaxX())
-            return true;
-
-        return false;
+        return !isUpSideToTarget(creature, target);
     }
 
+    //todo: sprawdzic
     public boolean isExactlyUnderOrAboveTarget(Sprite creature, Sprite target) {
         double creatureMinX = creature.getBoundary().getMinX();
         double creatureMaxX = creature.getBoundary().getMaxX();
 
-        if ((creatureMinX > target.getBoundary().getMinX()) && (creatureMaxX < target.getBoundary().getMaxX()))
+        if ((creatureMinX >= target.getBoundary().getMinX()) && (creatureMaxX <= target.getBoundary().getMaxX()))
             return true;
 
         return false;
@@ -55,7 +45,7 @@ public class PositionByTarget {
         double creatureHeight = creature.getHeight();
 
         if (isExactlyUnderOrAboveTarget(creature, target))
-            if (creatureMaxY - creatureHeight / 10 < target.getBoundary().getMinY())
+            if (creatureMaxY <= target.getBoundary().getMinY())
                 return true;
 
         return false;
