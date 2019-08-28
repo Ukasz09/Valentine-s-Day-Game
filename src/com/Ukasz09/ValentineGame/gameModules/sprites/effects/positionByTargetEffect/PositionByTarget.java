@@ -5,8 +5,8 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 public class PositionByTarget {
 
     public boolean isLeftSideToTarget(Sprite creature, Sprite target) {
-        double creatureMinX = creature.getBoundary().getMinX();
-        if (creatureMinX <= target.getBoundary().getMinX())
+        double creatureMinX = creature.getBoundaryForCollision().getMinX();
+        if (creatureMinX <= target.getBoundaryForCollision().getMinX())
             return true;
 
         return false;
@@ -16,10 +16,9 @@ public class PositionByTarget {
         return !isLeftSideToTarget(creature, target);
     }
 
-
     public boolean isUpSideToTarget(Sprite creature, Sprite target) {
-        double creatureMinY = creature.getBoundary().getMinY();
-        if (creatureMinY <= target.getBoundary().getMinY())
+        double creatureMinY = creature.getBoundaryForCollision().getMinY();
+        if (creatureMinY <= target.getBoundaryForCollision().getMinY())
             return true;
 
         return false;
@@ -29,24 +28,19 @@ public class PositionByTarget {
         return !isUpSideToTarget(creature, target);
     }
 
-    //todo: sprawdzic
     public boolean isExactlyUnderOrAboveTarget(Sprite creature, Sprite target) {
-        double creatureMinX = creature.getBoundary().getMinX();
-        double creatureMaxX = creature.getBoundary().getMaxX();
+        double creatureMinX = creature.getBoundaryForCollision().getMinX();
+        double creatureMaxX = creature.getBoundaryForCollision().getMaxX();
 
-        if ((creatureMinX >= target.getBoundary().getMinX()) && (creatureMaxX <= target.getBoundary().getMaxX()))
+        if ((creatureMinX >= target.getBoundaryForCollision().getMinX()) && (creatureMaxX <= target.getBoundaryForCollision().getMaxX()))
             return true;
 
         return false;
     }
 
     public boolean isExactlyAboveTarget(Sprite creature, Sprite target) {
-        double creatureMaxY = creature.getBoundary().getMaxY();
-        double creatureHeight = creature.getHeight();
-
-        if (isExactlyUnderOrAboveTarget(creature, target))
-            if (creatureMaxY <= target.getBoundary().getMinY())
-                return true;
+        if (isExactlyUnderOrAboveTarget(creature, target) && isUpSideToTarget(creature, target))
+            return true;
 
         return false;
     }

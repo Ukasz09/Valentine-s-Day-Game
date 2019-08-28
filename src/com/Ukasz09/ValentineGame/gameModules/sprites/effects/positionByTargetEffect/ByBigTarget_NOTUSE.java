@@ -2,8 +2,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEf
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 
-//todo: tmp - potem do abstarct
-public class ByBigTarget extends PositionByTarget {
+public class ByBigTarget_NOTUSE extends PositionByTarget {
     public boolean isRightSideToTarget(Sprite creature, Sprite target) {
         double creatureMinX = creature.getBoundary().getMinX();
         if (creatureMinX + creature.getWidth()/3 > target.getBoundary().getMaxX())

@@ -1,7 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.PropperImageSet;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.ProperImageSet;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
@@ -27,7 +27,7 @@ public class FishMonster extends Monster {
     private Image imageBottom;
     private Image imageTop;
 
-    private PropperImageSet imageSetWay;
+    private ProperImageSet imageSetWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonster(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
@@ -43,7 +43,7 @@ public class FishMonster extends Monster {
         this.imageRight = imageRight;
         this.imageBottom = imageBottom;
         this.imageTop = imageTop;
-        this.imageSetWay = new PropperImageSet();
+        this.imageSetWay = new ProperImageSet();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

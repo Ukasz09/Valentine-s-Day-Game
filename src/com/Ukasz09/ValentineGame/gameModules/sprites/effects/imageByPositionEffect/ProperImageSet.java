@@ -4,7 +4,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import javafx.scene.image.Image;
 
-public class PropperImageSet {
+public class ProperImageSet {
 
     public void byTargetPosition(Image left, Image right, Image down, Image up, Monster monsterToImageSet, Sprite target) {
         if (monsterToImageSet.isRightSideToTarget(target))

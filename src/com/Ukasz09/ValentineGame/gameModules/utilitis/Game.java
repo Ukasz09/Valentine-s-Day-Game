@@ -49,6 +49,8 @@ public class Game extends Application {
         inputsList = new ArrayList<>();
         moneybagList = new ArrayList<>();
         monstersList = new ArrayList<>();
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,6 +129,9 @@ public class Game extends Application {
         player.setVelocity(0, 0);
 
         if (inputsList.contains("A")) {
+
+            player.setPressedKey_A(true);
+
             if (!player.boundaryCollisionFromLeftSide(manager.getLeftBorder())) {
                 player.setLastDirectionX("A"); //must be before setting image
                 player.setProperActualImage();
@@ -136,9 +141,12 @@ public class Game extends Application {
                     player.setCollisionFromLeftSide(false);
                 } else player.setCollisionFromLeftSide(true);
             } else player.setCollisionFromLeftSide(true);
-        }
+        } else player.setPressedKey_A(false);
 
         if (inputsList.contains("D")) {
+
+            player.setPressedKey_D(true);
+
             if (!player.boundaryCollisionFromRightSide(manager.getRightBorder())) {
                 player.setLastDirectionX("D");
                 player.setProperActualImage();
@@ -148,9 +156,12 @@ public class Game extends Application {
                     player.setCollisionFromRightSide(false);
                 } else player.setCollisionFromRightSide(true);
             } else player.setCollisionFromRightSide(true);
-        }
+        } else player.setPressedKey_D(false);
 
         if (inputsList.contains("W")) {
+
+            player.setPressedKey_W(true);
+
             if (!player.boundaryCollisionFromTop(manager.getTopBorder())) {
 
                 if ((!player.collisionWithMonstersFromBottom(monstersList, player)) || (player.checkPlayerCanDoAnyMove())) {
@@ -158,9 +169,12 @@ public class Game extends Application {
                     player.setCollisionFromUpSide(false);
                 } else player.setCollisionFromUpSide(true);
             } else player.setCollisionFromUpSide(true);
-        }
+        } else player.setPressedKey_W(false);
 
         if (inputsList.contains("S")) {
+
+            player.setPressedKey_S(true);
+
             if (!player.boundaryCollisionFromBottom(manager.getBottomBorder())) {
 
                 if ((!player.collisionWithMonstersFromTop(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
@@ -168,7 +182,7 @@ public class Game extends Application {
                     player.setCollisionFromDownSide(false);
                 } else player.setCollisionFromDownSide(true);
             } else player.setCollisionFromDownSide(true);
-        }
+        } else player.setPressedKey_S(false);
 
         if (inputsList.contains("SPACE")) {
             if (player.getBulletOverheating() <= 0) {

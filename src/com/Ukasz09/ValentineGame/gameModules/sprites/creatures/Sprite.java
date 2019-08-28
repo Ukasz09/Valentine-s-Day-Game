@@ -3,7 +3,9 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
@@ -24,7 +26,6 @@ public abstract class Sprite {
     private SoundsPlayer missSound;
 
     private ViewManager manager;
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Sprite(Image actualImage, ViewManager manager) {
         this.manager = manager;
@@ -50,9 +51,32 @@ public abstract class Sprite {
     }
 
     public void render() {
-        manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
-        //manager.getGraphicContext().fillRect(positionX,positionY,getWidth(),getHeight()); //todo: temp
+        //manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
+        //drawActualImage(0);
 
+        drawNormallImage();
+        drawBoundaryForTests();
+
+    }
+
+    public void drawActualImage(double rotate){
+        if(rotate!=0) {
+            ImageView iv = new ImageView(actualImage);
+            iv.setRotate(rotate);
+            SnapshotParameters params = new SnapshotParameters();
+            params.setFill(Color.TRANSPARENT);
+            Image rotatedImage = iv.snapshot(params, null);
+            manager.getGraphicContext().drawImage(rotatedImage, positionX, positionY);
+        } else manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
+    }
+
+    //todo: na czas testow
+    public void drawNormallImage(){
+        manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
+    }
+
+
+    public void drawBoundaryForTests(){
         double tmpPosX = getBoundaryForCollision().getMinX();
         double tmpPosY = getBoundaryForCollision().getMinY();
         double tmpWidth = getBoundaryForCollision().getWidth();
@@ -61,7 +85,7 @@ public abstract class Sprite {
         manager.getGraphicContext().setFill(p);
         manager.getGraphicContext().fillRect(tmpPosX, tmpPosY, tmpWidth, tmpHeight);
     }
-
+    //
     public abstract Rectangle2D getBoundaryForCollision();
 
     public Rectangle2D getBoundary() {
@@ -112,6 +136,7 @@ public abstract class Sprite {
         if ((this.getBoundary().getMinY()) <= atTopBorder) return true;
         else return false;
     }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setActualImage(Image actualImage) {

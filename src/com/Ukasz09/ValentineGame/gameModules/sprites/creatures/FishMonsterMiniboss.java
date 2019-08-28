@@ -1,7 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.PropperImageSet;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.ProperImageSet;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ShieldKindOfRender;
@@ -42,7 +42,7 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     private Image imageDown;
     private Image imageUp;
     private HealthStatusBar healthBar;
-    private PropperImageSet imageSetWay;
+    private ProperImageSet imageSetWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonsterMiniboss(Image left, Image leftUp, Image leftDown, Image right, Image rightUp, Image rightDown, Image down, Image up, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
@@ -66,7 +66,7 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
         this.imageDown = down;
         this.imageUp = up;
         healthBar = new HealthStatusBar(maxLive, getWidth(), getPositionX(), getPositionY());
-        this.imageSetWay = new PropperImageSet();
+        this.imageSetWay = new ProperImageSet();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

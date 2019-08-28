@@ -1,6 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.PropperImageSet;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.ProperImageSet;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
@@ -53,7 +53,16 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private boolean collisionFromUpSide;
     private boolean collisionFromDownSide;
     private int anticollisionTimer; //to avoid jammed
-    private PropperImageSet imageSetWay;
+    private ProperImageSet imageSetWay;
+
+    private boolean pressedKey_A;
+    private boolean pressedKey_D;
+    private boolean pressedKey_W;
+    private boolean pressedKey_S;
+
+    //
+    private double actualRotate;
+    //
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
@@ -81,12 +90,19 @@ public class Player extends Sprite implements ShieldKindOfRender {
         killedMonstersOnLevel = 0;
         heartsRender = new InCorner(manager);
         shotsList = new ArrayList<>();
-        imageSetWay = new PropperImageSet();
+        imageSetWay = new ProperImageSet();
 
         collisionFromLeftSide = false;
         collisionFromRightSide = false;
         collisionFromUpSide = false;
         collisionFromDownSide = false;
+
+        pressedKey_A = false;
+        pressedKey_D = false;
+        pressedKey_W = false;
+        pressedKey_S = false;
+
+        actualRotate = 0;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,11 +123,19 @@ public class Player extends Sprite implements ShieldKindOfRender {
         updateBattery();
         updateBulletOverheating();
         updateAnticollisionTimer();
+        rotateByPressedKey();
     }
 
     @Override
     public void render() {
-        super.render();
+        //super.render();
+
+        //
+        //drawActualImage(actualRotate);
+        drawActualImage(actualRotate);
+        drawBoundaryForTests();
+        //
+
         renderShield(getManager().getGraphicContext());
         renderBattery(getManager().getGraphicContext());
         heartsRender.renderHearts(this);
@@ -124,9 +148,9 @@ public class Player extends Sprite implements ShieldKindOfRender {
         double width = getWidth();
         double height = getHeight();
         if (lastDirectionX.equals("D"))
-            return new Rectangle2D(getPositionX() + width/3, getPositionY() + height/2.8, width / 2, height / 2);
+            return new Rectangle2D(getPositionX() + width / 3, getPositionY() + height / 2.8, width / 2, height / 2);
 
-        return new Rectangle2D(getPositionX()+width/8, getPositionY()+height/2.8, width / 2, height / 2);
+        return new Rectangle2D(getPositionX() + width / 8, getPositionY() + height / 2.8, width / 2, height / 2);
     }
 
     private void addTotalScore(int score) {
@@ -322,6 +346,34 @@ public class Player extends Sprite implements ShieldKindOfRender {
         getRandomHitSound().playSound(DEFAULT_HIT_SOUND_VOLUME, false);
     }
 
+    public void rotateByPressedKey() {
+//        if (pressedKey_W) {
+//            if (pressedKey_A || pressedKey_D)
+//                actualRotate =45;
+//            else actualRotate = 0;
+//        } else if (pressedKey_S) {
+//            if (pressedKey_A || pressedKey_D)
+//                actualRotate = - 45;
+//            else actualRotate = 0;
+//        } else actualRotate = 0;
+
+        if (pressedKey_A) {
+            if (pressedKey_W)
+                actualRotate = 25;
+            else if (pressedKey_S)
+                actualRotate = -25;
+            else actualRotate = 0;
+        } else if (pressedKey_D) {
+            if (pressedKey_W)
+                actualRotate = -25;
+            else if (pressedKey_S)
+                actualRotate = 25;
+            else actualRotate = 0;
+        } else actualRotate = 0;
+
+        System.out.println(actualRotate);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private SoundsPlayer getRandomHitSound() {
         int random = (int) (Math.random() * playerHitSounds.length);
@@ -402,5 +454,37 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public void setCollisionFromDownSide(boolean collisionFromDownSide) {
         this.collisionFromDownSide = collisionFromDownSide;
+    }
+
+    public boolean isPressedKey_A() {
+        return pressedKey_A;
+    }
+
+    public boolean isPressedKey_D() {
+        return pressedKey_D;
+    }
+
+    public boolean isPressedKey_W() {
+        return pressedKey_W;
+    }
+
+    public boolean isPressedKey_S() {
+        return pressedKey_S;
+    }
+
+    public void setPressedKey_A(boolean pressedKey_A) {
+        this.pressedKey_A = pressedKey_A;
+    }
+
+    public void setPressedKey_D(boolean pressedKey_D) {
+        this.pressedKey_D = pressedKey_D;
+    }
+
+    public void setPressedKey_W(boolean pressedKey_W) {
+        this.pressedKey_W = pressedKey_W;
+    }
+
+    public void setPressedKey_S(boolean pressedKey_S) {
+        this.pressedKey_S = pressedKey_S;
     }
 }
