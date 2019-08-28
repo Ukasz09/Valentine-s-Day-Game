@@ -50,6 +50,11 @@ public class BulletSprite extends ShotSprite {
     }
 
     @Override
+    public void updateImageDirection() {
+        //nothing to do
+    }
+
+    @Override
     public void update(double time) {
         if (shotDirection.equals("D"))
             addPositionX(getVelocityX() * time);

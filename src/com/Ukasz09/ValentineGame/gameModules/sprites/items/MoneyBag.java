@@ -41,6 +41,11 @@ public class MoneyBag extends Sprite {
         return getBoundary();
     }
 
+    @Override
+    public void updateImageDirection() {
+        //todo: to do
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public int getValue() {
         return value;

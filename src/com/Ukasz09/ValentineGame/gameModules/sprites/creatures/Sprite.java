@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.ProperImageSet;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Rectangle2D;
@@ -20,6 +21,9 @@ public abstract class Sprite {
     protected double lives;
     protected double maxLives;
     private int protectionTime;
+    private double lastRotate;
+    private double actualRotate;
+    private ProperImageSet imageSetWay;
 
     private SoundsPlayer hitSound;
     private SoundsPlayer deathSound;
@@ -36,6 +40,9 @@ public abstract class Sprite {
         maxLives = lives;
         missSound = null;
         protectionTime = 0;
+        actualRotate=0;
+        lastRotate=actualRotate;
+        imageSetWay=new ProperImageSet();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,17 +53,19 @@ public abstract class Sprite {
     }
 
     public void update(double time) {
+        updatePosition(time);
+        updateImageDirection();
+    }
+
+    public void updatePosition(double time){
         positionX += velocityX * time;
         positionY += velocityY * time;
     }
 
+
     public void render() {
-        //manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
-        //drawActualImage(0);
-
-        drawNormallImage();
+        drawActualImage(actualRotate);
         drawBoundaryForTests();
-
     }
 
     public void drawActualImage(double rotate){
@@ -67,15 +76,14 @@ public abstract class Sprite {
             params.setFill(Color.TRANSPARENT);
             Image rotatedImage = iv.snapshot(params, null);
             manager.getGraphicContext().drawImage(rotatedImage, positionX, positionY);
-        } else manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
+        } else{
+            manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
+        }
     }
+
+
 
     //todo: na czas testow
-    public void drawNormallImage(){
-        manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
-    }
-
-
     public void drawBoundaryForTests(){
         double tmpPosX = getBoundaryForCollision().getMinX();
         double tmpPosY = getBoundaryForCollision().getMinY();
@@ -87,6 +95,8 @@ public abstract class Sprite {
     }
     //
     public abstract Rectangle2D getBoundaryForCollision();
+
+    public abstract void updateImageDirection();
 
     public Rectangle2D getBoundary() {
         return new Rectangle2D(positionX, positionY, width, height);
@@ -137,6 +147,9 @@ public abstract class Sprite {
         else return false;
     }
 
+    public void updateLastRotate(){
+        lastRotate=actualRotate;
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setActualImage(Image actualImage) {
@@ -234,5 +247,21 @@ public abstract class Sprite {
 
     public int getProtectionTime() {
         return protectionTime;
+    }
+
+    public double getActualRotate() {
+        return actualRotate;
+    }
+
+    public void setActualRotate(double actualRotate) {
+        this.actualRotate = actualRotate;
+    }
+
+    public double getLastRotate() {
+        return lastRotate;
+    }
+
+    public ProperImageSet getImageSetWay() {
+        return imageSetWay;
     }
 }

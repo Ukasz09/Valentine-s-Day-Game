@@ -35,7 +35,7 @@ public class ProperImageSet {
         else monsterToImageSet.setActualImage(normal);
     }
 
-    public void byLastDirection(Image left, Image right, Sprite sprite, String lastDirectionX) {
+    public void setByLastDirection(Image left, Image right, Sprite sprite, String lastDirectionX) {
         if (lastDirectionX.equals("A"))
             sprite.setActualImage(left);
         else sprite.setActualImage(right);

@@ -42,7 +42,6 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     private Image imageDown;
     private Image imageUp;
     private HealthStatusBar healthBar;
-    private ProperImageSet imageSetWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonsterMiniboss(Image left, Image leftUp, Image leftDown, Image right, Image rightUp, Image rightDown, Image down, Image up, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
@@ -66,7 +65,6 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
         this.imageDown = down;
         this.imageUp = up;
         healthBar = new HealthStatusBar(maxLive, getWidth(), getPositionX(), getPositionY());
-        this.imageSetWay = new ProperImageSet();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,7 +79,7 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void setImageByPosition(Image left, Image leftUp, Image leftDown, Image right, Image rightUp, Image rightDown, Image down, Image up, Sprite target) {
-        imageSetWay.byTargetPosition(left, leftUp, leftDown, right, rightUp, rightDown, down, up, this, target);
+        getImageSetWay().byTargetPosition(left, leftUp, leftDown, right, rightUp, rightDown, down, up, this, target);
     }
 
     @Override
@@ -131,5 +129,10 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     public Rectangle2D getBoundaryForCollision() {
         return getBoundary();
         //todo: zmienic
+    }
+
+    @Override
+    public void updateImageDirection() {
+        //todo: to do
     }
 }

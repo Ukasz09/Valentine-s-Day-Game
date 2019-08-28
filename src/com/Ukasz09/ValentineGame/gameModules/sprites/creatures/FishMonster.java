@@ -27,8 +27,6 @@ public class FishMonster extends Monster {
     private Image imageBottom;
     private Image imageTop;
 
-    private ProperImageSet imageSetWay;
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonster(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(imageLeft, kickMethod, manager, collisionAvoidWay);
@@ -43,7 +41,6 @@ public class FishMonster extends Monster {
         this.imageRight = imageRight;
         this.imageBottom = imageBottom;
         this.imageTop = imageTop;
-        this.imageSetWay = new ProperImageSet();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,8 +65,13 @@ public class FishMonster extends Monster {
         //nothing
     }
 
+    @Override
+    public void updateImageDirection() {
+        //todo: do it
+    }
+
     private void setImageByPosition(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, Sprite target) {
-        imageSetWay.byTargetPosition(imageLeft, imageRight, imageBottom, imageTop, this, target);
+        getImageSetWay().byTargetPosition(imageLeft, imageRight, imageBottom, imageTop, this, target);
     }
 
     @Override

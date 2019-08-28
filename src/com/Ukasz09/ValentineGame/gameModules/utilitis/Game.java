@@ -134,7 +134,6 @@ public class Game extends Application {
 
             if (!player.boundaryCollisionFromLeftSide(manager.getLeftBorder())) {
                 player.setLastDirectionX("A"); //must be before setting image
-                player.setProperActualImage();
 
                 if ((!player.collisionWithMonstersFromLeftSide(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(-velocity, 0);
@@ -149,7 +148,6 @@ public class Game extends Application {
 
             if (!player.boundaryCollisionFromRightSide(manager.getRightBorder())) {
                 player.setLastDirectionX("D");
-                player.setProperActualImage();
 
                 if ((!player.collisionWithMonstersFromRightSide(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(velocity, 0);

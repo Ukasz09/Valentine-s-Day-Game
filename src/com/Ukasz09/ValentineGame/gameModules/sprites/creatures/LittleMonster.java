@@ -43,6 +43,11 @@ public class LittleMonster extends Monster {
     }
 
     @Override
+    public void updateImageDirection() {
+        //todo: to do
+    }
+
+    @Override
     public void missHitAction() {
         //nothing
     }

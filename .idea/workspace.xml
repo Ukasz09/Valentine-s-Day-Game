@@ -8,24 +8,15 @@
   <component name="ChangeListManager">
     <list default="true" id="2f9ff56b-6d18-4e2f-871d-36bb47c8212c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByBigTarget.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByTarget.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/CollectMoneyForValentinesDay/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByTarget.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ProperImageSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByBigTarget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByBigTarget_NOTUSE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByTarget.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByTarget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ProperImageSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ProperImageSet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/items/MoneyBag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/items/MoneyBag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BombSprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BombSprite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BulletSprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BulletSprite.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -143,12 +134,12 @@
           <entry key="Learning" value="5" />
           <entry key="dummy" value="144" />
           <entry key="gitignore" value="38" />
-          <entry key="java" value="33267" />
+          <entry key="java" value="34234" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="33267" />
+          <entry key="JAVA" value="34234" />
           <entry key="PLAIN_TEXT" value="182" />
           <entry key="Scratch" value="5" />
         </counts>
@@ -158,7 +149,7 @@
           <entry key="Learning" value="1" />
           <entry key="gif" value="2" />
           <entry key="gitignore" value="2" />
-          <entry key="java" value="371" />
+          <entry key="java" value="378" />
           <entry key="jpg" value="3" />
           <entry key="png" value="5" />
         </counts>
@@ -166,7 +157,7 @@
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Image" value="10" />
-          <entry key="JAVA" value="371" />
+          <entry key="JAVA" value="378" />
           <entry key="PLAIN_TEXT" value="2" />
           <entry key="Scratch" value="1" />
         </counts>
@@ -181,12 +172,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="365" column="34" selection-start-line="365" selection-start-column="34" selection-end-line="365" selection-end-column="34" />
+            <state relative-caret-position="205">
+              <caret line="331" column="7" selection-start-line="331" selection-start-column="7" selection-end-line="331" selection-end-column="7" />
               <folding>
                 <element signature="e#3076#3077#0" expanded="true" />
                 <element signature="e#3165#3166#0" expanded="true" />
-                <element signature="e#4294#4878#0" />
                 <element signature="e#6071#7055#0" />
                 <element signature="e#7061#7268#0" />
                 <element signature="e#7274#7423#0" />
@@ -201,7 +191,6 @@
                 <element signature="e#11501#11707#0" />
                 <element signature="e#11713#11897#0" />
                 <element signature="e#12015#12169#0" />
-                <element signature="e#12175#12298#0" />
                 <element signature="e#12569#12847#0" />
                 <element signature="e#13765#13912#0" />
                 <element signature="e#14007#14138#0" />
@@ -232,12 +221,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1418">
-              <caret line="184" column="43" selection-start-line="184" selection-start-column="43" selection-end-line="184" selection-end-column="43" />
+            <state relative-caret-position="976">
+              <caret line="182" column="9" selection-start-line="182" selection-start-column="9" selection-end-line="182" selection-end-column="9" />
               <folding>
-                <element signature="e#0#9464#0" expanded="true" />
-                <element signature="class#2546:4156" />
-                <element signature="method#handle#0;class#2546:4156" />
                 <element signature="method#endLevel#0;class#Game#0" />
                 <element signature="method#playerReadyToGame#0;class#Game#0" />
                 <element signature="method#play#0;class#Game#0" />
@@ -252,15 +238,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/rotateEffect/RotateEffect.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="71" column="25" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#update#0;class#FishMonster#0" />
-                <element signature="method#missHitAction#0;class#FishMonster#0" />
-              </folding>
+            <state relative-caret-position="168">
+              <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -268,23 +249,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ProperImageSet.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="37" column="22" lean-forward="true" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-146">
-              <caret line="48" column="36" selection-start-line="48" selection-start-column="36" selection-end-line="48" selection-end-column="36" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3166#3167#0" expanded="true" />
-                <element signature="e#3236#3237#0" expanded="true" />
-                <element signature="method#isExactlyUnderOrAboveTarget#0;class#Monster#0" />
-              </folding>
+            <state relative-caret-position="313">
+              <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -292,82 +258,110 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="121">
-              <caret line="56" column="27" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
+            <state relative-caret-position="506">
+              <caret line="150" column="32" selection-start-line="150" selection-start-column="32" selection-end-line="150" selection-end-column="32" />
               <folding>
                 <element signature="e#1255#1489#0" />
-                <element signature="e#2447#2448#0" expanded="true" />
-                <element signature="e#2535#2536#0" expanded="true" />
-                <element signature="e#2915#2916#0" expanded="true" />
-                <element signature="e#2990#2991#0" expanded="true" />
-                <element signature="e#3033#3034#0" expanded="true" />
-                <element signature="e#3104#3105#0" expanded="true" />
+                <element signature="e#3240#3241#0" expanded="true" />
+                <element signature="e#3315#3316#0" expanded="true" />
+                <element signature="e#3358#3359#0" expanded="true" />
+                <element signature="e#3429#3430#0" expanded="true" />
                 <element signature="e#2560#2704#0" />
-                <element signature="e#3301#3302#0" expanded="true" />
-                <element signature="e#3336#3337#0" expanded="true" />
-                <element signature="e#3383#3384#0" expanded="true" />
-                <element signature="e#3418#3419#0" expanded="true" />
-                <element signature="e#3465#3466#0" expanded="true" />
-                <element signature="e#3497#3498#0" expanded="true" />
-                <element signature="e#3548#3549#0" expanded="true" />
-                <element signature="e#3587#3588#0" expanded="true" />
+                <element signature="e#3626#3627#0" expanded="true" />
+                <element signature="e#3661#3662#0" expanded="true" />
+                <element signature="e#3708#3709#0" expanded="true" />
+                <element signature="e#3743#3744#0" expanded="true" />
+                <element signature="e#3790#3791#0" expanded="true" />
+                <element signature="e#3822#3823#0" expanded="true" />
+                <element signature="e#3873#3874#0" expanded="true" />
+                <element signature="e#3912#3913#0" expanded="true" />
                 <element signature="e#3043#3216#0" />
                 <element signature="e#3222#3398#0" />
                 <element signature="e#3404#3580#0" />
                 <element signature="e#3586#3752#0" />
-                <element signature="e#4477#4478#0" expanded="true" />
-                <element signature="e#4523#4524#0" expanded="true" />
+                <element signature="e#4840#4841#0" expanded="true" />
+                <element signature="e#4865#4866#0" expanded="true" />
+                <element signature="e#4802#4803#0" expanded="true" />
+                <element signature="e#4848#4849#0" expanded="true" />
                 <element signature="e#3978#4076#0" />
                 <element signature="e#4082#4180#0" />
                 <element signature="e#4186#4285#0" />
-                <element signature="e#4878#4879#0" expanded="true" />
-                <element signature="e#4912#4913#0" expanded="true" />
-                <element signature="e#4966#4967#0" expanded="true" />
-                <element signature="e#5006#5007#0" expanded="true" />
-                <element signature="e#5064#5065#0" expanded="true" />
-                <element signature="e#5108#5109#0" expanded="true" />
-                <element signature="e#5164#5165#0" expanded="true" />
-                <element signature="e#5206#5207#0" expanded="true" />
-                <element signature="e#5263#5264#0" expanded="true" />
-                <element signature="e#5315#5316#0" expanded="true" />
-                <element signature="e#5354#5355#0" expanded="true" />
-                <element signature="e#5384#5385#0" expanded="true" />
-                <element signature="e#5421#5422#0" expanded="true" />
-                <element signature="e#5455#5456#0" expanded="true" />
-                <element signature="e#5491#5492#0" expanded="true" />
-                <element signature="e#5523#5524#0" expanded="true" />
-                <element signature="e#5559#5560#0" expanded="true" />
-                <element signature="e#5591#5592#0" expanded="true" />
-                <element signature="e#5627#5628#0" expanded="true" />
-                <element signature="e#5659#5660#0" expanded="true" />
-                <element signature="e#5695#5696#0" expanded="true" />
-                <element signature="e#5727#5728#0" expanded="true" />
-                <element signature="e#5759#5760#0" expanded="true" />
-                <element signature="e#5787#5788#0" expanded="true" />
-                <element signature="e#5828#5829#0" expanded="true" />
-                <element signature="e#5859#5860#0" expanded="true" />
-                <element signature="e#5902#5903#0" expanded="true" />
-                <element signature="e#5935#5936#0" expanded="true" />
-                <element signature="e#5977#5978#0" expanded="true" />
-                <element signature="e#6009#6010#0" expanded="true" />
-                <element signature="e#6041#6042#0" expanded="true" />
-                <element signature="e#6069#6070#0" expanded="true" />
-                <element signature="e#6102#6103#0" expanded="true" />
-                <element signature="e#6131#6132#0" expanded="true" />
-                <element signature="e#6166#6167#0" expanded="true" />
-                <element signature="e#6197#6198#0" expanded="true" />
-                <element signature="e#6235#6236#0" expanded="true" />
-                <element signature="e#6272#6273#0" expanded="true" />
+                <element signature="e#5203#5204#0" expanded="true" />
+                <element signature="e#5237#5238#0" expanded="true" />
+                <element signature="e#5291#5292#0" expanded="true" />
+                <element signature="e#5331#5332#0" expanded="true" />
+                <element signature="e#5389#5390#0" expanded="true" />
+                <element signature="e#5433#5434#0" expanded="true" />
+                <element signature="e#5489#5490#0" expanded="true" />
+                <element signature="e#5531#5532#0" expanded="true" />
+                <element signature="e#5588#5589#0" expanded="true" />
+                <element signature="e#5640#5641#0" expanded="true" />
+                <element signature="e#5679#5680#0" expanded="true" />
+                <element signature="e#5709#5710#0" expanded="true" />
+                <element signature="e#5746#5747#0" expanded="true" />
+                <element signature="e#5780#5781#0" expanded="true" />
+                <element signature="e#5816#5817#0" expanded="true" />
+                <element signature="e#5848#5849#0" expanded="true" />
+                <element signature="e#5884#5885#0" expanded="true" />
+                <element signature="e#5916#5917#0" expanded="true" />
+                <element signature="e#5952#5953#0" expanded="true" />
+                <element signature="e#5984#5985#0" expanded="true" />
+                <element signature="e#6020#6021#0" expanded="true" />
+                <element signature="e#6052#6053#0" expanded="true" />
+                <element signature="e#6084#6085#0" expanded="true" />
+                <element signature="e#6112#6113#0" expanded="true" />
+                <element signature="e#6153#6154#0" expanded="true" />
+                <element signature="e#6184#6185#0" expanded="true" />
+                <element signature="e#6227#6228#0" expanded="true" />
+                <element signature="e#6260#6261#0" expanded="true" />
+                <element signature="e#6302#6303#0" expanded="true" />
+                <element signature="e#6334#6335#0" expanded="true" />
+                <element signature="e#6366#6367#0" expanded="true" />
+                <element signature="e#6394#6395#0" expanded="true" />
+                <element signature="e#6427#6428#0" expanded="true" />
+                <element signature="e#6456#6457#0" expanded="true" />
+                <element signature="e#6491#6492#0" expanded="true" />
+                <element signature="e#6522#6523#0" expanded="true" />
+                <element signature="e#6560#6561#0" expanded="true" />
+                <element signature="e#6597#6598#0" expanded="true" />
+                <element signature="e#6636#6637#0" expanded="true" />
+                <element signature="e#6671#6672#0" expanded="true" />
+                <element signature="e#6727#6728#0" expanded="true" />
+                <element signature="e#6775#6776#0" expanded="true" />
+                <element signature="e#7080#7081#0" expanded="true" />
+                <element signature="e#7113#7114#0" expanded="true" />
+                <element signature="e#6821#6822#0" expanded="true" />
+                <element signature="e#6855#6856#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/ViewManager.java">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="84" column="53" selection-start-line="84" selection-start-column="53" selection-end-line="84" selection-end-column="53" />
+            <state relative-caret-position="415">
+              <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#missHitAction#0;class#LittleMonster#0" />
+                <element signature="e#2061#2062#0" expanded="true" />
+                <element signature="e#2097#2098#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="537">
+              <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#render#0;class#FishMonsterMiniboss#0" />
+                <element signature="method#renderShield#0;class#FishMonsterMiniboss#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -401,12 +395,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/LevelsNumber.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/EndPanel.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/tmp/AnimatedSprite_NOTUSING.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Collision.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BulletSprite.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BombSprite.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Levels.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/shieldsEffect/ShieldKindOfRender.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/IImageByPosition.java" />
@@ -428,10 +419,7 @@
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesPath.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesPath/SpritesImages.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByBigTarget.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/ShotSprite.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/items/MoneyBag.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/kickEffect/TeleportKick.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/kickEffect/KickPlayer.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/ICollisionAvoidWay.java" />
@@ -441,16 +429,22 @@
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/OldNormalCollisonAvoid.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/TeleportCollisionAvoid.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/NormalCollisionAvoid.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/PropperImageSet.java" />
-        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ProperImageSet.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/PositionByTarget.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/positionByTargetEffect/ByBigTarget_NOTUSE.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Monster.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/levels/Level_2.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/ViewManager.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/items/MoneyBag.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BombSprite.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BulletSprite.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ProperImageSet.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java" />
+        <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/rotateEffect/RotateEffect.java" />
         <option value="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java" />
       </list>
     </option>
@@ -575,7 +569,7 @@
               <item name="gameModules" type="462c0819:PsiDirectoryNode" />
               <item name="sprites" type="462c0819:PsiDirectoryNode" />
               <item name="effects" type="462c0819:PsiDirectoryNode" />
-              <item name="kickEffect" type="462c0819:PsiDirectoryNode" />
+              <item name="positionByTargetEffect" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
@@ -585,7 +579,7 @@
               <item name="gameModules" type="462c0819:PsiDirectoryNode" />
               <item name="sprites" type="462c0819:PsiDirectoryNode" />
               <item name="effects" type="462c0819:PsiDirectoryNode" />
-              <item name="positionByTargetEffect" type="462c0819:PsiDirectoryNode" />
+              <item name="rotateEffect" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="CollectMoneyForValentinesDay" type="b2602c69:ProjectViewProjectNode" />
@@ -610,7 +604,7 @@
     <property name="SearchEverywhereHistoryKey" value="plugins&#9;ACTION&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566986106948" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1566993628907" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -736,12 +730,12 @@
       <workItem from="1564149182923" duration="1727000" />
       <workItem from="1564236172283" duration="129000" />
       <workItem from="1566894822279" duration="16928000" />
-      <workItem from="1566980193535" duration="5796000" />
+      <workItem from="1566980193535" duration="11362000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="421166000" />
+    <option name="totallyTimeSpent" value="426732000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -853,13 +847,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/soundsModule/soundsPath/SoundsPath.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="114" selection-start-line="25" selection-start-column="114" selection-end-line="25" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/soundsModule/soundsPath/Sounds.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
@@ -974,45 +961,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/items/MoneyBag.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="40" column="29" selection-start-line="40" selection-start-column="29" selection-end-line="40" selection-end-column="29" />
-          <folding>
-            <element signature="e#1387#1388#0" expanded="true" />
-            <element signature="e#1423#1424#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/littleMonster1.gif">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BombSprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="333">
-          <caret line="51" column="6" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="6" />
-          <folding>
-            <element signature="method#BombSprite#1;class#BombSprite#0" />
-            <element signature="method#BombSprite#2;class#BombSprite#0" />
-            <element signature="method#setPosition#0;class#BombSprite#0" />
-            <element signature="e#3316#3317#0" expanded="true" />
-            <element signature="e#3367#3368#0" expanded="true" />
-            <element signature="method#isOutOfBoundary#0;class#BombSprite#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BulletSprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="39" column="6" selection-start-line="39" selection-start-column="6" selection-end-line="39" selection-end-column="6" />
-          <folding>
-            <element signature="method#setPosition#0;class#BulletSprite#0" />
-            <element signature="method#update#0;class#BulletSprite#0" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/kickEffect/TeleportKick.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1094,31 +1044,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#missHitAction#0;class#LittleMonster#0" />
-            <element signature="e#2061#2062#0" expanded="true" />
-            <element signature="e#2097#2098#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="611">
-          <caret line="132" column="23" selection-start-line="132" selection-start-column="23" selection-end-line="132" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#render#0;class#FishMonsterMiniboss#0" />
-            <element signature="method#renderShield#0;class#FishMonsterMiniboss#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/collisionAvoidEffect/NormalCollisionAvoid.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1134,6 +1059,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="820">
           <caret line="41" column="76" selection-start-line="41" selection-start-column="76" selection-end-line="41" selection-end-column="76" />
+          <folding>
+            <element signature="e#514#515#0" expanded="true" />
+            <element signature="e#574#575#0" expanded="true" />
+            <element signature="e#897#898#0" expanded="true" />
+            <element signature="e#955#956#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1172,10 +1103,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/ViewManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="84" column="53" selection-start-line="84" selection-start-column="53" selection-end-line="84" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="71" column="25" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
+        <state relative-caret-position="435">
+          <caret line="73" column="24" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#update#0;class#FishMonster#0" />
@@ -1184,100 +1122,160 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ProperImageSet.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/items/MoneyBag.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="37" column="22" lean-forward="true" selection-start-line="37" selection-start-column="22" selection-end-line="37" selection-end-column="22" />
+        <state relative-caret-position="221">
+          <caret line="45" column="21" selection-start-line="45" selection-start-column="21" selection-end-line="45" selection-end-column="21" />
+          <folding>
+            <element signature="e#1387#1388#0" expanded="true" />
+            <element signature="e#1423#1424#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/ViewManager.java">
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BombSprite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="84" column="53" selection-start-line="84" selection-start-column="53" selection-end-line="84" selection-end-column="53" />
+        <state relative-caret-position="153">
+          <caret line="69" column="23" selection-start-line="69" selection-start-column="23" selection-end-line="69" selection-end-column="23" />
+          <folding>
+            <element signature="method#BombSprite#1;class#BombSprite#0" />
+            <element signature="method#BombSprite#2;class#BombSprite#0" />
+            <element signature="method#setPosition#0;class#BombSprite#0" />
+            <element signature="e#3316#3317#0" expanded="true" />
+            <element signature="e#3367#3368#0" expanded="true" />
+            <element signature="method#isOutOfBoundary#0;class#BombSprite#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/weapons/BulletSprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
+          <folding>
+            <element signature="method#setPosition#0;class#BulletSprite#0" />
+            <element signature="method#update#0;class#BulletSprite#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/LittleMonster.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="46" column="21" selection-start-line="46" selection-start-column="21" selection-end-line="46" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#missHitAction#0;class#LittleMonster#0" />
+            <element signature="e#2061#2062#0" expanded="true" />
+            <element signature="e#2097#2098#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/FishMonsterMiniboss.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="537">
+          <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="135" selection-end-column="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#render#0;class#FishMonsterMiniboss#0" />
+            <element signature="method#renderShield#0;class#FishMonsterMiniboss#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/imageByPositionEffect/ProperImageSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="313">
+          <caret line="37" column="24" selection-start-line="37" selection-start-column="24" selection-end-line="37" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Sprite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="56" column="27" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
+        <state relative-caret-position="506">
+          <caret line="150" column="32" selection-start-line="150" selection-start-column="32" selection-end-line="150" selection-end-column="32" />
           <folding>
             <element signature="e#1255#1489#0" />
-            <element signature="e#2447#2448#0" expanded="true" />
-            <element signature="e#2535#2536#0" expanded="true" />
-            <element signature="e#2915#2916#0" expanded="true" />
-            <element signature="e#2990#2991#0" expanded="true" />
-            <element signature="e#3033#3034#0" expanded="true" />
-            <element signature="e#3104#3105#0" expanded="true" />
+            <element signature="e#3240#3241#0" expanded="true" />
+            <element signature="e#3315#3316#0" expanded="true" />
+            <element signature="e#3358#3359#0" expanded="true" />
+            <element signature="e#3429#3430#0" expanded="true" />
             <element signature="e#2560#2704#0" />
-            <element signature="e#3301#3302#0" expanded="true" />
-            <element signature="e#3336#3337#0" expanded="true" />
-            <element signature="e#3383#3384#0" expanded="true" />
-            <element signature="e#3418#3419#0" expanded="true" />
-            <element signature="e#3465#3466#0" expanded="true" />
-            <element signature="e#3497#3498#0" expanded="true" />
-            <element signature="e#3548#3549#0" expanded="true" />
-            <element signature="e#3587#3588#0" expanded="true" />
+            <element signature="e#3626#3627#0" expanded="true" />
+            <element signature="e#3661#3662#0" expanded="true" />
+            <element signature="e#3708#3709#0" expanded="true" />
+            <element signature="e#3743#3744#0" expanded="true" />
+            <element signature="e#3790#3791#0" expanded="true" />
+            <element signature="e#3822#3823#0" expanded="true" />
+            <element signature="e#3873#3874#0" expanded="true" />
+            <element signature="e#3912#3913#0" expanded="true" />
             <element signature="e#3043#3216#0" />
             <element signature="e#3222#3398#0" />
             <element signature="e#3404#3580#0" />
             <element signature="e#3586#3752#0" />
-            <element signature="e#4477#4478#0" expanded="true" />
-            <element signature="e#4523#4524#0" expanded="true" />
+            <element signature="e#4840#4841#0" expanded="true" />
+            <element signature="e#4865#4866#0" expanded="true" />
+            <element signature="e#4802#4803#0" expanded="true" />
+            <element signature="e#4848#4849#0" expanded="true" />
             <element signature="e#3978#4076#0" />
             <element signature="e#4082#4180#0" />
             <element signature="e#4186#4285#0" />
-            <element signature="e#4878#4879#0" expanded="true" />
-            <element signature="e#4912#4913#0" expanded="true" />
-            <element signature="e#4966#4967#0" expanded="true" />
-            <element signature="e#5006#5007#0" expanded="true" />
-            <element signature="e#5064#5065#0" expanded="true" />
-            <element signature="e#5108#5109#0" expanded="true" />
-            <element signature="e#5164#5165#0" expanded="true" />
-            <element signature="e#5206#5207#0" expanded="true" />
-            <element signature="e#5263#5264#0" expanded="true" />
-            <element signature="e#5315#5316#0" expanded="true" />
-            <element signature="e#5354#5355#0" expanded="true" />
-            <element signature="e#5384#5385#0" expanded="true" />
-            <element signature="e#5421#5422#0" expanded="true" />
-            <element signature="e#5455#5456#0" expanded="true" />
-            <element signature="e#5491#5492#0" expanded="true" />
-            <element signature="e#5523#5524#0" expanded="true" />
-            <element signature="e#5559#5560#0" expanded="true" />
-            <element signature="e#5591#5592#0" expanded="true" />
-            <element signature="e#5627#5628#0" expanded="true" />
-            <element signature="e#5659#5660#0" expanded="true" />
-            <element signature="e#5695#5696#0" expanded="true" />
-            <element signature="e#5727#5728#0" expanded="true" />
-            <element signature="e#5759#5760#0" expanded="true" />
-            <element signature="e#5787#5788#0" expanded="true" />
-            <element signature="e#5828#5829#0" expanded="true" />
-            <element signature="e#5859#5860#0" expanded="true" />
-            <element signature="e#5902#5903#0" expanded="true" />
-            <element signature="e#5935#5936#0" expanded="true" />
-            <element signature="e#5977#5978#0" expanded="true" />
-            <element signature="e#6009#6010#0" expanded="true" />
-            <element signature="e#6041#6042#0" expanded="true" />
-            <element signature="e#6069#6070#0" expanded="true" />
-            <element signature="e#6102#6103#0" expanded="true" />
-            <element signature="e#6131#6132#0" expanded="true" />
-            <element signature="e#6166#6167#0" expanded="true" />
-            <element signature="e#6197#6198#0" expanded="true" />
-            <element signature="e#6235#6236#0" expanded="true" />
-            <element signature="e#6272#6273#0" expanded="true" />
+            <element signature="e#5203#5204#0" expanded="true" />
+            <element signature="e#5237#5238#0" expanded="true" />
+            <element signature="e#5291#5292#0" expanded="true" />
+            <element signature="e#5331#5332#0" expanded="true" />
+            <element signature="e#5389#5390#0" expanded="true" />
+            <element signature="e#5433#5434#0" expanded="true" />
+            <element signature="e#5489#5490#0" expanded="true" />
+            <element signature="e#5531#5532#0" expanded="true" />
+            <element signature="e#5588#5589#0" expanded="true" />
+            <element signature="e#5640#5641#0" expanded="true" />
+            <element signature="e#5679#5680#0" expanded="true" />
+            <element signature="e#5709#5710#0" expanded="true" />
+            <element signature="e#5746#5747#0" expanded="true" />
+            <element signature="e#5780#5781#0" expanded="true" />
+            <element signature="e#5816#5817#0" expanded="true" />
+            <element signature="e#5848#5849#0" expanded="true" />
+            <element signature="e#5884#5885#0" expanded="true" />
+            <element signature="e#5916#5917#0" expanded="true" />
+            <element signature="e#5952#5953#0" expanded="true" />
+            <element signature="e#5984#5985#0" expanded="true" />
+            <element signature="e#6020#6021#0" expanded="true" />
+            <element signature="e#6052#6053#0" expanded="true" />
+            <element signature="e#6084#6085#0" expanded="true" />
+            <element signature="e#6112#6113#0" expanded="true" />
+            <element signature="e#6153#6154#0" expanded="true" />
+            <element signature="e#6184#6185#0" expanded="true" />
+            <element signature="e#6227#6228#0" expanded="true" />
+            <element signature="e#6260#6261#0" expanded="true" />
+            <element signature="e#6302#6303#0" expanded="true" />
+            <element signature="e#6334#6335#0" expanded="true" />
+            <element signature="e#6366#6367#0" expanded="true" />
+            <element signature="e#6394#6395#0" expanded="true" />
+            <element signature="e#6427#6428#0" expanded="true" />
+            <element signature="e#6456#6457#0" expanded="true" />
+            <element signature="e#6491#6492#0" expanded="true" />
+            <element signature="e#6522#6523#0" expanded="true" />
+            <element signature="e#6560#6561#0" expanded="true" />
+            <element signature="e#6597#6598#0" expanded="true" />
+            <element signature="e#6636#6637#0" expanded="true" />
+            <element signature="e#6671#6672#0" expanded="true" />
+            <element signature="e#6727#6728#0" expanded="true" />
+            <element signature="e#6775#6776#0" expanded="true" />
+            <element signature="e#7080#7081#0" expanded="true" />
+            <element signature="e#7113#7114#0" expanded="true" />
+            <element signature="e#6821#6822#0" expanded="true" />
+            <element signature="e#6855#6856#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1418">
-          <caret line="184" column="43" selection-start-line="184" selection-start-column="43" selection-end-line="184" selection-end-column="43" />
+        <state relative-caret-position="976">
+          <caret line="182" column="9" selection-start-line="182" selection-start-column="9" selection-end-line="182" selection-end-column="9" />
           <folding>
-            <element signature="e#0#9464#0" expanded="true" />
-            <element signature="class#2546:4156" />
-            <element signature="method#handle#0;class#2546:4156" />
             <element signature="method#endLevel#0;class#Game#0" />
             <element signature="method#playerReadyToGame#0;class#Game#0" />
             <element signature="method#play#0;class#Game#0" />
@@ -1290,14 +1288,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/effects/rotateEffect/RotateEffect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="12" lean-forward="true" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/sprites/creatures/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="365" column="34" selection-start-line="365" selection-start-column="34" selection-end-line="365" selection-end-column="34" />
+        <state relative-caret-position="205">
+          <caret line="331" column="7" selection-start-line="331" selection-start-column="7" selection-end-line="331" selection-end-column="7" />
           <folding>
             <element signature="e#3076#3077#0" expanded="true" />
             <element signature="e#3165#3166#0" expanded="true" />
-            <element signature="e#4294#4878#0" />
             <element signature="e#6071#7055#0" />
             <element signature="e#7061#7268#0" />
             <element signature="e#7274#7423#0" />
@@ -1312,7 +1316,6 @@
             <element signature="e#11501#11707#0" />
             <element signature="e#11713#11897#0" />
             <element signature="e#12015#12169#0" />
-            <element signature="e#12175#12298#0" />
             <element signature="e#12569#12847#0" />
             <element signature="e#13765#13912#0" />
             <element signature="e#14007#14138#0" />

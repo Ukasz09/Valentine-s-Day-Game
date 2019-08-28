@@ -1,6 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.ProperImageSet;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
@@ -53,16 +53,12 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private boolean collisionFromUpSide;
     private boolean collisionFromDownSide;
     private int anticollisionTimer; //to avoid jammed
-    private ProperImageSet imageSetWay;
 
     private boolean pressedKey_A;
     private boolean pressedKey_D;
     private boolean pressedKey_W;
     private boolean pressedKey_S;
-
-    //
-    private double actualRotate;
-    //
+    private RotateEffect rotateWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
@@ -90,7 +86,6 @@ public class Player extends Sprite implements ShieldKindOfRender {
         killedMonstersOnLevel = 0;
         heartsRender = new InCorner(manager);
         shotsList = new ArrayList<>();
-        imageSetWay = new ProperImageSet();
 
         collisionFromLeftSide = false;
         collisionFromRightSide = false;
@@ -101,8 +96,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         pressedKey_D = false;
         pressedKey_W = false;
         pressedKey_S = false;
-
-        actualRotate = 0;
+        rotateWay = new RotateEffect();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,19 +117,13 @@ public class Player extends Sprite implements ShieldKindOfRender {
         updateBattery();
         updateBulletOverheating();
         updateAnticollisionTimer();
-        rotateByPressedKey();
+        updateImageDirection();
+        updatePlayerRotate();
     }
 
     @Override
     public void render() {
-        //super.render();
-
-        //
-        //drawActualImage(actualRotate);
-        drawActualImage(actualRotate);
-        drawBoundaryForTests();
-        //
-
+        super.render();
         renderShield(getManager().getGraphicContext());
         renderBattery(getManager().getGraphicContext());
         heartsRender.renderHearts(this);
@@ -338,40 +326,21 @@ public class Player extends Sprite implements ShieldKindOfRender {
             reduceAnticollisionTimer();
     }
 
-    public void setProperActualImage() {
-        imageSetWay.byLastDirection(PLAYER_LEFT_IMAGE, PLAYER_RIGHT_IMAGE, this, lastDirectionX);
+    @Override
+    public void updateImageDirection() {
+        double rotateDiff = getLastRotate() + getActualRotate();
+        if (getActualRotate() == 0 || rotateDiff == 0)
+            getImageSetWay().setByLastDirection(PLAYER_LEFT_IMAGE, PLAYER_RIGHT_IMAGE, this, lastDirectionX);
     }
 
     private void playRandomHitSound() {
         getRandomHitSound().playSound(DEFAULT_HIT_SOUND_VOLUME, false);
     }
 
-    public void rotateByPressedKey() {
-//        if (pressedKey_W) {
-//            if (pressedKey_A || pressedKey_D)
-//                actualRotate =45;
-//            else actualRotate = 0;
-//        } else if (pressedKey_S) {
-//            if (pressedKey_A || pressedKey_D)
-//                actualRotate = - 45;
-//            else actualRotate = 0;
-//        } else actualRotate = 0;
-
-        if (pressedKey_A) {
-            if (pressedKey_W)
-                actualRotate = 25;
-            else if (pressedKey_S)
-                actualRotate = -25;
-            else actualRotate = 0;
-        } else if (pressedKey_D) {
-            if (pressedKey_W)
-                actualRotate = -25;
-            else if (pressedKey_S)
-                actualRotate = 25;
-            else actualRotate = 0;
-        } else actualRotate = 0;
-
-        System.out.println(actualRotate);
+    public void updatePlayerRotate() {
+        updateLastRotate();
+        double properRotate = rotateWay.rotateByPressedKey(pressedKey_A, pressedKey_D, pressedKey_W, pressedKey_S);
+        setActualRotate(properRotate);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
