@@ -74,9 +74,4 @@ public class FishMonster extends Monster {
         getImageSetWay().byTargetPosition(imageLeft, imageRight, imageBottom, imageTop, this, target);
     }
 
-    @Override
-    public Rectangle2D getBoundaryForCollision() {
-        return getBoundary();
-        //todo: zmienic
-    }
 }

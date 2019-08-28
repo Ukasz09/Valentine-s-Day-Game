@@ -126,12 +126,6 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     }
 
     @Override
-    public Rectangle2D getBoundaryForCollision() {
-        return getBoundary();
-        //todo: zmienic
-    }
-
-    @Override
     public void updateImageDirection() {
         //todo: to do
     }

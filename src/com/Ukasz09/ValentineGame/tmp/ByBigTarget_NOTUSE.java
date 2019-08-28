@@ -1,6 +1,7 @@
-package com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect;
+package com.Ukasz09.ValentineGame.tmp;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.PositionByTarget;
 
 public class ByBigTarget_NOTUSE extends PositionByTarget {
     public boolean isRightSideToTarget(Sprite creature, Sprite target) {

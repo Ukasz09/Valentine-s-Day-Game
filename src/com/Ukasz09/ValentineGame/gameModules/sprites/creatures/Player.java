@@ -15,10 +15,17 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.Shield;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ManualActivateShield;
 
+import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
 
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -33,6 +40,8 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
     private static final Image PLAYER_LEFT_IMAGE = SpritesImages.playerLeftImage;
     private static final Image PLAYER_SHIELD_IMAGE = SpritesImages.playerShieldImage;
+
+    private final double amountOfToPixelRotate = 15;
 
     private Image playerRightImage;
     private Image playerLeftImage;
@@ -131,14 +140,27 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //do NOT touch
     @Override
-    public Rectangle2D getBoundaryForCollision() {
+    public Rectangle2D getBoundary() {
         double width = getWidth();
         double height = getHeight();
-        if (lastDirectionX.equals("D"))
-            return new Rectangle2D(getPositionX() + width / 3, getPositionY() + height / 2.8, width / 2, height / 2);
 
-        return new Rectangle2D(getPositionX() + width / 8, getPositionY() + height / 2.8, width / 2, height / 2);
+        if (lastDirectionX.equals("D")) {
+            if (getActualRotate() == amountOfToPixelRotate)
+                return new Rectangle2D(getPositionX() + width / 2, getPositionY() + height / 2, width / 2.4, height / 2);
+            else if (getActualRotate() == -amountOfToPixelRotate)
+                return new Rectangle2D(getPositionX() + width / 1.8, getPositionY() + height / 2.2, width / 2.3, height / 2.2);
+            else
+                return new Rectangle2D(getPositionX() + width / 2.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
+        } else {
+            if (getActualRotate() == amountOfToPixelRotate)
+                return new Rectangle2D(getPositionX() + width / 3.9, getPositionY() + height / 2.3, width / 2.3, height / 2.2);
+            else if (getActualRotate() == -amountOfToPixelRotate)
+                return new Rectangle2D(getPositionX() + width / 2.7, getPositionY() + height / 2, width / 2.5, height / 2.1);
+            else
+                return new Rectangle2D(getPositionX() + width / 5.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
+        }
     }
 
     private void addTotalScore(int score) {
@@ -296,6 +318,21 @@ public class Player extends Sprite implements ShieldKindOfRender {
         shotsList.add(shot);
     }
 
+    public Point2D getBulletPosition() {
+        double shotPositionY = getBoundary().getMaxY() - getHeight() / 4;
+        double shotPositionRightX = getBoundary().getMaxX();
+        double shotPositionLeftX = getBoundary().getMinX();
+
+        if (lastDirectionX.equals("D"))
+            return new Point2D(shotPositionRightX, shotPositionY);
+        return new Point2D(shotPositionLeftX, shotPositionY);
+    }
+
+    public Point2D getBombPosition() {
+        double centerPositionRightX = getBoundary().getMaxX() - getWidth() / 3;
+        return new Point2D(centerPositionRightX, getBoundary().getMaxY());
+    }
+
     private boolean playerCantDoAnyMove() {
         if (collisionFromDownSide && collisionFromUpSide && collisionFromLeftSide && collisionFromRightSide)
             return true;
@@ -339,7 +376,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public void updatePlayerRotate() {
         updateLastRotate();
-        double properRotate = rotateWay.rotateByPressedKey(pressedKey_A, pressedKey_D, pressedKey_W, pressedKey_S);
+        double properRotate = rotateWay.rotateByPressedKey(pressedKey_A, pressedKey_D, pressedKey_W, pressedKey_S, amountOfToPixelRotate);
         setActualRotate(properRotate);
     }
 
@@ -423,22 +460,6 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public void setCollisionFromDownSide(boolean collisionFromDownSide) {
         this.collisionFromDownSide = collisionFromDownSide;
-    }
-
-    public boolean isPressedKey_A() {
-        return pressedKey_A;
-    }
-
-    public boolean isPressedKey_D() {
-        return pressedKey_D;
-    }
-
-    public boolean isPressedKey_W() {
-        return pressedKey_W;
-    }
-
-    public boolean isPressedKey_S() {
-        return pressedKey_S;
     }
 
     public void setPressedKey_A(boolean pressedKey_A) {

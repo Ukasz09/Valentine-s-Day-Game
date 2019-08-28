@@ -51,9 +51,4 @@ public class LittleMonster extends Monster {
     public void missHitAction() {
         //nothing
     }
-
-    @Override
-    public Rectangle2D getBoundaryForCollision() {
-        return getBoundary();
-    }
 }

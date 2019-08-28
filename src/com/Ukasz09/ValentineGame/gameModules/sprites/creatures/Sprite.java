@@ -3,12 +3,14 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.ProperImageSet;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
+import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 
 public abstract class Sprite {
     private Image actualImage;
@@ -30,6 +32,7 @@ public abstract class Sprite {
     private SoundsPlayer missSound;
 
     private ViewManager manager;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Sprite(Image actualImage, ViewManager manager) {
         this.manager = manager;
@@ -40,9 +43,9 @@ public abstract class Sprite {
         maxLives = lives;
         missSound = null;
         protectionTime = 0;
-        actualRotate=0;
-        lastRotate=actualRotate;
-        imageSetWay=new ProperImageSet();
+        actualRotate = 0;
+        lastRotate = actualRotate;
+        imageSetWay = new ProperImageSet();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +60,7 @@ public abstract class Sprite {
         updateImageDirection();
     }
 
-    public void updatePosition(double time){
+    public void updatePosition(double time) {
         positionX += velocityX * time;
         positionY += velocityY * time;
     }
@@ -68,33 +71,32 @@ public abstract class Sprite {
         drawBoundaryForTests();
     }
 
-    public void drawActualImage(double rotate){
-        if(rotate!=0) {
+    public void drawActualImage(double rotate) {
+        if (rotate != 0) {
             ImageView iv = new ImageView(actualImage);
             iv.setRotate(rotate);
             SnapshotParameters params = new SnapshotParameters();
             params.setFill(Color.TRANSPARENT);
             Image rotatedImage = iv.snapshot(params, null);
             manager.getGraphicContext().drawImage(rotatedImage, positionX, positionY);
-        } else{
-            manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
-        }
-    }
+        } else manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
 
+    }
 
 
     //todo: na czas testow
-    public void drawBoundaryForTests(){
-        double tmpPosX = getBoundaryForCollision().getMinX();
-        double tmpPosY = getBoundaryForCollision().getMinY();
-        double tmpWidth = getBoundaryForCollision().getWidth();
-        double tmpHeight = getBoundaryForCollision().getHeight();
-        Paint p=new Color(0.6,0.6,0.6,0.3);
+    public void drawBoundaryForTests() {
+        double tmpPosX = getBoundary().getMinX();
+        double tmpPosY = getBoundary().getMinY();
+        double tmpWidth = getBoundary().getWidth();
+        double tmpHeight = getBoundary().getHeight();
+        Paint p = new Color(0.6, 0.6, 0.6, 0.3);
         manager.getGraphicContext().setFill(p);
         manager.getGraphicContext().fillRect(tmpPosX, tmpPosY, tmpWidth, tmpHeight);
     }
+
     //
-    public abstract Rectangle2D getBoundaryForCollision();
+//    public abstract Rectangle2D getBoundaryForCollision();
 
     public abstract void updateImageDirection();
 
@@ -106,9 +108,9 @@ public abstract class Sprite {
         return (s.getBoundary().intersects(this.getBoundary()));
     }
 
-    public boolean intersectsForCollision(Sprite s) {
-        return (s.getBoundaryForCollision().intersects(this.getBoundaryForCollision()));
-    }
+//    public boolean intersectsForCollision(Sprite s) {
+//        return (s.getBoundaryForCollision().intersects(this.getBoundaryForCollision()));
+//    }
 
     public void addPositionX(double offset) {
         positionX += offset;
@@ -147,8 +149,8 @@ public abstract class Sprite {
         else return false;
     }
 
-    public void updateLastRotate(){
-        lastRotate=actualRotate;
+    public void updateLastRotate() {
+        lastRotate = actualRotate;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -157,13 +159,11 @@ public abstract class Sprite {
     }
 
     public void setPosition(double x, double y) {
-
         positionX = x;
         positionY = y;
     }
 
     public void setVelocity(double x, double y) {
-
         velocityX = x;
         velocityY = y;
     }

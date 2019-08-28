@@ -35,12 +35,6 @@ public class MoneyBag extends Sprite {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-    @Override
-    public Rectangle2D getBoundaryForCollision() {
-        return getBoundary();
-    }
-
     @Override
     public void updateImageDirection() {
         //todo: to do

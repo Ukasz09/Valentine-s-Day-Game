@@ -31,11 +31,11 @@ public class NormalCollisionAvoid implements ICollisionAvoidWay {
     @Override
     public void updateCords(Sprite target, Monster monster, ArrayList<Monster> monstersList) {
         //if no collision with target
-        if (!monster.intersectsForCollision(target)) {
+        if (!monster.intersects(target)) {
             monster.updateByVelocity(target);
 
             for (Monster m : monstersList) {
-                if (monster.intersectsForCollision(m) && monster != m) {
+                if (monster.intersects(m) && monster != m) {
                     double addPositionX = offsetAfterCollision(monster, m).getX();
                     double addPositionY = offsetAfterCollision(monster, m).getY();
                     double monsterPositionX = monster.getPositionX();

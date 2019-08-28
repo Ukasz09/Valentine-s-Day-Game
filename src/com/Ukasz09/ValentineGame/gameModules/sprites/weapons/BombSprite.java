@@ -9,6 +9,7 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 public class BombSprite extends ShotSprite {
@@ -49,17 +50,6 @@ public class BombSprite extends ShotSprite {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //todo: przerobic by byla uniwersalna
-    @Override
-    public void setPosition(Sprite ukasz) {
-        double centerPositionRightX = ukasz.getBoundary().getMaxX() - ukasz.getWidth() / 2;
-        double centerPositionLeftX = ukasz.getBoundary().getMaxX() - ukasz.getWidth() / 1.5;
-
-        if (((Player) ukasz).getLastDirectionX().equals("D"))
-            setPosition(centerPositionRightX, ukasz.getBoundary().getMaxY() - 50);
-        else setPosition(centerPositionLeftX, ukasz.getBoundary().getMaxY() - 50);
-    }
-
     @Override
     public void update(double time) {
         addPositionY(getVelocityY() * time);
@@ -100,7 +90,8 @@ public class BombSprite extends ShotSprite {
 
     @Override
     public void prepareToShot(Player player) {
-        setPosition(player);
+        Point2D bombPosition=player.getBombPosition();
+        setPosition(bombPosition.getX(),bombPosition.getY());
         setVelocity(0, getShotVelocity());
     }
 

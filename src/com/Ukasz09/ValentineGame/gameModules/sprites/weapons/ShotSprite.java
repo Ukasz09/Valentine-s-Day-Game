@@ -36,8 +36,6 @@ public abstract class ShotSprite extends Sprite {
 
     public abstract void prepareToShot(Player player);
 
-    public abstract void setPosition(Sprite sprite);
-
     public abstract void update(double time);
 
     protected void playSound(SoundsPlayer sound, double volume) {
@@ -52,8 +50,6 @@ public abstract class ShotSprite extends Sprite {
 
     public abstract void hitMonster(Monster monster);
 
-    @Override
-    public Rectangle2D getBoundaryForCollision() {
-        return getBoundary();
-    }
+
+
 }
