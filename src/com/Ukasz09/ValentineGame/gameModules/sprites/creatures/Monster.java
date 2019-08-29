@@ -2,6 +2,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.PositionByTarget;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import javafx.scene.image.Image;
@@ -14,7 +15,7 @@ public abstract class Monster extends Sprite {
     private KickPlayer kickMethod;
     private ICollisionAvoidWay collisionAvoidWay;
     private PositionByTarget positionByTarget;
-
+    private RotateEffect rotateWay;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Monster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(image, manager);
@@ -24,6 +25,7 @@ public abstract class Monster extends Sprite {
         this.kickMethod = kickMethod;
         this.collisionAvoidWay = collisionAvoidWay;
         this.positionByTarget = new PositionByTarget();
+        rotateWay=new RotateEffect();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,18 +44,29 @@ public abstract class Monster extends Sprite {
 
     public void update(Sprite target, ArrayList<Monster> monsters) {
         collisionAvoidWay.updateCords(target, this, monsters);
+        updateMonsterRotate(target);
+        System.out.println(getActualRotate());
     }
 
     public void updateByVelocity(Sprite target) {
+//        double dx = this.getPositionX();
+//        double dy = this.getPositionY();
+//        double diffX = target.getPositionX() - dx;
+//        double diffY = target.getPositionY() - dy;
+//        float angle = (float) Math.atan2(diffY, diffX);
+
         double dx = this.getPositionX();
         double dy = this.getPositionY();
-        double diffX = target.getPositionX() - dx;
-        double diffY = target.getPositionY() - dy;
-        float angle = (float) Math.atan2(diffY, diffX);
-
+        float angle = getAngleToTarget(target);
         dx += this.getVelocityX() * Math.cos(angle);
         dy += this.getVelocityY() * Math.sin(angle);
         this.setPosition(dx, dy);
+    }
+
+    public void updateMonsterRotate(Sprite target) {
+        updateLastRotate();
+        double properRotate = rotateWay.rotateByAngle(this,target);
+        setActualRotate(properRotate);
     }
 
     public void kickPlayer(Player p) {

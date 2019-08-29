@@ -14,6 +14,7 @@ package com.Ukasz09.ValentineGame.gameModules.utilitis;
 import com.Ukasz09.ValentineGame.gameModules.levels.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
@@ -45,7 +46,7 @@ public class Game extends Application {
     public Game() {
         manager = new ViewManager(); //do NOT touch
         lastNanoTime = new LongValue(System.nanoTime());
-        player = new Player(SpritesImages.playerRightImage, SpritesImages.playerLeftImage, SpritesImages.playerShieldImage, manager);
+        player = new Player(SpritesImages.playerRightImage, SpritesImages.playerShieldImage, manager);
         inputsList = new ArrayList<>();
         moneybagList = new ArrayList<>();
         monstersList = new ArrayList<>();
@@ -61,7 +62,7 @@ public class Game extends Application {
         manager.readKeyboardAction(inputsList);
 
         //todo: dodac mozliwosc wczytwywania poziomu z pliku
-        int levelNumber = 2;
+        int levelNumber = 0;
         if (levelNumber == 0) {
             actualPanel = new StartPanel(manager);
             actualPanel.makePanel();
@@ -132,8 +133,9 @@ public class Game extends Application {
 
             player.setPressedKey_A(true);
 
+            //TODO: dac wyzej (?)
             if (!player.boundaryCollisionFromLeftSide(manager.getLeftBorder())) {
-                player.setLastDirectionX("A"); //must be before setting image
+                player.setImageDirection(Sprite.YAxisDirection.LEFT); //must be before setting image
 
                 if ((!player.collisionWithMonstersFromLeftSide(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(-velocity, 0);
@@ -147,7 +149,7 @@ public class Game extends Application {
             player.setPressedKey_D(true);
 
             if (!player.boundaryCollisionFromRightSide(manager.getRightBorder())) {
-                player.setLastDirectionX("D");
+                player.setImageDirection(Sprite.YAxisDirection.RIGHT);
 
                 if ((!player.collisionWithMonstersFromRightSide(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(velocity, 0);
@@ -184,7 +186,7 @@ public class Game extends Application {
 
         if (inputsList.contains("SPACE")) {
             if (player.getBulletOverheating() <= 0) {
-                ShotSprite shotSprite = new BulletSprite(player.getLastDirectionX(), manager);
+                ShotSprite shotSprite = new BulletSprite(player.getImageDirection(), manager);
                 shotSprite.prepareToShot(player);
 
                 player.addShot(shotSprite);

@@ -38,18 +38,16 @@ public class Player extends Sprite implements ShieldKindOfRender {
     public static final int DEFAULT_ANTICOLLISION_TIMER = 4000;
     public static final double DEFAULT_HIT_SOUND_VOLUME = 0.2;
     private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
-    private static final Image PLAYER_LEFT_IMAGE = SpritesImages.playerLeftImage;
     private static final Image PLAYER_SHIELD_IMAGE = SpritesImages.playerShieldImage;
 
     private final double amountOfToPixelRotate = 15;
 
     private Image playerRightImage;
-    private Image playerLeftImage;
     private ArrayList<ShotSprite> shotsList;
     private Shield shield;
     private SoundsPlayer[] playerHitSounds;
     private Image[] batteryImages = SpritesImages.getBatteryImages();
-    private String lastDirectionX;
+//    private String lastDirectionX;
     private int totalScore;
     private double bombOverheating;
     private double bulletOverheating;
@@ -71,13 +69,12 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
-        this(PLAYER_RIGHT_IMAGE, PLAYER_LEFT_IMAGE, PLAYER_SHIELD_IMAGE, manager);
+        this(PLAYER_RIGHT_IMAGE, PLAYER_SHIELD_IMAGE, manager);
     }
 
-    public Player(Image playerRightImage, Image playerLeftImage, Image shieldImage, ViewManager manager) {
+    public Player(Image playerRightImage, Image shieldImage, ViewManager manager) {
         super(playerRightImage, manager);
         this.playerRightImage = playerRightImage;
-        this.playerLeftImage = playerLeftImage;
         shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage, this);
         lives = DEFAULT_LIVES;
         maxLives = DEFAULT_LIVES;
@@ -86,7 +83,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         playerHitSounds[0] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_PATH_1);
         playerHitSounds[1] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_PATH_2);
 
-        lastDirectionX = "D";
+//        lastDirectionX = "D";
         totalScore = 0;
         bombOverheating = 0;
         bulletOverheating = 0;
@@ -106,6 +103,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         pressedKey_W = false;
         pressedKey_S = false;
         rotateWay = new RotateEffect();
+        setImageDirection(YAxisDirection.RIGHT);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,7 +111,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     public void renderShield(GraphicsContext gc) {
         //if shield is active, 750 - delay to see when sheild dissapear before another hit
         if ((getProtectionTime() > 0) && (getProtectionTime() > 750)) {
-            if (lastDirectionX.equals("D"))
+            if (getImageDirection().equals(YAxisDirection.RIGHT))
                 gc.drawImage(shield.getShieldImage(), getPositionX(), getPositionY());
             else gc.drawImage(shield.getShieldImage(), getPositionX() - 50, getPositionY());
         }
@@ -126,7 +124,6 @@ public class Player extends Sprite implements ShieldKindOfRender {
         updateBattery();
         updateBulletOverheating();
         updateAnticollisionTimer();
-        updateImageDirection();
         updatePlayerRotate();
     }
 
@@ -146,7 +143,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         double width = getWidth();
         double height = getHeight();
 
-        if (lastDirectionX.equals("D")) {
+        if (getImageDirection().equals(YAxisDirection.RIGHT)) {
             if (getActualRotate() == amountOfToPixelRotate)
                 return new Rectangle2D(getPositionX() + width / 2, getPositionY() + height / 2, width / 2.4, height / 2);
             else if (getActualRotate() == -amountOfToPixelRotate)
@@ -323,7 +320,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         double shotPositionRightX = getBoundary().getMaxX();
         double shotPositionLeftX = getBoundary().getMinX();
 
-        if (lastDirectionX.equals("D"))
+        if (getImageDirection().equals(YAxisDirection.RIGHT))
             return new Point2D(shotPositionRightX, shotPositionY);
         return new Point2D(shotPositionLeftX, shotPositionY);
     }
@@ -363,13 +360,6 @@ public class Player extends Sprite implements ShieldKindOfRender {
             reduceAnticollisionTimer();
     }
 
-    @Override
-    public void updateImageDirection() {
-        double rotateDiff = getLastRotate() + getActualRotate();
-        if (getActualRotate() == 0 || rotateDiff == 0)
-            getImageSetWay().setByLastDirection(PLAYER_LEFT_IMAGE, PLAYER_RIGHT_IMAGE, this, lastDirectionX);
-    }
-
     private void playRandomHitSound() {
         getRandomHitSound().playSound(DEFAULT_HIT_SOUND_VOLUME, false);
     }
@@ -390,16 +380,8 @@ public class Player extends Sprite implements ShieldKindOfRender {
         return DEFAULT_VELOCITY;
     }
 
-    public String getLastDirectionX() {
-        return lastDirectionX;
-    }
-
     public int getTotalScore() {
         return totalScore;
-    }
-
-    public void setLastDirectionX(String lastDirectionX) {
-        this.lastDirectionX = lastDirectionX;
     }
 
     public void setShield(Shield shield) {

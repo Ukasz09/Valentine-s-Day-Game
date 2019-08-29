@@ -33,19 +33,11 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     private final int defaultShieldDuration = 10000;
 
     private Shield shield;
-    private Image imageLeft;
-    private Image imageLeftUp;
-    private Image imageLeftDown;
-    private Image imageRight;
-    private Image imageRightUp;
-    private Image imageRightDown;
-    private Image imageDown;
-    private Image imageUp;
     private HealthStatusBar healthBar;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public FishMonsterMiniboss(Image left, Image leftUp, Image leftDown, Image right, Image rightUp, Image rightDown, Image down, Image up, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
-        super(left, kickMethod, manager, collisionAvoidWay);
+    public FishMonsterMiniboss(Image right, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+        super(right, kickMethod, manager, collisionAvoidWay);
         setLives(maxLive);
         setProtectionTime(0);
         shield = new AutoActivateShield(defaultShieldTimer, defaultShieldDuration, shieldImage, this);
@@ -56,14 +48,6 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
         setHowManyLivesTake(howManyLivesTake);
         setVelocity(velocityX, velocityY);
 
-        this.imageLeft = left;
-        this.imageLeftUp = leftUp;
-        this.imageLeftDown = leftDown;
-        this.imageRight = right;
-        this.imageRightUp = rightUp;
-        this.imageRightDown = rightDown;
-        this.imageDown = down;
-        this.imageUp = up;
         healthBar = new HealthStatusBar(maxLive, getWidth(), getPositionX(), getPositionY());
     }
 
@@ -78,14 +62,14 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void setImageByPosition(Image left, Image leftUp, Image leftDown, Image right, Image rightUp, Image rightDown, Image down, Image up, Sprite target) {
-        getImageSetWay().byTargetPosition(left, leftUp, leftDown, right, rightUp, rightDown, down, up, this, target);
-    }
+//    public void setImageByPosition(Image left, Image leftUp, Image leftDown, Image right, Image rightUp, Image rightDown, Image down, Image up, Sprite target) {
+//        getImageSetWay().byTargetPosition(left, leftUp, leftDown, right, rightUp, rightDown, down, up, this, target);
+//    }
 
     @Override
     public void update(Sprite player, ArrayList<Monster> monsters) {
         super.update(player, monsters);
-        setImageByPosition(imageLeft, imageLeftUp, imageLeftDown, imageRight, imageRightUp,imageRightDown, imageDown, imageUp, player);
+//        setImageByPosition(imageLeft, imageLeftUp, imageLeftDown, imageRight, imageRightUp,imageRightDown, imageDown, imageUp, player);
         healthBar.update(getLives(), getPositionX(), getPositionY());
         updateShield();
     }
@@ -101,7 +85,7 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     public void renderShield(GraphicsContext gc) {
         if (getProtectionTime() != 0) {
             double centerPositionX;
-            if (getActualImage() == imageLeft)
+            if (getImageDirection().equals(YAxisDirection.LEFT))
                 centerPositionX = getPositionX() + 40;
             else centerPositionX = getPositionX();
             double centerPositionY = getPositionY();
@@ -123,10 +107,5 @@ public class FishMonsterMiniboss extends Monster implements ShieldKindOfRender {
     @Override
     public void missHitAction() {
         defaultMissHitAction(MISS_SOUND_VOLUME);
-    }
-
-    @Override
-    public void updateImageDirection() {
-        //todo: to do
     }
 }

@@ -56,11 +56,6 @@ public class BombSprite extends ShotSprite {
     }
 
     @Override
-    public void updateImageDirection() {
-        //todo: nothing
-    }
-
-    @Override
     public void playShotSound() {
         playSound(SHOT_SOUND, DEFAULT_SHOT_VOLUME);
     }

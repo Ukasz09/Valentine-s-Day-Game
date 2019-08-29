@@ -1,5 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
+
 public class RotateEffect {
 
     public double rotateByPressedKey(boolean pressedKey_A, boolean pressedKey_D, boolean pressedKey_W, boolean pressedKey_S, double amountOfRotate) {
@@ -10,10 +12,17 @@ public class RotateEffect {
         else if ((pressedKey_A && pressedKey_S) || (pressedKey_D && pressedKey_W))
             rotation = -amountOfRotate;
 
-        if (pressedKey_A && pressedKey_D)
-            return 0;
+//        if (pressedKey_A && pressedKey_D)
+//            return 0;
 
         return rotation;
     }
 
+    public double rotateByAngle(Sprite spriteToRotate, Sprite target) {
+        double rotation = Math.toDegrees(spriteToRotate.getAngleToTarget(target));
+        if (rotation > 90 || rotation < -90)
+            rotation = 180 - rotation;
+
+        return rotation;
+    }
 }

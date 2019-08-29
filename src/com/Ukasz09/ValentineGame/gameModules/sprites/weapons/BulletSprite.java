@@ -20,34 +20,29 @@ public class BulletSprite extends ShotSprite {
     private static final double DEFAULT_SHOT_VOLUME = 0.2;
     private static double maxOverheating = DEFAULT_MAX_OVERHEATING;
 
-    private String shotDirection;
+    private YAxisDirection shotDirection;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public BulletSprite(String shotDirection, ViewManager manager) {
+    public BulletSprite(YAxisDirection shotDirection, ViewManager manager) {
         this(DEFAULT_SHOT_IMAGE, shotDirection, manager);
     }
 
-    public BulletSprite(Image image, String shotDirection, ViewManager manager) {
+    public BulletSprite(Image image, YAxisDirection shotDirection, ViewManager manager) {
         this(image, DEFAULT_SHOT_VELOCITY, shotDirection, DEFAULT_LIVES_TAKES, DEFAULT_MAX_OVERHEATING, manager);
     }
 
-    public BulletSprite(Image image, double shotVelocity, String shotDirection, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
+    public BulletSprite(Image image, double shotVelocity, YAxisDirection shotDirection, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
         super(image, shotVelocity, howManyLiveTakes, manager);
         this.maxOverheating = maxOverheating;
         this.shotDirection=shotDirection;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Override
-    public void updateImageDirection() {
-        //nothing to do
-    }
-
 
     @Override
     public void update(double time) {
-        if (shotDirection.equals("D"))
+        if (shotDirection.equals(YAxisDirection.RIGHT))
             addPositionX(getVelocityX() * time);
-        if (shotDirection.equals("A"))
+        if (shotDirection.equals(YAxisDirection.LEFT))
             addPositionX((-1) * getVelocityX() * time);
     }
 

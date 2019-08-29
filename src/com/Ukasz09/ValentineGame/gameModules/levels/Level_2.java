@@ -39,7 +39,7 @@ public class Level_2 extends Levels {
     private final int smallCoinValue = 50;
     private final int normalCoinValue = 100;
 
-    private final int howManyLittleMonsters = 2;
+    private final int howManyLittleMonsters = 1;
     private final int howManyAllMonsters = howManyLittleMonsters + 1; //male potworki+boss
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,7 +68,7 @@ public class Level_2 extends Levels {
 
     public void spawnMiniboss(ArrayList<Monster> monsters) {
 
-        FishMonsterMiniboss miniBoss = new FishMonsterMiniboss(FISH_MONSTER_MINIBOSS_LEFT_IMAGE, FISH_MONSTER_MINIBOSS_LEFT_UP_IMAGE,FISH_MONSTER_MINIBOSS_LEFT_DOWN_IMAGE,FISH_MONSTER_MINIBOSS_RIGHT_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_UP_IMAGE, FISH_MONSTER_MINIBOSS_RIGHT_DOWN_IMAGE, FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE, FISH_MONSTER_MINIBOSS_TOP_IMAGE, FISH_MINIBOSS_SHIELD_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
+        FishMonsterMiniboss miniBoss = new FishMonsterMiniboss(FISH_MONSTER_MINIBOSS_RIGHT_IMAGE, FISH_MINIBOSS_SHIELD_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
 
         int random = (int) (Math.random() * 2);
 
@@ -108,6 +108,13 @@ public class Level_2 extends Levels {
 
     }
 
+    //temp
+    public void setPositionMonsterTEMP(ArrayList<Monster> monsters) {
+        for (Sprite m : monsters) {
+            m.setPosition(1000,400);
+        }
+    }
+
     public boolean needToSpawnMiniboss(int collectedMoneyBags, boolean killedAllMonsters) {
         if ((collectedMoneyBags >= howManyMoneybags) && (killedAllMonsters))
             return true;
@@ -131,7 +138,8 @@ public class Level_2 extends Levels {
     public void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters) {
         makeMoneyBags(moneybagList);
         spawnLittleMonsters(monsters);
-        setPositionMonsters(monsters);
+        //setPositionMonsters(monsters);
+        setPositionMonsterTEMP(monsters);
     }
 
     @Override

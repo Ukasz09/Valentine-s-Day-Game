@@ -11,8 +11,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.transform.Rotate;
+
+import java.beans.Transient;
 
 public abstract class Sprite {
+
+    public enum YAxisDirection {
+        LEFT, RIGHT;
+    }
+
     private Image actualImage;
     private double positionX;
     private double positionY;
@@ -32,6 +40,7 @@ public abstract class Sprite {
     private SoundsPlayer missSound;
 
     private ViewManager manager;
+    private YAxisDirection imageDirection;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Sprite(Image actualImage, ViewManager manager) {
@@ -46,6 +55,7 @@ public abstract class Sprite {
         actualRotate = 0;
         lastRotate = actualRotate;
         imageSetWay = new ProperImageSet();
+        imageDirection = YAxisDirection.RIGHT;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,7 +67,6 @@ public abstract class Sprite {
 
     public void update(double time) {
         updatePosition(time);
-        updateImageDirection();
     }
 
     public void updatePosition(double time) {
@@ -67,24 +76,39 @@ public abstract class Sprite {
 
 
     public void render() {
-        drawActualImage(actualRotate);
+        drawActualImage(actualRotate, imageDirection);
         drawBoundaryForTests();
     }
 
-    public void drawActualImage(double rotate) {
-        if (rotate != 0) {
+    public void drawActualImage(double rotate, YAxisDirection direction) {
+        if (direction.equals(YAxisDirection.LEFT) || (rotate != 0)) {
             ImageView iv = new ImageView(actualImage);
-            iv.setRotate(rotate);
+
+            if (rotate != 0 && direction.equals(YAxisDirection.LEFT)) {
+                iv.setScaleX(-1);
+                iv.setRotate(rotate);
+            } else if (rotate != 0)
+                iv.setRotate(rotate);
+            else iv.setScaleX(-1);
+
             SnapshotParameters params = new SnapshotParameters();
             params.setFill(Color.TRANSPARENT);
             Image rotatedImage = iv.snapshot(params, null);
             manager.getGraphicContext().drawImage(rotatedImage, positionX, positionY);
         } else manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
-
     }
 
+    public float getAngleToTarget(Sprite target) {
+        double dx = this.getPositionX();
+        double dy = this.getPositionY();
+        double diffX = target.getPositionX() - dx;
+        double diffY = target.getPositionY() - dy;
+        float angle = (float) Math.atan2(diffY, diffX);
 
-    //todo: na czas testow
+        return angle;
+    }
+
+    //TEMP
     public void drawBoundaryForTests() {
         double tmpPosX = getBoundary().getMinX();
         double tmpPosY = getBoundary().getMinY();
@@ -95,11 +119,6 @@ public abstract class Sprite {
         manager.getGraphicContext().fillRect(tmpPosX, tmpPosY, tmpWidth, tmpHeight);
     }
 
-    //
-//    public abstract Rectangle2D getBoundaryForCollision();
-
-    public abstract void updateImageDirection();
-
     public Rectangle2D getBoundary() {
         return new Rectangle2D(positionX, positionY, width, height);
     }
@@ -107,10 +126,6 @@ public abstract class Sprite {
     public boolean intersects(Sprite s) {
         return (s.getBoundary().intersects(this.getBoundary()));
     }
-
-//    public boolean intersectsForCollision(Sprite s) {
-//        return (s.getBoundaryForCollision().intersects(this.getBoundaryForCollision()));
-//    }
 
     public void addPositionX(double offset) {
         positionX += offset;
@@ -263,5 +278,13 @@ public abstract class Sprite {
 
     public ProperImageSet getImageSetWay() {
         return imageSetWay;
+    }
+
+    public void setImageDirection(YAxisDirection imageDirection) {
+        this.imageDirection = imageDirection;
+    }
+
+    public YAxisDirection getImageDirection() {
+        return imageDirection;
     }
 }

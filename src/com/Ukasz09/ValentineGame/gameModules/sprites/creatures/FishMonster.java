@@ -19,8 +19,8 @@ public class FishMonster extends Monster {
 
     private final double howManyLivesTake = 0.5;
     private final int howBigKickSize = 0;
-    private final double velocityX = 2.5;
-    private final double velocityY = 2.5;
+    private final double velocityX = 0.0;
+    private final double velocityY = 0.0;
 
     private Image imageLeft;
     private Image imageRight;
@@ -29,7 +29,7 @@ public class FishMonster extends Monster {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonster(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
-        super(imageLeft, kickMethod, manager, collisionAvoidWay);
+        super(imageRight, kickMethod, manager, collisionAvoidWay);
         setLives(2);
         setHitSound(new SoundsPlayer(hitSoundPath));
         setDeathSound(new SoundsPlayer(deathSoundPath));
@@ -47,7 +47,7 @@ public class FishMonster extends Monster {
     @Override
     public void update(Sprite player, ArrayList<Monster> monsters) {
         super.update(player, monsters);
-        setImageByPosition(imageLeft, imageRight, imageBottom, imageTop, player);
+       // setImageByPosition(imageLeft, imageRight, imageBottom, imageTop, player);
     }
 
     @Override
@@ -65,13 +65,9 @@ public class FishMonster extends Monster {
         //nothing
     }
 
-    @Override
-    public void updateImageDirection() {
-        //todo: do it
-    }
-
-    private void setImageByPosition(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, Sprite target) {
-        getImageSetWay().byTargetPosition(imageLeft, imageRight, imageBottom, imageTop, this, target);
-    }
+//
+//    private void setImageByPosition(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, Sprite target) {
+//        getImageSetWay().byTargetPosition(imageLeft, imageRight, imageBottom, imageTop, this, target);
+//    }
 
 }
