@@ -2,73 +2,72 @@ package com.Ukasz09.ValentineGame.gameModules.levels;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.*;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickByLittleMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickByBigMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.TeleportKick;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Level_2 extends Levels {
-    private static final Image FISH_MONSTER_LEFT_IMAGE = SpritesImages.fishMonsterLeftImage;
-    private static final Image FISH_MONSTER_RIGHT_IMAGE = SpritesImages.fishMonsterRightImage;
-    private static final Image FISH_MONSTER_BOTTOM_IMAGE = SpritesImages.fishMonsterDownImage;
-    private static final Image FISH_MONSTER_TOP_IMAGE = SpritesImages.fishMonsterUpImage;
-    private static final Image FISH_MONSTER_MINIBOSS_LEFT_IMAGE = SpritesImages.fishMonsterMinibossLeftImage;
-    private static final Image FISH_MONSTER_MINIBOSS_LEFT_UP_IMAGE = SpritesImages.fishMonsterMinibossLeftUpImage;
-    private static final Image FISH_MONSTER_MINIBOSS_LEFT_DOWN_IMAGE = SpritesImages.fishMonsterMinibossLeftDownImage;
-    private static final Image FISH_MONSTER_MINIBOSS_RIGHT_IMAGE = SpritesImages.fishMonsterMinibossRightImage;
-    private static final Image FISH_MONSTER_MINIBOSS_RIGHT_UP_IMAGE = SpritesImages.fishMonsterMinibossRightUpImage;
-    private static final Image FISH_MONSTER_MINIBOSS_RIGHT_DOWN_IMAGE = SpritesImages.fishMonsterMinibossRightDownImage;
-    private static final Image FISH_MONSTER_MINIBOSS_BOTTOM_IMAGE = SpritesImages.fishMonsterMinibossDownImage;
-    private static final Image FISH_MONSTER_MINIBOSS_TOP_IMAGE = SpritesImages.fishMonsterMinibossUpImage;
-    private static final Image FISH_MINIBOSS_SHIELD_IMAGE = SpritesImages.fishMinibossShieldImage;
+public class Level_2 extends AllLevels {
+    public static final String BACKGROOUND_IMAGE_PATH = BackgroundPath.BACKGROUD_IMAGE_PATH_L_1;
 
-    private static final Image MONEY_BAG_IMAGE_1 = SpritesImages.moneyBagImage1;
-    private static final Image MONEY_BAG_IMAGE_2 = SpritesImages.moneyBagImage2;
+    private final int amountOfSmallCoins = 3;
+    private final int amountOfNormalCoins = 5;
+    private final int amountOfBigCoins = 2;
+    private final int smallCoinValue = 25;
+    private final int normalCoinValue = 50;
+    private final int bigCoinValue = 100;
 
-    private static final Image BACKGROUND_IMAGE = BackgroundImages.backgroundImage2;
-
-    private final int howManyMoneybags = 8;
-    private final int howManySmallCoins = 5;
-    private final int smallCoinValue = 50;
-    private final int normalCoinValue = 100;
-
-    private final int howManyLittleMonsters = 1;
-    private final int howManyAllMonsters = howManyLittleMonsters + 1; //male potworki+boss
+    private final int amountOfMonsters = 2;
+    private final int amountOfBosses = 1;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_2(ViewManager manager) {
         super(manager);
-        setMoneyBagImage1(MONEY_BAG_IMAGE_1);
-        setMoneyBagImage2(MONEY_BAG_IMAGE_2);
-        setHowManyMoneybags(howManyMoneybags);
-        setSmallCoinValue(smallCoinValue);
-        setNormalCoinValue(normalCoinValue);
-        setHowManySmallCoins(howManySmallCoins);
-        setHowManyLittleMonsters(howManyLittleMonsters);
-        setHowManyAllMonsters(howManyAllMonsters);
+        setAmountOfCoins(amountOfSmallCoins, amountOfNormalCoins, amountOfBigCoins);
+        setCoinsValue(smallCoinValue, normalCoinValue, bigCoinValue);
+        setAmountOfMonsters(amountOfMonsters, amountOfBosses);
+        setBackgroundImage(getBackgroundImage());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* Metody */
+    //TODO: zrobione
+    @Override
+    public void prepareLevel(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList, Player player) {
+        super.prepareLevel(coinsList, enemiesList, player);
+    }
 
-    public void spawnLittleMonsters(ArrayList<Monster> monsters) {
+    @Override
+    public void spawnEnemies(ArrayList<Monster> enemiesList) {
+        spawnMonsters(enemiesList);
+    }
 
-        for (int i = 0; i < howManyLittleMonsters; i++) {
-            FishMonster m = new FishMonster(FISH_MONSTER_LEFT_IMAGE, FISH_MONSTER_RIGHT_IMAGE, FISH_MONSTER_BOTTOM_IMAGE, FISH_MONSTER_TOP_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
-            monsters.add(m);
+    //TODO: zrobione
+    private void spawnMonsters(ArrayList<Monster> enemiesList) {
+        Image fishMonsterImage = new Image(SpritesPath.FISH_MONSTER_PATH);
+        FishMonster fishMonster = new FishMonster(fishMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
+        for (int i = 0; i < amountOfMonsters; i++) {
+            fishMonster.setPosition();
+            enemiesList.add(fishMonster);
         }
     }
 
     public void spawnMiniboss(ArrayList<Monster> monsters) {
+        Image fishMonsterBossImage = new Image(SpritesPath.FISH_MONSTER_BOSS_PATH);
+        Image shieldImage = new Image(SpritesPath.FISH_MONSTER_BOSS_SHIELD_PATH);
+        FishMonsterBoss fishMonsterBoss = new FishMonsterBoss(fishMonsterBossImage, shieldImage, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
+        for (int i = 0; i < amountOfMonsters; i++) {
+            fishMonsterBoss.setPosition();
+            enemiesList.add(fishMonsterBoss);
+        }
 
-        FishMonsterMiniboss miniBoss = new FishMonsterMiniboss(FISH_MONSTER_MINIBOSS_RIGHT_IMAGE, FISH_MINIBOSS_SHIELD_IMAGE, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
 
         int random = (int) (Math.random() * 2);
 
@@ -82,6 +81,7 @@ public class Level_2 extends Levels {
         monsters.add(miniBoss);
     }
 
+    //uzupelnic w fishMonster (najlepiej dac do monster metode dla 3 i 4 kierunkow)
     public void setPositionMonsters(ArrayList<Monster> monsters) {
 
         for (Sprite m : monsters) {
@@ -108,48 +108,28 @@ public class Level_2 extends Levels {
 
     }
 
-    //temp
-    public void setPositionMonsterTEMP(ArrayList<Monster> monsters) {
-        for (Sprite m : monsters) {
-            m.setPosition(1000,400);
-        }
-    }
-
     public boolean needToSpawnMiniboss(int collectedMoneyBags, boolean killedAllMonsters) {
-        if ((collectedMoneyBags >= howManyMoneybags) && (killedAllMonsters))
+        if ((collectedMoneyBags >= getAmountOfAllCoins()) && (killedAllMonsters))
             return true;
 
         return false;
     }
 
     @Override
-    public boolean isEnd(Player player) {
-        return defaultLevelIsEnd(player);
-    }
-
-    @Override
-    public void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, Player player) {
-        defaultRenderLevel(monsters, moneyBags, shots, player.getTotalScore(), BACKGROUND_IMAGE);
-        if (needToSpawnMiniboss(player.getCollectedMoneyBagsOnLevel(), monsters.isEmpty()))
+    public void renderLevel(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<ShotSprite> shots, Player player) {
+        defaultRenderLevel(monsters, coins, shots, player.getTotalScore(), BACKGROUND_IMAGE);
+        if (needToSpawnMiniboss(player.getCollectedCoinsOnLevel(), monsters.isEmpty()))
             spawnMiniboss(monsters);
     }
 
     @Override
-    public void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters) {
-        makeMoneyBags(moneybagList);
-        spawnLittleMonsters(monsters);
-        //setPositionMonsters(monsters);
-        setPositionMonsterTEMP(monsters);
-    }
-
-    @Override
     public Point2D playerStartPosition() {
-        return playerDefaultStartPosition();
+        return getDefaultPlayerPosition();
     }
 
     @Override
     public void playBackgroundSound() {
         setBackgroundSound(Level_1.BACKGROUND_SOUND);
-        Levels.playBackgroundSound(Level_1.BACKGROUND_SOUND_VOLUME, true);
+        AllLevels.playBackgroundSound(Level_1.BACKGROUND_SOUND_VOLUME, true);
     }
 }

@@ -1,7 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HeartsRender;
@@ -17,15 +17,9 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.Manua
 
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.transform.Rotate;
 
-import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -215,16 +209,16 @@ public class Player extends Sprite implements ShieldKindOfRender {
         bulletOverheating = BulletSprite.getMaxOverheating();
     }
 
-    public void checkCollision(ArrayList<MoneyBag> moneyBagsList, ArrayList<Monster> monsters) {
+    public void checkCollision(ArrayList<Coin> moneyBagsList, ArrayList<Monster> monsters) {
         checkIntersectsWithMoneyBags(moneyBagsList);
         checksShotsIntersectsWithMonsters(monsters);
         checkIntersectsWithMonsters(monsters);
     }
 
-    private void checkIntersectsWithMoneyBags(ArrayList<MoneyBag> moneyBagsList) {
-        Iterator<MoneyBag> moneyBagIterator = moneyBagsList.iterator();
+    private void checkIntersectsWithMoneyBags(ArrayList<Coin> moneyBagsList) {
+        Iterator<Coin> moneyBagIterator = moneyBagsList.iterator();
         while (moneyBagIterator.hasNext()) {
-            MoneyBag moneybag = moneyBagIterator.next();
+            Coin moneybag = moneyBagIterator.next();
             if (intersects(moneybag)) {
                 moneybag.playCollectSound();
                 moneyBagIterator.remove();
@@ -408,7 +402,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         levelNumber++;
     }
 
-    public int getCollectedMoneyBagsOnLevel() {
+    public int getCollectedCoinsOnLevel() {
         return collectedMoneyBagsOnLevel;
     }
 
@@ -416,7 +410,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         this.collectedMoneyBagsOnLevel = collectedMoneyBagsOnLevel;
     }
 
-    public int getKilledMonstersOnLevel() {
+    public int getKilledEnemiesOnLevel() {
         return killedMonstersOnLevel;
     }
 

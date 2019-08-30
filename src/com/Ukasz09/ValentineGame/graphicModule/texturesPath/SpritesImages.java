@@ -4,25 +4,12 @@ import javafx.scene.image.Image;
 
 public class SpritesImages {
     //Player
-    public static Image playerLeftImage = new Image(SpritesPath.PLAYER_LEFT_PATH);
     public static Image playerRightImage = new Image(SpritesPath.PLAYER_RIGHT_PATH);
 
     //Enemy's
     public static Image littleMonsterImage = new Image(SpritesPath.LITTLE_MONSTER_1_PATH);
-
-    public static Image fishMonsterRightImage = new Image(SpritesPath.FISH_MONSTER_RIGHT_PATH);
-    public static Image fishMonsterLeftImage = new Image(SpritesPath.FISH_MONSTER_LEFT_PATH);
-    public static Image fishMonsterUpImage = new Image(SpritesPath.FISH_MONSTER_TOP_PATH);
-    public static Image fishMonsterDownImage = new Image(SpritesPath.FISH_MONSTER_BOTTOM_PATH);
-
-    public static Image fishMonsterMinibossRightImage = new Image(SpritesPath.FISH_MONSTER_MINIBOSS_RIGHT_PATH);
-    public static Image fishMonsterMinibossRightUpImage = new Image(SpritesPath.FISH_MONSTER_MINIBOSS_RIGHT_UP_PATH);
-    public static Image fishMonsterMinibossRightDownImage = new Image(SpritesPath.FISH_MONSTER_MINIBOSS_RIGHT_DOWN__PATH);
-    public static Image fishMonsterMinibossLeftImage = new Image(SpritesPath.FISH_MONSTER_MINIBOSS_LEFT_PATH);
-    public static Image fishMonsterMinibossLeftUpImage = new Image(SpritesPath.FISH_MONSTER_MINIBOSS_LEFT_UP_PATH);
-    public static Image fishMonsterMinibossLeftDownImage = new Image(SpritesPath.FISH_MONSTER_MINIBOSS_LEFT_DOWN_PATH);
-    public static Image fishMonsterMinibossUpImage = new Image(SpritesPath.FISH_MONSTER_MINIBOSS_TOP_PATH);
-    public static Image fishMonsterMinibossDownImage = new Image(SpritesPath.FISH_MONSTER_MINIBOSS_BOTTOM_PATH);
+    public static Image fishMonsterRightImage = new Image(SpritesPath.FISH_MONSTER_PATH);
+    public static Image fishMonsterMinibossRightImage = new Image(SpritesPath.FISH_MONSTER_BOSS_PATH);
 
     //Other
     public static Image playerShieldImage = new Image(SpritesPath.PROTECTION_ORBIT_PATH);
@@ -32,11 +19,7 @@ public class SpritesImages {
     public static Image heartHalfImage = new Image(SpritesPath.HEART_HALF_PATH);
     public static Image heartEmptyImage = new Image(SpritesPath.HEART_EMPTY_PATH);
     private static Image[] batteryImages = new Image[5];
-
-    public static Image moneyBagImage1 = new Image(SpritesPath.MONEY_BAG_PATH_1);
-    public static Image moneyBagImage2 = new Image(SpritesPath.MONEY_BAG_PATH_2);
-
-    public static Image fishMinibossShieldImage = new Image(SpritesPath.FISH_MONSTER_MINIBOSS_SHIELD_PATH);
+    public static Image fishMinibossShieldImage = new Image(SpritesPath.FISH_MONSTER_BOSS_SHIELD_PATH);
 
     //endPanel
     public static Image kasiaImage = new Image(SpritesPath.KASIA_IMAGE_PATH);

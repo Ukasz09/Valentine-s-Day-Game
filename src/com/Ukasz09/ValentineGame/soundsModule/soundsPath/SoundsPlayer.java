@@ -9,16 +9,25 @@ import java.net.URL;
 public class SoundsPlayer {
     private String soundPath;
     private MediaPlayer mediaPlayer;
+    double volume;
+    boolean inLoop;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public SoundsPlayer(String soundPath) {
+    public SoundsPlayer(String soundPath, double volume, boolean inLoop) {
         this.soundPath = soundPath;
+        this.volume = volume;
+        this.inLoop=inLoop;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void playSound(double volume, boolean inLoop) {
-        //URL resource = getClass().getResource(soundPath);
-        String resource=new File(soundPath).toURI().toString();
+        this.volume = volume;
+        this.inLoop=inLoop;
+        playSound();
+    }
+
+    public void playSound() {
+        String resource = new File(soundPath).toURI().toString();
         Media media = new Media(resource);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(volume);

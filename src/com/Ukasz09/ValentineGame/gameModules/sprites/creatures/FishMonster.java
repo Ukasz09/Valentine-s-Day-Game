@@ -1,12 +1,10 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.imageByPositionEffect.ProperImageSet;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -22,13 +20,8 @@ public class FishMonster extends Monster {
     private final double velocityX = 0.0;
     private final double velocityY = 0.0;
 
-    private Image imageLeft;
-    private Image imageRight;
-    private Image imageBottom;
-    private Image imageTop;
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public FishMonster(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+    public FishMonster(Image imageRight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(imageRight, kickMethod, manager, collisionAvoidWay);
         setLives(2);
         setHitSound(new SoundsPlayer(hitSoundPath));
@@ -36,18 +29,13 @@ public class FishMonster extends Monster {
         setHowBigKickSize(howBigKickSize);
         setHowManyLivesTake(howManyLivesTake);
         setVelocity(velocityX, velocityY);
-
-        this.imageLeft = imageLeft;
-        this.imageRight = imageRight;
-        this.imageBottom = imageBottom;
-        this.imageTop = imageTop;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void update(Sprite player, ArrayList<Monster> monsters) {
         super.update(player, monsters);
-       // setImageByPosition(imageLeft, imageRight, imageBottom, imageTop, player);
+        // setImageByPosition(imageLeft, imageRight, imageBottom, imageTop, player);
     }
 
     @Override

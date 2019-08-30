@@ -15,7 +15,7 @@ import com.Ukasz09.ValentineGame.gameModules.levels.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
@@ -30,14 +30,14 @@ import java.util.ArrayList;
 
 public class Game extends Application {
     private ViewManager manager;
-    private ArrayList<MoneyBag> moneybagList;
+    private ArrayList<Coin> moneybagList;
     private ArrayList<Monster> monstersList;
     private ArrayList<String> inputsList;
 
     private double elapsedTime;
     private LongValue lastNanoTime;
 
-    private Levels actualLevel;
+    private AllLevels actualLevel;
     private Panels actualPanel;
 
     private Player player;
@@ -84,18 +84,18 @@ public class Game extends Application {
                     break;
 
                     case 1: {
-                        if (!actualLevel.isEnd(player))
+                        if (!actualLevel.levelIsEnd(player))
                             play(currentNanoTime, actualLevel);
                         else {
                             endLevel();
                             actualLevel = new Level_2(manager);
-                            actualLevel.makeLevel(moneybagList, monstersList);
+                            actualLevel.prepareLevel(moneybagList, monstersList);
                         }
                     }
                     break;
 
                     case 2: {
-                        if (!actualLevel.isEnd(player))
+                        if (!actualLevel.levelIsEnd(player))
                             play(currentNanoTime, actualLevel);
                         else {
                             endLevel();
@@ -212,7 +212,7 @@ public class Game extends Application {
         else return false;
     }
 
-    private void play(long currentNanoTime, Levels level) {
+    private void play(long currentNanoTime, AllLevels level) {
         calculateTime(currentNanoTime);
         player.checkCollision(moneybagList, monstersList);
         level.renderLevel(monstersList, moneybagList, player.getShotsList(), player);
@@ -220,7 +220,7 @@ public class Game extends Application {
         player.update(elapsedTime);
         player.render();
         level.updateShots(player.getShotsList(), elapsedTime);
-        level.updateMonsters(player, monstersList);
+        level.updateEnemies(player, monstersList);
 
     }
 
@@ -229,16 +229,15 @@ public class Game extends Application {
         lastNanoTime.setValue(currentNanoTime);
     }
 
-    private void prepareGame(Levels startLevel) {
-        double playerPositionX = startLevel.playerStartPosition().getX();
-        double playerPositionY = startLevel.playerStartPosition().getY();
-        player.setPosition(playerPositionX, playerPositionY);
-        startLevel.makeLevel(moneybagList, monstersList);
-        startLevel.playBackgroundSound();
-        Levels.playWingsSound();
+    private void prepareGame(AllLevels startLevel) {
+//        double playerPositionX = startLevel.playerStartPosition().getX();
+//        double playerPositionY = startLevel.playerStartPosition().getY();
+//        player.setPosition(playerPositionX, playerPositionY);
+        startLevel.prepareLevel(moneybagList, monstersList);
+        AllLevels.playWingsSound();
     }
 
-    private Levels chooseLevel(int levelNumber) {
+    private AllLevels chooseLevel(int levelNumber) {
         player.setLevelNumber(levelNumber);
         switch (levelNumber) {
             case 1:

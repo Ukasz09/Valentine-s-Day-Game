@@ -5,110 +5,78 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffec
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.LittleMonster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.MoneyBag;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickByLittleMonster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.TeleportKick;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
-import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-import javafx.geometry.Point2D;
+
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class Level_1 extends Levels {
-    private static final Image LITTLE_MONSTER_IMAGE = SpritesImages.littleMonsterImage;
-    private static final Image MONEY_BAG_IMAGE_1 = SpritesImages.moneyBagImage1;
-    private static final Image MONEY_BAG_IMAGE_2 = SpritesImages.moneyBagImage2;
-    private static final Image BACKGROUND_IMAGE = BackgroundImages.backgroundImage1;
-
-    public static final SoundsPlayer BACKGROUND_SOUND = Sounds.backgroundSound;
+//ZROBIONE
+public class Level_1 extends AllLevels {
+    public static final String BACKGROOUND_IMAGE_PATH = BackgroundPath.BACKGROUD_IMAGE_PATH_L_0;
+    public static final String BACKGROUND_SOUND_PATH = SoundsPath.BACKGROUND_SOUND_PATH_1;
     public static final double BACKGROUND_SOUND_VOLUME = 0.1;
 
-    private final int howManyMoneybags = 10;
-    private final int howManySmallCoins = 8;
-    private final int smallCoinValue = 50;
-    private final int normalCoinValue = 100;
-    private final int howManyLittleMonsters = 4;
-    private final int howManyAllMonsters = howManyLittleMonsters;
+    private final int amountOfSmallCoins = 5;
+    private final int amountOfNormalCoins = 3;
+    private final int amountOfBigCoins = 2;
+    private final int smallCoinValue = 25;
+    private final int normalCoinValue = 50;
+    private final int bigCoinValue = 100;
+
+    private final int amountOfMonsters = 4;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_1(ViewManager manager) {
         super(manager);
-        setMoneyBagImage1(MONEY_BAG_IMAGE_1);
-        setMoneyBagImage2(MONEY_BAG_IMAGE_2);
-        setHowManyMoneybags(howManyMoneybags);
-        setSmallCoinValue(smallCoinValue);
-        setNormalCoinValue(normalCoinValue);
-        setHowManySmallCoins(howManySmallCoins);
-
-        setHowManyLittleMonsters(howManyLittleMonsters);
-        setHowManyAllMonsters(howManyAllMonsters);
+        setAmountOfCoins(amountOfSmallCoins, amountOfNormalCoins, amountOfBigCoins);
+        setCoinsValue(smallCoinValue, normalCoinValue, bigCoinValue);
+        setAmountOfMonsters(amountOfMonsters, 0);
+        setBackgroundImage(getBackgroundImage());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void spawnLittleMonsters(ArrayList<Monster> monsters) {
+    @Override
+    public void prepareLevel(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList, Player player) {
+        super.prepareLevel(coinsList, enemiesList, player);
+        playBackgroundSound(getBackgroundSound());
+    }
 
-        for (int i = 0; i < getHowManyLittleMonsters(); i++) {
-            LittleMonster m = new LittleMonster(LITTLE_MONSTER_IMAGE, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
-            monsters.add(m);
+    @Override
+    public void spawnEnemies(ArrayList<Monster> enemiesList) {
+        Image littleMonsterImage = new Image(SpritesPath.LITTLE_MONSTER_1_PATH);
+        LittleMonster littleMonster = new LittleMonster(littleMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
+        for (int i = 0; i < getAmountOfAllEnemies(); i++) {
+            littleMonster.setPosition();
+            enemiesList.add(littleMonster);
         }
-
-    }
-
-    public void setPositionMonsters(ArrayList<Monster> monsters) {
-
-        for (Sprite m : monsters) {
-
-            int random = (int) (Math.random() * 3 + 1);
-            int spawnPositionY = (int) (Math.random() * getManager().getBottomBorder());
-            int spawnPositionX = (int) (Math.random() * getManager().getRightBorder());
-
-            //spawn na lewym brzegu
-            if (random == 1)
-                m.setPosition(getManager().getLeftBorder(), spawnPositionY);
-
-            //spawn na prawym brzegu
-            if (random == 2)
-                m.setPosition(getManager().getRightBorder(), spawnPositionY);
-
-            //spawn na gornym brzegu
-            if (random == 3)
-                m.setPosition(spawnPositionX, getManager().getTopBorder());
-        }
-
     }
 
     @Override
-    public boolean isEnd(Player player) {
-        return defaultLevelIsEnd(player);
+    public void setPlayerStartPosition(Player player) {
+        double posX = getDefaultPlayerPosition().getX();
+        double posY = getDefaultPlayerPosition().getY();
+        player.setPosition(posX, posY);
     }
 
     @Override
-    public void renderLevel(ArrayList<Monster> monsters, ArrayList<MoneyBag> moneyBags, ArrayList<ShotSprite> shots, Player player) {
-        defaultRenderLevel(monsters, moneyBags, shots, player.getTotalScore(), BACKGROUND_IMAGE);
+    public void renderLevel(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<ShotSprite> shots, Player player) {
+        defaultLevelRender(monsters, coins, shots, player.getTotalScore());
     }
 
-    @Override
-    public void makeLevel(ArrayList<MoneyBag> moneybagList, ArrayList<Monster> monsters) {
-        makeMoneyBags(moneybagList);
-        spawnLittleMonsters(monsters);
-        setPositionMonsters(monsters);
-        playBackgroundSound();
+    public SoundsPlayer getBackgroundSound() {
+        return new SoundsPlayer(BACKGROUND_SOUND_PATH, BACKGROUND_SOUND_VOLUME, true);
     }
 
-    @Override
-    public Point2D playerStartPosition() {
-        return playerDefaultStartPosition();
+    public Image getBackgroundImage() {
+        return new Image(BACKGROOUND_IMAGE_PATH);
     }
 
-    @Override
-    public void playBackgroundSound() {
-        setBackgroundSound(BACKGROUND_SOUND);
-        Levels.playBackgroundSound(BACKGROUND_SOUND_VOLUME, true);
-    }
 }

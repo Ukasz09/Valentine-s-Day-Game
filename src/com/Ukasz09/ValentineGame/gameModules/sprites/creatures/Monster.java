@@ -3,6 +3,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.PositionByTarget;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import javafx.scene.image.Image;
@@ -16,6 +17,7 @@ public abstract class Monster extends Sprite {
     private ICollisionAvoidWay collisionAvoidWay;
     private PositionByTarget positionByTarget;
     private RotateEffect rotateWay;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Monster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(image, manager);
@@ -25,7 +27,7 @@ public abstract class Monster extends Sprite {
         this.kickMethod = kickMethod;
         this.collisionAvoidWay = collisionAvoidWay;
         this.positionByTarget = new PositionByTarget();
-        rotateWay=new RotateEffect();
+        rotateWay = new RotateEffect();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +67,7 @@ public abstract class Monster extends Sprite {
 
     public void updateMonsterRotate(Sprite target) {
         updateLastRotate();
-        double properRotate = rotateWay.rotateByAngle(this,target);
+        double properRotate = rotateWay.rotateByAngle(this, target);
         setActualRotate(properRotate);
     }
 
@@ -111,6 +113,62 @@ public abstract class Monster extends Sprite {
 
     public boolean isExactlyAboveTarget(Sprite target) {
         return positionByTarget.isExactlyAboveTarget(this, target);
+    }
+
+    //todo:
+    public void setPositionByDirection(boolean north, boolean south, boolean east, boolean west) {
+        double positionY;
+        double positionX;
+        if (!north && !south && !east && !west) {
+            //set position like in north
+            positionX = Math.random() * getManager().getRightBorder();
+            positionY = getManager().getTopBorder() - getHeight();
+            this.setPosition(positionX, positionY);
+        } else {
+
+            DirectionEnum direction = DirectionEnum.getDirection();
+            switch (direction){
+
+            }
+
+
+
+
+
+
+        }
+
+//////////////////////
+        double positionY;
+        double positionX;
+        switch (DirectionEnum.getDirection()) {
+            case NORTH: {
+                positionX = Math.random() * getManager().getRightBorder();
+                positionY = getManager().getTopBorder() - getHeight();
+                this.setPosition(positionX, positionY);
+            }
+            break;
+
+            case EAST: {
+                positionX = getManager().getLeftBorder() - getWidth();
+                positionY = Math.random() * getManager().getBottomBorder();
+                this.setPosition(positionX, positionY);
+            }
+            break;
+
+            case WEST: {
+                positionX = getManager().getRightBorder() + getWidth();
+                positionY = Math.random() * getManager().getBottomBorder();
+                this.setPosition(positionX, positionY);
+            }
+            break;
+
+            default: {
+                positionX = Math.random() * getManager().getRightBorder();
+                positionY = getManager().getTopBorder() - getHeight();
+                this.setPosition(positionX, positionY);
+            }
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

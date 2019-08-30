@@ -20,8 +20,8 @@ public class EndPanel extends Panels {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void makePanel() {
-        Levels.stopBackgroundSound();
-        Levels.stopWingsSound();
+        AllLevels.stopBackgroundSound();
+        AllLevels.stopWingsSound();
         BACKGROUND_SOUND.playSound(SOUND_VOLUME, false);
     }
 
