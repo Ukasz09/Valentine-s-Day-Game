@@ -54,7 +54,7 @@ public class Level_1 extends AllLevels {
         Image littleMonsterImage = new Image(SpritesPath.LITTLE_MONSTER_1_PATH);
         LittleMonster littleMonster = new LittleMonster(littleMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
         for (int i = 0; i < getAmountOfAllEnemies(); i++) {
-            littleMonster.setPosition();
+            littleMonster.setStartedPosition();
             enemiesList.add(littleMonster);
         }
     }
@@ -67,15 +67,15 @@ public class Level_1 extends AllLevels {
     }
 
     @Override
-    public void renderLevel(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<ShotSprite> shots, Player player) {
-        defaultLevelRender(monsters, coins, shots, player.getTotalScore());
+    public void render(ArrayList<Monster> enemiesList, ArrayList<Coin> coinsList, ArrayList<ShotSprite> shotsList, Player player) {
+        defaultLevelRender(enemiesList, coinsList, shotsList, player.getTotalScore());
     }
 
     public SoundsPlayer getBackgroundSound() {
         return new SoundsPlayer(BACKGROUND_SOUND_PATH, BACKGROUND_SOUND_VOLUME, true);
     }
 
-    public Image getBackgroundImage() {
+    private Image getBackgroundImage() {
         return new Image(BACKGROOUND_IMAGE_PATH);
     }
 

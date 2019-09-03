@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class Game extends Application {
     private ViewManager manager;
     private ArrayList<Coin> moneybagList;
-    private ArrayList<Monster> monstersList;
+    private ArrayList<Monster> enemiesList;
     private ArrayList<String> inputsList;
 
     private double elapsedTime;
@@ -49,7 +49,7 @@ public class Game extends Application {
         player = new Player(SpritesImages.playerRightImage, SpritesImages.playerShieldImage, manager);
         inputsList = new ArrayList<>();
         moneybagList = new ArrayList<>();
-        monstersList = new ArrayList<>();
+        enemiesList = new ArrayList<>();
 
 
     }
@@ -65,7 +65,7 @@ public class Game extends Application {
         int levelNumber = 0;
         if (levelNumber == 0) {
             actualPanel = new StartPanel(manager);
-            actualPanel.makePanel();
+            actualPanel.make();
         } else startGame(levelNumber);
 
         class gameAnimationTimer extends AnimationTimer {
@@ -74,9 +74,9 @@ public class Game extends Application {
                 switch (player.getLevelNumber()) {
                     case 0: {
                         if (!playerReadyToGame())
-                            actualPanel.renderPanel();
+                            actualPanel.render();
                         else {
-                            actualPanel.endPanel();
+                            actualPanel.end();
                             actualPanel = null;
                             startGame(1);
                         }
@@ -89,7 +89,7 @@ public class Game extends Application {
                         else {
                             endLevel();
                             actualLevel = new Level_2(manager);
-                            actualLevel.prepareLevel(moneybagList, monstersList);
+                            actualLevel.prepareLevel(moneybagList, enemiesList);
                         }
                     }
                     break;
@@ -101,13 +101,13 @@ public class Game extends Application {
                             endLevel();
                             actualLevel = null;
                             actualPanel = new EndPanel(manager);
-                            actualPanel.makePanel();
+                            actualPanel.make();
                         }
                     }
                     break;
 
                     default: {
-                        actualPanel.renderPanel();
+                        actualPanel.render();
                     }
                 }
             }
@@ -122,7 +122,7 @@ public class Game extends Application {
         player.setCollectedMoneyBagsOnLevel(0);
         player.setKilledMonstersOnLevel(0);
         moneybagList.clear();
-        monstersList.clear();
+        enemiesList.clear();
         player.clearShotsList();
     }
 
@@ -137,7 +137,7 @@ public class Game extends Application {
             if (!player.boundaryCollisionFromLeftSide(manager.getLeftBorder())) {
                 player.setImageDirection(Sprite.YAxisDirection.LEFT); //must be before setting image
 
-                if ((!player.collisionWithMonstersFromLeftSide(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
+                if ((!player.collisionWithMonstersFromLeftSide(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(-velocity, 0);
                     player.setCollisionFromLeftSide(false);
                 } else player.setCollisionFromLeftSide(true);
@@ -151,7 +151,7 @@ public class Game extends Application {
             if (!player.boundaryCollisionFromRightSide(manager.getRightBorder())) {
                 player.setImageDirection(Sprite.YAxisDirection.RIGHT);
 
-                if ((!player.collisionWithMonstersFromRightSide(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
+                if ((!player.collisionWithMonstersFromRightSide(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(velocity, 0);
                     player.setCollisionFromRightSide(false);
                 } else player.setCollisionFromRightSide(true);
@@ -164,7 +164,7 @@ public class Game extends Application {
 
             if (!player.boundaryCollisionFromTop(manager.getTopBorder())) {
 
-                if ((!player.collisionWithMonstersFromBottom(monstersList, player)) || (player.checkPlayerCanDoAnyMove())) {
+                if ((!player.collisionWithMonstersFromBottom(enemiesList, player)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(0, -velocity);
                     player.setCollisionFromUpSide(false);
                 } else player.setCollisionFromUpSide(true);
@@ -177,7 +177,7 @@ public class Game extends Application {
 
             if (!player.boundaryCollisionFromBottom(manager.getBottomBorder())) {
 
-                if ((!player.collisionWithMonstersFromTop(monstersList)) || (player.checkPlayerCanDoAnyMove())) {
+                if ((!player.collisionWithMonstersFromTop(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(0, velocity);
                     player.setCollisionFromDownSide(false);
                 } else player.setCollisionFromDownSide(true);
@@ -212,19 +212,18 @@ public class Game extends Application {
         else return false;
     }
 
+    //todo: poprawic
     private void play(long currentNanoTime, AllLevels level) {
-        calculateTime(currentNanoTime);
-        player.checkCollision(moneybagList, monstersList);
-        level.renderLevel(monstersList, moneybagList, player.getShotsList(), player);
+        updateTime(currentNanoTime);
+        level.render(enemiesList, moneybagList, player.getShotsList(), player);
         checkPlayerMove(Player.getDefaultVelocity());
         player.update(elapsedTime);
         player.render();
-        level.updateShots(player.getShotsList(), elapsedTime);
-        level.updateEnemies(player, monstersList);
+        level.update(player, enemiesList,elapsedTime);
 
     }
 
-    private void calculateTime(long currentNanoTime) {
+    private void updateTime(long currentNanoTime) {
         elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
         lastNanoTime.setValue(currentNanoTime);
     }
@@ -233,7 +232,7 @@ public class Game extends Application {
 //        double playerPositionX = startLevel.playerStartPosition().getX();
 //        double playerPositionY = startLevel.playerStartPosition().getY();
 //        player.setPosition(playerPositionX, playerPositionY);
-        startLevel.prepareLevel(moneybagList, monstersList);
+        startLevel.prepareLevel(moneybagList, enemiesList);
         AllLevels.playWingsSound();
     }
 

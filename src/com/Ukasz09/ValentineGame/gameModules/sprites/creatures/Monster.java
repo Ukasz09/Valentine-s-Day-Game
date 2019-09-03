@@ -8,6 +8,7 @@ import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import javafx.scene.image.Image;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 public abstract class Monster extends Sprite {
@@ -115,60 +116,70 @@ public abstract class Monster extends Sprite {
         return positionByTarget.isExactlyAboveTarget(this, target);
     }
 
-    //todo:
-    public void setPositionByDirection(boolean north, boolean south, boolean east, boolean west) {
-        double positionY;
-        double positionX;
-        if (!north && !south && !east && !west) {
-            //set position like in north
-            positionX = Math.random() * getManager().getRightBorder();
-            positionY = getManager().getTopBorder() - getHeight();
-            this.setPosition(positionX, positionY);
-        } else {
+    //todo: zrobione
+    public abstract void setStartedPosition();
 
-            DirectionEnum direction = DirectionEnum.getDirection();
-            switch (direction){
-
-            }
-
-
-
-
-
-
+    //todo: zrobione
+    private DirectionEnum randomPositionByDirection(boolean north, boolean south, boolean east, boolean west) {
+        DirectionEnum direction;
+        try {
+            direction = DirectionEnum.getRandomDirection(north, south, east, west);
+            return direction;
+        } catch (InvalidParameterException anyDirection) {
+            return DirectionEnum.NORTH;
         }
+    }
 
-//////////////////////
-        double positionY;
-        double positionX;
-        switch (DirectionEnum.getDirection()) {
-            case NORTH: {
-                positionX = Math.random() * getManager().getRightBorder();
-                positionY = getManager().getTopBorder() - getHeight();
-                this.setPosition(positionX, positionY);
-            }
-            break;
+    //todo: zrobione
+    public void setPositionByDirection(boolean north, boolean south, boolean east, boolean west, double offset) {
+        DirectionEnum direction = randomPositionByDirection(north, south, east, west);
+        setPositionByDirection(direction, offset);
+    }
 
-            case EAST: {
-                positionX = getManager().getLeftBorder() - getWidth();
-                positionY = Math.random() * getManager().getBottomBorder();
-                this.setPosition(positionX, positionY);
-            }
-            break;
-
-            case WEST: {
-                positionX = getManager().getRightBorder() + getWidth();
-                positionY = Math.random() * getManager().getBottomBorder();
-                this.setPosition(positionX, positionY);
-            }
-            break;
-
-            default: {
-                positionX = Math.random() * getManager().getRightBorder();
-                positionY = getManager().getTopBorder() - getHeight();
-                this.setPosition(positionX, positionY);
-            }
+    //todo: zrobione
+    private void setPositionByDirection(DirectionEnum direction, double offset) {
+        switch (direction) {
+            case NORTH:
+                setPositionFromNorth(offset);
+                break;
+            case SOUTH:
+                setPositionFromSouth(offset);
+                break;
+            case EAST:
+                setPositionFromEast(offset);
+                break;
+            case WEST:
+                setPositionFromWest(offset);
+                break;
         }
+    }
+
+    //todo: zrobione
+    private void setPositionFromNorth(double offset) {
+        double positionX = Math.random() * getManager().getRightBorder();
+        double positionY = getManager().getTopBorder() - offset;
+        this.setPosition(positionX, positionY);
+    }
+
+    //todo: zrobione
+    private void setPositionFromSouth(double offset) {
+        double positionX = Math.random() * getManager().getRightBorder();
+        double positionY = getManager().getBottomBorder() + offset;
+        this.setPosition(positionX, positionY);
+    }
+
+    //todo: zrobione
+    private void setPositionFromEast(double offset) {
+        double positionX = getManager().getLeftBorder() - offset;
+        double positionY = Math.random() * getManager().getBottomBorder();
+        this.setPosition(positionX, positionY);
+    }
+
+    //todo: zrobione
+    private void setPositionFromWest(double offset) {
+        double positionX = getManager().getRightBorder() + offset;
+        double positionY = Math.random() * getManager().getBottomBorder();
+        this.setPosition(positionX, positionY);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

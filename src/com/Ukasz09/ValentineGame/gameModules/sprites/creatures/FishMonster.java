@@ -32,10 +32,15 @@ public class FishMonster extends Monster {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // TODO: zrobione:
+    @Override
+    public void setStartedPosition() {
+        setPositionByDirection(true, true, true, true, getWidth());
+    }
+
     @Override
     public void update(Sprite player, ArrayList<Monster> monsters) {
         super.update(player, monsters);
-        // setImageByPosition(imageLeft, imageRight, imageBottom, imageTop, player);
     }
 
     @Override

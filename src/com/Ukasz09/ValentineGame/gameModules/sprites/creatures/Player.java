@@ -41,7 +41,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private Shield shield;
     private SoundsPlayer[] playerHitSounds;
     private Image[] batteryImages = SpritesImages.getBatteryImages();
-//    private String lastDirectionX;
+    //    private String lastDirectionX;
     private int totalScore;
     private double bombOverheating;
     private double bulletOverheating;
@@ -111,9 +111,9 @@ public class Player extends Sprite implements ShieldKindOfRender {
         }
     }
 
-    @Override
-    public void update(double time) {
+    public void update(double time, ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList) {
         super.update(time);
+        updateAllCollisions(coinsList, enemiesList);
         updateShield();
         updateBattery();
         updateBulletOverheating();
@@ -209,10 +209,10 @@ public class Player extends Sprite implements ShieldKindOfRender {
         bulletOverheating = BulletSprite.getMaxOverheating();
     }
 
-    public void checkCollision(ArrayList<Coin> moneyBagsList, ArrayList<Monster> monsters) {
-        checkIntersectsWithMoneyBags(moneyBagsList);
-        checksShotsIntersectsWithMonsters(monsters);
-        checkIntersectsWithMonsters(monsters);
+    public void updateAllCollisions(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList) {
+        checkIntersectsWithMoneyBags(coinsList);
+        checksShotsIntersectsWithMonsters(enemiesList);
+        checkIntersectsWithMonsters(enemiesList);
     }
 
     private void checkIntersectsWithMoneyBags(ArrayList<Coin> moneyBagsList) {

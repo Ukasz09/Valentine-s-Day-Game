@@ -66,6 +66,12 @@ public abstract class AllLevels {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // TODO: 03.09.2019: zrobione
+    public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime){
+      updateShots(player.getShotsList(),elapsedTime);
+      updateEnemies(player,enemiesList);
+    }
+
     //TODO: zrobione
     public boolean levelIsEnd(Player player) {
         if ((player.getCollectedCoinsOnLevel() < getAmountOfAllCoins()) || (player.getKilledEnemiesOnLevel() < getAmountOfAllEnemies()))
@@ -116,7 +122,7 @@ public abstract class AllLevels {
     }
 
     //TODO: zrobione
-    public void updateEnemies(Sprite target, ArrayList<Monster> enemiesList) {
+    private void updateEnemies(Sprite target, ArrayList<Monster> enemiesList) {
         for (Monster m : enemiesList)
             m.update(target, enemiesList);
     }
@@ -129,10 +135,6 @@ public abstract class AllLevels {
     public abstract void spawnEnemies(ArrayList<Monster> enemiesList);
 
     //TODO: zrobione
-
-    /**
-     * Need to spawn coins, enemies, play background music specify by level
-     */
     public void prepareLevel(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList, Player player) {
         spawnCoins(coinsList, amountOfSmallCoins, amountOfNormalCoins, amountOfBigCoins);
         spawnEnemies(enemiesList);
@@ -140,7 +142,7 @@ public abstract class AllLevels {
     }
 
     //Todo: zrobione
-    public abstract void renderLevel(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<ShotSprite> shots, Player player);
+    public abstract void render(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<ShotSprite> shots, Player player);
 
     //TODO: zrobione
     public Point2D getDefaultPlayerPosition() {
@@ -191,8 +193,8 @@ public abstract class AllLevels {
             shots.next().render();
     }
 
-    public void updateShots(ArrayList<ShotSprite> shotSprites, double elapsedTime) {
-        Iterator<ShotSprite> shotsIterator = shotSprites.iterator();
+    private void updateShots(ArrayList<ShotSprite> shotsList, double elapsedTime) {
+        Iterator<ShotSprite> shotsIterator = shotsList.iterator();
         while (shotsIterator.hasNext()) {
             ShotSprite shot = shotsIterator.next();
             shot.update(elapsedTime);

@@ -1,11 +1,13 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class Panels {
     private ViewManager manager;
+    private Image backgroundImage;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Panels(ViewManager manager) {
@@ -13,19 +15,24 @@ public abstract class Panels {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public abstract void makePanel();
+    public abstract void make();
 
-    public abstract void endPanel();
+    public abstract void end();
 
-    public abstract void renderPanel();
+    public void render(){
+     drawBackground();
+    }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    protected void drawBackground(GraphicsContext gc, Image background) {
-        gc.drawImage(background, 0, 0);
+    public void drawBackground() {
+        manager.getGraphicContext().drawImage(backgroundImage, 0, 0);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public ViewManager getManager() {
         return manager;
+    }
+
+    public void setBackgroundImage(Image backgroundImage) {
+        this.backgroundImage = backgroundImage;
     }
 }

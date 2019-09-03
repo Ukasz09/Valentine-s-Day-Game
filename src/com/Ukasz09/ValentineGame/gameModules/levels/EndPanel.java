@@ -2,44 +2,72 @@ package com.Ukasz09.ValentineGame.gameModules.levels;
 
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
-import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 public class EndPanel extends Panels {
-
-    private static final SoundsPlayer BACKGROUND_SOUND = Sounds.backgroundEndSound;
-    private static final double SOUND_VOLUME = 0.3;
+    public static final String BACKGROUND_IMAGE_PATH = BackgroundPath.END_IMAGE_PATH;
+    public static final String BACKGROUND_SOUND_PATH = SoundsPath.END_SOUND_PATH;
+    private static final double BACKGROUND_SOUND_VOLUME = 0.3;
+    private SoundsPlayer backgroundSound;
+    private Image heartFlare;
+    private Image princess;
+    private Image princessWings;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public EndPanel(ViewManager manager) {
         super(manager);
+        setBackgroundImage(getBackgroundImage());
+        backgroundSound = getBackgroundSound();
+        heartFlare=new Image(SpritesPath.HEART_FLARE_PATH);
+        princess=new Image(SpritesPath.PRINCESS_IMAGE_PATH);
+        princessWings=new Image(SpritesPath.PRINCESS_WINGS_PATH);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public void makePanel() {
+    public void make() {
         AllLevels.stopBackgroundSound();
         AllLevels.stopWingsSound();
-        BACKGROUND_SOUND.playSound(SOUND_VOLUME, false);
+        playBackgroundSound();
     }
 
     @Override
-    public void endPanel() {
-        //nothing to do
+    public void end() {
+        stopBackgroundSound();
     }
 
     @Override
-    public void renderPanel() {
-        drawElements(getManager().getGraphicContext());
+    public void render() {
+       super.render();
+       renderPrincess();
+
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void drawElements(GraphicsContext gc) {
-        gc.drawImage(BackgroundImages.endImage, 0, 0);
-        gc.drawImage(SpritesImages.heartFlareImage, 10, 0);
+    //ZROBIC: nowy sprite princess i ustawic
+    public void renderPrincess() {
+        getManager().getGraphicContext().drawImage(heartFlare, 10, 0);
         gc.drawImage(SpritesImages.kasiaWingsImage, 440, 500);
         gc.drawImage(SpritesImages.kasiaImage, 600, 230);
+    }
+
+    private void playBackgroundSound() {
+        backgroundSound.playSound();
+    }
+
+    private void stopBackgroundSound() {
+        backgroundSound.stopSound();
+    }
+
+    private Image getBackgroundImage() {
+        return new Image(BACKGROUND_IMAGE_PATH);
+    }
+
+    private SoundsPlayer getBackgroundSound() {
+        return new SoundsPlayer(BACKGROUND_SOUND_PATH, BACKGROUND_SOUND_VOLUME, false);
     }
 }
