@@ -2,31 +2,28 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.items;
 
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public class Coin extends Sprite {
 
-    private static final SoundsPlayer DEFAULT_COLLECT_SOUND = Sounds.collectMoneySound;
+    private static final String COLLECT_SOUND_PATH = SoundsPath.COLLECT_COIN_SOUND_PATH;
+    private static final double SOUND_VOLUME = 0.1;
     private SoundsPlayer collectSound;
-    private double soundVolume;
-
     private int value;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Coin(Image image, int value, ViewManager manager) {
         super(image, manager);
         this.value = value;
-        collectSound = DEFAULT_COLLECT_SOUND;
-        soundVolume = 0.1;
+        collectSound = new SoundsPlayer(COLLECT_SOUND_PATH, SOUND_VOLUME, false);
     }
 
-    public Coin(Image image, int value, SoundsPlayer collectSound, double soundVolume, ViewManager manager) {
+    public Coin(Image image, int value, SoundsPlayer collectSound, ViewManager manager) {
 
         this(image, value, manager);
         this.collectSound = collectSound;
-        this.soundVolume = soundVolume;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -41,12 +38,8 @@ public class Coin extends Sprite {
         return value;
     }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
-
     public void playCollectSound() {
-        collectSound.playSound(soundVolume, false);
+        collectSound.playSound(SOUND_VOLUME, false);
     }
 
 }

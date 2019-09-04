@@ -72,12 +72,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage, this);
         lives = DEFAULT_LIVES;
         maxLives = DEFAULT_LIVES;
-
-        playerHitSounds = new SoundsPlayer[2];
-        playerHitSounds[0] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_PATH_1);
-        playerHitSounds[1] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_PATH_2);
-
-//        lastDirectionX = "D";
+        playerHitSounds = getPlayerHitSounds();
         totalScore = 0;
         bombOverheating = 0;
         bulletOverheating = 0;
@@ -452,5 +447,13 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public void setPressedKey_S(boolean pressedKey_S) {
         this.pressedKey_S = pressedKey_S;
+    }
+
+    //todo: zrobione
+    public SoundsPlayer[] getPlayerHitSounds() {
+        SoundsPlayer hitSounds[] = new SoundsPlayer[2];
+        hitSounds[0] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_1_PATH, DEFAULT_HIT_SOUND_VOLUME, false);
+        hitSounds[1] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_2_PATH, DEFAULT_HIT_SOUND_VOLUME, false);
+        return hitSounds;
     }
 }

@@ -15,11 +15,6 @@ public class SpritesImages {
     public static Image heartEmptyImage = new Image(SpritesPath.HEART_EMPTY_PATH);
     private static Image[] batteryImages = new Image[5];
 
-    //endPanel
-    public static Image kasiaImage = new Image(SpritesPath.PRINCESS_IMAGE_PATH);
-    public static Image heartFlareImage = new Image(SpritesPath.HEART_FLARE_PATH);
-    public static Image kasiaWingsImage = new Image(SpritesPath.PRINCESS_WINGS_PATH);
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static Image[] getBatteryImages() {
         for (int i = 0; i < batteryImages.length; i++)

@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class Game extends Application {
     private ViewManager manager;
-    private ArrayList<Coin> moneybagList;
+    private ArrayList<Coin> coinsList;
     private ArrayList<Monster> enemiesList;
     private ArrayList<String> inputsList;
 
@@ -48,7 +48,7 @@ public class Game extends Application {
         lastNanoTime = new LongValue(System.nanoTime());
         player = new Player(SpritesImages.playerRightImage, SpritesImages.playerShieldImage, manager);
         inputsList = new ArrayList<>();
-        moneybagList = new ArrayList<>();
+        coinsList = new ArrayList<>();
         enemiesList = new ArrayList<>();
 
 
@@ -89,7 +89,7 @@ public class Game extends Application {
                         else {
                             endLevel();
                             actualLevel = new Level_2(manager);
-                            actualLevel.prepareLevel(moneybagList, enemiesList);
+                            actualLevel.prepareLevel(coinsList, enemiesList, player);
                         }
                     }
                     break;
@@ -121,7 +121,7 @@ public class Game extends Application {
         player.setNextLevel();
         player.setCollectedMoneyBagsOnLevel(0);
         player.setKilledMonstersOnLevel(0);
-        moneybagList.clear();
+        coinsList.clear();
         enemiesList.clear();
         player.clearShotsList();
     }
@@ -215,7 +215,7 @@ public class Game extends Application {
     //todo: poprawic
     private void play(long currentNanoTime, AllLevels level) {
         updateTime(currentNanoTime);
-        level.render(enemiesList, moneybagList, player.getShotsList(), player);
+        level.render(enemiesList, coinsList, player.getShotsList(), player);
         checkPlayerMove(Player.getDefaultVelocity());
         player.update(elapsedTime);
         player.render();
@@ -226,14 +226,6 @@ public class Game extends Application {
     private void updateTime(long currentNanoTime) {
         elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
         lastNanoTime.setValue(currentNanoTime);
-    }
-
-    private void prepareGame(AllLevels startLevel) {
-//        double playerPositionX = startLevel.playerStartPosition().getX();
-//        double playerPositionY = startLevel.playerStartPosition().getY();
-//        player.setPosition(playerPositionX, playerPositionY);
-        startLevel.prepareLevel(moneybagList, enemiesList);
-        AllLevels.playWingsSound();
     }
 
     private AllLevels chooseLevel(int levelNumber) {
@@ -254,7 +246,8 @@ public class Game extends Application {
 
     private void startGame(int levelNumber) {
         actualLevel = chooseLevel(levelNumber);
-        prepareGame(actualLevel);
+        actualLevel.prepareLevel(coinsList, enemiesList,player);
+        AllLevels.playWingsSound();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

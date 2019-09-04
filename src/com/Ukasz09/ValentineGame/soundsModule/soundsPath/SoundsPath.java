@@ -20,8 +20,8 @@ public class SoundsPath {
     public static final String BOMB_BOOM_SOUND_PATH_4 = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/bombBoomEffect4.mp3";
     public static final String BULLET_SHOT_SOUND_PATH = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/shoot.wav";
 
-    public static final String PLAYER_HIT_SOUND_PATH_1 = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/ukaszHitSound1.mp3";
-    public static final String PLAYER_HIT_SOUND_PATH_2 = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/ukaszHitSound2.mp3";
+    public static final String PLAYER_HIT_SOUND_1_PATH = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/ukaszHitSound1.mp3";
+    public static final String PLAYER_HIT_SOUND_2_PATH = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/ukaszHitSound2.mp3";
     public static final String PLAYER_WINGS_SOUND_PATH = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/ukaszWings.mp3";
-    public static final String COLLECT_MONEY_SOUND_PATH = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/collectMoney.wav";
+    public static final String COLLECT_COIN_SOUND_PATH = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/collectMoney.wav";
 }

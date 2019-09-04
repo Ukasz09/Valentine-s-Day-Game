@@ -8,7 +8,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
-import com.Ukasz09.ValentineGame.soundsModule.soundsPath.Sounds;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -20,7 +20,9 @@ import java.util.Iterator;
 public abstract class AllLevels {
     private static final String MONEY_COMMUNICATE = "Kasa na walentynki: $";
     private static final double WINGS_SOUND_VOLUME = 1;
-//    private static SoundsPlayer backgroundSound;
+    private static SoundsPlayer backgroundSound;
+    private static final String WINGS_SOUND_PATH = SoundsPath.PLAYER_WINGS_SOUND_PATH;
+    private static SoundsPlayer wingsSound;
 
     private int amountOfAllCoins;
     private int amountOfSmallCoins;
@@ -45,11 +47,7 @@ public abstract class AllLevels {
     public AllLevels(ViewManager manager) {
         this.manager = manager;
         this.amountOfAllCoins = 0;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public static void setBackgroundSound(SoundsPlayer backgroundSound) {
-        AllLevels.backgroundSound = backgroundSound;
+        wingsSound=new SoundsPlayer(WINGS_SOUND_PATH,WINGS_SOUND_VOLUME,true);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,9 +65,9 @@ public abstract class AllLevels {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // TODO: 03.09.2019: zrobione
-    public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime){
-      updateShots(player.getShotsList(),elapsedTime);
-      updateEnemies(player,enemiesList);
+    public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime) {
+        updateShots(player.getShotsList(), elapsedTime);
+        updateEnemies(player, enemiesList);
     }
 
     //TODO: zrobione
@@ -163,18 +161,19 @@ public abstract class AllLevels {
         renderMonsters(monsters);
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //TODO: zrobione
     public void renderBackground(Image backgroundImage) {
         getManager().getGraphicContext().drawImage(backgroundImage, 0, 0);
     }
 
+    //TODO: zrobione
     public static void playWingsSound() {
-        Sounds.ukaszWingsSound.playSound(WINGS_SOUND_VOLUME, true);
+       wingsSound.playSound();
     }
 
+    //TODO: zrobione
     public static void stopWingsSound() {
-        Sounds.ukaszWingsSound.stopSound();
+       wingsSound.stopSound();
     }
 
     //TODO: zrobione

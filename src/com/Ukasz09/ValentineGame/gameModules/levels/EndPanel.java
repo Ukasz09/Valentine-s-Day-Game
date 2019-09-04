@@ -1,9 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundImages;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
@@ -16,7 +14,6 @@ public class EndPanel extends Panels {
     private SoundsPlayer backgroundSound;
     private Image heartFlare;
     private Image princess;
-    private Image princessWings;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public EndPanel(ViewManager manager) {
@@ -25,7 +22,6 @@ public class EndPanel extends Panels {
         backgroundSound = getBackgroundSound();
         heartFlare=new Image(SpritesPath.HEART_FLARE_PATH);
         princess=new Image(SpritesPath.PRINCESS_IMAGE_PATH);
-        princessWings=new Image(SpritesPath.PRINCESS_WINGS_PATH);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,8 +47,7 @@ public class EndPanel extends Panels {
     //ZROBIC: nowy sprite princess i ustawic
     public void renderPrincess() {
         getManager().getGraphicContext().drawImage(heartFlare, 10, 0);
-        gc.drawImage(SpritesImages.kasiaWingsImage, 440, 500);
-        gc.drawImage(SpritesImages.kasiaImage, 600, 230);
+        getManager().getGraphicContext().drawImage(princess, 0, 0);
     }
 
     private void playBackgroundSound() {

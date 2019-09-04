@@ -38,10 +38,6 @@ public abstract class ShotSprite extends Sprite {
 
     public abstract void update(double time);
 
-    protected void playSound(SoundsPlayer sound, double volume) {
-        sound.playSound(volume, false);
-    }
-
     public abstract void playShotSound();
 
     public abstract boolean isOutOfBoundary();

@@ -4,16 +4,15 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffec
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
-import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
 public class FishMonster extends Monster {
-    private final String hitSoundPath = SoundsPath.FISH_MONSTER_HIT_SOUND_PATH;
-    private final String deathSoundPath = SoundsPath.FISH_MONSTER_DEATH_SOUND_PATH;
-    private static final double DEFAULT_DEATH_VOLUME = 1;
-    private static final double DEFAULT_HIT_VOLUME = 1;
+    public static final String HIT_SOUND_PATH = SoundsPath.FISH_MONSTER_HIT_SOUND_PATH;
+    public static final String DEATH_SOUND_PATH = SoundsPath.FISH_MONSTER_DEATH_SOUND_PATH;
+    public static final double DEATH_SOUND_VOLUME = 1;
+    public static final double HIT_SOUND_VOLUME = 1;
 
     private final double howManyLivesTake = 0.5;
     private final int howBigKickSize = 0;
@@ -24,8 +23,8 @@ public class FishMonster extends Monster {
     public FishMonster(Image imageRight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(imageRight, kickMethod, manager, collisionAvoidWay);
         setLives(2);
-        setHitSound(new SoundsPlayer(hitSoundPath));
-        setDeathSound(new SoundsPlayer(deathSoundPath));
+        setHitSound(HIT_SOUND_PATH, HIT_SOUND_VOLUME);
+        setDeathSound(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME);
         setHowBigKickSize(howBigKickSize);
         setHowManyLivesTake(howManyLivesTake);
         setVelocity(velocityX, velocityY);
@@ -45,22 +44,17 @@ public class FishMonster extends Monster {
 
     @Override
     public void isDeadAction() {
-        defaultIsDeadAction(DEFAULT_DEATH_VOLUME);
+        defaultIsDeadAction(DEATH_SOUND_VOLUME);
     }
 
     @Override
     public void isHitAction() {
-        defaultIsHitAction(DEFAULT_HIT_VOLUME);
+        defaultIsHitAction(HIT_SOUND_VOLUME);
     }
 
     @Override
     public void missHitAction() {
         //nothing
     }
-
-//
-//    private void setImageByPosition(Image imageLeft, Image imageRight, Image imageBottom, Image imageTop, Sprite target) {
-//        getImageSetWay().byTargetPosition(imageLeft, imageRight, imageBottom, imageTop, this, target);
-//    }
 
 }

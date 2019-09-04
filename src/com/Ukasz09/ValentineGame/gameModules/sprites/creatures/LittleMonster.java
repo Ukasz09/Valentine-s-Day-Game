@@ -8,8 +8,8 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public class LittleMonster extends Monster {
-    private final String hitSoundPath = SoundsPath.LITTLE_MONSTER_HIT_SOUND_PATH;
-    private final String deathSoundPath = SoundsPath.LITTLE_MONSTER_DEATH_SOUND_PATH;
+    private static final String HIT_SOUND_PATH = SoundsPath.LITTLE_MONSTER_HIT_SOUND_PATH;
+    private static final String DEATH_SOUND_PATH = SoundsPath.LITTLE_MONSTER_DEATH_SOUND_PATH;
     private static final double DEATH_SOUND_VOLUME = 1;
     private static final double HIT_SOUND_VOLUME = 1;
 
@@ -23,8 +23,8 @@ public class LittleMonster extends Monster {
         super(image, kickMethod, manager, collisionAvoidWay);
         setLives(3);
 
-        setHitSound(new SoundsPlayer(hitSoundPath));
-        setDeathSound(new SoundsPlayer(deathSoundPath));
+        setHitSound(HIT_SOUND_PATH, HIT_SOUND_VOLUME);
+        setDeathSound(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME);
         setHowBigKickSize(howBigKickSize);
         setHowManyLivesTake(howManyLivesTake);
         setVelocity(velocityX, velocityY);

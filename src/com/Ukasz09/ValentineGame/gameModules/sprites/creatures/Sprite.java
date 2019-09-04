@@ -163,6 +163,21 @@ public abstract class Sprite {
         lastRotate = actualRotate;
     }
 
+    // TODO: 04.09.2019: zrobione
+    public void setHitSound(String hitSoundPath, double soundVolume) {
+        this.hitSound = new SoundsPlayer(hitSoundPath, soundVolume, false);
+    }
+
+    // TODO: 04.09.2019: zrobione
+    public void setDeathSound(String deathSoundPath, double soundVolume) {
+        this.deathSound = new SoundsPlayer(deathSoundPath, soundVolume, false);
+    }
+
+    // TODO: 04.09.2019: zrobione
+    public void setMissSound(String missSoundPath, double soundVolume) {
+        this.missSound = new SoundsPlayer(missSoundPath, soundVolume, false);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setActualImage(Image actualImage) {
         this.actualImage = actualImage;
@@ -185,18 +200,6 @@ public abstract class Sprite {
 
     public void setLives(double lives) {
         this.lives = lives;
-    }
-
-    public void setHitSound(SoundsPlayer hitSound) {
-        this.hitSound = hitSound;
-    }
-
-    public void setDeathSound(SoundsPlayer deathSound) {
-        this.deathSound = deathSound;
-    }
-
-    public void setMissSound(SoundsPlayer missSound) {
-        this.missSound = missSound;
     }
 
     public void setProtectionTime(int protectionTime) {
