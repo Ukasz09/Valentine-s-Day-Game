@@ -62,6 +62,7 @@ public abstract class Sprite {
 
     public void update(double time) {
         updatePosition(time);
+
     }
 
     public void updatePosition(double time) {

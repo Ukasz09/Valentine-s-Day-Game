@@ -21,7 +21,7 @@ public abstract class AllLevels {
     private static final String MONEY_COMMUNICATE = "Kasa na walentynki: $";
     private static final double WINGS_SOUND_VOLUME = 1;
     private static SoundsPlayer backgroundSound;
-    private static final String WINGS_SOUND_PATH = SoundsPath.PLAYER_WINGS_SOUND_PATH;
+    private static final String WINGS_SOUND_PATH = SoundsPath.PLAYER_WINGS_SOUND_PATH; //TODO: dac wings do PLAYER'a
     private static SoundsPlayer wingsSound;
 
     private int amountOfAllCoins;

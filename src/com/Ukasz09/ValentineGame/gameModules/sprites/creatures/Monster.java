@@ -49,7 +49,6 @@ public abstract class Monster extends Sprite {
     public void update(Sprite target, ArrayList<Monster> monsters) {
         collisionAvoidWay.updateCords(target, this, monsters);
         updateMonsterRotate(target);
-        System.out.println(getActualRotate());
     }
 
     public void updateByVelocity(Sprite target) {

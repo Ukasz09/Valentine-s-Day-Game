@@ -99,9 +99,9 @@ public class Game extends Application {
                             play(currentNanoTime, actualLevel);
                         else {
                             endLevel();
-                            actualLevel = null;
                             actualPanel = new EndPanel(manager);
                             actualPanel.make();
+                            actualLevel = null;
                         }
                     }
                     break;
@@ -217,9 +217,9 @@ public class Game extends Application {
         updateTime(currentNanoTime);
         level.render(enemiesList, coinsList, player.getShotsList(), player);
         checkPlayerMove(Player.getDefaultVelocity());
-        player.update(elapsedTime);
+        player.update(elapsedTime, coinsList, enemiesList);
         player.render();
-        level.update(player, enemiesList,elapsedTime);
+        level.update(player, enemiesList, elapsedTime);
 
     }
 
@@ -246,7 +246,7 @@ public class Game extends Application {
 
     private void startGame(int levelNumber) {
         actualLevel = chooseLevel(levelNumber);
-        actualLevel.prepareLevel(coinsList, enemiesList,player);
+        actualLevel.prepareLevel(coinsList, enemiesList, player);
         AllLevels.playWingsSound();
     }
 

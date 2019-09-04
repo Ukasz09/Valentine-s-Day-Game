@@ -24,7 +24,7 @@ public class Level_2 extends AllLevels {
     private final int normalCoinValue = 50;
     private final int bigCoinValue = 100;
 
-    private final int amountOfMonsters = 2;
+    private final int amountOfMonsters = 0;
     private final int amountOfBosses = 1;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -210,6 +210,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         checkIntersectsWithMonsters(enemiesList);
     }
 
+
     private void checkIntersectsWithMoneyBags(ArrayList<Coin> moneyBagsList) {
         Iterator<Coin> moneyBagIterator = moneyBagsList.iterator();
         while (moneyBagIterator.hasNext()) {

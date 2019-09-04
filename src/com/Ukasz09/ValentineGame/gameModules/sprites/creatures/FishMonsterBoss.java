@@ -27,7 +27,7 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
     private final double velocityX = 3;
     private final double velocityY = 3;
     private final int defaultShieldTimer = 5000;
-    private final int defaultShieldDuration = 10000;
+    private final int defaultShieldDuration = 100; //10 000
 
     private Shield shield;
     private HealthStatusBar healthBar;
