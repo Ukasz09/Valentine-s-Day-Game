@@ -24,8 +24,8 @@ public class Level_2 extends AllLevels {
     private final int normalCoinValue = 50;
     private final int bigCoinValue = 100;
 
-    private final int amountOfMonsters = 0;
-    private final int amountOfBosses = 1;
+    private final int amountOfMonsters = 1;
+    private final int amountOfBosses = 0;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_2(ViewManager manager) {
@@ -84,7 +84,6 @@ public class Level_2 extends AllLevels {
     public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime) {
         super.update(player, enemiesList, elapsedTime);
         updateBosses(player, enemiesList);
-
     }
 
     private void updateBosses(Player player, ArrayList<Monster> enemiesList) {
@@ -114,4 +113,6 @@ public class Level_2 extends AllLevels {
     public Image getBackgroundImage() {
         return new Image(BACKGROOUND_IMAGE_PATH);
     }
+
+
 }

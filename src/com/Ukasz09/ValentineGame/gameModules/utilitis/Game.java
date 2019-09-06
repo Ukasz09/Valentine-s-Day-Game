@@ -101,7 +101,7 @@ public class Game extends Application {
                             endLevel();
                             actualPanel = new EndPanel(manager);
                             actualPanel.make();
-                            actualLevel = null;
+//                            actualLevel = null;
                         }
                     }
                     break;
@@ -248,6 +248,7 @@ public class Game extends Application {
         actualLevel = chooseLevel(levelNumber);
         actualLevel.prepareLevel(coinsList, enemiesList, player);
         AllLevels.playWingsSound();
+//        AllLevels.playBackgroundSound();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

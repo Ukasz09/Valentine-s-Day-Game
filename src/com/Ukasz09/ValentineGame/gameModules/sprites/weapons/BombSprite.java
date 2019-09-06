@@ -42,6 +42,8 @@ public class BombSprite extends ShotSprite {
 
         shotSound=new SoundsPlayer(BOMB_SHOT_SOUND_PATH,DEFAULT_SHOT_VOLUME,false);
         bombBoomSound = getBombBoomSound();
+
+        System.out.println(bombBoomSound.length);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -91,7 +93,7 @@ public class BombSprite extends ShotSprite {
         boomSound[1] = new SoundsPlayer(BOMB_BOOM_SOUND_PATH_2, DEFAULT_SHOT_VOLUME, false);
         boomSound[2] = new SoundsPlayer(BOMB_BOOM_SOUND_PATH_3, DEFAULT_SHOT_VOLUME, false);
         boomSound[3] = new SoundsPlayer(BOMB_BOOM_SOUND_PATH_4, DEFAULT_SHOT_VOLUME, false);
-        return bombBoomSound;
+        return boomSound;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

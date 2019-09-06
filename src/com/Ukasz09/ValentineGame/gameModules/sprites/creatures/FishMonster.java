@@ -16,8 +16,8 @@ public class FishMonster extends Monster {
 
     private final double howManyLivesTake = 0.5;
     private final int howBigKickSize = 0;
-    private final double velocityX = 0.0;
-    private final double velocityY = 0.0;
+    private final double velocityX = 2.2;
+    private final double velocityY = 2.2;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonster(Image imageRight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
@@ -34,12 +34,7 @@ public class FishMonster extends Monster {
     // TODO: zrobione:
     @Override
     public void setStartedPosition() {
-        setPositionByDirection(true, true, true, true, getWidth());
-    }
-
-    @Override
-    public void update(Sprite player, ArrayList<Monster> monsters) {
-        super.update(player, monsters);
+        setPositionByDirection(true, true, true, true, 0);
     }
 
     @Override

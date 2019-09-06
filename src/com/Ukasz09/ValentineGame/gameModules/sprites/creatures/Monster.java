@@ -46,18 +46,12 @@ public abstract class Monster extends Sprite {
         return false;
     }
 
-    public void update(Sprite target, ArrayList<Monster> monsters) {
-        collisionAvoidWay.updateCords(target, this, monsters);
+    public void update(Sprite target, ArrayList<Monster> enemiesList) {
+        collisionAvoidWay.updateCords(target, this, enemiesList);
         updateMonsterRotate(target);
     }
 
     public void updateByVelocity(Sprite target) {
-//        double dx = this.getPositionX();
-//        double dy = this.getPositionY();
-//        double diffX = target.getPositionX() - dx;
-//        double diffY = target.getPositionY() - dy;
-//        float angle = (float) Math.atan2(diffY, diffX);
-
         double dx = this.getPositionX();
         double dy = this.getPositionY();
         float angle = getAngleToTarget(target);

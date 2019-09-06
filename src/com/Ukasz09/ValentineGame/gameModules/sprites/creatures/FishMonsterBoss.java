@@ -63,8 +63,8 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
     }
 
     @Override
-    public void update(Sprite player, ArrayList<Monster> monsters) {
-        super.update(player, monsters);
+    public void update(Sprite player, ArrayList<Monster> enemiesList) {
+        super.update(player, enemiesList);
         healthBar.update(getLives(), getPositionX(), getPositionY());
         updateShield();
     }

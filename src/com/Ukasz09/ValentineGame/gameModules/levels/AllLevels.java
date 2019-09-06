@@ -177,10 +177,17 @@ public abstract class AllLevels {
     }
 
     //TODO: zrobione
-    public static void playBackgroundSound(SoundsPlayer backgroundSound) {
-        AllLevels.backgroundSound = backgroundSound;
+//    public static void playBackgroundSound(SoundsPlayer backgroundSound) {
+//        AllLevels.backgroundSound = backgroundSound;
+//        AllLevels.backgroundSound.playSound();
+//    }
+
+    protected static void playBackgroundSound(SoundsPlayer backgroundSound) {
+        AllLevels.backgroundSound=backgroundSound
         AllLevels.backgroundSound.playSound();
     }
+
+    //tODO: dokonczyc
 
     public static void stopBackgroundSound() {
         backgroundSound.stopSound();
