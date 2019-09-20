@@ -40,13 +40,14 @@ public class Level_1 extends AllLevels {
         setCoinsValue(smallCoinValue, normalCoinValue, bigCoinValue);
         setAmountOfMonsters(amountOfMonsters, 0);
         setBackgroundImage(getBackgroundImage());
+        setBackgroundSound(new SoundsPlayer(BACKGROUND_SOUND_PATH,BACKGROUND_SOUND_VOLUME,true));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void prepareLevel(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList, Player player) {
         super.prepareLevel(coinsList, enemiesList, player);
-        playBackgroundSound(getBackgroundSound());
+        playBackgroundSound();
     }
 
     @Override
@@ -71,12 +72,7 @@ public class Level_1 extends AllLevels {
         defaultLevelRender(enemiesList, coinsList, shotsList, player.getTotalScore());
     }
 
-    public SoundsPlayer getBackgroundSound() {
-        return new SoundsPlayer(BACKGROUND_SOUND_PATH, BACKGROUND_SOUND_VOLUME, true);
-    }
-
     private Image getBackgroundImage() {
         return new Image(BACKGROOUND_IMAGE_PATH);
     }
-
 }

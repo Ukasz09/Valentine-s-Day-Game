@@ -22,6 +22,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.wrappers.LongValue;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -41,7 +42,7 @@ public class Game extends Application {
     private Panels actualPanel;
 
     private Player player;
-
+    private SoundsPlayer backgroundSound;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
         manager = new ViewManager(); //do NOT touch
@@ -50,8 +51,6 @@ public class Game extends Application {
         inputsList = new ArrayList<>();
         coinsList = new ArrayList<>();
         enemiesList = new ArrayList<>();
-
-
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,7 +64,8 @@ public class Game extends Application {
         int levelNumber = 0;
         if (levelNumber == 0) {
             actualPanel = new StartPanel(manager);
-            actualPanel.make();
+            backgroundSound=actualPanel.getBackgroundSound();
+            backgroundSound.playSound();
         } else startGame(levelNumber);
 
         class gameAnimationTimer extends AnimationTimer {
@@ -76,7 +76,7 @@ public class Game extends Application {
                         if (!playerReadyToGame())
                             actualPanel.render();
                         else {
-                            actualPanel.end();
+                            backgroundSound.stopSound();
                             actualPanel = null;
                             startGame(1);
                         }
@@ -99,9 +99,11 @@ public class Game extends Application {
                             play(currentNanoTime, actualLevel);
                         else {
                             endLevel();
+                            backgroundSound.stopSound();
+                            player.stopWingsSound();
                             actualPanel = new EndPanel(manager);
-                            actualPanel.make();
-//                            actualLevel = null;
+                            backgroundSound=actualPanel.getBackgroundSound();
+                            backgroundSound.playSound();
                         }
                     }
                     break;
@@ -247,8 +249,12 @@ public class Game extends Application {
     private void startGame(int levelNumber) {
         actualLevel = chooseLevel(levelNumber);
         actualLevel.prepareLevel(coinsList, enemiesList, player);
-        AllLevels.playWingsSound();
-//        AllLevels.playBackgroundSound();
+        backgroundSound=actualLevel.getBackgroundSound();
+        backgroundSound.playSound();
+
+        if(player!=null)
+            player.playWingsSound();
+        else  System.out.println(player.toString()+" is null");
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

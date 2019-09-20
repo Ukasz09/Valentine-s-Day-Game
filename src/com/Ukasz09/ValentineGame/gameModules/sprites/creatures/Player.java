@@ -33,6 +33,8 @@ public class Player extends Sprite implements ShieldKindOfRender {
     public static final double DEFAULT_HIT_SOUND_VOLUME = 0.2;
     private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
     private static final Image PLAYER_SHIELD_IMAGE = SpritesImages.playerShieldImage;
+    private static final double WINGS_SOUND_VOLUME = 1;
+    private static final String WINGS_SOUND_PATH = SoundsPath.PLAYER_WINGS_SOUND_PATH;
 
     private final double amountOfToPixelRotate = 15;
 
@@ -41,7 +43,6 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private Shield shield;
     private SoundsPlayer[] playerHitSounds;
     private Image[] batteryImages = SpritesImages.getBatteryImages();
-    //    private String lastDirectionX;
     private int totalScore;
     private double bombOverheating;
     private double bulletOverheating;
@@ -54,6 +55,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private boolean collisionFromUpSide;
     private boolean collisionFromDownSide;
     private int anticollisionTimer; //to avoid jammed
+    private SoundsPlayer wingsSound;
 
     private boolean pressedKey_A;
     private boolean pressedKey_D;
@@ -93,6 +95,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         pressedKey_S = false;
         rotateWay = new RotateEffect();
         setImageDirection(YAxisDirection.RIGHT);
+        wingsSound = new SoundsPlayer(WINGS_SOUND_PATH, WINGS_SOUND_VOLUME, true);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -450,11 +453,22 @@ public class Player extends Sprite implements ShieldKindOfRender {
         this.pressedKey_S = pressedKey_S;
     }
 
-    //todo: zrobione
     public SoundsPlayer[] getPlayerHitSounds() {
         SoundsPlayer hitSounds[] = new SoundsPlayer[2];
         hitSounds[0] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_1_PATH, DEFAULT_HIT_SOUND_VOLUME, false);
         hitSounds[1] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_2_PATH, DEFAULT_HIT_SOUND_VOLUME, false);
         return hitSounds;
+    }
+
+    public void playWingsSound() {
+        if (wingsSound != null)
+            wingsSound.playSound();
+        else System.out.println(wingsSound.toString()+" is null");
+    }
+
+    public void stopWingsSound() {
+        if (wingsSound != null)
+            wingsSound.stopSound();
+        else System.out.println(wingsSound.toString()+" is null");
     }
 }

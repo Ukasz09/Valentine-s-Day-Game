@@ -15,10 +15,6 @@ public abstract class Panels {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public abstract void make();
-
-    public abstract void end();
-
     public void render(){
      drawBackground();
     }
@@ -27,6 +23,7 @@ public abstract class Panels {
         manager.getGraphicContext().drawImage(backgroundImage, 0, 0);
     }
 
+    abstract public SoundsPlayer getBackgroundSound();
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public ViewManager getManager() {
         return manager;

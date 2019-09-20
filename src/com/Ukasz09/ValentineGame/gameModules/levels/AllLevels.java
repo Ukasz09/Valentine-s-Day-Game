@@ -19,11 +19,8 @@ import java.util.Iterator;
 
 public abstract class AllLevels {
     private static final String MONEY_COMMUNICATE = "Kasa na walentynki: $";
-    private static final double WINGS_SOUND_VOLUME = 1;
-    private static SoundsPlayer backgroundSound;
-    private static final String WINGS_SOUND_PATH = SoundsPath.PLAYER_WINGS_SOUND_PATH; //TODO: dac wings do PLAYER'a
-    private static SoundsPlayer wingsSound;
 
+    private  SoundsPlayer backgroundSound;
     private int amountOfAllCoins;
     private int amountOfSmallCoins;
     private int amountOfNormalCoins;
@@ -47,7 +44,7 @@ public abstract class AllLevels {
     public AllLevels(ViewManager manager) {
         this.manager = manager;
         this.amountOfAllCoins = 0;
-        wingsSound=new SoundsPlayer(WINGS_SOUND_PATH,WINGS_SOUND_VOLUME,true);
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -166,30 +163,13 @@ public abstract class AllLevels {
         getManager().getGraphicContext().drawImage(backgroundImage, 0, 0);
     }
 
-    //TODO: zrobione
-    public static void playWingsSound() {
-       wingsSound.playSound();
+    public void playBackgroundSound(){
+        backgroundSound.playSound();
     }
 
-    //TODO: zrobione
-    public static void stopWingsSound() {
-       wingsSound.stopSound();
-    }
+    //tODO: dokonczyc: background sound jakos + wings sound
 
-    //TODO: zrobione
-//    public static void playBackgroundSound(SoundsPlayer backgroundSound) {
-//        AllLevels.backgroundSound = backgroundSound;
-//        AllLevels.backgroundSound.playSound();
-//    }
-
-    protected static void playBackgroundSound(SoundsPlayer backgroundSound) {
-        AllLevels.backgroundSound=backgroundSound
-        AllLevels.backgroundSound.playSound();
-    }
-
-    //tODO: dokonczyc
-
-    public static void stopBackgroundSound() {
+    public void stopBackgroundSound() {
         backgroundSound.stopSound();
     }
 
@@ -255,5 +235,13 @@ public abstract class AllLevels {
         else this.amountOfBosses = 0;
 
         this.amountOfAllEnemies = this.amountOfMonsters + this.amountOfBosses;
+    }
+
+    public void setBackgroundSound(SoundsPlayer backgroundSound) {
+       this.backgroundSound = backgroundSound;
+    }
+
+    public SoundsPlayer getBackgroundSound() {
+        return backgroundSound;
     }
 }

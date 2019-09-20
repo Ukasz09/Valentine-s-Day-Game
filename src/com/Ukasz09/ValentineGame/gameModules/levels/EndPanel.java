@@ -11,7 +11,6 @@ public class EndPanel extends Panels {
     public static final String BACKGROUND_IMAGE_PATH = BackgroundPath.END_IMAGE_PATH;
     public static final String BACKGROUND_SOUND_PATH = SoundsPath.END_SOUND_PATH;
     private static final double BACKGROUND_SOUND_VOLUME = 0.3;
-    private SoundsPlayer backgroundSound;
     private Image heartFlare;
     private Image princess;
 
@@ -19,23 +18,11 @@ public class EndPanel extends Panels {
     public EndPanel(ViewManager manager) {
         super(manager);
         setBackgroundImage(getBackgroundImage());
-        backgroundSound = getBackgroundSound();
         heartFlare=new Image(SpritesPath.HEART_FLARE_PATH);
         princess=new Image(SpritesPath.PRINCESS_IMAGE_PATH);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Override
-    public void make() {
-        AllLevels.stopBackgroundSound();
-        playBackgroundSound();
-    }
-
-    @Override
-    public void end() {
-        stopBackgroundSound();
-    }
-
     @Override
     public void render() {
        super.render();
@@ -43,25 +30,17 @@ public class EndPanel extends Panels {
 
     }
 
-    //ZROBIC: nowy sprite princess i ustawic
     public void renderPrincess() {
         getManager().getGraphicContext().drawImage(heartFlare, 10, 0);
         getManager().getGraphicContext().drawImage(princess, 0, 0);
-    }
-
-    private void playBackgroundSound() {
-        backgroundSound.playSound();
-    }
-
-    private void stopBackgroundSound() {
-        backgroundSound.stopSound();
     }
 
     private Image getBackgroundImage() {
         return new Image(BACKGROUND_IMAGE_PATH);
     }
 
-    private SoundsPlayer getBackgroundSound() {
+    @Override
+    public SoundsPlayer getBackgroundSound() {
         return new SoundsPlayer(BACKGROUND_SOUND_PATH, BACKGROUND_SOUND_VOLUME, false);
     }
 }

@@ -10,6 +10,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickByBi
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.TeleportKick;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -34,23 +35,21 @@ public class Level_2 extends AllLevels {
         setCoinsValue(smallCoinValue, normalCoinValue, bigCoinValue);
         setAmountOfMonsters(amountOfMonsters, amountOfBosses);
         setBackgroundImage(getBackgroundImage());
+        setBackgroundSound(new SoundsPlayer(Level_1.BACKGROUND_SOUND_PATH,Level_1.BACKGROUND_SOUND_VOLUME,true));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //TODO: zrobione
     @Override
     public void prepareLevel(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList, Player player) {
         super.prepareLevel(coinsList, enemiesList, player);
     }
 
-    // TODO: 03.09.2019: zrobione
     @Override
     public void spawnEnemies(ArrayList<Monster> enemiesList) {
         spawnMonsters(enemiesList);
         spawnBosses(enemiesList);
     }
 
-    //TODO: zrobione
     private void spawnMonsters(ArrayList<Monster> enemiesList) {
         Image fishMonsterImage = new Image(SpritesPath.FISH_MONSTER_PATH);
         FishMonster fishMonster = new FishMonster(fishMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
@@ -60,7 +59,6 @@ public class Level_2 extends AllLevels {
         }
     }
 
-    //TODO: zrobione
     private void spawnBosses(ArrayList<Monster> enemiesList) {
         Image fishMonsterBossImage = new Image(SpritesPath.FISH_MONSTER_BOSS_PATH);
         Image shieldImage = new Image(SpritesPath.FISH_MONSTER_BOSS_SHIELD_PATH);
@@ -71,7 +69,6 @@ public class Level_2 extends AllLevels {
         }
     }
 
-    //todo: zrobione
     @Override
     public void setPlayerStartPosition(Player player) {
         double posX = getDefaultPlayerPosition().getX();
@@ -79,7 +76,6 @@ public class Level_2 extends AllLevels {
         player.setPosition(posX, posY);
     }
 
-    // TODO: 03.09.2019 :zrobione
     @Override
     public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime) {
         super.update(player, enemiesList, elapsedTime);
@@ -91,13 +87,11 @@ public class Level_2 extends AllLevels {
             spawnBosses(enemiesList);
     }
 
-    // TODO: 03.09.2019 : zrobione
     @Override
     public void render(ArrayList<Monster> enemiesList, ArrayList<Coin> coinsList, ArrayList<ShotSprite> shotsList, Player player) {
         defaultLevelRender(enemiesList, coinsList, shotsList, player.getTotalScore());
     }
 
-    //todo: zrobione
     /**
      * @param amountOfCollectedCoins - (amount of coins in pcs.)
      */
@@ -109,7 +103,6 @@ public class Level_2 extends AllLevels {
     }
 
 
-    //todo: zrobione
     public Image getBackgroundImage() {
         return new Image(BACKGROOUND_IMAGE_PATH);
     }
