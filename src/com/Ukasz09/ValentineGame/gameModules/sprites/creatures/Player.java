@@ -3,6 +3,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.Game;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HeartsRender;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.InCorner;
@@ -38,7 +39,6 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     private final double amountOfToPixelRotate = 15;
 
-    private Image playerRightImage;
     private ArrayList<ShotSprite> shotsList;
     private Shield shield;
     private SoundsPlayer[] playerHitSounds;
@@ -70,7 +70,6 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public Player(Image playerRightImage, Image shieldImage, ViewManager manager) {
         super(playerRightImage, manager);
-        this.playerRightImage = playerRightImage;
         shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage, this);
         lives = DEFAULT_LIVES;
         maxLives = DEFAULT_LIVES;
@@ -214,14 +213,14 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
 
-    private void checkIntersectsWithMoneyBags(ArrayList<Coin> moneyBagsList) {
-        Iterator<Coin> moneyBagIterator = moneyBagsList.iterator();
-        while (moneyBagIterator.hasNext()) {
-            Coin moneybag = moneyBagIterator.next();
-            if (intersects(moneybag)) {
-                moneybag.playCollectSound();
-                moneyBagIterator.remove();
-                addTotalScore(moneybag.getValue());
+    private void checkIntersectsWithMoneyBags(ArrayList<Coin> coinsList) {
+        Iterator<Coin> coinsIterator = coinsList.iterator();
+        while (coinsIterator.hasNext()) {
+            Coin coin = coinsIterator.next();
+            if (intersects(coin)) {
+                Coin.playCollectSound();
+                addTotalScore(coin.getValue());
+                coinsIterator.remove();
                 collectedMoneyBagsOnLevel++;
             }
         }
@@ -358,7 +357,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     public void updatePlayerRotate() {
-        updateLastRotate();
+//        updateLastRotate();
         double properRotate = rotateWay.rotateByPressedKey(pressedKey_A, pressedKey_D, pressedKey_W, pressedKey_S, amountOfToPixelRotate);
         setActualRotate(properRotate);
     }

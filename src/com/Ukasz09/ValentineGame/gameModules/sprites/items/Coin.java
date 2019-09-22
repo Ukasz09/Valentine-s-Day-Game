@@ -7,24 +7,22 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public class Coin extends Sprite {
-
-    private static final String COLLECT_SOUND_PATH = SoundsPath.COLLECT_COIN_SOUND_PATH;
-    private static final double SOUND_VOLUME = 0.1;
-    private SoundsPlayer collectSound;
+    public static final String COLLECT_SOUND_PATH = SoundsPath.COLLECT_COIN_SOUND_PATH;
+    public static final double SOUND_VOLUME = 0.1;
+    private static final SoundsPlayer COLLECT_SOUND = new SoundsPlayer(COLLECT_SOUND_PATH, SOUND_VOLUME, false);
     private int value;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Coin(Image image, int value, ViewManager manager) {
         super(image, manager);
         this.value = value;
-        collectSound = new SoundsPlayer(COLLECT_SOUND_PATH, SOUND_VOLUME, false);
+//        collectSound = new SoundsPlayer(COLLECT_SOUND_PATH, SOUND_VOLUME, false);
     }
 
-    public Coin(Image image, int value, SoundsPlayer collectSound, ViewManager manager) {
-
-        this(image, value, manager);
-        this.collectSound = collectSound;
-    }
+//    public Coin(Image image, int value, SoundsPlayer collectSound, ViewManager manager) {
+//        this(image, value, manager);
+//        this.collectSound = collectSound;
+//    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setPosition() {
@@ -38,8 +36,8 @@ public class Coin extends Sprite {
         return value;
     }
 
-    public void playCollectSound() {
-        collectSound.playSound(SOUND_VOLUME, false);
+    public static void playCollectSound() {
+        Coin.COLLECT_SOUND.playSound();
     }
 
 }

@@ -7,8 +7,6 @@
 
 */
 
-//Todo: LAST DIRECTION NA ENUM
-
 package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
 import com.Ukasz09.ValentineGame.gameModules.levels.*;
@@ -43,6 +41,8 @@ public class Game extends Application {
 
     private Player player;
     private SoundsPlayer backgroundSound;
+//    private static SoundsPlayer effectSound; //to avoid remove object by garbage collctor before sound effect end
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
         manager = new ViewManager(); //do NOT touch
@@ -64,7 +64,7 @@ public class Game extends Application {
         int levelNumber = 0;
         if (levelNumber == 0) {
             actualPanel = new StartPanel(manager);
-            backgroundSound=actualPanel.getBackgroundSound();
+            backgroundSound = actualPanel.getBackgroundSound();
             backgroundSound.playSound();
         } else startGame(levelNumber);
 
@@ -102,7 +102,7 @@ public class Game extends Application {
                             backgroundSound.stopSound();
                             player.stopWingsSound();
                             actualPanel = new EndPanel(manager);
-                            backgroundSound=actualPanel.getBackgroundSound();
+                            backgroundSound = actualPanel.getBackgroundSound();
                             backgroundSound.playSound();
                         }
                     }
@@ -192,7 +192,6 @@ public class Game extends Application {
                 shotSprite.prepareToShot(player);
 
                 player.addShot(shotSprite);
-                shotSprite.playShotSound();
                 player.overheatBullet();
             }
         }
@@ -203,7 +202,6 @@ public class Game extends Application {
                 shotSprite.prepareToShot(player);
 
                 player.addShot(shotSprite);
-                shotSprite.playShotSound();
                 player.overheatBomb();
             }
         }
@@ -249,13 +247,18 @@ public class Game extends Application {
     private void startGame(int levelNumber) {
         actualLevel = chooseLevel(levelNumber);
         actualLevel.prepareLevel(coinsList, enemiesList, player);
-        backgroundSound=actualLevel.getBackgroundSound();
+        backgroundSound = actualLevel.getBackgroundSound();
         backgroundSound.playSound();
 
-        if(player!=null)
+        if (player != null)
             player.playWingsSound();
-        else  System.out.println(player.toString()+" is null");
+        else System.out.println(player.toString() + " is null");
     }
+
+//    public static void playEffectSound(SoundsPlayer sound){
+//        effectSound=sound;
+//        effectSound.playSound();
+//    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {

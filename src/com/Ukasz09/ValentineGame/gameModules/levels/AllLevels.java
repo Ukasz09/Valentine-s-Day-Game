@@ -20,7 +20,6 @@ import java.util.Iterator;
 public abstract class AllLevels {
     private static final String MONEY_COMMUNICATE = "Kasa na walentynki: $";
 
-    private  SoundsPlayer backgroundSound;
     private int amountOfAllCoins;
     private int amountOfSmallCoins;
     private int amountOfNormalCoins;
@@ -61,6 +60,8 @@ public abstract class AllLevels {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    abstract public SoundsPlayer getBackgroundSound();
+
     // TODO: 03.09.2019: zrobione
     public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime) {
         updateShots(player.getShotsList(), elapsedTime);
@@ -163,16 +164,6 @@ public abstract class AllLevels {
         getManager().getGraphicContext().drawImage(backgroundImage, 0, 0);
     }
 
-    public void playBackgroundSound(){
-        backgroundSound.playSound();
-    }
-
-    //tODO: dokonczyc: background sound jakos + wings sound
-
-    public void stopBackgroundSound() {
-        backgroundSound.stopSound();
-    }
-
     public void renderShots(ArrayList<ShotSprite> shotSprites) {
         Iterator<ShotSprite> shots = shotSprites.iterator();
         while (shots.hasNext())
@@ -237,11 +228,5 @@ public abstract class AllLevels {
         this.amountOfAllEnemies = this.amountOfMonsters + this.amountOfBosses;
     }
 
-    public void setBackgroundSound(SoundsPlayer backgroundSound) {
-       this.backgroundSound = backgroundSound;
-    }
 
-    public SoundsPlayer getBackgroundSound() {
-        return backgroundSound;
-    }
 }

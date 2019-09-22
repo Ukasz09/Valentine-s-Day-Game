@@ -31,7 +31,7 @@ public class Level_1 extends AllLevels {
     private final int normalCoinValue = 50;
     private final int bigCoinValue = 100;
 
-    private final int amountOfMonsters = 1;
+    private final int amountOfMonsters = 3;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_1(ViewManager manager) {
@@ -40,21 +40,15 @@ public class Level_1 extends AllLevels {
         setCoinsValue(smallCoinValue, normalCoinValue, bigCoinValue);
         setAmountOfMonsters(amountOfMonsters, 0);
         setBackgroundImage(getBackgroundImage());
-        setBackgroundSound(new SoundsPlayer(BACKGROUND_SOUND_PATH,BACKGROUND_SOUND_VOLUME,true));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public void prepareLevel(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList, Player player) {
-        super.prepareLevel(coinsList, enemiesList, player);
-        playBackgroundSound();
-    }
-
-    @Override
     public void spawnEnemies(ArrayList<Monster> enemiesList) {
         Image littleMonsterImage = new Image(SpritesPath.LITTLE_MONSTER_1_PATH);
-        LittleMonster littleMonster = new LittleMonster(littleMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
+        LittleMonster littleMonster;
         for (int i = 0; i < getAmountOfAllEnemies(); i++) {
+            littleMonster = new LittleMonster(littleMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
             littleMonster.setStartedPosition();
             enemiesList.add(littleMonster);
         }
@@ -74,5 +68,10 @@ public class Level_1 extends AllLevels {
 
     private Image getBackgroundImage() {
         return new Image(BACKGROOUND_IMAGE_PATH);
+    }
+
+    @Override
+    public SoundsPlayer getBackgroundSound() {
+        return new SoundsPlayer(BACKGROUND_SOUND_PATH, BACKGROUND_SOUND_VOLUME, true);
     }
 }

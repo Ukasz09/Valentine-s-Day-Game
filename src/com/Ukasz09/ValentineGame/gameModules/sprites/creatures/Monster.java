@@ -12,6 +12,9 @@ import javafx.scene.image.Image;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
+/*
+hitSound, deathSound, missSound - is static to avoid remove object by garbage collector before sound stop play effect
+ */
 public abstract class Monster extends Sprite {
     private double howManyLivesTake;
     private double howBigKickSize;
@@ -33,11 +36,6 @@ public abstract class Monster extends Sprite {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public abstract void isDeadAction();
-
-    public abstract void isHitAction();
-
-    public abstract void missHitAction();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public boolean kickAfterHit() {
@@ -61,8 +59,7 @@ public abstract class Monster extends Sprite {
     }
 
     public void updateMonsterRotate(Sprite target) {
-        updateLastRotate();
-        double properRotate = rotateWay.rotateByAngle(this, target);
+        double properRotate = rotateWay.setRotateByAngle(this, target);
         setActualRotate(properRotate);
     }
 
@@ -70,16 +67,22 @@ public abstract class Monster extends Sprite {
         kickMethod.kickPlayerByMonsterPostion(this, p, getManager());
     }
 
-    protected void defaultIsDeadAction(double soundsVolume) {
-        getDeathSound().playSound(soundsVolume, false);
+    public void isDeadAction() {
+        if (getDeathSoundOrNull() != null)
+            getDeathSoundOrNull().playSound();
+        else System.out.println("Error: deathSound is null");
     }
 
-    protected void defaultIsHitAction(double soundsVolume) {
-        getHitSound().playSound(soundsVolume, false);
+    public void isHitAction() {
+        if (getHitSoundOrNull() != null)
+            getHitSoundOrNull().playSound();
+        else System.out.println("Error: hitSound is null");
     }
 
-    protected void defaultMissHitAction(double soundsVolume) {
-        getMissSound().playSound(soundsVolume, false);
+    public void missHitAction() {
+        if (getMissSoundOrNull() != null)
+            getMissSoundOrNull().playSound();
+        else System.out.println("Error: missHitSound is null");
     }
 
     public boolean isDead() {
@@ -175,6 +178,14 @@ public abstract class Monster extends Sprite {
         double positionY = Math.random() * getManager().getBottomBorder();
         this.setPosition(positionX, positionY);
     }
+
+    abstract public  SoundsPlayer getHitSoundOrNull();
+
+
+    abstract public SoundsPlayer getMissSoundOrNull();
+
+
+    abstract public SoundsPlayer getDeathSoundOrNull();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setHowManyLivesTake(double howManyLivesTake) {

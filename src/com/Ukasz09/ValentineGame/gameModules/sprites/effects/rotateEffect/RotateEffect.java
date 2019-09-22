@@ -11,17 +11,15 @@ public class RotateEffect {
             rotation = amountOfRotate;
         else if ((pressedKey_A && pressedKey_S) || (pressedKey_D && pressedKey_W))
             rotation = -amountOfRotate;
-
-//        if (pressedKey_A && pressedKey_D)
-//            return 0;
-
         return rotation;
     }
 
-    public double rotateByAngle(Sprite spriteToRotate, Sprite target) {
+    public double setRotateByAngle(Sprite spriteToRotate, Sprite target) {
         double rotation = Math.toDegrees(spriteToRotate.getAngleToTarget(target));
-        if (rotation > 90 || rotation < -90)
-            rotation = 180 - rotation;
+        if (rotation > 90 || rotation < -90) {
+            rotation += 180;
+            spriteToRotate.setImageDirection(Sprite.YAxisDirection.LEFT);
+        } else spriteToRotate.setImageDirection(Sprite.YAxisDirection.RIGHT);
 
         return rotation;
     }

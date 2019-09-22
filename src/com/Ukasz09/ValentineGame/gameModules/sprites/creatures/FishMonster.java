@@ -4,15 +4,17 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffec
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
+import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
-import java.util.ArrayList;
 
 public class FishMonster extends Monster {
     public static final String HIT_SOUND_PATH = SoundsPath.FISH_MONSTER_HIT_SOUND_PATH;
     public static final String DEATH_SOUND_PATH = SoundsPath.FISH_MONSTER_DEATH_SOUND_PATH;
     public static final double DEATH_SOUND_VOLUME = 1;
     public static final double HIT_SOUND_VOLUME = 1;
+    private static final SoundsPlayer HIT_SOUND = new SoundsPlayer(HIT_SOUND_PATH, HIT_SOUND_VOLUME, false);
+    private static final SoundsPlayer DEATH_SOUND = new SoundsPlayer(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME, false);
 
     private final double howManyLivesTake = 0.5;
     private final int howBigKickSize = 0;
@@ -23,28 +25,17 @@ public class FishMonster extends Monster {
     public FishMonster(Image imageRight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(imageRight, kickMethod, manager, collisionAvoidWay);
         setLives(2);
-        setHitSound(HIT_SOUND_PATH, HIT_SOUND_VOLUME);
-        setDeathSound(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME);
+//        setHitSound(HIT_SOUND_PATH, HIT_SOUND_VOLUME);
+//        setDeathSound(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME);
         setHowBigKickSize(howBigKickSize);
         setHowManyLivesTake(howManyLivesTake);
         setVelocity(velocityX, velocityY);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // TODO: zrobione:
     @Override
     public void setStartedPosition() {
-        setPositionByDirection(true, true, true, true, 0);
-    }
-
-    @Override
-    public void isDeadAction() {
-        defaultIsDeadAction(DEATH_SOUND_VOLUME);
-    }
-
-    @Override
-    public void isHitAction() {
-        defaultIsHitAction(HIT_SOUND_VOLUME);
+        setPositionByDirection(true, true, true, true, 60);
     }
 
     @Override
@@ -52,4 +43,18 @@ public class FishMonster extends Monster {
         //nothing
     }
 
+    @Override
+    public SoundsPlayer getHitSoundOrNull() {
+        return FishMonster.HIT_SOUND;
+    }
+
+    @Override
+    public SoundsPlayer getMissSoundOrNull() {
+        return null;
+    }
+
+    @Override
+    public SoundsPlayer getDeathSoundOrNull() {
+        return FishMonster.DEATH_SOUND;
+    }
 }

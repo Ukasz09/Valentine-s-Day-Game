@@ -2,6 +2,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.weapons;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.Game;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
@@ -13,12 +14,12 @@ public class BulletSprite extends ShotSprite {
     public static final double DEFAULT_LIVES_TAKES = 1;
     public static final double DEFAULT_MAX_OVERHEATING = 1000;
     public static final double DEFAULT_SHOT_VELOCITY = 600;
-
     private static final Image DEFAULT_SHOT_IMAGE = SpritesImages.playerShotImage;
     private static final String SHOT_SOUND_PATH = SoundsPath.BULLET_SHOT_SOUND_PATH;
     private static final double SHOT_SOUND_VOLUME = 0.2;
+    private static final SoundsPlayer SHOT_SOUND = new SoundsPlayer(SHOT_SOUND_PATH, SHOT_SOUND_VOLUME, false);
     private static double maxOverheating = DEFAULT_MAX_OVERHEATING;
-    private SoundsPlayer shotSound;
+
     private YAxisDirection shotDirection;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +35,6 @@ public class BulletSprite extends ShotSprite {
         super(image, shotVelocity, howManyLiveTakes, manager);
         this.maxOverheating = maxOverheating;
         this.shotDirection = shotDirection;
-        this.shotSound = new SoundsPlayer(SHOT_SOUND_PATH, SHOT_SOUND_VOLUME, false);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,11 +45,6 @@ public class BulletSprite extends ShotSprite {
             addPositionX(getVelocityX() * time);
         if (shotDirection.equals(YAxisDirection.LEFT))
             addPositionX((-1) * getVelocityX() * time);
-    }
-
-    @Override
-    public void playShotSound() {
-        shotSound.playSound();
     }
 
     @Override
@@ -70,12 +65,18 @@ public class BulletSprite extends ShotSprite {
         monster.removeLives(getHowManyLivesTake());
     }
 
+    private void playShotSound() {
+        BulletSprite.SHOT_SOUND.playSound();
+    }
+
     @Override
     public void prepareToShot(Player player) {
         Point2D bulletPosition = player.getBulletPosition();
         setPosition(bulletPosition.getX(), bulletPosition.getY());
         setVelocity(getShotVelocity(), 0);
+        playShotSound();
     }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static double getMaxOverheating() {

@@ -1,6 +1,5 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.tmp.ProperImageSet;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Rectangle2D;
@@ -26,13 +25,7 @@ public abstract class Sprite {
     protected double lives;
     protected double maxLives;
     private int protectionTime;
-    private double lastRotate;
     private double actualRotate;
-    private ProperImageSet imageSetWay;
-
-    private SoundsPlayer hitSound;
-    private SoundsPlayer deathSound;
-    private SoundsPlayer missSound;
 
     private ViewManager manager;
     private YAxisDirection imageDirection;
@@ -45,11 +38,8 @@ public abstract class Sprite {
         height = actualImage.getHeight();
         lives = 3;
         maxLives = lives;
-        missSound = null;
         protectionTime = 0;
         actualRotate = 0;
-        lastRotate = actualRotate;
-        imageSetWay = new ProperImageSet();
         imageDirection = YAxisDirection.RIGHT;
     }
 
@@ -76,6 +66,7 @@ public abstract class Sprite {
         drawBoundaryForTests();
     }
 
+    //todo: zoptymalizować poprzez ograniczenie zbednego tworzenia tych samych obiektow params i rotatedImage
     public void drawActualImage(double rotate, YAxisDirection direction) {
         if (direction.equals(YAxisDirection.LEFT) || (rotate != 0)) {
             ImageView iv = new ImageView(actualImage);
@@ -159,31 +150,25 @@ public abstract class Sprite {
         if ((this.getBoundary().getMinY()) <= atTopBorder) return true;
         else return false;
     }
+//
+//    public void setHitSound(String hitSoundPath, double soundVolume) {
+//        this.hitSound = new SoundsPlayer(hitSoundPath, soundVolume, false);
+//    }
+//
+//    public void setDeathSound(String deathSoundPath, double soundVolume) {
+//        this.deathSound = new SoundsPlayer(deathSoundPath, soundVolume, false);
+//    }
+//
+//    public void setMissSound(String missSoundPath, double soundVolume) {
+//        this.missSound = new SoundsPlayer(missSoundPath, soundVolume, false);
+//    }
 
-    public void updateLastRotate() {
-        lastRotate = actualRotate;
-    }
-
-    // TODO: 04.09.2019: zrobione
-    public void setHitSound(String hitSoundPath, double soundVolume) {
-        this.hitSound = new SoundsPlayer(hitSoundPath, soundVolume, false);
-    }
-
-    // TODO: 04.09.2019: zrobione
-    public void setDeathSound(String deathSoundPath, double soundVolume) {
-        this.deathSound = new SoundsPlayer(deathSoundPath, soundVolume, false);
-    }
-
-    // TODO: 04.09.2019: zrobione
-    public void setMissSound(String missSoundPath, double soundVolume) {
-        this.missSound = new SoundsPlayer(missSoundPath, soundVolume, false);
-    }
+//    public void playSoundEffect(SoundsPlayer soundEffect){
+//        this.effectSound=soundEffect;
+//        effectSound.playSound();
+//    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void setActualImage(Image actualImage) {
-        this.actualImage = actualImage;
-    }
-
     public void setPosition(double x, double y) {
         positionX = x;
         positionY = y;
@@ -211,10 +196,6 @@ public abstract class Sprite {
         return manager;
     }
 
-    public Image getActualImage() {
-        return actualImage;
-    }
-
     public double getPositionX() {
         return positionX;
     }
@@ -233,18 +214,6 @@ public abstract class Sprite {
 
     public double getLives() {
         return lives;
-    }
-
-    public SoundsPlayer getHitSound() {
-        return hitSound;
-    }
-
-    public SoundsPlayer getDeathSound() {
-        return deathSound;
-    }
-
-    public SoundsPlayer getMissSound() {
-        return missSound;
     }
 
     public double getWidth() {
@@ -269,14 +238,6 @@ public abstract class Sprite {
 
     public void setActualRotate(double actualRotate) {
         this.actualRotate = actualRotate;
-    }
-
-    public double getLastRotate() {
-        return lastRotate;
-    }
-
-    public ProperImageSet getImageSetWay() {
-        return imageSetWay;
     }
 
     public void setImageDirection(YAxisDirection imageDirection) {

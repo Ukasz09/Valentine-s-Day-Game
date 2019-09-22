@@ -5,14 +5,12 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 
 public abstract class ShotSprite extends Sprite {
 
     private double howManyLivesTake;
     private double shotVelocity;
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public ShotSprite(Image image, double shotVelocity, double howManyLivesTake, ViewManager manager) {
         super(image, manager);
@@ -38,14 +36,9 @@ public abstract class ShotSprite extends Sprite {
 
     public abstract void update(double time);
 
-    public abstract void playShotSound();
-
     public abstract boolean isOutOfBoundary();
 
     public abstract void doOutOfBoundaryAction();
 
     public abstract void hitMonster(Monster monster);
-
-
-
 }

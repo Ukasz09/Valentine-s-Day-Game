@@ -38,11 +38,8 @@ public class NormalCollisionAvoid implements ICollisionAvoidWay {
                 if (monster.intersects(m) && monster != m) {
                     double addPositionX = offsetAfterCollision(monster, m).getX();
                     double addPositionY = offsetAfterCollision(monster, m).getY();
-                    double monsterPositionX = monster.getPositionX();
-                    double monsterPositionY = monster.getPositionY();
-
-                    monsterPositionX += addPositionX;
-                    monsterPositionY += addPositionY;
+                    double monsterPositionX = monster.getPositionX() + addPositionX;
+                    double monsterPositionY = monster.getPositionY() + addPositionY;
 
                     monster.setPosition(monsterPositionX, monsterPositionY);
                     m.setPosition(m.getPositionX() - addPositionX, m.getPositionY() - addPositionY);

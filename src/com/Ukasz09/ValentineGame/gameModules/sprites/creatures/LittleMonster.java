@@ -8,10 +8,13 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public class LittleMonster extends Monster {
-    private static final String HIT_SOUND_PATH = SoundsPath.LITTLE_MONSTER_HIT_SOUND_PATH;
-    private static final String DEATH_SOUND_PATH = SoundsPath.LITTLE_MONSTER_DEATH_SOUND_PATH;
-    private static final double DEATH_SOUND_VOLUME = 1;
-    private static final double HIT_SOUND_VOLUME = 1;
+    public static final String HIT_SOUND_PATH = SoundsPath.LITTLE_MONSTER_HIT_SOUND_PATH;
+    public static final String DEATH_SOUND_PATH = SoundsPath.LITTLE_MONSTER_DEATH_SOUND_PATH;
+    public static final double DEATH_SOUND_VOLUME = 1;
+    public static final double HIT_SOUND_VOLUME = 1;
+    private static final SoundsPlayer HIT_SOUND = new SoundsPlayer(HIT_SOUND_PATH, HIT_SOUND_VOLUME, false);
+    private static final SoundsPlayer DEATH_SOUND = new SoundsPlayer(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME, false);
+
 
     private final double howManyLivesTake = 0.5;
     private final int howBigKickSize = 0;
@@ -23,8 +26,8 @@ public class LittleMonster extends Monster {
         super(image, kickMethod, manager, collisionAvoidWay);
         setLives(3);
 
-        setHitSound(HIT_SOUND_PATH, HIT_SOUND_VOLUME);
-        setDeathSound(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME);
+//        setHitSound(HIT_SOUND_PATH, HIT_SOUND_VOLUME);
+//        setDeathSound(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME);
         setHowBigKickSize(howBigKickSize);
         setHowManyLivesTake(howManyLivesTake);
         setVelocity(velocityX, velocityY);
@@ -38,17 +41,22 @@ public class LittleMonster extends Monster {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public void isDeadAction() {
-        defaultIsDeadAction(DEATH_SOUND_VOLUME);
-    }
-
-    @Override
-    public void isHitAction() {
-        defaultIsHitAction(HIT_SOUND_VOLUME);
-    }
-
-    @Override
     public void missHitAction() {
         //nothing
+    }
+
+    @Override
+    public SoundsPlayer getHitSoundOrNull() {
+        return LittleMonster.HIT_SOUND;
+    }
+
+    @Override
+    public SoundsPlayer getMissSoundOrNull() {
+        return null;
+    }
+
+    @Override
+    public SoundsPlayer getDeathSoundOrNull() {
+        return LittleMonster.DEATH_SOUND;
     }
 }

@@ -25,8 +25,8 @@ public class Level_2 extends AllLevels {
     private final int normalCoinValue = 50;
     private final int bigCoinValue = 100;
 
-    private final int amountOfMonsters = 1;
-    private final int amountOfBosses = 0;
+    private final int amountOfMonsters = 4;
+    private final int amountOfBosses = 1;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_2(ViewManager manager) {
@@ -35,25 +35,19 @@ public class Level_2 extends AllLevels {
         setCoinsValue(smallCoinValue, normalCoinValue, bigCoinValue);
         setAmountOfMonsters(amountOfMonsters, amountOfBosses);
         setBackgroundImage(getBackgroundImage());
-        setBackgroundSound(new SoundsPlayer(Level_1.BACKGROUND_SOUND_PATH,Level_1.BACKGROUND_SOUND_VOLUME,true));
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public void prepareLevel(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList, Player player) {
-        super.prepareLevel(coinsList, enemiesList, player);
-    }
-
-    @Override
     public void spawnEnemies(ArrayList<Monster> enemiesList) {
         spawnMonsters(enemiesList);
-        spawnBosses(enemiesList);
     }
 
     private void spawnMonsters(ArrayList<Monster> enemiesList) {
         Image fishMonsterImage = new Image(SpritesPath.FISH_MONSTER_PATH);
-        FishMonster fishMonster = new FishMonster(fishMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
+        FishMonster fishMonster;
         for (int i = 0; i < amountOfMonsters; i++) {
+            fishMonster = new FishMonster(fishMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
             fishMonster.setStartedPosition();
             enemiesList.add(fishMonster);
         }
@@ -62,8 +56,9 @@ public class Level_2 extends AllLevels {
     private void spawnBosses(ArrayList<Monster> enemiesList) {
         Image fishMonsterBossImage = new Image(SpritesPath.FISH_MONSTER_BOSS_PATH);
         Image shieldImage = new Image(SpritesPath.FISH_MONSTER_BOSS_SHIELD_PATH);
-        FishMonsterBoss fishMonsterBoss = new FishMonsterBoss(fishMonsterBossImage, shieldImage, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
+        FishMonsterBoss fishMonsterBoss;
         for (int i = 0; i < amountOfBosses; i++) {
+            fishMonsterBoss = new FishMonsterBoss(fishMonsterBossImage, shieldImage, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
             fishMonsterBoss.setStartedPosition();
             enemiesList.add(fishMonsterBoss);
         }
@@ -79,10 +74,10 @@ public class Level_2 extends AllLevels {
     @Override
     public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime) {
         super.update(player, enemiesList, elapsedTime);
-        updateBosses(player, enemiesList);
+        spawnBossIfNeed(player, enemiesList);
     }
 
-    private void updateBosses(Player player, ArrayList<Monster> enemiesList) {
+    private void spawnBossIfNeed(Player player, ArrayList<Monster> enemiesList) {
         if (bossesSpawnIsNeed(player.getCollectedCoinsOnLevel(), enemiesList.isEmpty()))
             spawnBosses(enemiesList);
     }
@@ -107,5 +102,8 @@ public class Level_2 extends AllLevels {
         return new Image(BACKGROOUND_IMAGE_PATH);
     }
 
-
+    @Override
+    public SoundsPlayer getBackgroundSound() {
+        return new SoundsPlayer(Level_1.BACKGROUND_SOUND_PATH, Level_1.BACKGROUND_SOUND_VOLUME, true);
+    }
 }
