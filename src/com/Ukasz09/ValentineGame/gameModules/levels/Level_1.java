@@ -18,7 +18,6 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-//ZROBIONE
 public class Level_1 extends AllLevels {
     public static final String BACKGROOUND_IMAGE_PATH = BackgroundPath.BACKGROUD_IMAGE_PATH_L_0;
     public static final String BACKGROUND_SOUND_PATH = SoundsPath.BACKGROUND_SOUND_PATH_1;

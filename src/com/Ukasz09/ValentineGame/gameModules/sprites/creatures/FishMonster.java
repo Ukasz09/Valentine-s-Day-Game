@@ -9,10 +9,10 @@ import javafx.scene.image.Image;
 
 
 public class FishMonster extends Monster {
-    public static final String HIT_SOUND_PATH = SoundsPath.FISH_MONSTER_HIT_SOUND_PATH;
-    public static final String DEATH_SOUND_PATH = SoundsPath.FISH_MONSTER_DEATH_SOUND_PATH;
-    public static final double DEATH_SOUND_VOLUME = 1;
-    public static final double HIT_SOUND_VOLUME = 1;
+    private static final String HIT_SOUND_PATH = SoundsPath.FISH_MONSTER_HIT_SOUND_PATH;
+    private static final String DEATH_SOUND_PATH = SoundsPath.FISH_MONSTER_DEATH_SOUND_PATH;
+    private static final double DEATH_SOUND_VOLUME = 1;
+    private static final double HIT_SOUND_VOLUME = 1;
     private static final SoundsPlayer HIT_SOUND = new SoundsPlayer(HIT_SOUND_PATH, HIT_SOUND_VOLUME, false);
     private static final SoundsPlayer DEATH_SOUND = new SoundsPlayer(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME, false);
 
@@ -25,10 +25,8 @@ public class FishMonster extends Monster {
     public FishMonster(Image imageRight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(imageRight, kickMethod, manager, collisionAvoidWay);
         setLives(2);
-//        setHitSound(HIT_SOUND_PATH, HIT_SOUND_VOLUME);
-//        setDeathSound(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME);
-        setHowBigKickSize(howBigKickSize);
-        setHowManyLivesTake(howManyLivesTake);
+        setKickSize(howBigKickSize);
+        setLivesTake(howManyLivesTake);
         setVelocity(velocityX, velocityY);
     }
 
@@ -39,7 +37,7 @@ public class FishMonster extends Monster {
     }
 
     @Override
-    public void missHitAction() {
+    public void actionWhenMissHit() {
         //nothing
     }
 

@@ -14,49 +14,49 @@ public class TeleportKick implements KindOfKick {
         switch (kickDirection) {
             case "A": {
                 if (!player.boundaryCollisionFromLeftSide(manager.getLeftBorder()))
-                    player.setPosition(player.getPositionX() - m.getHowBigKickSize(), player.getPositionY());
+                    player.setPosition(player.getPositionX() - m.getKickSize(), player.getPositionY());
             }
             break;
 
             case "D": {
                 if (!player.boundaryCollisionFromRightSide(manager.getRightBorder()))
-                    player.setPosition(player.getPositionX() + m.getHowBigKickSize(), player.getPositionY());
+                    player.setPosition(player.getPositionX() + m.getKickSize(), player.getPositionY());
             }
             break;
 
             case "W": {
                 if (!player.boundaryCollisionFromTop(manager.getTopBorder()))
-                    player.setPosition(player.getPositionX(), player.getPositionY() - m.getHowBigKickSize());
+                    player.setPosition(player.getPositionX(), player.getPositionY() - m.getKickSize());
             }
             break;
 
             case "S": {
                 if (!player.boundaryCollisionFromBottom(manager.getBottomBorder()))
-                    player.setPosition(player.getPositionX(), player.getPositionY() + m.getHowBigKickSize());
+                    player.setPosition(player.getPositionX(), player.getPositionY() + m.getKickSize());
             }
             break;
 
             case "SD": {
                 if ((!player.boundaryCollisionFromBottom(manager.getBottomBorder())) && (!player.boundaryCollisionFromRightSide(manager.getRightBorder())))
-                    player.setPosition(player.getPositionX() + m.getHowBigKickSize(), player.getPositionY() + m.getHowBigKickSize());
+                    player.setPosition(player.getPositionX() + m.getKickSize(), player.getPositionY() + m.getKickSize());
             }
             break;
 
             case "WD": {
                 if ((!player.boundaryCollisionFromTop(manager.getTopBorder())) && (!player.boundaryCollisionFromRightSide(manager.getRightBorder())))
-                    player.setPosition(player.getPositionX() + m.getHowBigKickSize(), player.getPositionY() - m.getHowBigKickSize());
+                    player.setPosition(player.getPositionX() + m.getKickSize(), player.getPositionY() - m.getKickSize());
             }
             break;
 
             case "SA": {
                 if ((!player.boundaryCollisionFromBottom(manager.getBottomBorder())) && (!player.boundaryCollisionFromLeftSide(manager.getLeftBorder())))
-                    player.setPosition(player.getPositionX() - m.getHowBigKickSize(), player.getPositionY() + m.getHowBigKickSize());
+                    player.setPosition(player.getPositionX() - m.getKickSize(), player.getPositionY() + m.getKickSize());
             }
             break;
 
             case "WA": {
                 if ((!player.boundaryCollisionFromTop(manager.getTopBorder())) && (!player.boundaryCollisionFromLeftSide(manager.getLeftBorder())))
-                    player.setPosition(player.getPositionX() - m.getHowBigKickSize(), player.getPositionY() - m.getHowBigKickSize());
+                    player.setPosition(player.getPositionX() - m.getKickSize(), player.getPositionY() - m.getKickSize());
             }
             break;
 

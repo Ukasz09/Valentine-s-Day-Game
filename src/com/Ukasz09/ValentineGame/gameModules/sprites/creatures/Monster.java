@@ -1,7 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.positionByTargetEffect.PositionByTarget;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
@@ -13,40 +12,50 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 /*
-hitSound, deathSound, missSound - is static to avoid remove object by garbage collector before sound stop play effect
+    hitSound, deathSound, missSound - is static to avoid remove object by garbage collector before sound stop play effect
  */
 public abstract class Monster extends Sprite {
-    private double howManyLivesTake;
-    private double howBigKickSize;
+    private double kickSize;
+    private double livesTake;
     private KickPlayer kickMethod;
     private ICollisionAvoidWay collisionAvoidWay;
-    private PositionByTarget positionByTarget;
     private RotateEffect rotateWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Monster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(image, manager);
-        howManyLivesTake = 0;
-        howBigKickSize = 0;
+        livesTake = 0;
+        kickSize = 0;
         setVelocity(0, 0);
         this.kickMethod = kickMethod;
         this.collisionAvoidWay = collisionAvoidWay;
-        this.positionByTarget = new PositionByTarget();
         rotateWay = new RotateEffect();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    abstract public SoundsPlayer getHitSoundOrNull();
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public boolean kickAfterHit() {
-        if (howBigKickSize > 0) return true;
+    abstract public SoundsPlayer getMissSoundOrNull();
 
-        return false;
+    abstract public SoundsPlayer getDeathSoundOrNull();
+
+    abstract public void setStartedPosition();
+
+    protected void setProperties(double kickSize, double livesTake, double lives, double velocityX, double velocityY) {
+        setLives(lives);
+        this.kickSize = kickSize;
+        this.livesTake = livesTake;
+        setVelocity(velocityX, velocityY);
     }
 
     public void update(Sprite target, ArrayList<Monster> enemiesList) {
         collisionAvoidWay.updateCords(target, this, enemiesList);
         updateMonsterRotate(target);
+    }
+
+    private void updateMonsterRotate(Sprite target) {
+        double properRotate = rotateWay.setRotateByAngle(this, target);
+        setActualRotate(properRotate);
     }
 
     public void updateByVelocity(Sprite target) {
@@ -58,28 +67,30 @@ public abstract class Monster extends Sprite {
         this.setPosition(dx, dy);
     }
 
-    public void updateMonsterRotate(Sprite target) {
-        double properRotate = rotateWay.setRotateByAngle(this, target);
-        setActualRotate(properRotate);
-    }
-
     public void kickPlayer(Player p) {
-        kickMethod.kickPlayerByMonsterPostion(this, p, getManager());
+        if (doKick())
+            kickMethod.kickPlayerByMonsterPostion(this, p, getManager());
     }
 
-    public void isDeadAction() {
+    private boolean doKick() {
+        if (kickSize > 0)
+            return true;
+        return false;
+    }
+
+    public void actionWhenDead() {
         if (getDeathSoundOrNull() != null)
             getDeathSoundOrNull().playSound();
         else System.out.println("Error: deathSound is null");
     }
 
-    public void isHitAction() {
+    public void actionWhenHit() {
         if (getHitSoundOrNull() != null)
             getHitSoundOrNull().playSound();
         else System.out.println("Error: hitSound is null");
     }
 
-    public void missHitAction() {
+    public void actionWhenMissHit() {
         if (getMissSoundOrNull() != null)
             getMissSoundOrNull().playSound();
         else System.out.println("Error: missHitSound is null");
@@ -89,34 +100,27 @@ public abstract class Monster extends Sprite {
         return (getLives() <= 0);
     }
 
-    public boolean isRightSideToTarget(Sprite target) {
-        return positionByTarget.isRightSideToTarget(this, target);
-    }
-
     public boolean isLeftSideToTarget(Sprite target) {
-        return positionByTarget.isLeftSideToTarget(this, target);
+        double creatureMinX = this.getBoundary().getMinX();
+        if (creatureMinX <= target.getBoundary().getMinX())
+            return true;
+
+        return false;
     }
 
     public boolean isUpSideToTarget(Sprite target) {
-        return positionByTarget.isUpSideToTarget(this, target);
+        double creatureMinY = this.getBoundary().getMinY();
+        if (creatureMinY <= target.getBoundary().getMinY())
+            return true;
+
+        return false;
     }
 
-    public boolean isDownSideToTarget(Sprite target) {
-        return positionByTarget.isDownSideToTarget(this, target);
+    public void setPositionByDirection(boolean north, boolean south, boolean east, boolean west, double offset) {
+        DirectionEnum direction = randomPositionByDirection(north, south, east, west);
+        setPositionByDirection(direction, offset);
     }
 
-    public boolean isExactlyUnderOrAboveTarget(Sprite target) {
-        return positionByTarget.isExactlyUnderOrAboveTarget(this, target);
-    }
-
-    public boolean isExactlyAboveTarget(Sprite target) {
-        return positionByTarget.isExactlyAboveTarget(this, target);
-    }
-
-    //todo: zrobione
-    public abstract void setStartedPosition();
-
-    //todo: zrobione
     private DirectionEnum randomPositionByDirection(boolean north, boolean south, boolean east, boolean west) {
         DirectionEnum direction;
         try {
@@ -127,13 +131,6 @@ public abstract class Monster extends Sprite {
         }
     }
 
-    //todo: zrobione
-    public void setPositionByDirection(boolean north, boolean south, boolean east, boolean west, double offset) {
-        DirectionEnum direction = randomPositionByDirection(north, south, east, west);
-        setPositionByDirection(direction, offset);
-    }
-
-    //todo: zrobione
     private void setPositionByDirection(DirectionEnum direction, double offset) {
         switch (direction) {
             case NORTH:
@@ -151,57 +148,45 @@ public abstract class Monster extends Sprite {
         }
     }
 
-    //todo: zrobione
     private void setPositionFromNorth(double offset) {
         double positionX = Math.random() * getManager().getRightBorder();
         double positionY = getManager().getTopBorder() - offset;
         this.setPosition(positionX, positionY);
     }
 
-    //todo: zrobione
     private void setPositionFromSouth(double offset) {
         double positionX = Math.random() * getManager().getRightBorder();
         double positionY = getManager().getBottomBorder() + offset;
         this.setPosition(positionX, positionY);
     }
 
-    //todo: zrobione
     private void setPositionFromEast(double offset) {
         double positionX = getManager().getLeftBorder() - offset;
         double positionY = Math.random() * getManager().getBottomBorder();
         this.setPosition(positionX, positionY);
     }
 
-    //todo: zrobione
     private void setPositionFromWest(double offset) {
         double positionX = getManager().getRightBorder() + offset;
         double positionY = Math.random() * getManager().getBottomBorder();
         this.setPosition(positionX, positionY);
     }
 
-    abstract public  SoundsPlayer getHitSoundOrNull();
-
-
-    abstract public SoundsPlayer getMissSoundOrNull();
-
-
-    abstract public SoundsPlayer getDeathSoundOrNull();
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void setHowManyLivesTake(double howManyLivesTake) {
-        this.howManyLivesTake = howManyLivesTake;
+    public void setLivesTake(double livesTake) {
+        this.livesTake = livesTake;
     }
 
-    public void setHowBigKickSize(double howBigKickSize) {
-        this.howBigKickSize = howBigKickSize;
+    public void setKickSize(double kickSize) {
+        this.kickSize = kickSize;
     }
 
-    public double getHowBigKickSize() {
-        return howBigKickSize;
+    public double getKickSize() {
+        return kickSize;
     }
 
-    public double getHowManyLivesTake() {
-        return howManyLivesTake;
+    public double getLivesTake() {
+        return livesTake;
     }
 
 }

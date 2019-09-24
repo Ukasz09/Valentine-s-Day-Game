@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
+//TODO: uzupelnic default properties
 public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
     public static final String HIT_SOUND_PATH = SoundsPath.FISH_MINIBOSS_HIT_SOUND_PATH;
     public static final String DEATH_SOUND_PATH = SoundsPath.FISH_MINIBOSS_DEATH_SOUND_PATH;
@@ -43,11 +44,8 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
         setLives(maxLive);
         setProtectionTime(0);
         shield = new AutoActivateShield(defaultShieldTimer, defaultShieldDuration, shieldImage, this);
-//        setHitSound(HIT_SOUND_PATH, HIT_SOUND_VOLUME);
-//        setDeathSound(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME);
-//        setMissSound(MISS_SHOT_SOUND_PATH, MISS_SHOT_SOUND_VOLUME);
-        setHowBigKickSize(howBigKickSize);
-        setHowManyLivesTake(howManyLivesTake);
+        setKickSize(howBigKickSize);
+        setLivesTake(howManyLivesTake);
         setVelocity(velocityX, velocityY);
 
         healthBar = new HealthStatusBar(maxLive, getWidth(), getPositionX(), getPositionY());

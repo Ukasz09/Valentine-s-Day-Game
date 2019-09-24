@@ -12,7 +12,7 @@ import javafx.scene.paint.Paint;
 public abstract class Sprite {
 
     public enum YAxisDirection {
-        LEFT, RIGHT;
+        LEFT, RIGHT
     }
 
     private Image actualImage;
@@ -22,7 +22,7 @@ public abstract class Sprite {
     private double velocityY;
     private double width;
     private double height;
-    protected double lives;
+    private double lives;
     protected double maxLives;
     private int protectionTime;
     private double actualRotate;
@@ -45,14 +45,14 @@ public abstract class Sprite {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public boolean shieldIsActive() {
-        if (getProtectionTime() <= 0) return false;
+        if (getProtectionTime() <= 0)
+            return false;
 
         return true;
     }
 
     public void update(double time) {
         updatePosition(time);
-
     }
 
     public void updatePosition(double time) {
@@ -150,23 +150,6 @@ public abstract class Sprite {
         if ((this.getBoundary().getMinY()) <= atTopBorder) return true;
         else return false;
     }
-//
-//    public void setHitSound(String hitSoundPath, double soundVolume) {
-//        this.hitSound = new SoundsPlayer(hitSoundPath, soundVolume, false);
-//    }
-//
-//    public void setDeathSound(String deathSoundPath, double soundVolume) {
-//        this.deathSound = new SoundsPlayer(deathSoundPath, soundVolume, false);
-//    }
-//
-//    public void setMissSound(String missSoundPath, double soundVolume) {
-//        this.missSound = new SoundsPlayer(missSoundPath, soundVolume, false);
-//    }
-
-//    public void playSoundEffect(SoundsPlayer soundEffect){
-//        this.effectSound=soundEffect;
-//        effectSound.playSound();
-//    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setPosition(double x, double y) {
@@ -247,4 +230,5 @@ public abstract class Sprite {
     public YAxisDirection getImageDirection() {
         return imageDirection;
     }
+
 }

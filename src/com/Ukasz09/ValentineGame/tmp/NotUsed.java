@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.tmp;
 
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
 import javafx.scene.canvas.Canvas;
 
 public class NotUsed {
@@ -52,5 +53,38 @@ public class NotUsed {
 //            while (Boundary.boundaryCollisionFromTop(canvas, this))
 //                setPosition(getPositionX(), getPositionY() + kickSize / 4);
 //        }
+//    }
+
+//    public boolean isDownSideToTarget(Sprite target) {
+//        return positionByTarget.isDownSideToTarget(this, target);
+//    }
+//
+//    public boolean isExactlyUnderOrAboveTarget(Sprite target) {
+//        return positionByTarget.isExactlyUnderOrAboveTarget(this, target);
+//    }
+//
+//    public boolean isExactlyAboveTarget(Sprite target) {
+//        return positionByTarget.isExactlyAboveTarget(this, target);
+//    }
+
+//    public boolean isRightSideToTarget(Sprite target) {
+//        return positionByTarget.isRightSideToTarget(this, target);
+//    }
+
+//    public boolean isExactlyUnderOrAboveTarget(Sprite creature, Sprite target) {
+//        double creatureMinX = creature.getBoundary().getMinX();
+//        double creatureMaxX = creature.getBoundary().getMaxX();
+//
+//        if ((creatureMinX >= target.getBoundary().getMinX()) && (creatureMaxX <= target.getBoundary().getMaxX()))
+//            return true;
+//
+//        return false;
+//    }
+//
+//    public boolean isExactlyAboveTarget(Sprite creature, Sprite target) {
+//        if (isExactlyUnderOrAboveTarget(creature, target) && isUpSideToTarget(creature, target))
+//            return true;
+//
+//        return false;
 //    }
 }

@@ -15,14 +15,20 @@ public class SoundsPlayer {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public SoundsPlayer(String soundPath, double volume, boolean inLoop) {
         this.soundPath = soundPath;
+        this.inLoop = inLoop;
         this.volume = volume;
-        this.inLoop=inLoop;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void playSound(double volume, boolean inLoop) {
-        this.volume = volume;
-        this.inLoop=inLoop;
+        if (volume > 0)
+            this.volume = volume;
+        else {
+            this.volume = 1;
+            System.out.println("Error: volume was negative: " + soundPath);
+        }
+
+        this.inLoop = inLoop;
         playSound();
     }
 

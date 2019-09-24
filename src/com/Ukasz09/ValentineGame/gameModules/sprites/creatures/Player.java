@@ -3,7 +3,6 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
-import com.Ukasz09.ValentineGame.gameModules.utilitis.Game;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HeartsRender;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.InCorner;
@@ -71,7 +70,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     public Player(Image playerRightImage, Image shieldImage, ViewManager manager) {
         super(playerRightImage, manager);
         shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage, this);
-        lives = DEFAULT_LIVES;
+        setLives(DEFAULT_LIVES);
         maxLives = DEFAULT_LIVES;
         playerHitSounds = getPlayerHitSounds();
         totalScore = 0;
@@ -183,7 +182,6 @@ public class Player extends Sprite implements ShieldKindOfRender {
             //20%
         else
             gc.drawImage(batteryImages[0], batteryPositionX, batteryPositionY);
-
     }
 
     private void updateBattery() {
@@ -239,11 +237,11 @@ public class Player extends Sprite implements ShieldKindOfRender {
                     if (!monster.shieldIsActive()) {
                         shot.hitMonster(monster);
                         if (monster.isDead()) {
-                            monster.isDeadAction();
+                            monster.actionWhenDead();
                             monstersIterator.remove();
                             killedMonstersOnLevel++;
-                        } else monster.isHitAction();
-                    } else monster.missHitAction();
+                        } else monster.actionWhenHit();
+                    } else monster.actionWhenMissHit();
 
                     shotIterator.remove();
                 }
@@ -255,10 +253,9 @@ public class Player extends Sprite implements ShieldKindOfRender {
         for (Monster m : monsters) {
             if (this.intersects(m)) {
                 if (!shieldIsActive()) {
-                    if (m.kickAfterHit())
-                        m.kickPlayer(this);
+                    m.kickPlayer(this);
 
-                    removeLives(m.getHowManyLivesTake());
+                    removeLives(m.getLivesTake());
                     playRandomHitSound();
                     activateShield();
                 }
@@ -462,12 +459,12 @@ public class Player extends Sprite implements ShieldKindOfRender {
     public void playWingsSound() {
         if (wingsSound != null)
             wingsSound.playSound();
-        else System.out.println(wingsSound.toString()+" is null");
+        else System.out.println(wingsSound.toString() + " is null");
     }
 
     public void stopWingsSound() {
         if (wingsSound != null)
             wingsSound.stopSound();
-        else System.out.println(wingsSound.toString()+" is null");
+        else System.out.println(wingsSound.toString() + " is null");
     }
 }
