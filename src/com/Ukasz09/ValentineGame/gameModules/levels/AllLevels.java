@@ -104,7 +104,7 @@ public abstract class AllLevels {
     //TODO: zrobione
     public void renderMonsters(ArrayList<Monster> enemiesList) {
         if (enemiesList != null) {
-            for (Sprite m : enemiesList)
+            for (Monster m : enemiesList)
                 m.render();
         }
     }

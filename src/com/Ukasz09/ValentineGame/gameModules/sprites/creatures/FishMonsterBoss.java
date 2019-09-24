@@ -1,6 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ShieldKindOfRender;
@@ -63,6 +64,12 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
     @Override
     public void setStartedPosition() {
         setPositionByDirection(false, false, true, true, getWidth() * 3);
+    }
+
+    @Override
+    public void updateMonsterRotate(Sprite target) {
+        double properRotate = RotateEffect.setRotateByAngle(this, target);
+        setActualRotate(properRotate);
     }
 
     @Override

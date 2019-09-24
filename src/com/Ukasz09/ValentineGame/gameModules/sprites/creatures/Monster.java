@@ -19,7 +19,6 @@ public abstract class Monster extends Sprite {
     private double livesTake;
     private KickPlayer kickMethod;
     private ICollisionAvoidWay collisionAvoidWay;
-    private RotateEffect rotateWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Monster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
@@ -29,7 +28,6 @@ public abstract class Monster extends Sprite {
         setVelocity(0, 0);
         this.kickMethod = kickMethod;
         this.collisionAvoidWay = collisionAvoidWay;
-        rotateWay = new RotateEffect();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,10 +51,7 @@ public abstract class Monster extends Sprite {
         updateMonsterRotate(target);
     }
 
-    private void updateMonsterRotate(Sprite target) {
-        double properRotate = rotateWay.setRotateByAngle(this, target);
-        setActualRotate(properRotate);
-    }
+    abstract public void updateMonsterRotate(Sprite target);
 
     public void updateByVelocity(Sprite target) {
         double dx = this.getPositionX();

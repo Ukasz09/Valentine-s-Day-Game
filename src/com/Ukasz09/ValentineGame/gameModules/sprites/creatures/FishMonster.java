@@ -1,6 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
@@ -39,6 +40,12 @@ public class FishMonster extends Monster {
     @Override
     public void actionWhenMissHit() {
         //nothing
+    }
+
+    @Override
+    public void updateMonsterRotate(Sprite target) {
+        double properRotate = RotateEffect.setRotateByAngle(this, target);
+        setActualRotate(properRotate);
     }
 
     @Override

@@ -60,7 +60,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private boolean pressedKey_D;
     private boolean pressedKey_W;
     private boolean pressedKey_S;
-    private RotateEffect rotateWay;
+//    private RotateEffect rotateWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
@@ -91,7 +91,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         pressedKey_D = false;
         pressedKey_W = false;
         pressedKey_S = false;
-        rotateWay = new RotateEffect();
+//        rotateWay = new RotateEffect();
         setImageDirection(YAxisDirection.RIGHT);
         wingsSound = new SoundsPlayer(WINGS_SOUND_PATH, WINGS_SOUND_VOLUME, true);
     }
@@ -119,10 +119,10 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     @Override
     public void render() {
-        super.render();
-        renderShield(getManager().getGraphicContext());
         renderBattery(getManager().getGraphicContext());
         heartsRender.renderHearts(this);
+        renderShield(getManager().getGraphicContext());
+        renderSprite();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -355,7 +355,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public void updatePlayerRotate() {
 //        updateLastRotate();
-        double properRotate = rotateWay.rotateByPressedKey(pressedKey_A, pressedKey_D, pressedKey_W, pressedKey_S, amountOfToPixelRotate);
+        double properRotate = RotateEffect.rotateByPressedKey(pressedKey_A, pressedKey_D, pressedKey_W, pressedKey_S, amountOfToPixelRotate);
         setActualRotate(properRotate);
     }
 

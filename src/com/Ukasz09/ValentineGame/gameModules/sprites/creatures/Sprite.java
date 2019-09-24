@@ -62,6 +62,10 @@ public abstract class Sprite {
 
 
     public void render() {
+        renderSprite();
+    }
+
+    public void renderSprite(){
         drawActualImage(actualRotate, imageDirection);
         drawBoundaryForTests();
     }

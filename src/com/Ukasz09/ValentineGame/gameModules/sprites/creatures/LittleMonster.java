@@ -1,11 +1,14 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
+import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
+
+import java.util.Random;
 
 public class LittleMonster extends Monster {
     private static final String HIT_SOUND_PATH = SoundsPath.LITTLE_MONSTER_HIT_SOUND_PATH;
@@ -22,6 +25,7 @@ public class LittleMonster extends Monster {
     private final double defaultKickSize =0;
     private final double defaultVelocityX =1;
     private final double defaultVelocityY =1;
+    private final double rotateOffset=Math.random()*360;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public LittleMonster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
@@ -48,6 +52,14 @@ public class LittleMonster extends Monster {
     @Override
     public void actionWhenMissHit() {
         //nothing
+    }
+
+    @Override
+    public void updateMonsterRotate(Sprite target) {
+        double rotate= RotateEffect.setRotateByAngle(this,target);
+        rotate+=rotateOffset;
+        System.out.println(rotateOffset);
+        setActualRotate(rotate);
     }
 
     @Override
