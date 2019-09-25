@@ -58,7 +58,6 @@ public class LittleMonster extends Monster {
     public void updateMonsterRotate(Sprite target) {
         double rotate= RotateEffect.setRotateByAngle(this,target);
         rotate+=rotateOffset;
-        System.out.println(rotateOffset);
         setActualRotate(rotate);
     }
 
