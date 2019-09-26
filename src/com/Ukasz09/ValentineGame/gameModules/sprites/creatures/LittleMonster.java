@@ -8,8 +8,6 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
-import java.util.Random;
-
 public class LittleMonster extends Monster {
     private static final String HIT_SOUND_PATH = SoundsPath.LITTLE_MONSTER_HIT_SOUND_PATH;
     private static final String DEATH_SOUND_PATH = SoundsPath.LITTLE_MONSTER_DEATH_SOUND_PATH;
@@ -58,7 +56,7 @@ public class LittleMonster extends Monster {
     public void updateMonsterRotate(Sprite target) {
         double rotate= RotateEffect.setRotateByAngle(this,target);
         rotate+=rotateOffset;
-        setActualRotate(rotate);
+        setActualRotation(rotate);
     }
 
     @Override

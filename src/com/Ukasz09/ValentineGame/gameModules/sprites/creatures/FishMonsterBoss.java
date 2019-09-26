@@ -15,11 +15,11 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-//TODO: uzupelnic default properties
 public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
     public static final String HIT_SOUND_PATH = SoundsPath.FISH_MINIBOSS_HIT_SOUND_PATH;
     public static final String DEATH_SOUND_PATH = SoundsPath.FISH_MINIBOSS_DEATH_SOUND_PATH;
     public static final String MISS_SHOT_SOUND_PATH = SoundsPath.FISH_MONSTER_MISS_SHOT_SOUND_PATH;
+
     public static final double DEATH_SOUND_VOLUME = 1;
     public static final double HIT_SOUND_VOLUME = 1;
     public static final double MISS_SHOT_SOUND_VOLUME = 1;
@@ -28,28 +28,28 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
     private static final SoundsPlayer MISS_SOUND = new SoundsPlayer(MISS_SHOT_SOUND_PATH, MISS_SHOT_SOUND_VOLUME, false);
     private static final SoundsPlayer DEATH_SOUND = new SoundsPlayer(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME, false);
 
-    private final double howManyLivesTake = 1.5;
-    private final int howBigKickSize = 0; //todo: tmp
-    private final double maxLive = 20;
-    private final double velocityX = 3;
-    private final double velocityY = 3;
-    private final int defaultShieldTimer = 5000;
-    private final int defaultShieldDuration = 10000;
-
     private Shield shield;
     private HealthStatusBar healthBar;
+
+    private final double defaultLives = 20;
+    private final double defaultLivesTake = 1.5;
+    private final int defaultKickSize = 25;
+    private final double defaultVelocityX = 3;
+    private final double defaultVelocityY = 3;
+    private final int defaultShieldCooldown = 5000;
+    private final int defaultShieldDuration = 10000;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonsterBoss(Image right, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(right, kickMethod, manager, collisionAvoidWay);
-        setLives(maxLive);
+        setLives(defaultLives);
         setProtectionTime(0);
-        shield = new AutoActivateShield(defaultShieldTimer, defaultShieldDuration, shieldImage, this);
-        setKickSize(howBigKickSize);
-        setLivesTake(howManyLivesTake);
-        setVelocity(velocityX, velocityY);
+        shield = new AutoActivateShield(defaultShieldCooldown, defaultShieldDuration, shieldImage, this);
+        setKickSize(defaultKickSize);
+        setLivesTake(defaultLivesTake);
+        setVelocity(defaultVelocityX, defaultVelocityY);
 
-        healthBar = new HealthStatusBar(maxLive, getWidth(), getPositionX(), getPositionY());
+        healthBar = new HealthStatusBar(defaultLives, getWidth(), getPositionX(), getPositionY());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -69,7 +69,7 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
     @Override
     public void updateMonsterRotate(Sprite target) {
         double properRotate = RotateEffect.setRotateByAngle(this, target);
-        setActualRotate(properRotate);
+        setActualRotation(properRotate);
     }
 
     @Override

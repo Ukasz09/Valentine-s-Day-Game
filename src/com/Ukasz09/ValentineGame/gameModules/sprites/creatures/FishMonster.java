@@ -17,18 +17,19 @@ public class FishMonster extends Monster {
     private static final SoundsPlayer HIT_SOUND = new SoundsPlayer(HIT_SOUND_PATH, HIT_SOUND_VOLUME, false);
     private static final SoundsPlayer DEATH_SOUND = new SoundsPlayer(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME, false);
 
-    private final double howManyLivesTake = 0.5;
-    private final int howBigKickSize = 0;
-    private final double velocityX = 2.2;
-    private final double velocityY = 2.2;
+    private final double defaultLives = 2;
+    private final double defaultLivesTake = 0.5;
+    private final int defaultKickSize = 0;
+    private final double defaultVelocityX = 2.2;
+    private final double defaultVelocityY = 2.2;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonster(Image imageRight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(imageRight, kickMethod, manager, collisionAvoidWay);
-        setLives(2);
-        setKickSize(howBigKickSize);
-        setLivesTake(howManyLivesTake);
-        setVelocity(velocityX, velocityY);
+        setLives(defaultLives);
+        setKickSize(defaultKickSize);
+        setLivesTake(defaultLivesTake);
+        setVelocity(defaultVelocityX, defaultVelocityY);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,7 +46,7 @@ public class FishMonster extends Monster {
     @Override
     public void updateMonsterRotate(Sprite target) {
         double properRotate = RotateEffect.setRotateByAngle(this, target);
-        setActualRotate(properRotate);
+        setActualRotation(properRotate);
     }
 
     @Override

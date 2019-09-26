@@ -134,16 +134,16 @@ public class Player extends Sprite implements ShieldKindOfRender {
         double height = getHeight();
 
         if (getImageDirection().equals(YAxisDirection.RIGHT)) {
-            if (getActualRotate() == amountOfToPixelRotate)
+            if (getActualRotation() == amountOfToPixelRotate)
                 return new Rectangle2D(getPositionX() + width / 2, getPositionY() + height / 2, width / 2.4, height / 2);
-            else if (getActualRotate() == -amountOfToPixelRotate)
+            else if (getActualRotation() == -amountOfToPixelRotate)
                 return new Rectangle2D(getPositionX() + width / 1.8, getPositionY() + height / 2.2, width / 2.3, height / 2.2);
             else
                 return new Rectangle2D(getPositionX() + width / 2.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
         } else {
-            if (getActualRotate() == amountOfToPixelRotate)
+            if (getActualRotation() == amountOfToPixelRotate)
                 return new Rectangle2D(getPositionX() + width / 3.9, getPositionY() + height / 2.3, width / 2.3, height / 2.2);
-            else if (getActualRotate() == -amountOfToPixelRotate)
+            else if (getActualRotation() == -amountOfToPixelRotate)
                 return new Rectangle2D(getPositionX() + width / 2.7, getPositionY() + height / 2, width / 2.5, height / 2.1);
             else
                 return new Rectangle2D(getPositionX() + width / 5.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
@@ -356,7 +356,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     public void updatePlayerRotate() {
 //        updateLastRotate();
         double properRotate = RotateEffect.rotateByPressedKey(pressedKey_A, pressedKey_D, pressedKey_W, pressedKey_S, amountOfToPixelRotate);
-        setActualRotate(properRotate);
+        setActualRotation(properRotate);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

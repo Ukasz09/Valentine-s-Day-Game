@@ -1,7 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
@@ -25,10 +24,11 @@ public abstract class Sprite {
     private double lives;
     protected double maxLives;
     private int protectionTime;
-    private double actualRotate;
+    private double actualRotation;
 
     private ViewManager manager;
     private YAxisDirection imageDirection;
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Sprite(Image actualImage, ViewManager manager) {
@@ -39,7 +39,7 @@ public abstract class Sprite {
         lives = 3;
         maxLives = lives;
         protectionTime = 0;
-        actualRotate = 0;
+        actualRotation = 0;
         imageDirection = YAxisDirection.RIGHT;
     }
 
@@ -65,16 +65,14 @@ public abstract class Sprite {
         renderSprite();
     }
 
-    public void renderSprite(){
-        drawActualImage(actualRotate, imageDirection);
+    public void renderSprite() {
+        drawActualImage(actualRotation, imageDirection);
         drawBoundaryForTests();
     }
 
-    //todo: zoptymalizować poprzez ograniczenie zbednego tworzenia tych samych obiektow params i rotatedImage
     public void drawActualImage(double rotate, YAxisDirection direction) {
         if (direction.equals(YAxisDirection.LEFT) || (rotate != 0)) {
             ImageView iv = new ImageView(actualImage);
-
             if (rotate != 0 && direction.equals(YAxisDirection.LEFT)) {
                 iv.setScaleX(-1);
                 iv.setRotate(rotate);
@@ -82,6 +80,7 @@ public abstract class Sprite {
                 iv.setRotate(rotate);
             else iv.setScaleX(-1);
 
+            //needed for rotations
             SnapshotParameters params = new SnapshotParameters();
             params.setFill(Color.TRANSPARENT);
             Image rotatedImage = iv.snapshot(params, null);
@@ -219,12 +218,12 @@ public abstract class Sprite {
         return protectionTime;
     }
 
-    public double getActualRotate() {
-        return actualRotate;
+    public double getActualRotation() {
+        return actualRotation;
     }
 
-    public void setActualRotate(double actualRotate) {
-        this.actualRotate = actualRotate;
+    public void setActualRotation(double actualRotation) {
+        this.actualRotation = actualRotation;
     }
 
     public void setImageDirection(YAxisDirection imageDirection) {
