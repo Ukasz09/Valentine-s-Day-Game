@@ -73,4 +73,9 @@ public class LittleMonster extends Monster {
     public SoundsPlayer getDeathSoundOrNull() {
         return LittleMonster.DEATH_SOUND;
     }
+
+    @Override
+    public boolean hasActiveShield() {
+        return false;
+    }
 }

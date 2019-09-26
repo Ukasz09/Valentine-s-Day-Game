@@ -7,14 +7,14 @@ import javafx.scene.image.Image;
 public class ManualActivateShield extends Shield {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public ManualActivateShield(int shieldCooldown, int shieldDuration, Image shieldImage, Sprite sprite) {
-        super(shieldCooldown, shieldDuration, shieldImage, sprite);
+    public ManualActivateShield(int shieldCooldown, int shieldDuration, Image shieldImage) {
+        super(shieldCooldown, shieldDuration, shieldImage);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void activateShield() {
-        activeProtectDuration(sprite);
+        activeProtectDuration();
         setActualShieldCooldown(Integer.MAX_VALUE);
     }
 
@@ -24,7 +24,7 @@ public class ManualActivateShield extends Shield {
         if (getActualShieldCooldown() == 0)
             activateShield();
 
-        if (sprite.getProtectionTime() > 0)
-            reduceShieldDuration(sprite);
+        if (isActive())
+            reduceShieldDuration();
     }
 }

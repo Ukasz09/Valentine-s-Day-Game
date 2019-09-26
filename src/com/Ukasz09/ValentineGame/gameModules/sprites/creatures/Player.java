@@ -69,7 +69,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public Player(Image playerRightImage, Image shieldImage, ViewManager manager) {
         super(playerRightImage, manager);
-        shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage, this);
+        shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage);
         setLives(DEFAULT_LIVES);
         maxLives = DEFAULT_LIVES;
         playerHitSounds = getPlayerHitSounds();
@@ -100,7 +100,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     @Override
     public void renderShield(GraphicsContext gc) {
         //if shield is active, 750 - delay to see when sheild dissapear before another hit
-        if ((getProtectionTime() > 0) && (getProtectionTime() > 750)) {
+        if (shield.isActive()) {
             if (getImageDirection().equals(YAxisDirection.RIGHT))
                 gc.drawImage(shield.getShieldImage(), getPositionX(), getPositionY());
             else gc.drawImage(shield.getShieldImage(), getPositionX() - 50, getPositionY());
@@ -234,7 +234,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
                 ShotSprite shot = shotIterator.next();
                 //monster is hitted
                 if (monster.intersects(shot)) {
-                    if (!monster.shieldIsActive()) {
+                    if (!monster.hasActiveShield()) {
                         shot.hitMonster(monster);
                         if (monster.isDead()) {
                             monster.actionWhenDead();
@@ -252,7 +252,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private void checkIntersectsWithMonsters(ArrayList<Monster> monsters) {
         for (Monster m : monsters) {
             if (this.intersects(m)) {
-                if (!shieldIsActive()) {
+                if (!shield.isActive()) {
                     m.kickPlayer(this);
 
                     removeLives(m.getLivesTake());

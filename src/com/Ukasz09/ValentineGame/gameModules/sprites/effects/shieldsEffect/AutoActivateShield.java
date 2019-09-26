@@ -1,19 +1,17 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-
 import javafx.scene.image.Image;
 
 public class AutoActivateShield extends Shield {
 
-    public AutoActivateShield(int shieldCooldown, int shieldDuration, Image shieldImage, Sprite sprite) {
-        super(shieldCooldown, shieldDuration, shieldImage, sprite);
+    public AutoActivateShield(int shieldCooldown, int shieldDuration, Image shieldImage) {
+        super(shieldCooldown, shieldDuration, shieldImage);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void activateShield() {
-        activeProtectDuration(sprite);
+        activeProtectDuration();
         setActualShieldCooldown(getDefaultShieldCooldown());
     }
 
@@ -21,10 +19,10 @@ public class AutoActivateShield extends Shield {
     @Override
     public void updateShield() {
         //if shield is not active
-        if (sprite.getProtectionTime() == 0) {
+        if (!isActive()) { //==0
             if (getActualShieldCooldown() == 0)
                 activateShield();
             else reduceShieldCooldown(SHIELD_REDUCE_TIME);
-        } else reduceShieldDuration(sprite);
+        } else reduceShieldDuration();
     }
 }

@@ -7,19 +7,21 @@ import javafx.scene.image.Image;
 public abstract class Shield {
     public static final int SHIELD_REDUCE_TIME = 50;
 
+    private int protectionTime;
+
     private int actualShieldCooldown;
     private int defaultShieldCooldown;
     private int defaultShieldDuration;
     private Image shieldImage;
-    Sprite sprite;
+//    Sprite sprite;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Shield(int defaultShieldCooldown, int defaultShieldDuration, Image shieldImage, Sprite sprite) {
+    public Shield(int defaultShieldCooldown, int defaultShieldDuration, Image shieldImage) {
 
         this.defaultShieldCooldown = defaultShieldCooldown;
         this.defaultShieldDuration = defaultShieldDuration;
         this.shieldImage = shieldImage;
-        this.sprite = sprite;
+//        this.sprite = sprite;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,15 +30,27 @@ public abstract class Shield {
     public abstract void activateShield();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void activeProtectDuration(Sprite sprite) {
-        sprite.setProtectionTime(defaultShieldDuration);
+    public boolean isActive() {
+        if (protectionTime > 0)
+            return true;
+
+        return false;
     }
 
-    public void reduceShieldDuration(Sprite sprite) {
-        sprite.removeProtectionTime(SHIELD_REDUCE_TIME);
+    public void activeProtectDuration() {
+//        sprite.setProtectionTime(defaultShieldDuration);
+        protectionTime = defaultShieldDuration;
+    }
 
-        if (sprite.getProtectionTime() < 0)
-            sprite.setProtectionTime(0);
+    public void reduceShieldDuration() {
+        removeProtectionTime(SHIELD_REDUCE_TIME);
+
+        if (protectionTime < 0)
+            protectionTime = 0;
+    }
+
+    private void removeProtectionTime(int value) {
+        protectionTime -= value;
     }
 
     public void reduceShieldCooldown(int value) {
@@ -62,4 +76,8 @@ public abstract class Shield {
     public Image getShieldImage() {
         return shieldImage;
     }
+//
+//    public int getProtectionTime() {
+//        return protectionTime;
+//    }
 }

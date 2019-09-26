@@ -63,4 +63,9 @@ public class FishMonster extends Monster {
     public SoundsPlayer getDeathSoundOrNull() {
         return FishMonster.DEATH_SOUND;
     }
+
+    @Override
+    public boolean hasActiveShield() {
+        return false;
+    }
 }

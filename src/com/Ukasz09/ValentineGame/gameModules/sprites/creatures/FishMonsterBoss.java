@@ -43,8 +43,8 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
     public FishMonsterBoss(Image right, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(right, kickMethod, manager, collisionAvoidWay);
         setLives(defaultLives);
-        setProtectionTime(0);
-        shield = new AutoActivateShield(defaultShieldCooldown, defaultShieldDuration, shieldImage, this);
+//        setProtectionTime(0);
+        shield = new AutoActivateShield(defaultShieldCooldown, defaultShieldDuration, shieldImage);
         setKickSize(defaultKickSize);
         setLivesTake(defaultLivesTake);
         setVelocity(defaultVelocityX, defaultVelocityY);
@@ -88,7 +88,9 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
 
     @Override
     public void renderShield(GraphicsContext gc) {
-        if (getProtectionTime() != 0) {
+//        if (getProtectionTime() != 0) {
+
+        if(shield.isActive()){
             double centerPositionX;
             if (getImageDirection().equals(YAxisDirection.LEFT))
                 centerPositionX = getPositionX() + 40;
@@ -112,5 +114,10 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
     @Override
     public SoundsPlayer getDeathSoundOrNull() {
         return FishMonsterBoss.DEATH_SOUND;
+    }
+
+    @Override
+    public boolean hasActiveShield() {
+        return shield.isActive();
     }
 }

@@ -39,6 +39,8 @@ public abstract class Monster extends Sprite {
 
     abstract public void setStartedPosition();
 
+    abstract public boolean hasActiveShield();
+
     protected void setProperties(double kickSize, double livesTake, double lives, double velocityX, double velocityY) {
         setLives(lives);
         this.kickSize = kickSize;

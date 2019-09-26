@@ -23,7 +23,7 @@ public abstract class Sprite {
     private double height;
     private double lives;
     protected double maxLives;
-    private int protectionTime;
+//    private int protectionTime;
     private double actualRotation;
 
     private ViewManager manager;
@@ -38,18 +38,18 @@ public abstract class Sprite {
         height = actualImage.getHeight();
         lives = 3;
         maxLives = lives;
-        protectionTime = 0;
+//        protectionTime = 0;
         actualRotation = 0;
         imageDirection = YAxisDirection.RIGHT;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public boolean shieldIsActive() {
-        if (getProtectionTime() <= 0)
-            return false;
-
-        return true;
-    }
+//    public boolean shieldIsActive() {
+//        if (getProtectionTime() <= 0)
+//            return false;
+//
+//        return true;
+//    }
 
     public void update(double time) {
         updatePosition(time);
@@ -129,9 +129,9 @@ public abstract class Sprite {
         lives -= howMany;
     }
 
-    public void removeProtectionTime(int value) {
-        protectionTime -= value;
-    }
+//    public void removeProtectionTime(int value) {
+//        protectionTime -= value;
+//    }
 
     public boolean boundaryCollisionFromLeftSide(double atLeftBorder) {
         if ((this.getBoundary().getMinX()) <= atLeftBorder) return true;
@@ -174,9 +174,9 @@ public abstract class Sprite {
         this.lives = lives;
     }
 
-    public void setProtectionTime(int protectionTime) {
-        this.protectionTime = protectionTime;
-    }
+//    public void setProtectionTime(int protectionTime) {
+//        this.protectionTime = protectionTime;
+//    }
 
     public ViewManager getManager() {
         return manager;
@@ -214,9 +214,9 @@ public abstract class Sprite {
         return maxLives;
     }
 
-    public int getProtectionTime() {
-        return protectionTime;
-    }
+//    public int getProtectionTime() {
+//        return protectionTime;
+//    }
 
     public double getActualRotation() {
         return actualRotation;
