@@ -31,6 +31,12 @@ public abstract class Monster extends Sprite {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public void render() {
+        renderRotatedSprite();
+    }
+
+
     abstract public SoundsPlayer getHitSoundOrNull();
 
     abstract public SoundsPlayer getMissSoundOrNull();

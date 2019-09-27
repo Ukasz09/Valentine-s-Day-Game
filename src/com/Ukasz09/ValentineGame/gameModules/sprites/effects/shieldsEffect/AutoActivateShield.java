@@ -10,19 +10,13 @@ public class AutoActivateShield extends Shield {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public void activateShield() {
-        activeProtectDuration();
-        setActualShieldCooldown(getDefaultShieldCooldown());
-    }
-
-    //auto activate shield by timer
-    @Override
     public void updateShield() {
-        //if shield is not active
-        if (!isActive()) { //==0
-            if (getActualShieldCooldown() == 0)
+        if (isActive())
+            reduceProtectDurationTimer();
+        else {
+            if (canBeActivated())
                 activateShield();
-            else reduceShieldCooldown(SHIELD_REDUCE_TIME);
-        } else reduceShieldDuration();
+            else reduceShieldCooldown();
+        }
     }
 }

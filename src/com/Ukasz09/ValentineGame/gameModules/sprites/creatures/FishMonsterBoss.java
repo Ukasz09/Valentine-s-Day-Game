@@ -4,7 +4,6 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffec
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ShieldKindOfRender;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.AutoActivateShield;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HealthStatusBar;
@@ -15,7 +14,7 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
+public class FishMonsterBoss extends Monster{
     public static final String HIT_SOUND_PATH = SoundsPath.FISH_MINIBOSS_HIT_SOUND_PATH;
     public static final String DEATH_SOUND_PATH = SoundsPath.FISH_MINIBOSS_DEATH_SOUND_PATH;
     public static final String MISS_SHOT_SOUND_PATH = SoundsPath.FISH_MONSTER_MISS_SHOT_SOUND_PATH;
@@ -83,13 +82,11 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
     public void render() {
         super.render();
         healthBar.draw(getManager().getGraphicContext());
-        renderShield(getManager().getGraphicContext());
+        renderShield();
     }
 
-    @Override
-    public void renderShield(GraphicsContext gc) {
-//        if (getProtectionTime() != 0) {
-
+    //todo: zmienic render shielda
+    private void renderShield() {
         if(shield.isActive()){
             double centerPositionX;
             if (getImageDirection().equals(YAxisDirection.LEFT))
@@ -97,7 +94,7 @@ public class FishMonsterBoss extends Monster implements ShieldKindOfRender {
             else centerPositionX = getPositionX();
             double centerPositionY = getPositionY();
 
-            gc.drawImage(shield.getShieldImage(), centerPositionX, centerPositionY);
+           shield.render(centerPositionX,centerPositionY,getManager().getGraphicContext());
         }
     }
 

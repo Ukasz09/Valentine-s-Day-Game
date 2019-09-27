@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public abstract class AllLevels {
-    private static final String MONEY_COMMUNICATE = "Kasa na walentynki: $";
+    private static final String MONEY_COMMUNICATE = "  Money for Valentine's Day: $";
 
     private int amountOfAllCoins;
     private int amountOfSmallCoins;

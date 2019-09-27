@@ -6,7 +6,6 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HeartsRender;
 import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.InCorner;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ShieldKindOfRender;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
@@ -23,7 +22,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Player extends Sprite implements ShieldKindOfRender {
+public class Player extends Sprite {
     public static final int DEFAULT_VELOCITY = 700;
     public static final int DEFAULT_LIVES = 5;
     public static final int DEFAULT_SHIELD_DURATION = 7500;
@@ -69,7 +68,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public Player(Image playerRightImage, Image shieldImage, ViewManager manager) {
         super(playerRightImage, manager);
-        shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage);
+        shield = new ManualActivateShield(DEFAULT_SHIELD_DURATION, shieldImage);
         setLives(DEFAULT_LIVES);
         maxLives = DEFAULT_LIVES;
         playerHitSounds = getPlayerHitSounds();
@@ -91,20 +90,15 @@ public class Player extends Sprite implements ShieldKindOfRender {
         pressedKey_D = false;
         pressedKey_W = false;
         pressedKey_S = false;
-//        rotateWay = new RotateEffect();
         setImageDirection(YAxisDirection.RIGHT);
         wingsSound = new SoundsPlayer(WINGS_SOUND_PATH, WINGS_SOUND_VOLUME, true);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Override
-    public void renderShield(GraphicsContext gc) {
-        //if shield is active, 750 - delay to see when sheild dissapear before another hit
-        if (shield.isActive()) {
-            if (getImageDirection().equals(YAxisDirection.RIGHT))
-                gc.drawImage(shield.getShieldImage(), getPositionX(), getPositionY());
-            else gc.drawImage(shield.getShieldImage(), getPositionX() - 50, getPositionY());
-        }
+    private void renderShield() {
+        GraphicsContext gc = getManager().getGraphicContext();
+        if (shield.isActive())
+            shield.render(getPositionX(), getPositionY(), gc);
     }
 
     public void update(double time, ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList) {
@@ -121,8 +115,8 @@ public class Player extends Sprite implements ShieldKindOfRender {
     public void render() {
         renderBattery(getManager().getGraphicContext());
         heartsRender.renderHearts(this);
-        renderShield(getManager().getGraphicContext());
-        renderSprite();
+        renderShield();
+        renderRotatedSprite();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

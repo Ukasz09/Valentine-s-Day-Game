@@ -61,16 +61,22 @@ public abstract class Sprite {
     }
 
 
+    //todo: zmienic podstawowy render na render bez obracania
     public void render() {
         renderSprite();
     }
 
-    public void renderSprite() {
-        drawActualImage(actualRotation, imageDirection);
+    private void renderSprite(){
+        drawNormalImage();
         drawBoundaryForTests();
     }
 
-    public void drawActualImage(double rotate, YAxisDirection direction) {
+    public void renderRotatedSprite() {
+        drawRotatedImage(actualRotation, imageDirection);
+        drawBoundaryForTests();
+    }
+
+    private void drawRotatedImage(double rotate, YAxisDirection direction) {
         if (direction.equals(YAxisDirection.LEFT) || (rotate != 0)) {
             ImageView iv = new ImageView(actualImage);
             if (rotate != 0 && direction.equals(YAxisDirection.LEFT)) {
@@ -85,7 +91,11 @@ public abstract class Sprite {
             params.setFill(Color.TRANSPARENT);
             Image rotatedImage = iv.snapshot(params, null);
             manager.getGraphicContext().drawImage(rotatedImage, positionX, positionY);
-        } else manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
+        } else drawNormalImage();
+    }
+
+    private void drawNormalImage(){
+        manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
     }
 
     public float getAngleToTarget(Sprite target) {
