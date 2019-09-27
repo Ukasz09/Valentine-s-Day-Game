@@ -45,7 +45,7 @@ public class BombSprite extends ShotSprite {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void update(double time) {
-        addPositionY(getVelocityY() * time);
+        update(time,0,1);
     }
 
     private void playBoomSound() {

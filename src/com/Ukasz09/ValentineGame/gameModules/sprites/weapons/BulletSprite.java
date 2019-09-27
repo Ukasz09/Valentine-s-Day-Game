@@ -42,9 +42,9 @@ public class BulletSprite extends ShotSprite {
     @Override
     public void update(double time) {
         if (shotDirection.equals(YAxisDirection.RIGHT))
-            addPositionX(getVelocityX() * time);
+            update(time,1,0);
         if (shotDirection.equals(YAxisDirection.LEFT))
-            addPositionX((-1) * getVelocityX() * time);
+            update(time,-1,0);
     }
 
     @Override

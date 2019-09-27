@@ -136,7 +136,7 @@ public class Game extends Application {
             player.setPressedKey_A(true);
 
             //TODO: dac wyzej (?)
-            if (!player.boundaryCollisionFromLeftSide(manager.getLeftBorder())) {
+            if (!player.leftSideFrameCollision()) {
                 player.setImageDirection(Sprite.YAxisDirection.LEFT); //must be before setting image
 
                 if ((!player.collisionWithMonstersFromLeftSide(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
@@ -150,7 +150,7 @@ public class Game extends Application {
 
             player.setPressedKey_D(true);
 
-            if (!player.boundaryCollisionFromRightSide(manager.getRightBorder())) {
+            if (!player.boundaryCollisionFromRightSide()) {
                 player.setImageDirection(Sprite.YAxisDirection.RIGHT);
 
                 if ((!player.collisionWithMonstersFromRightSide(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
@@ -164,7 +164,7 @@ public class Game extends Application {
 
             player.setPressedKey_W(true);
 
-            if (!player.boundaryCollisionFromTop(manager.getTopBorder())) {
+            if (!player.boundaryCollisionFromTop()) {
 
                 if ((!player.collisionWithMonstersFromBottom(enemiesList, player)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(0, -velocity);
@@ -177,7 +177,7 @@ public class Game extends Application {
 
             player.setPressedKey_S(true);
 
-            if (!player.boundaryCollisionFromBottom(manager.getBottomBorder())) {
+            if (!player.boundaryCollisionFromBottom()) {
 
                 if ((!player.collisionWithMonstersFromTop(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(0, velocity);

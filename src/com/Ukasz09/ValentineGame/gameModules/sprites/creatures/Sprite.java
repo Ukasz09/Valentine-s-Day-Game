@@ -9,7 +9,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public abstract class Sprite {
-
     public enum YAxisDirection {
         LEFT, RIGHT
     }
@@ -23,12 +22,10 @@ public abstract class Sprite {
     private double height;
     private double lives;
     protected double maxLives;
-//    private int protectionTime;
     private double actualRotation;
 
     private ViewManager manager;
     private YAxisDirection imageDirection;
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Sprite(Image actualImage, ViewManager manager) {
@@ -44,49 +41,71 @@ public abstract class Sprite {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    public boolean shieldIsActive() {
-//        if (getProtectionTime() <= 0)
-//            return false;
-//
-//        return true;
-//    }
-
+    //todo: do nieożywionych
     public void update(double time) {
         updatePosition(time);
     }
 
-    public void updatePosition(double time) {
+    //todo: do nieożywionych
+    private void updatePosition(double time) {
         positionX += velocityX * time;
         positionY += velocityY * time;
     }
 
+    //todo: do nieożywionych
+    public void update(double time, double multiplierX, double multiplierY) {
+        updatePosition(time, multiplierX, multiplierY);
+    }
 
-    //todo: zmienic podstawowy render na render bez obracania
+    //todo: do nieożywionych
+    private void updatePosition(double time, double multiplierX, double multiplierY) {
+        positionX += velocityX * time * multiplierX;
+        positionY += velocityY * time * multiplierY;
+    }
+
+    //todo: do nieożywionych
     public void render() {
         renderSprite();
     }
 
-    private void renderSprite(){
+    //todo: do nieożywionych
+    private void renderSprite() {
         drawNormalImage();
         drawBoundaryForTests();
     }
 
+    //todo: do nieożywionych
+    private void drawNormalImage() {
+        manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
+    }
+
+    //TEMP
+    //todo: do nieożywionych
+    private void drawBoundaryForTests() {
+        double tmpPosX = getBoundary().getMinX();
+        double tmpPosY = getBoundary().getMinY();
+        double tmpWidth = getBoundary().getWidth();
+        double tmpHeight = getBoundary().getHeight();
+        Paint p = new Color(0.6, 0.6, 0.6, 0.3);
+        manager.getGraphicContext().setFill(p);
+        manager.getGraphicContext().fillRect(tmpPosX, tmpPosY, tmpWidth, tmpHeight);
+    }
+
+    //todo: do nieożywionych
     public void renderRotatedSprite() {
-        drawRotatedImage(actualRotation, imageDirection);
+        drawRotatedImage();
         drawBoundaryForTests();
     }
 
-    private void drawRotatedImage(double rotate, YAxisDirection direction) {
-        if (direction.equals(YAxisDirection.LEFT) || (rotate != 0)) {
+    //todo: do nieożywionych
+    private void drawRotatedImage() {
+        if (needToRotate() || needToChangeImageDirection()) {
             ImageView iv = new ImageView(actualImage);
-            if (rotate != 0 && direction.equals(YAxisDirection.LEFT)) {
+            if (needToChangeImageDirection())
                 iv.setScaleX(-1);
-                iv.setRotate(rotate);
-            } else if (rotate != 0)
-                iv.setRotate(rotate);
-            else iv.setScaleX(-1);
+            if (needToRotate())
+                iv.setRotate(actualRotation);
 
-            //needed for rotations
             SnapshotParameters params = new SnapshotParameters();
             params.setFill(Color.TRANSPARENT);
             Image rotatedImage = iv.snapshot(params, null);
@@ -94,8 +113,14 @@ public abstract class Sprite {
         } else drawNormalImage();
     }
 
-    private void drawNormalImage(){
-        manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
+    //todo: do nieożywionych
+    private boolean needToChangeImageDirection() {
+        return imageDirection.equals(YAxisDirection.LEFT);
+    }
+
+    //todo: do nieożywionych
+    private boolean needToRotate() {
+        return actualRotation != 0;
     }
 
     public float getAngleToTarget(Sprite target) {
@@ -108,85 +133,65 @@ public abstract class Sprite {
         return angle;
     }
 
-    //TEMP
-    public void drawBoundaryForTests() {
-        double tmpPosX = getBoundary().getMinX();
-        double tmpPosY = getBoundary().getMinY();
-        double tmpWidth = getBoundary().getWidth();
-        double tmpHeight = getBoundary().getHeight();
-        Paint p = new Color(0.6, 0.6, 0.6, 0.3);
-        manager.getGraphicContext().setFill(p);
-        manager.getGraphicContext().fillRect(tmpPosX, tmpPosY, tmpWidth, tmpHeight);
-    }
-
+    //todo: do nieozywioncyh
     public Rectangle2D getBoundary() {
         return new Rectangle2D(positionX, positionY, width, height);
     }
 
+    //todo: do nieozywioncyh
     public boolean intersects(Sprite s) {
         return (s.getBoundary().intersects(this.getBoundary()));
-    }
-
-    public void addPositionX(double offset) {
-        positionX += offset;
-    }
-
-    public void addPositionY(double offset) {
-        positionY += offset;
     }
 
     public void removeLives(double howMany) {
         lives -= howMany;
     }
 
-//    public void removeProtectionTime(int value) {
-//        protectionTime -= value;
-//    }
-
-    public boolean boundaryCollisionFromLeftSide(double atLeftBorder) {
-        if ((this.getBoundary().getMinX()) <= atLeftBorder) return true;
-        else return false;
+    //todo: do nieozywioncyh (boundary)
+    public boolean leftSideFrameCollision() {
+        double atLeftBorder = manager.getLeftBorder();
+        return (this.getBoundary().getMinX() <= atLeftBorder);
     }
 
-    public boolean boundaryCollisionFromRightSide(double atRightBorder) {
-        if ((this.getBoundary().getMaxX()) >= atRightBorder) return true;
-        else return false;
+    public boolean boundaryCollisionFromRightSide() {
+        double atRightBorder = manager.getRightBorder();
+        return (this.getBoundary().getMaxX() >= atRightBorder);
     }
 
-    public boolean boundaryCollisionFromBottom(double atBottomBorder) {
-        if ((this.getBoundary().getMaxY()) >= atBottomBorder) return true;
-        else return false;
-
+    public boolean boundaryCollisionFromBottom() {
+        double atBottomBorder = manager.getBottomBorder();
+        return (this.getBoundary().getMaxY() >= atBottomBorder);
     }
 
-    public boolean boundaryCollisionFromTop(double atTopBorder) {
-        if ((this.getBoundary().getMinY()) <= atTopBorder) return true;
-        else return false;
+    public boolean boundaryCollisionFromTop() {
+        double atTopBorder = manager.getTopBorder();
+        return (this.getBoundary().getMinY() <= atTopBorder);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //todo: do nieozywioncyh
     public void setPosition(double x, double y) {
         positionX = x;
         positionY = y;
     }
 
+    //todo: do nieozywioncyh
     public void setVelocity(double x, double y) {
         velocityX = x;
         velocityY = y;
     }
 
+    //todo: do nieozywioncyh
+    //temp
     public void addVelocity(double x, double y) {
         velocityX += x;
         velocityY += y;
     }
 
+    //todo: do nieozywioncyh:...
     public void setLives(double lives) {
         this.lives = lives;
     }
-
-//    public void setProtectionTime(int protectionTime) {
-//        this.protectionTime = protectionTime;
-//    }
 
     public ViewManager getManager() {
         return manager;
@@ -224,10 +229,6 @@ public abstract class Sprite {
         return maxLives;
     }
 
-//    public int getProtectionTime() {
-//        return protectionTime;
-//    }
-
     public double getActualRotation() {
         return actualRotation;
     }
@@ -243,5 +244,4 @@ public abstract class Sprite {
     public YAxisDirection getImageDirection() {
         return imageDirection;
     }
-
 }
