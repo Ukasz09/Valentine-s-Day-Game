@@ -1,8 +1,5 @@
 package com.Ukasz09.ValentineGame.tmp;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import javafx.scene.canvas.Canvas;
-
 public class NotUsed {
 
 //    //odrzut gracza wedlug ostatnio kliknietego klawisza

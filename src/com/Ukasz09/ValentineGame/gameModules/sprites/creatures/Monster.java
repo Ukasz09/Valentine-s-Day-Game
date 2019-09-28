@@ -1,10 +1,9 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
+import com.Ukasz09.ValentineGame.gameModules.effects.collisionAvoidEffect.ICollisionAvoidWay;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
+import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 /*
     hitSound, deathSound, missSound - is static to avoid remove object by garbage collector before sound stop play effect
  */
-public abstract class Monster extends Sprite {
+public abstract class Monster extends Creature {
     private double kickSize;
     private double livesTake;
     private KickPlayer kickMethod;
@@ -31,6 +30,12 @@ public abstract class Monster extends Sprite {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public void render() {
+        renderRotatedSprite();
+    }
+
+
     abstract public SoundsPlayer getHitSoundOrNull();
 
     abstract public SoundsPlayer getMissSoundOrNull();
@@ -39,6 +44,8 @@ public abstract class Monster extends Sprite {
 
     abstract public void setStartedPosition();
 
+    abstract public boolean hasActiveShield();
+
     protected void setProperties(double kickSize, double livesTake, double lives, double velocityX, double velocityY) {
         setLives(lives);
         this.kickSize = kickSize;
@@ -46,14 +53,14 @@ public abstract class Monster extends Sprite {
         setVelocity(velocityX, velocityY);
     }
 
-    public void update(Sprite target, ArrayList<Monster> enemiesList) {
+    public void update(Creature target, ArrayList<Monster> enemiesList) {
         collisionAvoidWay.updateCords(target, this, enemiesList);
         updateMonsterRotate(target);
     }
 
-    abstract public void updateMonsterRotate(Sprite target);
+    abstract public void updateMonsterRotate(Creature target);
 
-    public void updateByVelocity(Sprite target) {
+    public void updateByVelocity(Creature target) {
         double dx = this.getPositionX();
         double dy = this.getPositionY();
         float angle = getAngleToTarget(target);
@@ -95,7 +102,7 @@ public abstract class Monster extends Sprite {
         return (getLives() <= 0);
     }
 
-    public boolean isLeftSideToTarget(Sprite target) {
+    public boolean isLeftSideToTarget(Creature target) {
         double creatureMinX = this.getBoundary().getMinX();
         if (creatureMinX <= target.getBoundary().getMinX())
             return true;
@@ -103,7 +110,7 @@ public abstract class Monster extends Sprite {
         return false;
     }
 
-    public boolean isUpSideToTarget(Sprite target) {
+    public boolean isUpSideToTarget(Creature target) {
         double creatureMinY = this.getBoundary().getMinY();
         if (creatureMinY <= target.getBoundary().getMinY())
             return true;

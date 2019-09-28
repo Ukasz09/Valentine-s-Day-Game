@@ -5,12 +5,6 @@
 
 package com.Ukasz09.ValentineGame.tmp;
 
-import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-
 public class AnimatedSprite_NOTUSING {
 
 //    private Image[] frames;

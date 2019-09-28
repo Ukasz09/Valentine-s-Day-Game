@@ -12,14 +12,12 @@ public class EndPanel extends Panels {
     public static final String BACKGROUND_SOUND_PATH = SoundsPath.END_SOUND_PATH;
     private static final double BACKGROUND_SOUND_VOLUME = 0.3;
     private Image heartFlare;
-//    private Image princess;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public EndPanel(ViewManager manager) {
         super(manager);
         setBackgroundImage(getBackgroundImage());
         heartFlare=new Image(SpritesPath.HEART_FLARE_PATH);
-//        princess=new Image(SpritesPath.PRINCESS_IMAGE_PATH);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +30,6 @@ public class EndPanel extends Panels {
 
     public void renderPrincess() {
         getManager().getGraphicContext().drawImage(heartFlare, 10, 0);
-//        getManager().getGraphicContext().drawImage(princess, 0, 0);
     }
 
     private Image getBackgroundImage() {

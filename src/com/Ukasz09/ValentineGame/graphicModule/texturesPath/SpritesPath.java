@@ -16,8 +16,6 @@ public class SpritesPath {
     public static final String BIG_COIN_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\bigCoin.gif";
 
     public static final String HEART_FLARE_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\heartFlare.gif";
-//    public static final String PRINCESS_WINGS_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\wings3.gif";
-//    public static final String PRINCESS_IMAGE_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\princess.gif";
 
     public static final String PROTECTION_ORBIT_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\protectionRing.gif";
     public static final String PLAYER_BULLET_SHOT_PATH = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\iceBallSmall.gif";

@@ -1,19 +1,18 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
+import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Weapon;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HeartsRender;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.InCorner;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ShieldKindOfRender;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
+import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.HeartsRender;
+import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.InCorner;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bomb;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bullet;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.Shield;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ManualActivateShield;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.Shield;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.ManualActivateShield;
 
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -23,7 +22,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Player extends Sprite implements ShieldKindOfRender {
+public class Player extends Creature {
     public static final int DEFAULT_VELOCITY = 700;
     public static final int DEFAULT_LIVES = 5;
     public static final int DEFAULT_SHIELD_DURATION = 7500;
@@ -38,7 +37,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     private final double amountOfToPixelRotate = 15;
 
-    private ArrayList<ShotSprite> shotsList;
+    private ArrayList<Weapon> shotsList;
     private Shield shield;
     private SoundsPlayer[] playerHitSounds;
     private Image[] batteryImages = SpritesImages.getBatteryImages();
@@ -69,7 +68,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
 
     public Player(Image playerRightImage, Image shieldImage, ViewManager manager) {
         super(playerRightImage, manager);
-        shield = new ManualActivateShield(0, DEFAULT_SHIELD_DURATION, shieldImage, this);
+        shield = new ManualActivateShield(DEFAULT_SHIELD_DURATION, shieldImage);
         setLives(DEFAULT_LIVES);
         maxLives = DEFAULT_LIVES;
         playerHitSounds = getPlayerHitSounds();
@@ -91,20 +90,15 @@ public class Player extends Sprite implements ShieldKindOfRender {
         pressedKey_D = false;
         pressedKey_W = false;
         pressedKey_S = false;
-//        rotateWay = new RotateEffect();
         setImageDirection(YAxisDirection.RIGHT);
         wingsSound = new SoundsPlayer(WINGS_SOUND_PATH, WINGS_SOUND_VOLUME, true);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Override
-    public void renderShield(GraphicsContext gc) {
-        //if shield is active, 750 - delay to see when sheild dissapear before another hit
-        if ((getProtectionTime() > 0) && (getProtectionTime() > 750)) {
-            if (getImageDirection().equals(YAxisDirection.RIGHT))
-                gc.drawImage(shield.getShieldImage(), getPositionX(), getPositionY());
-            else gc.drawImage(shield.getShieldImage(), getPositionX() - 50, getPositionY());
-        }
+    private void renderShield() {
+        GraphicsContext gc = getManager().getGraphicContext();
+        if (shield.isActive())
+            shield.render(getPositionX(), getPositionY(), gc);
     }
 
     public void update(double time, ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList) {
@@ -121,8 +115,8 @@ public class Player extends Sprite implements ShieldKindOfRender {
     public void render() {
         renderBattery(getManager().getGraphicContext());
         heartsRender.renderHearts(this);
-        renderShield(getManager().getGraphicContext());
-        renderSprite();
+        renderShield();
+        renderRotatedSprite();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -134,16 +128,16 @@ public class Player extends Sprite implements ShieldKindOfRender {
         double height = getHeight();
 
         if (getImageDirection().equals(YAxisDirection.RIGHT)) {
-            if (getActualRotate() == amountOfToPixelRotate)
+            if (getActualRotation() == amountOfToPixelRotate)
                 return new Rectangle2D(getPositionX() + width / 2, getPositionY() + height / 2, width / 2.4, height / 2);
-            else if (getActualRotate() == -amountOfToPixelRotate)
+            else if (getActualRotation() == -amountOfToPixelRotate)
                 return new Rectangle2D(getPositionX() + width / 1.8, getPositionY() + height / 2.2, width / 2.3, height / 2.2);
             else
                 return new Rectangle2D(getPositionX() + width / 2.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
         } else {
-            if (getActualRotate() == amountOfToPixelRotate)
+            if (getActualRotation() == amountOfToPixelRotate)
                 return new Rectangle2D(getPositionX() + width / 3.9, getPositionY() + height / 2.3, width / 2.3, height / 2.2);
-            else if (getActualRotate() == -amountOfToPixelRotate)
+            else if (getActualRotation() == -amountOfToPixelRotate)
                 return new Rectangle2D(getPositionX() + width / 2.7, getPositionY() + height / 2, width / 2.5, height / 2.1);
             else
                 return new Rectangle2D(getPositionX() + width / 5.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
@@ -163,7 +157,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     private void renderBattery(GraphicsContext gc) {
-        double overheatingPercents = bombOverheating / BombSprite.getMaxOverheating() * 100;
+        double overheatingPercents = bombOverheating / Bomb.getMaxOverheating() * 100;
         double batteryPositionX = getManager().getLeftBorder();
         double batteryPositionY = getManager().getBottomBorder() - batteryImages[0].getHeight();
 
@@ -197,11 +191,11 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     public void overheatBomb() {
-        bombOverheating = BombSprite.getMaxOverheating();
+        bombOverheating = Bomb.getMaxOverheating();
     }
 
     public void overheatBullet() {
-        bulletOverheating = BulletSprite.getMaxOverheating();
+        bulletOverheating = Bullet.getMaxOverheating();
     }
 
     public void updateAllCollisions(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList) {
@@ -229,12 +223,12 @@ public class Player extends Sprite implements ShieldKindOfRender {
         while (monstersIterator.hasNext()) {
             Monster monster = monstersIterator.next();
 
-            Iterator<ShotSprite> shotIterator = shotsList.iterator();
+            Iterator<Weapon> shotIterator = shotsList.iterator();
             while (shotIterator.hasNext()) {
-                ShotSprite shot = shotIterator.next();
+                Weapon shot = shotIterator.next();
                 //monster is hitted
                 if (monster.intersects(shot)) {
-                    if (!monster.shieldIsActive()) {
+                    if (!monster.hasActiveShield()) {
                         shot.hitMonster(monster);
                         if (monster.isDead()) {
                             monster.actionWhenDead();
@@ -252,7 +246,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     private void checkIntersectsWithMonsters(ArrayList<Monster> monsters) {
         for (Monster m : monsters) {
             if (this.intersects(m)) {
-                if (!shieldIsActive()) {
+                if (!shield.isActive()) {
                     m.kickPlayer(this);
 
                     removeLives(m.getLivesTake());
@@ -265,7 +259,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     public boolean collisionWithMonstersFromRightSide(ArrayList<Monster> monsters) {
-        for (Sprite m : monsters) {
+        for (Creature m : monsters) {
             if ((m.getBoundary().getMinX() < this.getBoundary().getMaxX()) && (m.getBoundary().getMaxX() > this.getBoundary().getMaxX()) && (this.intersects(m)))
                 return true;
         }
@@ -273,7 +267,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     public boolean collisionWithMonstersFromLeftSide(ArrayList<Monster> monsters) {
-        for (Sprite m : monsters) {
+        for (Creature m : monsters) {
             if ((m.getBoundary().getMaxX() > this.getBoundary().getMinX()) && (m.getBoundary().getMinX() < this.getBoundary().getMinX()) && (this.intersects(m)))
                 return true;
         }
@@ -281,15 +275,15 @@ public class Player extends Sprite implements ShieldKindOfRender {
     }
 
     public boolean collisionWithMonstersFromTop(ArrayList<Monster> monsters) {
-        for (Sprite m : monsters) {
+        for (Creature m : monsters) {
             if ((m.getBoundary().getMinY() < this.getBoundary().getMaxY()) && (m.getBoundary().getMinY() > this.getBoundary().getMinY()) && (this.intersects(m)))
                 return true;
         }
         return false;
     }
 
-    public boolean collisionWithMonstersFromBottom(ArrayList<Monster> monsters, Sprite ukasz) {
-        for (Sprite m : monsters) {
+    public boolean collisionWithMonstersFromBottom(ArrayList<Monster> monsters, Creature ukasz) {
+        for (Creature m : monsters) {
             if ((m.getBoundary().getMaxY() > ukasz.getBoundary().getMinY()) && (m.getBoundary().getMinY() < ukasz.getBoundary().getMinY()) && (m.intersects(ukasz)))
                 return true;
         }
@@ -300,7 +294,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         shotsList.clear();
     }
 
-    public void addShot(ShotSprite shot) {
+    public void addShot(Weapon shot) {
         shotsList.add(shot);
     }
 
@@ -356,7 +350,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
     public void updatePlayerRotate() {
 //        updateLastRotate();
         double properRotate = RotateEffect.rotateByPressedKey(pressedKey_A, pressedKey_D, pressedKey_W, pressedKey_S, amountOfToPixelRotate);
-        setActualRotate(properRotate);
+        setActualRotation(properRotate);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -413,7 +407,7 @@ public class Player extends Sprite implements ShieldKindOfRender {
         this.killedMonstersOnLevel = killedMonstersOnLevel;
     }
 
-    public ArrayList<ShotSprite> getShotsList() {
+    public ArrayList<Weapon> getShotsList() {
         return shotsList;
     }
 
