@@ -1,13 +1,5 @@
 package com.Ukasz09.ValentineGame.tmp;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import javafx.scene.SnapshotParameters;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.transform.Rotate;
-
 public class ProperImageSet {
 
 //    public void byTargetPosition(Image left, Image right, Image down, Image up, Monster monsterToImageSet, Sprite target) {

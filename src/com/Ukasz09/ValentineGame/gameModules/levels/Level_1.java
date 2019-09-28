@@ -1,14 +1,14 @@
 package com.Ukasz09.ValentineGame.gameModules.levels;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.NormalCollisionAvoid;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
+import com.Ukasz09.ValentineGame.gameModules.effects.collisionAvoidEffect.NormalCollisionAvoid;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Weapon;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.LittleMonster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickByLittleMonster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.TeleportKick;
+import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickByLittleMonster;
+import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.TeleportKick;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
@@ -61,7 +61,7 @@ public class Level_1 extends AllLevels {
     }
 
     @Override
-    public void render(ArrayList<Monster> enemiesList, ArrayList<Coin> coinsList, ArrayList<ShotSprite> shotsList, Player player) {
+    public void render(ArrayList<Monster> enemiesList, ArrayList<Coin> coinsList, ArrayList<Weapon> shotsList, Player player) {
         defaultLevelRender(enemiesList, coinsList, shotsList, player.getTotalScore());
     }
 

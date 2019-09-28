@@ -1,18 +1,18 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
+import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Weapon;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HeartsRender;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.InCorner;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
+import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.HeartsRender;
+import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.InCorner;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bomb;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bullet;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.Shield;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.ManualActivateShield;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.Shield;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.ManualActivateShield;
 
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -22,7 +22,7 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class Player extends Sprite {
+public class Player extends Creature {
     public static final int DEFAULT_VELOCITY = 700;
     public static final int DEFAULT_LIVES = 5;
     public static final int DEFAULT_SHIELD_DURATION = 7500;
@@ -37,7 +37,7 @@ public class Player extends Sprite {
 
     private final double amountOfToPixelRotate = 15;
 
-    private ArrayList<ShotSprite> shotsList;
+    private ArrayList<Weapon> shotsList;
     private Shield shield;
     private SoundsPlayer[] playerHitSounds;
     private Image[] batteryImages = SpritesImages.getBatteryImages();
@@ -157,7 +157,7 @@ public class Player extends Sprite {
     }
 
     private void renderBattery(GraphicsContext gc) {
-        double overheatingPercents = bombOverheating / BombSprite.getMaxOverheating() * 100;
+        double overheatingPercents = bombOverheating / Bomb.getMaxOverheating() * 100;
         double batteryPositionX = getManager().getLeftBorder();
         double batteryPositionY = getManager().getBottomBorder() - batteryImages[0].getHeight();
 
@@ -191,11 +191,11 @@ public class Player extends Sprite {
     }
 
     public void overheatBomb() {
-        bombOverheating = BombSprite.getMaxOverheating();
+        bombOverheating = Bomb.getMaxOverheating();
     }
 
     public void overheatBullet() {
-        bulletOverheating = BulletSprite.getMaxOverheating();
+        bulletOverheating = Bullet.getMaxOverheating();
     }
 
     public void updateAllCollisions(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList) {
@@ -223,9 +223,9 @@ public class Player extends Sprite {
         while (monstersIterator.hasNext()) {
             Monster monster = monstersIterator.next();
 
-            Iterator<ShotSprite> shotIterator = shotsList.iterator();
+            Iterator<Weapon> shotIterator = shotsList.iterator();
             while (shotIterator.hasNext()) {
-                ShotSprite shot = shotIterator.next();
+                Weapon shot = shotIterator.next();
                 //monster is hitted
                 if (monster.intersects(shot)) {
                     if (!monster.hasActiveShield()) {
@@ -259,7 +259,7 @@ public class Player extends Sprite {
     }
 
     public boolean collisionWithMonstersFromRightSide(ArrayList<Monster> monsters) {
-        for (Sprite m : monsters) {
+        for (Creature m : monsters) {
             if ((m.getBoundary().getMinX() < this.getBoundary().getMaxX()) && (m.getBoundary().getMaxX() > this.getBoundary().getMaxX()) && (this.intersects(m)))
                 return true;
         }
@@ -267,7 +267,7 @@ public class Player extends Sprite {
     }
 
     public boolean collisionWithMonstersFromLeftSide(ArrayList<Monster> monsters) {
-        for (Sprite m : monsters) {
+        for (Creature m : monsters) {
             if ((m.getBoundary().getMaxX() > this.getBoundary().getMinX()) && (m.getBoundary().getMinX() < this.getBoundary().getMinX()) && (this.intersects(m)))
                 return true;
         }
@@ -275,15 +275,15 @@ public class Player extends Sprite {
     }
 
     public boolean collisionWithMonstersFromTop(ArrayList<Monster> monsters) {
-        for (Sprite m : monsters) {
+        for (Creature m : monsters) {
             if ((m.getBoundary().getMinY() < this.getBoundary().getMaxY()) && (m.getBoundary().getMinY() > this.getBoundary().getMinY()) && (this.intersects(m)))
                 return true;
         }
         return false;
     }
 
-    public boolean collisionWithMonstersFromBottom(ArrayList<Monster> monsters, Sprite ukasz) {
-        for (Sprite m : monsters) {
+    public boolean collisionWithMonstersFromBottom(ArrayList<Monster> monsters, Creature ukasz) {
+        for (Creature m : monsters) {
             if ((m.getBoundary().getMaxY() > ukasz.getBoundary().getMinY()) && (m.getBoundary().getMinY() < ukasz.getBoundary().getMinY()) && (m.intersects(ukasz)))
                 return true;
         }
@@ -294,7 +294,7 @@ public class Player extends Sprite {
         shotsList.clear();
     }
 
-    public void addShot(ShotSprite shot) {
+    public void addShot(Weapon shot) {
         shotsList.add(shot);
     }
 
@@ -407,7 +407,7 @@ public class Player extends Sprite {
         this.killedMonstersOnLevel = killedMonstersOnLevel;
     }
 
-    public ArrayList<ShotSprite> getShotsList() {
+    public ArrayList<Weapon> getShotsList() {
         return shotsList;
     }
 

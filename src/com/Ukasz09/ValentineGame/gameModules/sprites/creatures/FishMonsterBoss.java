@@ -1,15 +1,14 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
+import com.Ukasz09.ValentineGame.gameModules.effects.collisionAvoidEffect.ICollisionAvoidWay;
+import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
+import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.AutoActivateShield;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.healthStatusBars.HealthStatusBar;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.shieldsEffect.Shield;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.AutoActivateShield;
+import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.HealthStatusBar;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.Shield;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 import java.util.ArrayList;
@@ -66,13 +65,13 @@ public class FishMonsterBoss extends Monster{
     }
 
     @Override
-    public void updateMonsterRotate(Sprite target) {
+    public void updateMonsterRotate(Creature target) {
         double properRotate = RotateEffect.setRotateByAngle(this, target);
         setActualRotation(properRotate);
     }
 
     @Override
-    public void update(Sprite player, ArrayList<Monster> enemiesList) {
+    public void update(Creature player, ArrayList<Monster> enemiesList) {
         super.update(player, enemiesList);
         healthBar.update(getLives(), getPositionX(), getPositionY());
         updateShield();

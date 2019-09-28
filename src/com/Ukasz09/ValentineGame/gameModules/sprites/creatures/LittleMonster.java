@@ -1,9 +1,9 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.collisionAvoidEffect.ICollisionAvoidWay;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.rotateEffect.RotateEffect;
+import com.Ukasz09.ValentineGame.gameModules.effects.collisionAvoidEffect.ICollisionAvoidWay;
+import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.effects.kickEffect.KickPlayer;
+import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
@@ -53,7 +53,7 @@ public class LittleMonster extends Monster {
     }
 
     @Override
-    public void updateMonsterRotate(Sprite target) {
+    public void updateMonsterRotate(Creature target) {
         double rotate= RotateEffect.setRotateByAngle(this,target);
         rotate+=rotateOffset;
         setActualRotation(rotate);

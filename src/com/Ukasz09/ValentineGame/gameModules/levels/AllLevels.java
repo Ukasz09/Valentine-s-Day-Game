@@ -2,13 +2,12 @@ package com.Ukasz09.ValentineGame.gameModules.levels;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Creature;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Weapon;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
-import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -118,7 +117,7 @@ public abstract class AllLevels {
     }
 
     //TODO: zrobione
-    private void updateEnemies(Sprite target, ArrayList<Monster> enemiesList) {
+    private void updateEnemies(Creature target, ArrayList<Monster> enemiesList) {
         for (Monster m : enemiesList)
             m.update(target, enemiesList);
     }
@@ -138,7 +137,7 @@ public abstract class AllLevels {
     }
 
     //Todo: zrobione
-    public abstract void render(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<ShotSprite> shots, Player player);
+    public abstract void render(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<Weapon> shots, Player player);
 
     //TODO: zrobione
     public Point2D getDefaultPlayerPosition() {
@@ -151,7 +150,7 @@ public abstract class AllLevels {
     public abstract void setPlayerStartPosition(Player player);
 
     //TODO: zrobione
-    public void defaultLevelRender(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<ShotSprite> shots, int playerScore) {
+    public void defaultLevelRender(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<Weapon> shots, int playerScore) {
         renderBackground(backgroundImage);
         renderScoreText(playerScore);
         renderCoins(coins);
@@ -164,16 +163,16 @@ public abstract class AllLevels {
         getManager().getGraphicContext().drawImage(backgroundImage, 0, 0);
     }
 
-    public void renderShots(ArrayList<ShotSprite> shotSprites) {
-        Iterator<ShotSprite> shots = shotSprites.iterator();
+    public void renderShots(ArrayList<Weapon> weapons) {
+        Iterator<Weapon> shots = weapons.iterator();
         while (shots.hasNext())
             shots.next().render();
     }
 
-    private void updateShots(ArrayList<ShotSprite> shotsList, double elapsedTime) {
-        Iterator<ShotSprite> shotsIterator = shotsList.iterator();
+    private void updateShots(ArrayList<Weapon> shotsList, double elapsedTime) {
+        Iterator<Weapon> shotsIterator = shotsList.iterator();
         while (shotsIterator.hasNext()) {
-            ShotSprite shot = shotsIterator.next();
+            Weapon shot = shotsIterator.next();
             shot.update(elapsedTime);
 
             if (shot.isOutOfBoundary()) {

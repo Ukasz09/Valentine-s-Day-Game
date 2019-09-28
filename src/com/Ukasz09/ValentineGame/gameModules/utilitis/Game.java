@@ -12,12 +12,11 @@ package com.Ukasz09.ValentineGame.gameModules.utilitis;
 import com.Ukasz09.ValentineGame.gameModules.levels.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.Coin;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BombSprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.BulletSprite;
-import com.Ukasz09.ValentineGame.gameModules.sprites.weapons.ShotSprite;
-import com.Ukasz09.ValentineGame.gameModules.utilitis.wrappers.LongValue;
+import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Creature;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bomb;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bullet;
+import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Weapon;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
@@ -137,7 +136,7 @@ public class Game extends Application {
 
             //TODO: dac wyzej (?)
             if (!player.leftSideFrameCollision()) {
-                player.setImageDirection(Sprite.YAxisDirection.LEFT); //must be before setting image
+                player.setImageDirection(Creature.YAxisDirection.LEFT); //must be before setting image
 
                 if ((!player.collisionWithMonstersFromLeftSide(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(-velocity, 0);
@@ -151,7 +150,7 @@ public class Game extends Application {
             player.setPressedKey_D(true);
 
             if (!player.boundaryCollisionFromRightSide()) {
-                player.setImageDirection(Sprite.YAxisDirection.RIGHT);
+                player.setImageDirection(Creature.YAxisDirection.RIGHT);
 
                 if ((!player.collisionWithMonstersFromRightSide(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
                     player.addVelocity(velocity, 0);
@@ -188,20 +187,20 @@ public class Game extends Application {
 
         if (inputsList.contains("SPACE")) {
             if (player.getBulletOverheating() <= 0) {
-                ShotSprite shotSprite = new BulletSprite(player.getImageDirection(), manager);
-                shotSprite.prepareToShot(player);
+                Weapon weapon = new Bullet(player.getImageDirection(), manager);
+                weapon.prepareToShot(player);
 
-                player.addShot(shotSprite);
+                player.addShot(weapon);
                 player.overheatBullet();
             }
         }
 
         if (inputsList.contains("P")) {
             if (player.getBombOverheating() <= 0) {
-                ShotSprite shotSprite = new BombSprite(manager);
-                shotSprite.prepareToShot(player);
+                Weapon weapon = new Bomb(manager);
+                weapon.prepareToShot(player);
 
-                player.addShot(shotSprite);
+                player.addShot(weapon);
                 player.overheatBomb();
             }
         }

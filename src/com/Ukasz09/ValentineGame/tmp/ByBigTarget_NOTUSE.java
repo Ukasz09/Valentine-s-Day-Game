@@ -1,7 +1,5 @@
 package com.Ukasz09.ValentineGame.tmp;
 
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Sprite;
-
 //public class ByBigTarget_NOTUSE extends PositionByTarget {
 //    public boolean isRightSideToTarget(Sprite creature, Sprite target) {
 //        double creatureMinX = creature.getBoundary().getMinX();
