@@ -32,7 +32,7 @@ public abstract class Monster extends Creature {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void render() {
-        renderRotatedSprite();
+        renderSpriteWithRotation();
     }
 
 

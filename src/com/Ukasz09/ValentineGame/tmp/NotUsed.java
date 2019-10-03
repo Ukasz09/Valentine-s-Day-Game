@@ -84,4 +84,21 @@ public class NotUsed {
 //
 //        return false;
 //    }
+
+
+
+//    public boolean intersectsCircle(Sprite s) {
+//        return (s.getBoundaryCircle().intersects(this.getBoundaryCircle()));
+//    }
+
+    //    public MyCircle getBoundaryCircle(){
+//        return new MyCircle(positionX+width/2,positionY+height/2,height/2);
+//    }
+
+//    private void drawCircleBoundary(){
+//        Paint p = new Color(0.6, 0.6, 0.6, 0.3);
+//        manager.getGraphicContext().setFill(p);
+//        manager.getGraphicContext().fillOval(positionX,positionY,height,height);
+//    }
 }
+

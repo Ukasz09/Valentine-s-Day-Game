@@ -20,8 +20,8 @@ public class FishMonster extends Monster {
     private final double defaultLives = 2;
     private final double defaultLivesTake = 0.5;
     private final int defaultKickSize = 0;
-    private final double defaultVelocityX = 2.2;
-    private final double defaultVelocityY = 2.2;
+    private final double defaultVelocityX = 4.2;
+    private final double defaultVelocityY = 4.2;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonster(Image imageRight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {

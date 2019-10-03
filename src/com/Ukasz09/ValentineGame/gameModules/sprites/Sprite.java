@@ -2,11 +2,12 @@ package com.Ukasz09.ValentineGame.gameModules.sprites;
 
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import javafx.geometry.Rectangle2D;
-import javafx.scene.SnapshotParameters;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.scene.transform.Affine;
+import javafx.scene.transform.Rotate;
 
 public abstract class Sprite {
     private ViewManager manager;
@@ -20,6 +21,11 @@ public abstract class Sprite {
     private double actualRotation;
     private YAxisDirection imageDirection;
 
+    public enum YAxisDirection {
+        LEFT, RIGHT
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Sprite(Image actualImage, ViewManager manager) {
         this.actualImage = actualImage;
         this.manager = manager;
@@ -29,10 +35,7 @@ public abstract class Sprite {
         imageDirection = YAxisDirection.RIGHT;
     }
 
-    public enum YAxisDirection {
-        LEFT, RIGHT
-    }
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void update(double time) {
         updatePosition(time);
     }
@@ -52,15 +55,15 @@ public abstract class Sprite {
     }
 
     public void render() {
-        renderSprite();
+        renderSpriteWithoutRotation();
     }
 
-    private void renderSprite() {
-        drawNormalImage();
+    private void renderSpriteWithoutRotation() {
+        drawImageWithoutMirrorReflection();
         drawBoundaryForTests();
     }
 
-    private void drawNormalImage() {
+    private void drawImageWithoutMirrorReflection() {
         manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
     }
 
@@ -75,26 +78,36 @@ public abstract class Sprite {
         manager.getGraphicContext().fillRect(tmpPosX, tmpPosY, tmpWidth, tmpHeight);
     }
 
-    public void renderRotatedSprite() {
-        drawRotatedImage();
+    public void renderSpriteWithRotation() {
+        drawImageWithRotation();
         drawBoundaryForTests();
     }
 
-    private void drawRotatedImage() {
-        if (needToRotate() || needToChangeImageDirection()) {
-            ImageView iv = new ImageView(actualImage);
-            if (needToChangeImageDirection())
-                iv.setScaleX(-1);
-            if (needToRotate())
-                iv.setRotate(actualRotation);
+    private void drawImageWithRotation() {
+        GraphicsContext gc = manager.getGraphicContext();
+        boolean needToRestoreGc = false;
 
-            SnapshotParameters params = new SnapshotParameters();
-            params.setFill(Color.TRANSPARENT);
-            Image rotatedImage = iv.snapshot(params, null);
-            manager.getGraphicContext().drawImage(rotatedImage, positionX, positionY);
-        } else drawNormalImage();
+        if (needToRotate()) {
+            double rotationCenterX = positionX + width / 2;
+            double rotationCenterY = positionY + height / 2;
+
+            gc.save();
+            gc.transform(new Affine(new Rotate(actualRotation, rotationCenterX, rotationCenterY)));
+            needToRestoreGc = true;
+        }
+
+        if (needToChangeImageDirection())
+            drawMirrorReflectedImage();
+        else drawImageWithoutMirrorReflection();
+
+        if (needToRestoreGc)
+            gc.restore();
     }
 
+    private void drawMirrorReflectedImage(){
+        manager.getGraphicContext().drawImage(actualImage, positionX + width, positionY, -width, height);
+    }
+    
     private boolean needToChangeImageDirection() {
         return imageDirection.equals(Sprite.YAxisDirection.LEFT);
     }
@@ -104,9 +117,10 @@ public abstract class Sprite {
     }
 
     public Rectangle2D getBoundary() {
-        return new Rectangle2D(positionX, positionY, width, height);
+        return new Rectangle2D(positionX+0.1*width, positionY+0.1*height, width*0.8, height*0.8);
     }
 
+    ////////////////////////////////
     public boolean intersects(Sprite s) {
         return (s.getBoundary().intersects(this.getBoundary()));
     }
@@ -131,6 +145,7 @@ public abstract class Sprite {
         return (this.getBoundary().getMinY() <= atTopBorder);
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setPosition(double x, double y) {
         positionX = x;
         positionY = y;
