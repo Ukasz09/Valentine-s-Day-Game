@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Player extends Creature {
-    public static final int DEFAULT_VELOCITY = 700;
+    public static final int DEFAULT_VELOCITY = 700; //700
     public static final int DEFAULT_LIVES = 5;
     public static final int DEFAULT_SHIELD_DURATION = 7500;
     public static final int DEFAULT_BATTERY_OVERHEATING_REDUCE = 50;
@@ -59,7 +59,6 @@ public class Player extends Creature {
     private boolean pressedKey_D;
     private boolean pressedKey_W;
     private boolean pressedKey_S;
-//    private RotateEffect rotateWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
@@ -116,32 +115,36 @@ public class Player extends Creature {
         renderBattery(getManager().getGraphicContext());
         heartsRender.renderHearts(this);
         renderShield();
-        renderRotatedSprite();
+        renderSpriteWithRotation();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     //do NOT touch
+    //todo: naprawic by lepiej pasowaly
     @Override
     public Rectangle2D getBoundary() {
         double width = getWidth();
         double height = getHeight();
 
-        if (getImageDirection().equals(YAxisDirection.RIGHT)) {
-            if (getActualRotation() == amountOfToPixelRotate)
-                return new Rectangle2D(getPositionX() + width / 2, getPositionY() + height / 2, width / 2.4, height / 2);
-            else if (getActualRotation() == -amountOfToPixelRotate)
-                return new Rectangle2D(getPositionX() + width / 1.8, getPositionY() + height / 2.2, width / 2.3, height / 2.2);
-            else
-                return new Rectangle2D(getPositionX() + width / 2.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
-        } else {
-            if (getActualRotation() == amountOfToPixelRotate)
-                return new Rectangle2D(getPositionX() + width / 3.9, getPositionY() + height / 2.3, width / 2.3, height / 2.2);
-            else if (getActualRotation() == -amountOfToPixelRotate)
-                return new Rectangle2D(getPositionX() + width / 2.7, getPositionY() + height / 2, width / 2.5, height / 2.1);
-            else
-                return new Rectangle2D(getPositionX() + width / 5.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
-        }
+        if (getImageDirection().equals(YAxisDirection.RIGHT))
+        return new Rectangle2D(getPositionX() + width / 2.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
+
+            return new Rectangle2D(getPositionX() + width / 5.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
+//        if (getImageDirection().equals(YAxisDirection.RIGHT)) {
+//            if (getActualRotation() == amountOfToPixelRotate)
+//                return new Rectangle2D(getPositionX() + width / 2, getPositionY() + height / 2, width / 2.4, height / 2);
+//            else if (getActualRotation() == -amountOfToPixelRotate)
+//                return new Rectangle2D(getPositionX() + width / 1.8, getPositionY() + height / 2.2, width / 2.3, height / 2.2);
+//            else
+//                return new Rectangle2D(getPositionX() + width / 2.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
+//        } else {
+//            if (getActualRotation() == amountOfToPixelRotate)
+//                return new Rectangle2D(getPositionX() + width / 3.9, getPositionY() + height / 2.3, width / 2.3, height / 2.2);
+//            else if (getActualRotation() == -amountOfToPixelRotate)
+//                return new Rectangle2D(getPositionX() + width / 2.7, getPositionY() + height / 2, width / 2.5, height / 2.1);
+//            else
+//                return new Rectangle2D(getPositionX() + width / 5.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
+//        }
     }
 
     private void addTotalScore(int score) {
@@ -344,7 +347,7 @@ public class Player extends Creature {
     }
 
     private void playRandomHitSound() {
-        getRandomHitSound().playSound(DEFAULT_HIT_SOUND_VOLUME, false);
+        getRandomHitSound().playSound();
     }
 
     public void updatePlayerRotate() {

@@ -17,6 +17,7 @@ public class Coin extends Sprite {
     public Coin(Image image, int value, ViewManager manager) {
         super(image, manager);
         this.value = value;
+        setPosition();
 //        collectSound = new SoundsPlayer(COLLECT_SOUND_PATH, SOUND_VOLUME, false);
     }
 
@@ -26,7 +27,7 @@ public class Coin extends Sprite {
 //    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void setPosition() {
+    private void setPosition() {
         double positionX = getManager().getRightBorder() * 0.9 * Math.random();
         double positionY = getManager().getBottomBorder() * 0.8 * Math.random();
         this.setPosition(positionX, positionY);

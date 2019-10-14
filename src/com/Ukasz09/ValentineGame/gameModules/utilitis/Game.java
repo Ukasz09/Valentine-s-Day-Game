@@ -60,7 +60,7 @@ public class Game extends Application {
         manager.readKeyboardAction(inputsList);
 
         //todo: dodac mozliwosc wczytwywania poziomu z pliku
-        int levelNumber = 0;
+        int levelNumber = 2;
         if (levelNumber == 0) {
             actualPanel = new StartPanel(manager);
             backgroundSound = actualPanel.getBackgroundSound();

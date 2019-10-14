@@ -4,7 +4,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 import java.io.File;
-import java.net.URL;
 
 public class SoundsPlayer {
     private String soundPath;
@@ -17,22 +16,11 @@ public class SoundsPlayer {
         this.soundPath = soundPath;
         this.inLoop = inLoop;
         this.volume = volume;
+        makeSound();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void playSound(double volume, boolean inLoop) {
-        if (volume > 0)
-            this.volume = volume;
-        else {
-            this.volume = 1;
-            System.out.println("Error: volume was negative: " + soundPath);
-        }
-
-        this.inLoop = inLoop;
-        playSound();
-    }
-
-    public void playSound() {
+    private void makeSound() {
         String resource = new File(soundPath).toURI().toString();
         Media media = new Media(resource);
         mediaPlayer = new MediaPlayer(media);
@@ -40,7 +28,21 @@ public class SoundsPlayer {
 
         if (inLoop)
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+    }
 
+//    public void playSound(double volume, boolean inLoop) {
+//        if (volume > 0)
+//            this.volume = volume;
+//        else {
+//            this.volume = 1;
+//            System.out.println("Error: volume was negative: " + soundPath);
+//        }
+//
+//        this.inLoop = inLoop;
+//        playSound();
+//    }
+
+    public void playSound() {
         mediaPlayer.play();
     }
 
