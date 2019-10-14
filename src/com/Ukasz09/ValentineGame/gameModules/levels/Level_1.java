@@ -26,19 +26,13 @@ public class Level_1 extends AllLevels {
     private final int amountOfSmallCoins = 5;
     private final int amountOfNormalCoins = 3;
     private final int amountOfBigCoins = 2;
-    private final int smallCoinValue = 25;
-    private final int normalCoinValue = 50;
-    private final int bigCoinValue = 100;
 
     private final int amountOfMonsters = 5;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_1(ViewManager manager) {
-        super(manager);
+        super(manager,new Image(BACKGROOUND_IMAGE_PATH));
         setAmountOfCoins(amountOfSmallCoins, amountOfNormalCoins, amountOfBigCoins);
-        setCoinsValue(smallCoinValue, normalCoinValue, bigCoinValue);
-        setAmountOfMonsters(amountOfMonsters, 0);
-        setBackgroundImage(getBackgroundImage());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +40,7 @@ public class Level_1 extends AllLevels {
     public void spawnEnemies(ArrayList<Monster> enemiesList) {
         Image littleMonsterImage = new Image(SpritesPath.LITTLE_MONSTER_1_PATH);
         LittleMonster littleMonster;
-        for (int i = 0; i < getAmountOfAllEnemies(); i++) {
+        for (int i = 0; i < amountOfMonsters; i++) {
             littleMonster = new LittleMonster(littleMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
             littleMonster.setStartedPosition();
             enemiesList.add(littleMonster);
@@ -65,12 +59,13 @@ public class Level_1 extends AllLevels {
         defaultLevelRender(enemiesList, coinsList, shotsList, player.getTotalScore());
     }
 
-    private Image getBackgroundImage() {
-        return new Image(BACKGROOUND_IMAGE_PATH);
-    }
-
     @Override
     public SoundsPlayer getBackgroundSound() {
         return new SoundsPlayer(BACKGROUND_SOUND_PATH, BACKGROUND_SOUND_VOLUME, true);
+    }
+
+    @Override
+    public int amountOfSpawnEnemies() {
+        return amountOfMonsters;
     }
 }

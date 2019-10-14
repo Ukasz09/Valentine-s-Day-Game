@@ -7,6 +7,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Creature;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Weapon;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Point2D;
@@ -17,41 +18,43 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public abstract class AllLevels {
+
+    private enum CoinTypes {
+        SMALL(25),
+        NORMAL(50),
+        BIG(100);
+
+        int value;
+
+        CoinTypes(int value) {
+            this.value = value;
+        }
+    }
+
     private static final String MONEY_COMMUNICATE = "  Money for Valentine's Day: $";
 
     private int amountOfAllCoins;
     private int amountOfSmallCoins;
     private int amountOfNormalCoins;
     private int amountOfBigCoins;
-    private Image smallCoinImage;
-    private Image normalCoinImage;
-    private Image bigCoinImage;
-    private int smallCoinValue;
-    private int normalCoinValue;
-    private int bigCoinValue;
 
     private Image backgroundImage;
-
-    private int amountOfMonsters;
-    private int amountOfBosses;
-    private int amountOfAllEnemies;
-
     private ViewManager manager;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public AllLevels(ViewManager manager) {
+        this(manager, new Image(BackgroundPath.DEFAULT_IMAGE_PATH));
+    }
+
+    public AllLevels(ViewManager manager, Image backgroundImage) {
         this.manager = manager;
         this.amountOfAllCoins = 0;
-
+        this.backgroundImage = backgroundImage;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public int getAmountOfAllCoins() {
         return amountOfAllCoins;
-    }
-
-    public int getAmountOfAllEnemies() {
-        return amountOfAllEnemies;
     }
 
     public ViewManager getManager() {
@@ -61,46 +64,36 @@ public abstract class AllLevels {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     abstract public SoundsPlayer getBackgroundSound();
 
-    // TODO: 03.09.2019: zrobione
     public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime) {
         updateShots(player.getShotsList(), elapsedTime);
         updateEnemies(player, enemiesList);
     }
 
-    //TODO: zrobione
     public boolean levelIsEnd(Player player) {
-        if ((player.getCollectedCoinsOnLevel() < getAmountOfAllCoins()) || (player.getKilledEnemiesOnLevel() < getAmountOfAllEnemies()))
+        if ((player.getCollectedCoinsOnLevel() < getAmountOfAllCoins()) || (player.getKilledEnemiesOnLevel() < amountOfSpawnEnemies()))
             return false;
         else return true;
     }
 
-    //TODO: zrobione
+    public abstract int amountOfSpawnEnemies();
+
     public void spawnCoins(ArrayList<Coin> coinsList, int amountOfSmallCoins, int amountOfNormalCoins, int amountOfBigCoins) {
         if (amountOfSmallCoins > 0 && amountOfNormalCoins > 0 && amountOfBigCoins > 0) {
-            smallCoinImage = new Image(SpritesPath.SMALL_COIN_PATH);
-            normalCoinImage = new Image(SpritesPath.NORMAL_COIN_PATH);
-            bigCoinImage = new Image(SpritesPath.BIG_COIN_PATH);
+            Image smallCoinImage = new Image(SpritesPath.SMALL_COIN_PATH);
+            Image normalCoinImage = new Image(SpritesPath.NORMAL_COIN_PATH);
+            Image bigCoinImage = new Image(SpritesPath.BIG_COIN_PATH);
 
-            Coin coin;
-            for (int i = 0; i < amountOfSmallCoins; i++) {
-                coin = new Coin(smallCoinImage, smallCoinValue, manager);
-                coin.setPosition();
-                coinsList.add(coin);
-            }
-            for (int i = 0; i < amountOfNormalCoins; i++) {
-                coin = new Coin(normalCoinImage, normalCoinValue, manager);
-                coin.setPosition();
-                coinsList.add(coin);
-            }
-            for (int i = 0; i < amountOfBigCoins; i++) {
-                coin = new Coin(bigCoinImage, bigCoinValue, manager);
-                coin.setPosition();
-                coinsList.add(coin);
-            }
+            for (int i = 0; i < amountOfSmallCoins; i++)
+                coinsList.add(new Coin(smallCoinImage, CoinTypes.SMALL.value, manager));
+
+            for (int i = 0; i < amountOfNormalCoins; i++)
+                coinsList.add(new Coin(normalCoinImage, CoinTypes.NORMAL.value, manager));
+
+            for (int i = 0; i < amountOfBigCoins; i++)
+                coinsList.add(new Coin(bigCoinImage, CoinTypes.BIG.value, manager));
         }
     }
 
-    //TODO: zrobione
     public void renderMonsters(ArrayList<Monster> enemiesList) {
         if (enemiesList != null) {
             for (Monster m : enemiesList)
@@ -108,7 +101,6 @@ public abstract class AllLevels {
         }
     }
 
-    //TODO: zrobione
     public void renderCoins(ArrayList<Coin> coinsList) {
         if (coinsList != null) {
             for (Coin m : coinsList)
@@ -116,40 +108,32 @@ public abstract class AllLevels {
         }
     }
 
-    //TODO: zrobione
     private void updateEnemies(Creature target, ArrayList<Monster> enemiesList) {
         for (Monster m : enemiesList)
             m.update(target, enemiesList);
     }
-
-    //TODO: zrobione
 
     /**
      * Need to set position of enemies, add enemySprite to enemiesList specify by level
      */
     public abstract void spawnEnemies(ArrayList<Monster> enemiesList);
 
-    //TODO: zrobione
     public void prepareLevel(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList, Player player) {
         spawnCoins(coinsList, amountOfSmallCoins, amountOfNormalCoins, amountOfBigCoins);
         spawnEnemies(enemiesList);
         setPlayerStartPosition(player);
     }
 
-    //Todo: zrobione
     public abstract void render(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<Weapon> shots, Player player);
 
-    //TODO: zrobione
     public Point2D getDefaultPlayerPosition() {
         double positionX = manager.getRightBorder() / 2;
         double positionY = manager.getBottomBorder() / 2;
         return new Point2D(positionX, positionY);
     }
 
-    //TODO: zrobione
     public abstract void setPlayerStartPosition(Player player);
 
-    //TODO: zrobione
     public void defaultLevelRender(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<Weapon> shots, int playerScore) {
         renderBackground(backgroundImage);
         renderScoreText(playerScore);
@@ -158,7 +142,6 @@ public abstract class AllLevels {
         renderMonsters(monsters);
     }
 
-    //TODO: zrobione
     public void renderBackground(Image backgroundImage) {
         getManager().getGraphicContext().drawImage(backgroundImage, 0, 0);
     }
@@ -182,13 +165,11 @@ public abstract class AllLevels {
         }
     }
 
-    //TODO: zrobione
     public void renderText(String text, Color color, double posX, double posY) {
         manager.getGraphicContext().setFill(color);
         manager.getGraphicContext().fillText(text, posX, posY);
     }
 
-    //TODO: zrobione
     public void renderScoreText(int score) {
         String pointsText = MONEY_COMMUNICATE + score;
         double posX = manager.getLeftBorder();
@@ -196,7 +177,6 @@ public abstract class AllLevels {
         renderText(pointsText, Color.TAN, posX, posY);
     }
 
-    //TODO: zrobione
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setAmountOfCoins(int amountOfSmallCoins, int amountOfNormalCoins, int amountOfBigCoins) {
         this.amountOfSmallCoins = amountOfSmallCoins;
@@ -204,28 +184,4 @@ public abstract class AllLevels {
         this.amountOfBigCoins = amountOfBigCoins;
         this.amountOfAllCoins = amountOfSmallCoins + amountOfNormalCoins + amountOfBigCoins;
     }
-
-    public void setBackgroundImage(Image backgroundImage) {
-        this.backgroundImage = backgroundImage;
-    }
-
-    public void setCoinsValue(int smallCoinValue, int normalCoinValue, int bigCoinValue) {
-        this.smallCoinValue = smallCoinValue;
-        this.normalCoinValue = normalCoinValue;
-        this.bigCoinValue = bigCoinValue;
-    }
-
-    public void setAmountOfMonsters(int amountOfMonsters, int amountOfBosses) {
-        if (amountOfMonsters > 0)
-            this.amountOfMonsters = amountOfMonsters;
-        else this.amountOfMonsters = 0;
-
-        if (amountOfBosses > 0)
-            this.amountOfBosses = amountOfBosses;
-        else this.amountOfBosses = 0;
-
-        this.amountOfAllEnemies = this.amountOfMonsters + this.amountOfBosses;
-    }
-
-
 }

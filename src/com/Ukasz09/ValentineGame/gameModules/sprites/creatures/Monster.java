@@ -27,6 +27,7 @@ public abstract class Monster extends Creature {
         setVelocity(0, 0);
         this.kickMethod = kickMethod;
         this.collisionAvoidWay = collisionAvoidWay;
+        setStartedPosition();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
