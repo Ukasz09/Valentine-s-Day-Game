@@ -2,7 +2,9 @@ package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -10,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -58,6 +61,17 @@ public class ViewManager {
         setFillColor(DEFAULT_FONT_COLOR);
         setDefaultFont();
         checkWindowBoundary(canvas);
+
+        //todo
+//        canvas.setScaleX(1.187);
+//        scale();
+//        for(Node n: root.getChildren()){
+//            Rectangle2D userResulution= Screen.getPrimary().getBounds();
+////            n.setScaleX(1.05);
+//             no
+////            n.setScaleY(1.05);
+//        }
+        scale();
     }
 
     public void setDefaultFont() {
@@ -106,6 +120,19 @@ public class ViewManager {
         leftBorder = bounds.getMinX();
         bottomBorder = bounds.getMaxY();
         topBorder = bounds.getMinY();
+    }
+
+    private void scale(){
+        Rectangle2D userResulution= Screen.getPrimary().getBounds();
+        double resolutionX=userResulution.getWidth();
+        double resolutionY=userResulution.getHeight();
+
+        canvas.setScaleX(resolutionX/WIDTH);
+        double calc=((WIDTH*canvas.getScaleX())-WIDTH)/2;
+        canvas.setTranslateX(calc);
+        canvas.setScaleY(resolutionY/HEIGHT);
+        double calc2=((HEIGHT*canvas.getScaleY())-HEIGHT)/2;
+        canvas.setTranslateY(calc2);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

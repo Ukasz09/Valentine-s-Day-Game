@@ -1,1 +1,0 @@
-Zeby dzialal jar trzeba wszystkie zrodla wrzucic bezposrendio, bez folderow
