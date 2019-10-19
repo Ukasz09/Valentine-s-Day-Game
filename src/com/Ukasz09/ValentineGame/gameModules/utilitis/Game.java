@@ -10,6 +10,7 @@
 package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
 import com.Ukasz09.ValentineGame.gameModules.levels.*;
+import com.Ukasz09.ValentineGame.gameModules.sprites.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Creature;
@@ -185,17 +186,17 @@ public class Game extends Application {
             } else player.setCollisionFromDownSide(true);
         } else player.setPressedKey_S(false);
 
-        if (inputsList.contains("SPACE")) {
-            if (player.getBulletOverheating() <= 0) {
-                Weapon weapon = new Bullet(player.getImageDirection(), manager);
-                weapon.prepareToShot(player);
-
-                player.addShot(weapon);
-                player.overheatBullet();
-            }
+        if (inputsList.contains("LEFT")) {
+            player.setImageDirection(Sprite.YAxisDirection.LEFT);
+            spawnBullet();
         }
 
-        if (inputsList.contains("P")) {
+        if (inputsList.contains("RIGHT")) {
+            player.setImageDirection(Sprite.YAxisDirection.RIGHT);
+            spawnBullet();
+        }
+
+        if (inputsList.contains("SPACE")) {
             if (player.getBombOverheating() <= 0) {
                 Weapon weapon = new Bomb(manager);
                 weapon.prepareToShot(player);
@@ -209,6 +210,16 @@ public class Game extends Application {
     private boolean playerReadyToGame() {
         if (inputsList.contains("ENTER")) return true;
         else return false;
+    }
+
+    private void spawnBullet(){
+        if (player.getBulletOverheating() <= 0) {
+            Weapon bullet = new Bullet(player.getImageDirection(), manager);
+            bullet.prepareToShot(player);
+
+            player.addShot(bullet);
+            player.overheatBullet();
+        }
     }
 
     //todo: poprawic

@@ -123,16 +123,16 @@ public class ViewManager {
     }
 
     private void scale(){
-        Rectangle2D userResulution= Screen.getPrimary().getBounds();
-        double resolutionX=userResulution.getWidth();
-        double resolutionY=userResulution.getHeight();
-
+        Rectangle2D userResolution= Screen.getPrimary().getBounds();
+        double resolutionX=userResolution.getWidth();
+        double resolutionY=userResolution.getHeight();
+        double translateOffset;
         canvas.setScaleX(resolutionX/WIDTH);
-        double calc=((WIDTH*canvas.getScaleX())-WIDTH)/2;
-        canvas.setTranslateX(calc);
+        translateOffset=((WIDTH*canvas.getScaleX())-WIDTH)/2;
+        canvas.setTranslateX(translateOffset);
         canvas.setScaleY(resolutionY/HEIGHT);
-        double calc2=((HEIGHT*canvas.getScaleY())-HEIGHT)/2;
-        canvas.setTranslateY(calc2);
+        translateOffset=((HEIGHT*canvas.getScaleY())-HEIGHT)/2;
+        canvas.setTranslateY(translateOffset);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
