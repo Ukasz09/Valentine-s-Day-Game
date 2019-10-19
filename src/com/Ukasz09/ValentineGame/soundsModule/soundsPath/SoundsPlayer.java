@@ -30,18 +30,6 @@ public class SoundsPlayer {
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
-//    public void playSound(double volume, boolean inLoop) {
-//        if (volume > 0)
-//            this.volume = volume;
-//        else {
-//            this.volume = 1;
-//            System.out.println("Error: volume was negative: " + soundPath);
-//        }
-//
-//        this.inLoop = inLoop;
-//        playSound();
-//    }
-
     public void playSound() {
         mediaPlayer.play();
     }
