@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="Gra">
-    <output-path>$PROJECT_DIR$/out/artifacts/Gra</output-path>
-    <root id="archive" name="Gra.jar">
-      <element id="module-output" name="CollectMoneyForValentinesDay" />
-    </root>
-  </artifact>
-</component>
