@@ -2,9 +2,9 @@ package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -71,7 +71,7 @@ public class ViewManager {
 //             no
 ////            n.setScaleY(1.05);
 //        }
-        scale();
+        scaleToPropperResolution();
     }
 
     public void setDefaultFont() {
@@ -122,17 +122,24 @@ public class ViewManager {
         topBorder = bounds.getMinY();
     }
 
-    private void scale(){
-        Rectangle2D userResolution= Screen.getPrimary().getBounds();
-        double resolutionX=userResolution.getWidth();
-        double resolutionY=userResolution.getHeight();
-        double translateOffset;
-        canvas.setScaleX(resolutionX/WIDTH);
-        translateOffset=((WIDTH*canvas.getScaleX())-WIDTH)/2;
-        canvas.setTranslateX(translateOffset);
-        canvas.setScaleY(resolutionY/HEIGHT);
-        translateOffset=((HEIGHT*canvas.getScaleY())-HEIGHT)/2;
-        canvas.setTranslateY(translateOffset);
+    private void scaleToPropperResolution() {
+        Point2D userResolution = getUserResolution();
+        canvas.setScaleX(userResolution.getX() / WIDTH);
+        canvas.setScaleY(userResolution.getY() / HEIGHT);
+        double translateOffsetX = ((WIDTH * canvas.getScaleX()) - WIDTH) / 2; //todo: nie mnozyc tylko dac userResolution.x
+        double translateOffsetY = ((HEIGHT * canvas.getScaleY()) - HEIGHT) / 2;
+
+        translateCanvas(translateOffsetX, translateOffsetY);
+    }
+
+    private Point2D getUserResolution() {
+        Rectangle2D resolutionBounds = Screen.getPrimary().getBounds();
+        return new Point2D(resolutionBounds.getWidth(), resolutionBounds.getHeight());
+    }
+
+    private void translateCanvas(double offsetX, double offsetY) {
+        canvas.setTranslateX(offsetX);
+        canvas.setTranslateY(offsetY);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -7,13 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f9ff56b-6d18-4e2f-871d-36bb47c8212c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/ViewManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/ViewManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/bigCoin.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/bigCoin.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/protectionRing.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/protectionRing.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/ukaszAngelLeftHoly.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/ukaszAngelRightHoly.gif" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/graphicModule/texturesModel/sprites/ukaszAngelRightHoly.gif" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/soundsModule/soundsPath/SoundsPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/soundsModule/soundsPath/SoundsPlayer.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -124,7 +119,7 @@
     <session id="187451895">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="38" />
+          <entry key="project.closed" value="39" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.14" value="1" />
           <entry key="project.open.time.15" value="4" />
@@ -150,12 +145,12 @@
           <entry key="Learning" value="5" />
           <entry key="dummy" value="159" />
           <entry key="gitignore" value="38" />
-          <entry key="java" value="55710" />
+          <entry key="java" value="55985" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="55710" />
+          <entry key="JAVA" value="55985" />
           <entry key="PLAIN_TEXT" value="197" />
           <entry key="Scratch" value="5" />
         </counts>
@@ -197,8 +192,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/ViewManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="128" column="31" lean-forward="true" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
+            <state relative-caret-position="145">
+              <caret line="128" column="123" selection-start-line="128" selection-start-column="123" selection-end-line="128" selection-end-column="123" />
               <folding>
                 <element signature="method#ViewManager#0;class#ViewManager#0" />
                 <element signature="docComment;method#initialize#0;class#ViewManager#0" />
@@ -206,6 +201,7 @@
                 <element signature="method#setFont#0;class#ViewManager#0" />
                 <element signature="method#setFont#1;class#ViewManager#0" />
                 <element signature="method#checkWindowBoundary#0;class#ViewManager#0" />
+                <element signature="method#getUserResolution#0;class#ViewManager#0" />
               </folding>
             </state>
           </provider>
@@ -794,12 +790,12 @@
       <workItem from="1571391121019" duration="996000" />
       <workItem from="1571487006635" duration="4496000" />
       <workItem from="1571493587667" duration="586000" />
-      <workItem from="1571495569470" duration="2890000" />
+      <workItem from="1571495569470" duration="4364000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="566809000" />
+    <option name="totallyTimeSpent" value="568283000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -812,9 +808,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="44" y="222" width="1537" height="748" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6701209" visible="true" weight="0.197021" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6701209" visible="true" weight="0.197021" />
       <window_info id="Structure" order="1" sideWeight="0.3298791" side_tool="true" weight="0.1625964" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -830,10 +825,10 @@
       <window_info anchor="bottom" id="TODO" order="5" weight="0.27526596" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32974428" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.18729642" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.18729642" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5012854" side_tool="true" weight="0.3882979" />
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32446808" />
-      <window_info anchor="bottom" x="0" y="728" width="1600" height="142" id="Run" order="11" sideWeight="0.49871466" visible="true" weight="0.09283388" />
+      <window_info anchor="bottom" x="0" y="728" width="1600" height="142" id="Run" order="11" sideWeight="0.49871466" weight="0.09283388" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -1346,8 +1341,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/Ukasz09/ValentineGame/gameModules/utilitis/ViewManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="128" column="31" lean-forward="true" selection-start-line="128" selection-start-column="31" selection-end-line="128" selection-end-column="31" />
+        <state relative-caret-position="145">
+          <caret line="128" column="123" selection-start-line="128" selection-start-column="123" selection-end-line="128" selection-end-column="123" />
           <folding>
             <element signature="method#ViewManager#0;class#ViewManager#0" />
             <element signature="docComment;method#initialize#0;class#ViewManager#0" />
@@ -1355,6 +1350,7 @@
             <element signature="method#setFont#0;class#ViewManager#0" />
             <element signature="method#setFont#1;class#ViewManager#0" />
             <element signature="method#checkWindowBoundary#0;class#ViewManager#0" />
+            <element signature="method#getUserResolution#0;class#ViewManager#0" />
           </folding>
         </state>
       </provider>
