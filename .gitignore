@@ -70,3 +70,4 @@ fabric.properties
 #Not used staff
 notUsedSprites/**
 *.lnk
+imagesProjects/**
