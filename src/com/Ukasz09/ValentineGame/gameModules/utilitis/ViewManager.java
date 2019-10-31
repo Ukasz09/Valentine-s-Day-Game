@@ -22,7 +22,7 @@ public class ViewManager {
     public static final FontWeight DEFAULT_FONT_WEIGHT = FontWeight.BOLD;
     public static final int DEFAULT_FONT_SIZE = 34;
     public static final Color DEFAULT_FONT_COLOR = Color.TAN;
-    public static final int WIDTH = 1600;
+    public static final int DEFAULT_GAME_FRAME_WIDTH = 1600;
     public static final int HEIGHT = 900;
 
     private Stage mainStage;
@@ -48,7 +48,7 @@ public class ViewManager {
     public void initialize(String title, boolean fullScreen) {
         mainStage = new Stage();
         mainStage.setTitle(title);
-        mainStage.setWidth(WIDTH);
+        mainStage.setWidth(DEFAULT_GAME_FRAME_WIDTH);
         mainStage.setHeight(HEIGHT);
         mainStage.setFullScreen(fullScreen);
         Group root = new Group();
@@ -71,7 +71,7 @@ public class ViewManager {
 //             no
 ////            n.setScaleY(1.05);
 //        }
-        scaleToPropperResolution();
+        scaleToProperResolution();
     }
 
     public void setDefaultFont() {
@@ -122,12 +122,12 @@ public class ViewManager {
         topBorder = bounds.getMinY();
     }
 
-    private void scaleToPropperResolution() {
+    private void scaleToProperResolution() {
         Point2D userResolution = getUserResolution();
-        canvas.setScaleX(userResolution.getX() / WIDTH);
+        canvas.setScaleX(userResolution.getX() / DEFAULT_GAME_FRAME_WIDTH);
         canvas.setScaleY(userResolution.getY() / HEIGHT);
-        double translateOffsetX = ((WIDTH * canvas.getScaleX()) - WIDTH) / 2; //todo: nie mnozyc tylko dac userResolution.x
-        double translateOffsetY = ((HEIGHT * canvas.getScaleY()) - HEIGHT) / 2;
+        double translateOffsetX = (userResolution.getX() - DEFAULT_GAME_FRAME_WIDTH) / 2; //todo: nie mnozyc tylko dac userResolution.x
+        double translateOffsetY = (userResolution.getY() - HEIGHT) / 2;
 
         translateCanvas(translateOffsetX, translateOffsetY);
     }

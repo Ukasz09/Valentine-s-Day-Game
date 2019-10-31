@@ -15,7 +15,7 @@ public class TeleportCollisionAvoid implements ICollisionAvoidWay {
 
             for (Monster m : monstersList) {
                 if (monster.intersects(m) && (monster != m)) {
-                    double dx = (int) (Math.random() * ViewManager.WIDTH);
+                    double dx = (int) (Math.random() * ViewManager.DEFAULT_GAME_FRAME_WIDTH);
                     double dy = (int) (Math.random() * ViewManager.HEIGHT);
                     monster.setPosition(dx, dy);
                     return;
