@@ -23,7 +23,6 @@ public abstract class AllLevels {
         SMALL(25),
         NORMAL(50),
         BIG(100);
-
         int value;
 
         CoinTypes(int value) {
