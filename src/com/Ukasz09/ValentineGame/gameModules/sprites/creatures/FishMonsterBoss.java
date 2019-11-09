@@ -2,6 +2,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.effects.collisionAvoidEffect.ICollisionAvoidWay;
 import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
@@ -26,8 +27,8 @@ public class FishMonsterBoss extends Monster{
     private static final SoundsPlayer MISS_SOUND = new SoundsPlayer(MISS_SHOT_SOUND_PATH, MISS_SHOT_SOUND_VOLUME, false);
     private static final SoundsPlayer DEATH_SOUND = new SoundsPlayer(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME, false);
 
-    private Shield shield;
-    private HealthStatusBar healthBar;
+    private final Shield shield;
+    private final HealthStatusBar healthBar;
 
     private final double defaultLives = 20;
     private final double defaultLivesTake = 1.5;
@@ -38,19 +39,19 @@ public class FishMonsterBoss extends Monster{
     private final int defaultShieldDuration = 10000;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public FishMonsterBoss(Image right, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
-        super(right, kickMethod, manager, collisionAvoidWay);
-        setLives(defaultLives);
-//        setProtectionTime(0);
+    public FishMonsterBoss(Image image, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+        super(image, kickMethod, manager, collisionAvoidWay);
+        setDefaultProperties();
         shield = new AutoActivateShield(defaultShieldCooldown, defaultShieldDuration, shieldImage);
-        setKickSize(defaultKickSize);
-        setLivesTake(defaultLivesTake);
-        setVelocity(defaultVelocityX, defaultVelocityY);
-
         healthBar = new HealthStatusBar(defaultLives, getWidth(), getPositionX(), getPositionY());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    protected void setDefaultProperties() {
+        setProperties(defaultKickSize,defaultLivesTake,defaultLives,defaultVelocityX,defaultVelocityY);
+    }
+
     public void updateShield() {
         shield.updateShield();
     }
@@ -71,8 +72,8 @@ public class FishMonsterBoss extends Monster{
     }
 
     @Override
-    public void update(Creature player, ArrayList<Monster> enemiesList) {
-        super.update(player, enemiesList);
+    public void update(double elapsedTime, Creature player, ArrayList<Monster> enemiesList) {
+        super.update(elapsedTime, player, enemiesList);
         healthBar.update(getLives(), getPositionX(), getPositionY());
         updateShield();
     }
@@ -88,7 +89,7 @@ public class FishMonsterBoss extends Monster{
     private void renderShield() {
         if(shield.isActive()){
             double centerPositionX;
-            if (getImageDirection().equals(YAxisDirection.LEFT))
+            if (getImageDirection().equals(DirectionEnum.LEFT))
                 centerPositionX = getPositionX() + 40;
             else centerPositionX = getPositionX();
             double centerPositionY = getPositionY();

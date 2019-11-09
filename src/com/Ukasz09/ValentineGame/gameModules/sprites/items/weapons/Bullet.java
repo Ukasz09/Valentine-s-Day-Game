@@ -2,6 +2,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
@@ -19,19 +20,16 @@ public class Bullet extends Weapon {
     private static final SoundsPlayer SHOT_SOUND = new SoundsPlayer(SHOT_SOUND_PATH, SHOT_SOUND_VOLUME, false);
     private static double maxOverheating = DEFAULT_MAX_OVERHEATING;
 
-    private YAxisDirection shotDirection;
+    private DirectionEnum shotDirection;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Bullet(YAxisDirection shotDirection, ViewManager manager) {
-        this(DEFAULT_SHOT_IMAGE, shotDirection, manager);
+    public Bullet(DirectionEnum shotDirection, double positionX, double positionY, ViewManager manager) {
+        this(DEFAULT_SHOT_IMAGE, DEFAULT_SHOT_VELOCITY, shotDirection, positionX, positionY, DEFAULT_LIVES_TAKES, DEFAULT_MAX_OVERHEATING, manager);
+
     }
 
-    public Bullet(Image image, YAxisDirection shotDirection, ViewManager manager) {
-        this(image, DEFAULT_SHOT_VELOCITY, shotDirection, DEFAULT_LIVES_TAKES, DEFAULT_MAX_OVERHEATING, manager);
-    }
-
-    public Bullet(Image image, double shotVelocity, YAxisDirection shotDirection, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
-        super(image, shotVelocity, howManyLiveTakes, manager);
+    public Bullet(Image image, double shotVelocity, DirectionEnum shotDirection, double positionX, double positionY, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
+        super(image, shotVelocity, shotVelocity, positionX, positionY, howManyLiveTakes, manager);
         this.maxOverheating = maxOverheating;
         this.shotDirection = shotDirection;
     }
@@ -39,16 +37,16 @@ public class Bullet extends Weapon {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
-    public void update(double time) {
-        if (shotDirection.equals(YAxisDirection.RIGHT))
-            update(time,1,0);
-        if (shotDirection.equals(YAxisDirection.LEFT))
-            update(time,-1,0);
+    public void update(double elapsedTime) {
+        if (shotDirection.equals(DirectionEnum.RIGHT))
+            update(elapsedTime,1,0);
+        if (shotDirection.equals(DirectionEnum.LEFT))
+            update(elapsedTime,-1,0);
     }
 
     @Override
     public boolean isOutOfBoundary() {
-        if ((getPositionX() > getManager().getRightBorder()) || (getPositionX() < getManager().getLeftBorder()))
+        if ((getPositionX() > getManager().getRightFrameBorder()) || (getPositionX() < getManager().getLeftFrameBorder()))
             return true;
 
         return false;
@@ -64,18 +62,9 @@ public class Bullet extends Weapon {
         monster.removeLives(getHowManyLivesTake());
     }
 
-    private void playShotSound() {
+    public void playShotSound() {
         Bullet.SHOT_SOUND.playSound();
     }
-
-    @Override
-    public void prepareToShot(Player player) {
-        Point2D bulletPosition = player.getBulletPosition();
-        setPosition(bulletPosition.getX(), bulletPosition.getY());
-        setVelocity(getShotVelocity(), 0);
-        playShotSound();
-    }
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static double getMaxOverheating() {

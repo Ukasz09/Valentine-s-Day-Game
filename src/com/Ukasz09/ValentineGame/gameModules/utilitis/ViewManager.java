@@ -30,10 +30,10 @@ public class ViewManager {
     private Canvas canvas;
     private GraphicsContext gc;
 
-    private double rightBorder;
-    private double leftBorder;
-    private double bottomBorder;
-    private double topBorder;
+    private double rightFrameBorder;
+    private double leftFrameBorder;
+    private double bottomFrameBorder;
+    private double topFrameBorder;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public ViewManager() {
@@ -116,10 +116,10 @@ public class ViewManager {
 
     private void checkWindowBoundary(Canvas canvas) {
         Bounds bounds = canvas.getBoundsInLocal();
-        rightBorder = bounds.getMaxX();
-        leftBorder = bounds.getMinX();
-        bottomBorder = bounds.getMaxY();
-        topBorder = bounds.getMinY();
+        rightFrameBorder = bounds.getMaxX();
+        leftFrameBorder = bounds.getMinX();
+        bottomFrameBorder = bounds.getMaxY();
+        topFrameBorder = bounds.getMinY();
     }
 
     private void scaleToProperResolution() {
@@ -151,20 +151,20 @@ public class ViewManager {
         return gc;
     }
 
-    public double getRightBorder() {
-        return rightBorder;
+    public double getRightFrameBorder() {
+        return rightFrameBorder;
     }
 
-    public double getLeftBorder() {
-        return leftBorder;
+    public double getLeftFrameBorder() {
+        return leftFrameBorder;
     }
 
-    public double getBottomBorder() {
-        return bottomBorder;
+    public double getBottomFrameBorder() {
+        return bottomFrameBorder;
     }
 
-    public double getTopBorder() {
-        return topBorder;
+    public double getTopFrameBorder() {
+        return topFrameBorder;
     }
 
 }

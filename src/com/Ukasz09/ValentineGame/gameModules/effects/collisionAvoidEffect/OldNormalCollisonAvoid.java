@@ -15,8 +15,8 @@ public class OldNormalCollisonAvoid implements ICollisionAvoidWay {
             double diffX = target.getPositionX() - dx;
             double diffY = target.getPositionY() - dy;
             float angle = (float) Math.atan2(diffY, diffX);
-            dx += monster.getVelocityX() * Math.cos(angle);
-            dy += monster.getVelocityY() * Math.sin(angle);
+            dx += monster.getActualVelocityX() * Math.cos(angle);
+            dy += monster.getActualVelocityY() * Math.sin(angle);
             monster.setPosition(dx, dy);
 
             for (Creature m : monsters) {

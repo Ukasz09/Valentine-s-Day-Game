@@ -10,14 +10,9 @@
 package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
 import com.Ukasz09.ValentineGame.gameModules.levels.*;
-import com.Ukasz09.ValentineGame.gameModules.sprites.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Creature;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bomb;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bullet;
-import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Weapon;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
 
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
@@ -121,90 +116,79 @@ public class Game extends Application {
 
     private void endLevel() {
         player.setNextLevel();
-        player.setCollectedMoneyBagsOnLevel(0);
+        player.setCollectedCoinsOnLevel(0);
         player.setKilledMonstersOnLevel(0);
         coinsList.clear();
         enemiesList.clear();
         player.clearShotsList();
     }
 
-    private void checkPlayerMove(int velocity) {
-        player.setVelocity(0, 0);
+    private void checkPlayerActions() {
+        checkPlayerMove();
+        checkPlayerCombatActions();
+    }
+
+    private void checkPlayerMove() {
+        player.setActualVelocity(0, 0);
 
         if (inputsList.contains("A")) {
-
-            player.setPressedKey_A(true);
-
-            //TODO: dac wyzej (?)
-            if (!player.leftSideFrameCollision()) {
-                player.setImageDirection(Creature.YAxisDirection.LEFT); //must be before setting image
-
-                if ((!player.collisionWithMonstersFromLeftSide(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
-                    player.addVelocity(-velocity, 0);
-                    player.setCollisionFromLeftSide(false);
-                } else player.setCollisionFromLeftSide(true);
-            } else player.setCollisionFromLeftSide(true);
+            doPlayerMoveAction(DirectionEnum.LEFT, player.getVelocityXPoints());
         } else player.setPressedKey_A(false);
 
         if (inputsList.contains("D")) {
-
-            player.setPressedKey_D(true);
-
-            if (!player.boundaryCollisionFromRightSide()) {
-                player.setImageDirection(Creature.YAxisDirection.RIGHT);
-
-                if ((!player.collisionWithMonstersFromRightSide(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
-                    player.addVelocity(velocity, 0);
-                    player.setCollisionFromRightSide(false);
-                } else player.setCollisionFromRightSide(true);
-            } else player.setCollisionFromRightSide(true);
+            doPlayerMoveAction(DirectionEnum.RIGHT, player.getVelocityXPoints());
         } else player.setPressedKey_D(false);
 
         if (inputsList.contains("W")) {
-
-            player.setPressedKey_W(true);
-
-            if (!player.boundaryCollisionFromTop()) {
-
-                if ((!player.collisionWithMonstersFromBottom(enemiesList, player)) || (player.checkPlayerCanDoAnyMove())) {
-                    player.addVelocity(0, -velocity);
-                    player.setCollisionFromUpSide(false);
-                } else player.setCollisionFromUpSide(true);
-            } else player.setCollisionFromUpSide(true);
+            doPlayerMoveAction(DirectionEnum.UP, player.getVelocityYPoints());
         } else player.setPressedKey_W(false);
 
         if (inputsList.contains("S")) {
-
-            player.setPressedKey_S(true);
-
-            if (!player.boundaryCollisionFromBottom()) {
-
-                if ((!player.collisionWithMonstersFromTop(enemiesList)) || (player.checkPlayerCanDoAnyMove())) {
-                    player.addVelocity(0, velocity);
-                    player.setCollisionFromDownSide(false);
-                } else player.setCollisionFromDownSide(true);
-            } else player.setCollisionFromDownSide(true);
+            doPlayerMoveAction(DirectionEnum.DOWN, player.getVelocityYPoints());
         } else player.setPressedKey_S(false);
+    }
 
+    private void doPlayerMoveAction(DirectionEnum side, double playerVelocity) {
+        player.setPressedKey(side.keypadEquivalent, true);
+
+        if (!player.anticollisionModeIsActive())
+            if (player.frameCollision(side))
+                player.setCollision(side, true);
+            else {
+                player.setImageDirection(side);
+
+                if (player.canNotDoAnyMove())
+                    player.restoreAnticollisionTimer();
+                else if (player.collisionWithMonster(side, enemiesList))
+                    player.setCollision(side, true);
+                else player.addActualVelocity(side, playerVelocity);
+            }
+        else player.addActualVelocity(side, playerVelocity);
+    }
+
+    private void checkPlayerCombatActions() {
         if (inputsList.contains("LEFT")) {
-            player.setImageDirection(Sprite.YAxisDirection.LEFT);
+            player.setImageDirection(DirectionEnum.LEFT);
             spawnBullet();
         }
 
         if (inputsList.contains("RIGHT")) {
-            player.setImageDirection(Sprite.YAxisDirection.RIGHT);
+            player.setImageDirection(DirectionEnum.RIGHT);
             spawnBullet();
         }
 
-        if (inputsList.contains("SPACE")) {
-            if (player.getBombOverheating() <= 0) {
-                Weapon weapon = new Bomb(manager);
-                weapon.prepareToShot(player);
+        if (inputsList.contains("SPACE"))
+            spawnBomb();
+    }
 
-                player.addShot(weapon);
-                player.overheatBomb();
-            }
-        }
+    private void spawnBullet() {
+        if (player.bulletCanBeSpawn())
+            player.addBullet();
+    }
+
+    private void spawnBomb() {
+        if (player.bombCanBeSpawn())
+            player.addBomb();
     }
 
     private boolean playerReadyToGame() {
@@ -212,21 +196,12 @@ public class Game extends Application {
         else return false;
     }
 
-    private void spawnBullet(){
-        if (player.getBulletOverheating() <= 0) {
-            Weapon bullet = new Bullet(player.getImageDirection(), manager);
-            bullet.prepareToShot(player);
-
-            player.addShot(bullet);
-            player.overheatBullet();
-        }
-    }
 
     //todo: poprawic
     private void play(long currentNanoTime, AllLevels level) {
         updateTime(currentNanoTime);
         level.render(enemiesList, coinsList, player.getShotsList(), player);
-        checkPlayerMove(Player.getDefaultVelocity());
+        checkPlayerActions();
         player.update(elapsedTime, coinsList, enemiesList);
         player.render();
         level.update(player, enemiesList, elapsedTime);

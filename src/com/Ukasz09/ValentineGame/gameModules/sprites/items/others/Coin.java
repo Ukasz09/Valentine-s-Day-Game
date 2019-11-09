@@ -2,7 +2,6 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.items.others;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Creature;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
@@ -28,8 +27,8 @@ public class Coin extends Sprite {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void setPosition() {
-        double positionX = getManager().getRightBorder() * 0.9 * Math.random();
-        double positionY = getManager().getBottomBorder() * 0.8 * Math.random();
+        double positionX = getManager().getRightFrameBorder() * 0.9 * Math.random();
+        double positionY = getManager().getBottomFrameBorder() * 0.8 * Math.random();
         this.setPosition(positionX, positionY);
     }
 

@@ -26,13 +26,15 @@ public class FishMonster extends Monster {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonster(Image imageRight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(imageRight, kickMethod, manager, collisionAvoidWay);
-        setLives(defaultLives);
-        setKickSize(defaultKickSize);
-        setLivesTake(defaultLivesTake);
-        setVelocity(defaultVelocityX, defaultVelocityY);
+        setDefaultProperties();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    protected void setDefaultProperties() {
+        setProperties(defaultKickSize, defaultLivesTake, defaultLives, defaultVelocityX, defaultVelocityY);
+    }
+
     @Override
     public void setStartedPosition() {
         setPositionByDirection(true, true, true, true, 60);

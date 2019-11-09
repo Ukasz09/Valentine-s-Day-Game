@@ -7,7 +7,6 @@ import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 /*
@@ -24,7 +23,17 @@ public abstract class Monster extends Creature {
         super(image, manager);
         livesTake = 0;
         kickSize = 0;
-        setVelocity(0, 0);
+        setActualVelocity(0, 0);
+        this.kickMethod = kickMethod;
+        this.collisionAvoidWay = collisionAvoidWay;
+        setStartedPosition();
+    }
+
+    public Monster(Image spriteSheet, double creatureWidth, double creatureHeight, double widthOfOneFrame, double heightOfOneFrame, double durationPerOneFrame, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+        super(spriteSheet, creatureWidth, creatureHeight, widthOfOneFrame, heightOfOneFrame, durationPerOneFrame, manager);
+        livesTake = 0;
+        kickSize = 0;
+        setActualVelocity(0, 0);
         this.kickMethod = kickMethod;
         this.collisionAvoidWay = collisionAvoidWay;
         setStartedPosition();
@@ -51,10 +60,11 @@ public abstract class Monster extends Creature {
         setLives(lives);
         this.kickSize = kickSize;
         this.livesTake = livesTake;
-        setVelocity(velocityX, velocityY);
+        setActualVelocity(velocityX, velocityY);
     }
 
-    public void update(Creature target, ArrayList<Monster> enemiesList) {
+    public void update(double elapsedTime, Creature target, ArrayList<Monster> enemiesList) {
+        updateNeedToChangeFrame(elapsedTime);
         collisionAvoidWay.updateCords(target, this, enemiesList);
         updateMonsterRotate(target);
     }
@@ -65,8 +75,8 @@ public abstract class Monster extends Creature {
         double dx = this.getPositionX();
         double dy = this.getPositionY();
         float angle = getAngleToTarget(target);
-        dx += this.getVelocityX() * Math.cos(angle);
-        dy += this.getVelocityY() * Math.sin(angle);
+        dx += this.getActualVelocityX() * Math.cos(angle);
+        dy += this.getActualVelocityY() * Math.sin(angle);
         this.setPosition(dx, dy);
     }
 
@@ -120,60 +130,27 @@ public abstract class Monster extends Creature {
     }
 
     public void setPositionByDirection(boolean north, boolean south, boolean east, boolean west, double offset) {
-        DirectionEnum direction = randomPositionByDirection(north, south, east, west);
+        DirectionEnum direction = DirectionEnum.getRandomDirection(north, south, east, west);
         setPositionByDirection(direction, offset);
     }
 
-    private DirectionEnum randomPositionByDirection(boolean north, boolean south, boolean east, boolean west) {
-        DirectionEnum direction;
-        try {
-            direction = DirectionEnum.getRandomDirection(north, south, east, west);
-            return direction;
-        } catch (InvalidParameterException anyDirection) {
-            return DirectionEnum.NORTH;
-        }
-    }
-
     private void setPositionByDirection(DirectionEnum direction, double offset) {
-        switch (direction) {
-            case NORTH:
-                setPositionFromNorth(offset);
-                break;
-            case SOUTH:
-                setPositionFromSouth(offset);
-                break;
-            case EAST:
-                setPositionFromEast(offset);
-                break;
-            case WEST:
-                setPositionFromWest(offset);
-                break;
+        double positionX, positionY;
+        if (direction.equals(DirectionEnum.UP) || direction.equals(DirectionEnum.DOWN)) {
+            positionX = Math.random() * getManager().getRightFrameBorder();
+            if (direction.equals(DirectionEnum.UP))
+                positionY = getManager().getTopFrameBorder() - offset;
+            else positionY = getManager().getBottomFrameBorder() + offset;
+        } else {
+            positionY = Math.random() * getManager().getBottomFrameBorder();
+            if (direction.equals(DirectionEnum.LEFT))
+                positionX = getManager().getLeftFrameBorder() - offset;
+            else positionX = getManager().getRightFrameBorder() + offset;
         }
-    }
 
-    private void setPositionFromNorth(double offset) {
-        double positionX = Math.random() * getManager().getRightBorder();
-        double positionY = getManager().getTopBorder() - offset;
         this.setPosition(positionX, positionY);
     }
 
-    private void setPositionFromSouth(double offset) {
-        double positionX = Math.random() * getManager().getRightBorder();
-        double positionY = getManager().getBottomBorder() + offset;
-        this.setPosition(positionX, positionY);
-    }
-
-    private void setPositionFromEast(double offset) {
-        double positionX = getManager().getLeftBorder() - offset;
-        double positionY = Math.random() * getManager().getBottomBorder();
-        this.setPosition(positionX, positionY);
-    }
-
-    private void setPositionFromWest(double offset) {
-        double positionX = getManager().getRightBorder() + offset;
-        double positionY = Math.random() * getManager().getBottomBorder();
-        this.setPosition(positionX, positionY);
-    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setLivesTake(double livesTake) {

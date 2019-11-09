@@ -3,6 +3,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Weapon;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.HeartsRender;
 import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.InCorner;
@@ -23,13 +24,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Player extends Creature {
-    public static final int DEFAULT_VELOCITY = 700; //700
-    public static final int DEFAULT_LIVES = 5;
-    public static final int DEFAULT_SHIELD_DURATION = 7500;
-    public static final int DEFAULT_BATTERY_OVERHEATING_REDUCE = 50;
-    public static final int DEFAULT_BULLET_OVERHEATING_REDUCE = 50;
-    public static final int DEFAULT_ANTICOLLISION_TIMER = 4000;
-    public static final double DEFAULT_HIT_SOUND_VOLUME = 0.2;
+    private static final double DEFAULT_VELOCITY = 700;
+    private static final int DEFAULT_LIVES = 5;
+    private static final int DEFAULT_SHIELD_DURATION = 7500;
+    private static final int DEFAULT_ANTICOLLISION_TIMER = 4000;
+    private static final double DEFAULT_HIT_SOUND_VOLUME = 0.2;
+
     private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
     private static final Image PLAYER_SHIELD_IMAGE = SpritesImages.playerShieldImage;
     private static final double WINGS_SOUND_VOLUME = 1;
@@ -46,7 +46,7 @@ public class Player extends Creature {
     private double bulletOverheating;
     private HeartsRender heartsRender;
     private int levelNumber;
-    private int collectedMoneyBagsOnLevel;
+    private int collectedCoinsOnLevel;
     private int killedMonstersOnLevel;
     private boolean collisionFromRightSide;
     private boolean collisionFromLeftSide;
@@ -60,23 +60,18 @@ public class Player extends Creature {
     private boolean pressedKey_W;
     private boolean pressedKey_S;
 
+    private double velocityXPoints;
+    private double velocityYPoints;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Player(ViewManager manager) {
         this(PLAYER_RIGHT_IMAGE, PLAYER_SHIELD_IMAGE, manager);
     }
 
-    public Player(Image playerRightImage, Image shieldImage, ViewManager manager) {
-        super(playerRightImage, manager);
+    public Player(Image spriteImage, Image shieldImage, ViewManager manager) {
+        super(spriteImage, manager);
+        setDefaultProperties();
         shield = new ManualActivateShield(DEFAULT_SHIELD_DURATION, shieldImage);
-        setLives(DEFAULT_LIVES);
-        maxLives = DEFAULT_LIVES;
         playerHitSounds = getPlayerHitSounds();
-        totalScore = 0;
-        bombOverheating = 0;
-        bulletOverheating = 0;
-        levelNumber = 0;
-        collectedMoneyBagsOnLevel = 0;
-        killedMonstersOnLevel = 0;
         heartsRender = new InCorner(manager);
         shotsList = new ArrayList<>();
 
@@ -89,11 +84,26 @@ public class Player extends Creature {
         pressedKey_D = false;
         pressedKey_W = false;
         pressedKey_S = false;
-        setImageDirection(YAxisDirection.RIGHT);
+        setImageDirection(DirectionEnum.RIGHT);
         wingsSound = new SoundsPlayer(WINGS_SOUND_PATH, WINGS_SOUND_VOLUME, true);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    protected void setDefaultProperties() {
+        setMaxLives(DEFAULT_LIVES);
+        setLives(DEFAULT_LIVES);
+        velocityXPoints=DEFAULT_VELOCITY;
+        velocityYPoints=DEFAULT_VELOCITY;
+        setActualVelocity(DEFAULT_VELOCITY, DEFAULT_VELOCITY);
+        totalScore = 0;
+        bombOverheating = 0;
+        bulletOverheating = 0;
+        levelNumber = 0;
+        collectedCoinsOnLevel = 0;
+        killedMonstersOnLevel = 0;
+    }
+
     private void renderShield() {
         GraphicsContext gc = getManager().getGraphicContext();
         if (shield.isActive())
@@ -126,10 +136,10 @@ public class Player extends Creature {
         double width = getWidth();
         double height = getHeight();
 
-        if (getImageDirection().equals(YAxisDirection.RIGHT))
-        return new Rectangle2D(getPositionX() + width / 2.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
+        if (getImageDirection().equals(DirectionEnum.RIGHT))
+            return new Rectangle2D(getPositionX() + width / 2.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
 
-            return new Rectangle2D(getPositionX() + width / 5.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
+        return new Rectangle2D(getPositionX() + width / 5.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
 //        if (getImageDirection().equals(YAxisDirection.RIGHT)) {
 //            if (getActualRotation() == amountOfToPixelRotate)
 //                return new Rectangle2D(getPositionX() + width / 2, getPositionY() + height / 2, width / 2.4, height / 2);
@@ -161,8 +171,8 @@ public class Player extends Creature {
 
     private void renderBattery(GraphicsContext gc) {
         double overheatingPercents = bombOverheating / Bomb.getMaxOverheating() * 100;
-        double batteryPositionX = getManager().getLeftBorder();
-        double batteryPositionY = getManager().getBottomBorder() - batteryImages[0].getHeight();
+        double batteryPositionX = getManager().getLeftFrameBorder();
+        double batteryPositionY = getManager().getBottomFrameBorder() - batteryImages[0].getHeight();
 
         //100% charge
         if (overheatingPercents == 0)
@@ -183,30 +193,68 @@ public class Player extends Creature {
 
     private void updateBattery() {
         if (bombOverheating > 0)
-            bombOverheating -= DEFAULT_BATTERY_OVERHEATING_REDUCE;
+            bombOverheating -= 50;
         else if (bombOverheating < 0)
             bombOverheating = 0;
     }
 
-    private void updateBulletOverheating() {
-        if (bulletOverheating > 0)
-            bulletOverheating -= DEFAULT_BULLET_OVERHEATING_REDUCE;
+    public void addBullet() {
+        Point2D bulletPosition = getBulletPosition();
+        Bullet bullet = new Bullet(getImageDirection(), bulletPosition.getX(), bulletPosition.getY(), getManager());
+        shotsList.add(bullet);
+        bullet.playShotSound();
+        overheatBulletGun();
     }
 
-    public void overheatBomb() {
-        bombOverheating = Bomb.getMaxOverheating();
+    private Point2D getBulletPosition() {
+        double shotPositionY = getBoundary().getMaxY() - getHeight() / 4;
+        double shotPositionRightX = getBoundary().getMaxX();
+        double shotPositionLeftX = getBoundary().getMinX();
+
+        if (getImageDirection().equals(DirectionEnum.RIGHT))
+            return new Point2D(shotPositionRightX, shotPositionY);
+        return new Point2D(shotPositionLeftX, shotPositionY);
     }
 
-    public void overheatBullet() {
+    private void overheatBulletGun() {
         bulletOverheating = Bullet.getMaxOverheating();
     }
 
-    public void updateAllCollisions(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList) {
+    public void addBomb() {
+        Point2D bombPosition = getBombPosition();
+        Bomb bomb = new Bomb(bombPosition.getX(), bombPosition.getY(), getManager());
+        shotsList.add(bomb);
+        bomb.playShotSound();
+        overheatBombGun();
+    }
+
+    public Point2D getBombPosition() {
+        double centerPositionRightX = getBoundary().getMaxX() - getWidth() / 3;
+        return new Point2D(centerPositionRightX, getBoundary().getMaxY());
+    }
+
+    private void overheatBombGun() {
+        bombOverheating = Bomb.getMaxOverheating();
+    }
+
+    private void updateBulletOverheating() {
+        if (bulletOverheating > 0)
+            bulletOverheating -= 50;
+    }
+
+    public boolean bulletCanBeSpawn() {
+        return (bulletOverheating <= 0);
+    }
+
+    public boolean bombCanBeSpawn() {
+        return (bombOverheating <= 0);
+    }
+
+    private void updateAllCollisions(ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList) {
         checkIntersectsWithMoneyBags(coinsList);
         checksShotsIntersectsWithMonsters(enemiesList);
         checkIntersectsWithMonsters(enemiesList);
     }
-
 
     private void checkIntersectsWithMoneyBags(ArrayList<Coin> coinsList) {
         Iterator<Coin> coinsIterator = coinsList.iterator();
@@ -216,7 +264,7 @@ public class Player extends Creature {
                 Coin.playCollectSound();
                 addTotalScore(coin.getValue());
                 coinsIterator.remove();
-                collectedMoneyBagsOnLevel++;
+                collectedCoinsOnLevel++;
             }
         }
     }
@@ -261,7 +309,21 @@ public class Player extends Creature {
         }
     }
 
-    public boolean collisionWithMonstersFromRightSide(ArrayList<Monster> monsters) {
+    public boolean collisionWithMonster(DirectionEnum side, ArrayList<Monster> monsters) {
+        switch (side) {
+            case LEFT:
+                return collisionWithMonsterFromLeft(monsters);
+            case RIGHT:
+                return collisionWithMonsterFromRight(monsters);
+            case UP:
+                return collisionWithMonsterFromTop(monsters);
+            case DOWN:
+                return collisionWithMonsterFromBottom(monsters);
+        }
+        return false;
+    }
+
+    private boolean collisionWithMonsterFromRight(ArrayList<Monster> monsters) {
         for (Creature m : monsters) {
             if ((m.getBoundary().getMinX() < this.getBoundary().getMaxX()) && (m.getBoundary().getMaxX() > this.getBoundary().getMaxX()) && (this.intersects(m)))
                 return true;
@@ -269,7 +331,7 @@ public class Player extends Creature {
         return false;
     }
 
-    public boolean collisionWithMonstersFromLeftSide(ArrayList<Monster> monsters) {
+    private boolean collisionWithMonsterFromLeft(ArrayList<Monster> monsters) {
         for (Creature m : monsters) {
             if ((m.getBoundary().getMaxX() > this.getBoundary().getMinX()) && (m.getBoundary().getMinX() < this.getBoundary().getMinX()) && (this.intersects(m)))
                 return true;
@@ -277,7 +339,7 @@ public class Player extends Creature {
         return false;
     }
 
-    public boolean collisionWithMonstersFromTop(ArrayList<Monster> monsters) {
+    private boolean collisionWithMonsterFromBottom(ArrayList<Monster> monsters) {
         for (Creature m : monsters) {
             if ((m.getBoundary().getMinY() < this.getBoundary().getMaxY()) && (m.getBoundary().getMinY() > this.getBoundary().getMinY()) && (this.intersects(m)))
                 return true;
@@ -285,9 +347,9 @@ public class Player extends Creature {
         return false;
     }
 
-    public boolean collisionWithMonstersFromBottom(ArrayList<Monster> monsters, Creature ukasz) {
+    private boolean collisionWithMonsterFromTop(ArrayList<Monster> monsters) {
         for (Creature m : monsters) {
-            if ((m.getBoundary().getMaxY() > ukasz.getBoundary().getMinY()) && (m.getBoundary().getMinY() < ukasz.getBoundary().getMinY()) && (m.intersects(ukasz)))
+            if ((m.getBoundary().getMaxY() > this.getBoundary().getMinY()) && (m.getBoundary().getMinY() < this.getBoundary().getMinY()) && (m.intersects(this)))
                 return true;
         }
         return false;
@@ -297,53 +359,46 @@ public class Player extends Creature {
         shotsList.clear();
     }
 
-    public void addShot(Weapon shot) {
-        shotsList.add(shot);
-    }
-
-    public Point2D getBulletPosition() {
-        double shotPositionY = getBoundary().getMaxY() - getHeight() / 4;
-        double shotPositionRightX = getBoundary().getMaxX();
-        double shotPositionLeftX = getBoundary().getMinX();
-
-        if (getImageDirection().equals(YAxisDirection.RIGHT))
-            return new Point2D(shotPositionRightX, shotPositionY);
-        return new Point2D(shotPositionLeftX, shotPositionY);
-    }
-
-    public Point2D getBombPosition() {
-        double centerPositionRightX = getBoundary().getMaxX() - getWidth() / 3;
-        return new Point2D(centerPositionRightX, getBoundary().getMaxY());
-    }
-
-    private boolean playerCantDoAnyMove() {
+    public boolean canNotDoAnyMove() {
         if (collisionFromDownSide && collisionFromUpSide && collisionFromLeftSide && collisionFromRightSide)
             return true;
         else return false;
     }
 
-    public boolean checkPlayerCanDoAnyMove() {
-        if (playerCantDoAnyMove()) {
-            restoreAnticollisionTimer();
-            return true;
-        }
+//    public boolean checkPlayerCanDoAnyMove() {
+////        if (playerCantDoAnyMove()) {
+////            restoreAnticollisionTimer();
+////            return true;
+////        }
+////
+////        return false;
+////    }
 
-        return false;
+    public boolean anticollisionModeIsActive() {
+        return (anticollisionTimer > 0);
     }
 
-    private void restoreAnticollisionTimer() {
+    public void restoreAnticollisionTimer() {
         anticollisionTimer = DEFAULT_ANTICOLLISION_TIMER;
+        setAllCollision(false);
+    }
+
+    private void setAllCollision(boolean condition) {
+        collisionFromLeftSide = condition;
+        collisionFromRightSide = condition;
+        collisionFromUpSide = condition;
+        collisionFromDownSide = condition;
+    }
+
+    private void updateAnticollisionTimer() {
+        if (anticollisionTimer > 0)
+            reduceAnticollisionTimer();
     }
 
     private void reduceAnticollisionTimer() {
         anticollisionTimer -= 100;
         if (anticollisionTimer < 0)
             anticollisionTimer = 0;
-    }
-
-    private void updateAnticollisionTimer() {
-        if (anticollisionTimer > 0)
-            reduceAnticollisionTimer();
     }
 
     private void playRandomHitSound() {
@@ -362,24 +417,12 @@ public class Player extends Creature {
         return playerHitSounds[random];
     }
 
-    public static int getDefaultVelocity() {
-        return DEFAULT_VELOCITY;
-    }
-
     public int getTotalScore() {
         return totalScore;
     }
 
     public void setShield(Shield shield) {
         this.shield = shield;
-    }
-
-    public double getBombOverheating() {
-        return bombOverheating;
-    }
-
-    public double getBulletOverheating() {
-        return bulletOverheating;
     }
 
     public int getLevelNumber() {
@@ -395,11 +438,11 @@ public class Player extends Creature {
     }
 
     public int getCollectedCoinsOnLevel() {
-        return collectedMoneyBagsOnLevel;
+        return collectedCoinsOnLevel;
     }
 
-    public void setCollectedMoneyBagsOnLevel(int collectedMoneyBagsOnLevel) {
-        this.collectedMoneyBagsOnLevel = collectedMoneyBagsOnLevel;
+    public void setCollectedCoinsOnLevel(int collectedCoinsOnLevel) {
+        this.collectedCoinsOnLevel = collectedCoinsOnLevel;
     }
 
     public int getKilledEnemiesOnLevel() {
@@ -412,6 +455,23 @@ public class Player extends Creature {
 
     public ArrayList<Weapon> getShotsList() {
         return shotsList;
+    }
+
+    public void setCollision(DirectionEnum side, boolean condition) {
+        switch (side) {
+            case UP:
+                setCollisionFromUpSide(condition);
+                break;
+            case DOWN:
+                setCollisionFromDownSide(condition);
+                break;
+            case LEFT:
+                setCollisionFromLeftSide(condition);
+                break;
+            case RIGHT:
+                setCollisionFromRightSide(condition);
+                break;
+        }
     }
 
     public void setCollisionFromRightSide(boolean collisionFromRightSide) {
@@ -428,6 +488,31 @@ public class Player extends Creature {
 
     public void setCollisionFromDownSide(boolean collisionFromDownSide) {
         this.collisionFromDownSide = collisionFromDownSide;
+    }
+
+    public boolean setPressedKey(String literal, boolean keyCondition) {
+        switch (literal) {
+            case "A":
+                setPressedKey_A(keyCondition);
+                break;
+
+            case "D":
+                setPressedKey_D(keyCondition);
+                break;
+
+            case "W":
+                setPressedKey_W(keyCondition);
+                break;
+
+            case "S":
+                setPressedKey_S(keyCondition);
+                break;
+
+            default:
+                return false;
+        }
+
+        return true;
     }
 
     public void setPressedKey_A(boolean pressedKey_A) {
@@ -463,5 +548,13 @@ public class Player extends Creature {
         if (wingsSound != null)
             wingsSound.stopSound();
         else System.out.println(wingsSound.toString() + " is null");
+    }
+
+    public double getVelocityXPoints() {
+        return velocityXPoints;
+    }
+
+    public double getVelocityYPoints() {
+        return velocityYPoints;
     }
 }

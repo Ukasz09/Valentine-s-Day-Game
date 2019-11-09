@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class NormalCollisionAvoid implements ICollisionAvoidWay {
 
     private Point2D offsetAfterCollision(Monster m1, Monster m2) {
-        double velocityX = m1.getVelocityX() * 2;
-        double velocityY = m1.getVelocityY() * 2;
+        double velocityX = m1.getActualVelocityX() * 2;
+        double velocityY = m1.getActualVelocityY() * 2;
 
         double addX = 0;
         double addY = 0;

@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.gameModules.sprites;
 
+import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,38 +12,105 @@ import javafx.scene.transform.Rotate;
 
 public abstract class Sprite {
     private ViewManager manager;
-    private Image actualImage;
+    protected Image spriteSheet;
     private double positionX;
     private double positionY;
-    private double velocityX;
-    private double velocityY;
-    private double width;
-    private double height;
+    private double actualVelocityX;
+    private double actualVelocityY;
+
+    protected double width;
+    protected double height;
     private double actualRotation;
-    private YAxisDirection imageDirection;
+    private DirectionEnum imageDirection;
 
-    public enum YAxisDirection {
-        LEFT, RIGHT
-    }
+    //todo:
+    private double durationPerOneFrame;
+    private double actualDuration;
+
+    protected double actualFramePositionX;
+    protected double actualFramePositionY;
+    private boolean needToChangeFrame;
+    protected double widthOfOneFrame;
+    protected double heightOfOneFrame;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Sprite(Image actualImage, ViewManager manager) {
-        this.actualImage = actualImage;
+    public Sprite(Image spriteSheet, ViewManager manager) {
+        this.spriteSheet = spriteSheet;
+        width = spriteSheet.getWidth();
+        height = spriteSheet.getHeight();
         this.manager = manager;
-        width = actualImage.getWidth();
-        height = actualImage.getHeight();
         actualRotation = 0;
-        imageDirection = YAxisDirection.RIGHT;
+        imageDirection = DirectionEnum.RIGHT;
+        durationPerOneFrame = 0;
+        needToChangeFrame = false;
+    }
+
+    public Sprite(Image spriteSheet, double spriteWidth, double spriteHeight, double widthOfOneFrame, double heightOfOneFrame, double durationPerOneFrame, ViewManager manager) {
+        this.spriteSheet = spriteSheet;
+        this.manager = manager;
+        this.width = spriteWidth;
+        this.height = spriteHeight;
+
+        this.widthOfOneFrame = widthOfOneFrame;
+        this.heightOfOneFrame = heightOfOneFrame;
+
+        actualRotation = 0;
+        imageDirection = DirectionEnum.RIGHT;
+        actualFramePositionX = 0;
+        actualFramePositionY = 0;
+        this.durationPerOneFrame = durationPerOneFrame;
+        needToChangeFrame = false;
+
+        actualDuration = durationPerOneFrame;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void update(double time) {
-        updatePosition(time);
+    //todo
+    public void setPositionOfNextFrame(double minXPosition, double maxXPosition, double minYPosition, double maxPositionY) {
+        if (!needToChangeFrame)
+            return;
+
+        actualFramePositionX += widthOfOneFrame;
+        if (actualFramePositionX >= maxXPosition) {
+            actualFramePositionX = minXPosition;
+
+            if (actualFramePositionY < maxPositionY)
+                actualFramePositionY += heightOfOneFrame;
+            else actualFramePositionY = minYPosition;
+        } else actualFramePositionX += widthOfOneFrame;
+    }
+
+    protected void updateNeedToChangeFrame(double elapsedTime) {
+//        int index = (int) ((elapsedTime % (actualAmountOfFrames * durationPerOneFrame)) / durationPerOneFrame);
+//        System.out.println(index);
+//        if (index != actualIndex){
+//            actualIndex=index;
+//            needToChangeFrame=true;
+//        } else needToChangeFrame=false;
+        actualDuration -= 1;
+        if (actualDuration <= 0) {
+            needToChangeFrame = true;
+            actualDuration = durationPerOneFrame;
+        } else needToChangeFrame = false;
+    }
+
+//    public Image getFrameIndex(double time)
+//    {
+//        int index = (int)((time % (frames.length * duration)) / duration);
+//        return frames[index];
+//    }
+
+
+    /////////
+
+    public void update(double elapsedTime) {
+        updatePosition(elapsedTime);
+        updateNeedToChangeFrame(elapsedTime);
     }
 
     private void updatePosition(double time) {
-        positionX += velocityX * time;
-        positionY += velocityY * time;
+        positionX += actualVelocityX * time;
+        positionY += actualVelocityY * time;
     }
 
     public void update(double time, double multiplierX, double multiplierY) {
@@ -50,12 +118,13 @@ public abstract class Sprite {
     }
 
     private void updatePosition(double time, double multiplierX, double multiplierY) {
-        positionX += velocityX * time * multiplierX;
-        positionY += velocityY * time * multiplierY;
+        positionX += actualVelocityX * time * multiplierX;
+        positionY += actualVelocityY * time * multiplierY;
     }
 
     public void render() {
         renderSpriteWithoutRotation();
+//        drawBoundaryForTests();
     }
 
     private void renderSpriteWithoutRotation() {
@@ -64,11 +133,12 @@ public abstract class Sprite {
     }
 
     private void drawImageWithoutMirrorReflection() {
-        manager.getGraphicContext().drawImage(actualImage, positionX, positionY);
+        manager.getGraphicContext().drawImage(spriteSheet, positionX, positionY);
     }
 
     //TEMP
-    private void drawBoundaryForTests() {
+    //todo: tmp public
+    public void drawBoundaryForTests() {
         double tmpPosX = getBoundary().getMinX();
         double tmpPosY = getBoundary().getMinY();
         double tmpWidth = getBoundary().getWidth();
@@ -104,12 +174,12 @@ public abstract class Sprite {
             gc.restore();
     }
 
-    private void drawMirrorReflectedImage(){
-        manager.getGraphicContext().drawImage(actualImage, positionX + width, positionY, -width, height);
+    private void drawMirrorReflectedImage() {
+        manager.getGraphicContext().drawImage(spriteSheet, positionX + width, positionY, -width, height);
     }
-    
+
     private boolean needToChangeImageDirection() {
-        return imageDirection.equals(Sprite.YAxisDirection.LEFT);
+        return imageDirection.equals(DirectionEnum.LEFT);
     }
 
     private boolean needToRotate() {
@@ -117,7 +187,7 @@ public abstract class Sprite {
     }
 
     public Rectangle2D getBoundary() {
-        return new Rectangle2D(positionX+0.1*width, positionY+0.1*height, width*0.8, height*0.8);
+        return new Rectangle2D(positionX, positionY, width, height);
     }
 
     ////////////////////////////////
@@ -125,24 +195,38 @@ public abstract class Sprite {
         return (s.getBoundary().intersects(this.getBoundary()));
     }
 
+    public boolean frameCollision(DirectionEnum side) {
+        switch (side) {
+            case UP:
+                return (topSideFrameCollision());
+            case DOWN:
+                return (downSideFrameCollision());
+            case LEFT:
+                return (leftSideFrameCollision());
+            case RIGHT:
+                return (rightSideFrameCollision());
+        }
+        return false;
+    }
+
+    public boolean topSideFrameCollision() {
+        double topFrameBorder = manager.getTopFrameBorder();
+        return (this.getBoundary().getMinY() <= topFrameBorder);
+    }
+
+    public boolean downSideFrameCollision() {
+        double bottomFrameBorder = manager.getBottomFrameBorder();
+        return (this.getBoundary().getMaxY() >= bottomFrameBorder);
+    }
+
     public boolean leftSideFrameCollision() {
-        double atLeftBorder = manager.getLeftBorder();
-        return (this.getBoundary().getMinX() <= atLeftBorder);
+        double leftFrameBorder = manager.getLeftFrameBorder();
+        return (this.getBoundary().getMinX() <= leftFrameBorder);
     }
 
-    public boolean boundaryCollisionFromRightSide() {
-        double atRightBorder = manager.getRightBorder();
-        return (this.getBoundary().getMaxX() >= atRightBorder);
-    }
-
-    public boolean boundaryCollisionFromBottom() {
-        double atBottomBorder = manager.getBottomBorder();
-        return (this.getBoundary().getMaxY() >= atBottomBorder);
-    }
-
-    public boolean boundaryCollisionFromTop() {
-        double atTopBorder = manager.getTopBorder();
-        return (this.getBoundary().getMinY() <= atTopBorder);
+    public boolean rightSideFrameCollision() {
+        double rightFrameBorder = manager.getRightFrameBorder();
+        return (this.getBoundary().getMaxX() >= rightFrameBorder);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,15 +235,26 @@ public abstract class Sprite {
         positionY = y;
     }
 
-    public void setVelocity(double x, double y) {
-        velocityX = x;
-        velocityY = y;
+    public void setActualVelocity(double x, double y) {
+        actualVelocityX = x;
+        actualVelocityY = y;
     }
 
-    //temp
-    public void addVelocity(double x, double y) {
-        velocityX += x;
-        velocityY += y;
+    public void addActualVelocity(DirectionEnum axis, double value) {
+        switch (axis) {
+            case LEFT:
+                actualVelocityX -= value;
+                break;
+            case RIGHT:
+                actualVelocityX += value;
+                break;
+            case UP:
+                actualVelocityY -= value;
+                break;
+            case DOWN:
+                actualVelocityY += value;
+                break;
+        }
     }
 
     public ViewManager getManager() {
@@ -174,12 +269,12 @@ public abstract class Sprite {
         return positionY;
     }
 
-    public double getVelocityX() {
-        return velocityX;
+    public double getActualVelocityX() {
+        return actualVelocityX;
     }
 
-    public double getVelocityY() {
-        return velocityY;
+    public double getActualVelocityY() {
+        return actualVelocityY;
     }
 
     public double getWidth() {
@@ -198,11 +293,23 @@ public abstract class Sprite {
         this.actualRotation = actualRotation;
     }
 
-    public void setImageDirection(YAxisDirection imageDirection) {
-        this.imageDirection = imageDirection;
+    public boolean setImageDirection(DirectionEnum imageDirection) {
+        if (imageDirection.equals(DirectionEnum.LEFT) || imageDirection.equals(DirectionEnum.RIGHT)) {
+            this.imageDirection = imageDirection;
+            return true;
+        }
+
+        return false;
     }
 
-    public YAxisDirection getImageDirection() {
+
+    public DirectionEnum getImageDirection() {
         return imageDirection;
     }
+
+    public void setSpriteSheet(Image spriteSheet) {
+        this.spriteSheet = spriteSheet;
+    }
+
+
 }

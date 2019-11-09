@@ -1,55 +1,50 @@
 package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
+import java.lang.reflect.Array;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
+//todo: usunac geographic
 public enum DirectionEnum {
-    NORTH, SOUTH, EAST, WEST;
+    LEFT("A"), RIGHT("D"), UP("W"), DOWN("S");
+
+    private static final int AMOUNT_OF_DEFINED_DIRECTION = 4;
+    private static final Random RANDOM = new Random();
+    String keypadEquivalent;
+
+    DirectionEnum(String keypadEquivalent) {
+        this.keypadEquivalent = keypadEquivalent;
+    }
 
     public static DirectionEnum getRandomDirection() {
-        int directionNumber = (int) (Math.random() * 4) + 1;
-
-        switch (directionNumber) {
-            case 1:
-                return NORTH;
-            case 2:
-                return SOUTH;
-            case 3:
-                return EAST;
-            case 4:
-                return WEST;
-            default:
-                return WEST;
-        }
+        return getRandomDirection(true, true, true, true);
     }
 
     public static DirectionEnum getRandomDirection(boolean north, boolean south, boolean east, boolean west) throws InvalidParameterException {
-        if (north || south || east || west) {
-            int directionNumber = (int) (Math.random() * 4) + 1;
-            switch (directionNumber) {
-                case 1:
-                    if (north)
-                        return NORTH;
-                    break;
-                case 2:
-                    if (south)
-                        return SOUTH;
-                    break;
-                case 3:
-                    if (east)
-                        return EAST;
-                    break;
-                case 4:
-                    if (west)
-                        return WEST;
-                    break;
-            }
-            //if we do not random allowed direction
-            if (north) return NORTH;
-            if (south) return SOUTH;
-            if (east) return EAST;
-            if (west) return WEST;
+        int directionNumber = RANDOM.nextInt(AMOUNT_OF_DEFINED_DIRECTION);
+        switch (directionNumber) {
+            case 0:
+                if (north)
+                    return UP;
+            case 1:
+                if (south)
+                    return DOWN;
+            case 2:
+                if (east)
+                    return LEFT;
+            case 3:
+                if (west)
+                    return RIGHT;
         }
 
-        throw new InvalidParameterException("Dont allow to get any direction");
+        //if we do not random allowed direction
+        if (east) return LEFT;
+        if (west) return RIGHT;
+        if (south) return DOWN;
+        return UP;
     }
 }
+

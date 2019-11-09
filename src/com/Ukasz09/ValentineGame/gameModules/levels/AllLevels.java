@@ -65,7 +65,7 @@ public abstract class AllLevels {
 
     public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime) {
         updateShots(player.getShotsList(), elapsedTime);
-        updateEnemies(player, enemiesList);
+        updateEnemies(elapsedTime, player, enemiesList);
     }
 
     public boolean levelIsEnd(Player player) {
@@ -107,9 +107,9 @@ public abstract class AllLevels {
         }
     }
 
-    private void updateEnemies(Creature target, ArrayList<Monster> enemiesList) {
+    private void updateEnemies(double elapsedTime, Creature target, ArrayList<Monster> enemiesList) {
         for (Monster m : enemiesList)
-            m.update(target, enemiesList);
+            m.update(elapsedTime, target, enemiesList);
     }
 
     /**
@@ -126,8 +126,8 @@ public abstract class AllLevels {
     public abstract void render(ArrayList<Monster> monsters, ArrayList<Coin> coins, ArrayList<Weapon> shots, Player player);
 
     public Point2D getDefaultPlayerPosition() {
-        double positionX = manager.getRightBorder() / 2;
-        double positionY = manager.getBottomBorder() / 2;
+        double positionX = manager.getRightFrameBorder() / 2;
+        double positionY = manager.getBottomFrameBorder() / 2;
         return new Point2D(positionX, positionY);
     }
 
@@ -171,8 +171,8 @@ public abstract class AllLevels {
 
     public void renderScoreText(int score) {
         String pointsText = MONEY_COMMUNICATE + score;
-        double posX = manager.getLeftBorder();
-        double posY = manager.getTopBorder() + 75;
+        double posX = manager.getLeftFrameBorder();
+        double posY = manager.getTopFrameBorder() + 75;
         renderText(pointsText, Color.TAN, posX, posY);
     }
 

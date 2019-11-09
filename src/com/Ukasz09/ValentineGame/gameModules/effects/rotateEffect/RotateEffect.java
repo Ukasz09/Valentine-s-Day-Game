@@ -1,6 +1,7 @@
 package com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Creature;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 
 public class RotateEffect {
 
@@ -18,8 +19,8 @@ public class RotateEffect {
         double rotation = Math.toDegrees(creatureToRotate.getAngleToTarget(target));
         if (rotation > 90 || rotation < -90) {
             rotation += 180;
-            creatureToRotate.setImageDirection(Creature.YAxisDirection.LEFT);
-        } else creatureToRotate.setImageDirection(Creature.YAxisDirection.RIGHT);
+            creatureToRotate.setImageDirection(DirectionEnum.LEFT);
+        } else creatureToRotate.setImageDirection(DirectionEnum.RIGHT);
 
         return rotation;
     }

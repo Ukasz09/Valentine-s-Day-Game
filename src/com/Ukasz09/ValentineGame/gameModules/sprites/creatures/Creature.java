@@ -5,17 +5,46 @@ import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import javafx.scene.image.Image;
 
 public abstract class Creature extends Sprite {
+    private final static double DEFAULT_MAX_LIVES = 0;
+    private final static double DEFAULT_LIVES = 0;
+
     private double lives;
-    protected double maxLives;
+    private double maxLives;
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Creature(Image actualImage, ViewManager manager) {
-        super(actualImage, manager);
+    public Creature(Image image, ViewManager manager) {
+        super(image, manager);
+        lives = 3;
+        maxLives = lives;
+    }
+
+    public Creature(Image image, double creatureWidth, double creatureHeight, double widthOfOneFrame, double heightOfOneFrame, double durationPerOneFrame, ViewManager manager) {
+        super(image, creatureWidth, creatureHeight, widthOfOneFrame, heightOfOneFrame, durationPerOneFrame, manager);
         lives = 3;
         maxLives = lives;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    protected abstract void setDefaultProperties();
+
+    protected void setMaxLives(double maxLives) {
+        if (maxLives > 0)
+            this.maxLives = maxLives;
+        else this.maxLives = DEFAULT_MAX_LIVES;
+    }
+
+
+    protected void setLives(double lives) {
+        if (lives > 0)
+            this.lives = lives;
+        else this.lives = DEFAULT_LIVES;
+    }
+
+    public double getLives() {
+        return lives;
+    }
+
     public float getAngleToTarget(Creature target) {
         double dx = this.getPositionX();
         double dy = this.getPositionY();
@@ -28,15 +57,6 @@ public abstract class Creature extends Sprite {
 
     public void removeLives(double howMany) {
         lives -= howMany;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void setLives(double lives) {
-        this.lives = lives;
-    }
-
-    public double getLives() {
-        return lives;
     }
 
     public double getMaxLives() {

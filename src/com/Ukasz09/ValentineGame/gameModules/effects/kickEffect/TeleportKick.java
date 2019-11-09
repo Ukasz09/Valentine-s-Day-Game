@@ -19,43 +19,43 @@ public class TeleportKick implements KindOfKick {
             break;
 
             case "D": {
-                if (!player.boundaryCollisionFromRightSide())
+                if (!player.rightSideFrameCollision())
                     player.setPosition(player.getPositionX() + m.getKickSize(), player.getPositionY());
             }
             break;
 
             case "W": {
-                if (!player.boundaryCollisionFromTop())
+                if (!player.topSideFrameCollision())
                     player.setPosition(player.getPositionX(), player.getPositionY() - m.getKickSize());
             }
             break;
 
             case "S": {
-                if (!player.boundaryCollisionFromBottom())
+                if (!player.downSideFrameCollision())
                     player.setPosition(player.getPositionX(), player.getPositionY() + m.getKickSize());
             }
             break;
 
             case "SD": {
-                if ((!player.boundaryCollisionFromBottom()) && (!player.boundaryCollisionFromRightSide()))
+                if ((!player.downSideFrameCollision()) && (!player.rightSideFrameCollision()))
                     player.setPosition(player.getPositionX() + m.getKickSize(), player.getPositionY() + m.getKickSize());
             }
             break;
 
             case "WD": {
-                if ((!player.boundaryCollisionFromTop()) && (!player.boundaryCollisionFromRightSide()))
+                if ((!player.topSideFrameCollision()) && (!player.rightSideFrameCollision()))
                     player.setPosition(player.getPositionX() + m.getKickSize(), player.getPositionY() - m.getKickSize());
             }
             break;
 
             case "SA": {
-                if ((!player.boundaryCollisionFromBottom()) && (!player.leftSideFrameCollision()))
+                if ((!player.downSideFrameCollision()) && (!player.leftSideFrameCollision()))
                     player.setPosition(player.getPositionX() - m.getKickSize(), player.getPositionY() + m.getKickSize());
             }
             break;
 
             case "WA": {
-                if ((!player.boundaryCollisionFromTop()) && (!player.leftSideFrameCollision()))
+                if ((!player.topSideFrameCollision()) && (!player.leftSideFrameCollision()))
                     player.setPosition(player.getPositionX() - m.getKickSize(), player.getPositionY() - m.getKickSize());
             }
             break;

@@ -18,8 +18,8 @@ public class InCorner extends HeartsRender implements IHeartsPosition {
         double heartWidth=getHeartFullImage().getWidth();
         double heartHeight=getHeartFullImage().getHeight();
 
-        double positionX = getManager().getRightBorder() - creature.getMaxLives() * heartWidth;
-        double positionY = getManager().getBottomBorder() - heartHeight;
+        double positionX = getManager().getRightFrameBorder() - creature.getMaxLives() * heartWidth;
+        double positionY = getManager().getBottomFrameBorder() - heartHeight;
         return new Point2D(positionX,positionY);
     }
 
