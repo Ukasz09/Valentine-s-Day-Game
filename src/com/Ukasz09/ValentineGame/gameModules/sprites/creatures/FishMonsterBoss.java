@@ -5,6 +5,10 @@ import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.AutoActivateShield;
 import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.HealthStatusBar;
@@ -14,44 +18,51 @@ import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
-public class FishMonsterBoss extends Monster{
-    public static final String HIT_SOUND_PATH = SoundsPath.FISH_MINIBOSS_HIT_SOUND_PATH;
-    public static final String DEATH_SOUND_PATH = SoundsPath.FISH_MINIBOSS_DEATH_SOUND_PATH;
-    public static final String MISS_SHOT_SOUND_PATH = SoundsPath.FISH_MONSTER_MISS_SHOT_SOUND_PATH;
+public class FishMonsterBoss extends Monster {
+    private static final String HIT_SOUND_PATH = SoundsPath.FISH_MINIBOSS_HIT_SOUND_PATH;
+    private static final String DEATH_SOUND_PATH = SoundsPath.FISH_MINIBOSS_DEATH_SOUND_PATH;
+    private static final String MISS_SHOT_SOUND_PATH = SoundsPath.FISH_MONSTER_MISS_SHOT_SOUND_PATH;
 
-    public static final double DEATH_SOUND_VOLUME = 1;
-    public static final double HIT_SOUND_VOLUME = 1;
-    public static final double MISS_SHOT_SOUND_VOLUME = 1;
+    private static final double DEATH_SOUND_VOLUME = 1;
+    private static final double HIT_SOUND_VOLUME = 1;
+    private static final double MISS_SHOT_SOUND_VOLUME = 1;
 
     private static final SoundsPlayer HIT_SOUND = new SoundsPlayer(HIT_SOUND_PATH, HIT_SOUND_VOLUME, false);
     private static final SoundsPlayer MISS_SOUND = new SoundsPlayer(MISS_SHOT_SOUND_PATH, MISS_SHOT_SOUND_VOLUME, false);
     private static final SoundsPlayer DEATH_SOUND = new SoundsPlayer(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME, false);
 
+    private static final double DEFAULT_SPRITE_WIDTH = 318;
+    private static final double DEFAULT_SPRITE_HEIGHT = 308;
+
+    private static final double DEFAULT_SHIELD_WIDTH = 318;
+    private static final double DEFAULT_SHIELD_HEIGHT = 308;
+
+    private static final double DEFAULT_LIVES = 20;
+    private static final double DEFAULT_LIVES_TAKE = 1.5;
+    private static final int DEFAULT_KICK_SIZE = 25;
+    private static final double DEFAULT_VELOCITY_X = 3;
+    private static final double DEFAULT_VELOCITY_Y = 3;
+    private static final int DEFAULT_SHIELD_COOLDOWN = 5000;
+    private static final int DEFAULT_SHIELD_DURATION = 10000;
+
     private final Shield shield;
     private final HealthStatusBar healthBar;
-
-    private final double defaultLives = 20;
-    private final double defaultLivesTake = 1.5;
-    private final int defaultKickSize = 25;
-    private final double defaultVelocityX = 3;
-    private final double defaultVelocityY = 3;
-    private final int defaultShieldCooldown = 5000;
-    private final int defaultShieldDuration = 10000;
+    private KindOfState actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public FishMonsterBoss(Image image, Image shieldImage, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
-        super(image, kickMethod, manager, collisionAvoidWay);
-        setDefaultProperties();
-        shield = new AutoActivateShield(defaultShieldCooldown, defaultShieldDuration, shieldImage);
-        healthBar = new HealthStatusBar(defaultLives, getWidth(), getPositionX(), getPositionY());
+    public FishMonsterBoss(CreatureSheetProperty spriteSheetProperty, ImageSheetProperty shieldSheetProperty, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+        super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, manager);
+        hueImage(-1, 1);
+//        setSpriteSheetProperties(WIDTH_OF_ONE_FRAME, HEIGHT_OF_ONE_FRAME);
+        setCreatureProperties(DEFAULT_LIVES, DEFAULT_VELOCITY_X, DEFAULT_VELOCITY_Y);
+        setMonsterProperties(kickMethod, DEFAULT_KICK_SIZE, DEFAULT_LIVES_TAKE, collisionAvoidWay);
+
+        actualState = spriteSheetProperty.getMove();
+        shield = new AutoActivateShield(shieldSheetProperty, DEFAULT_SHIELD_WIDTH, DEFAULT_SHIELD_HEIGHT, DEFAULT_SHIELD_COOLDOWN, DEFAULT_SHIELD_DURATION, manager);
+        healthBar = new HealthStatusBar(DEFAULT_LIVES, getWidth(), getPositionX(), getPositionY());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Override
-    protected void setDefaultProperties() {
-        setProperties(defaultKickSize,defaultLivesTake,defaultLives,defaultVelocityX,defaultVelocityY);
-    }
-
     public void updateShield() {
         shield.updateShield();
     }
@@ -72,8 +83,8 @@ public class FishMonsterBoss extends Monster{
     }
 
     @Override
-    public void update(double elapsedTime, Creature player, ArrayList<Monster> enemiesList) {
-        super.update(elapsedTime, player, enemiesList);
+    public void update(Creature player, ArrayList<Monster> enemiesList) {
+        super.update(player, enemiesList);
         healthBar.update(getLives(), getPositionX(), getPositionY());
         updateShield();
     }
@@ -87,14 +98,14 @@ public class FishMonsterBoss extends Monster{
 
     //todo: zmienic render shielda
     private void renderShield() {
-        if(shield.isActive()){
+        if (shield.isActive()) {
             double centerPositionX;
             if (getImageDirection().equals(DirectionEnum.LEFT))
                 centerPositionX = getPositionX() + 40;
             else centerPositionX = getPositionX();
             double centerPositionY = getPositionY();
 
-           shield.render(centerPositionX,centerPositionY,getManager().getGraphicContext());
+            shield.render(centerPositionX, centerPositionY);
         }
     }
 
@@ -116,5 +127,10 @@ public class FishMonsterBoss extends Monster{
     @Override
     public boolean hasActiveShield() {
         return shield.isActive();
+    }
+
+    @Override
+    protected void setPositionOfNextFrame() {
+        setPositionOfNextFrame(actualState.getMinX(), actualState.getMaxX(), actualState.getMinY(), actualState.getMaxY(), spriteImage.getWidth());
     }
 }

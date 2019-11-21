@@ -10,18 +10,15 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickByLittleMonster;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.TeleportKick;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 
-import javafx.scene.SnapshotParameters;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Level_1 extends AllLevels {
     public static final String BACKGROOUND_IMAGE_PATH = BackgroundPath.BACKGROUD_IMAGE_PATH_L_0;
@@ -32,7 +29,7 @@ public class Level_1 extends AllLevels {
     private final int amountOfNormalCoins = 3;
     private final int amountOfBigCoins = 2;
 
-    private final int amountOfMonsters = 2;
+    private final int amountOfMonsters = 1;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_1(ViewManager manager) {
@@ -43,7 +40,8 @@ public class Level_1 extends AllLevels {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void spawnEnemies(ArrayList<Monster> enemiesList) {
-        Image littleMonsterImage = new Image(SpritesPath.LITTLE_MONSTER_SPRITES_SHEET_1_PATH);
+        CreatureSheetProperty sheetProperty= SpritesProperties.littleMonsterSheetProperty();
+//        Image littleMonsterImage = new Image(SpritesPath.LITTLE_MONSTER1_SHEET_PATH);
 //        ColorAdjust monochrome = new ColorAdjust();
 ////        monochrome.setSaturation(-1.0);
 //        Random random=new Random();
@@ -60,7 +58,7 @@ public class Level_1 extends AllLevels {
 //        Image huedImage = iv.snapshot(params, null);
         LittleMonster littleMonster;
         for (int i = 0; i < amountOfMonsters; i++) {
-            littleMonster = new LittleMonster(littleMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
+            littleMonster = new LittleMonster(sheetProperty, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
             littleMonster.setStartedPosition();
             enemiesList.add(littleMonster);
         }

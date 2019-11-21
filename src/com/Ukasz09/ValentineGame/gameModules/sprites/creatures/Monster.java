@@ -4,14 +4,16 @@ import com.Ukasz09.ValentineGame.gameModules.effects.collisionAvoidEffect.IColli
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
-/*
-    hitSound, deathSound, missSound - is static to avoid remove object by garbage collector before sound stop play effect
- */
 public abstract class Monster extends Creature {
     private double kickSize;
     private double livesTake;
@@ -19,32 +21,47 @@ public abstract class Monster extends Creature {
     private ICollisionAvoidWay collisionAvoidWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Monster(Image image, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
-        super(image, manager);
-        livesTake = 0;
-        kickSize = 0;
-        setActualVelocity(0, 0);
-        this.kickMethod = kickMethod;
-        this.collisionAvoidWay = collisionAvoidWay;
-        setStartedPosition();
-    }
+//    public Monster(CreatureSheetProperty spriteSheetProperty, double spriteWidth, double spriteHeight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+//        super(spriteSheetProperty, spriteWidth, spriteHeight, manager);
+//        livesTake = 0;
+//        kickSize = 0;
+//        setActualVelocity(0, 0);
+//        this.kickMethod = kickMethod;
+//        this.collisionAvoidWay = collisionAvoidWay;
+//        setStartedPosition();
+//    }
 
-    public Monster(Image spriteSheet, double creatureWidth, double creatureHeight, double widthOfOneFrame, double heightOfOneFrame, double durationPerOneFrame, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
-        super(spriteSheet, creatureWidth, creatureHeight, widthOfOneFrame, heightOfOneFrame, durationPerOneFrame, manager);
-        livesTake = 0;
-        kickSize = 0;
-        setActualVelocity(0, 0);
-        this.kickMethod = kickMethod;
-        this.collisionAvoidWay = collisionAvoidWay;
+    public Monster(CreatureSheetProperty spriteSheetProperty, double creatureWidth, double creatureHeight, ViewManager manager) {
+        super(spriteSheetProperty, creatureWidth, creatureHeight, manager);
         setStartedPosition();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    protected void setMonsterProperties(KickPlayer kickMethod, double kickSize, double livesTake, ICollisionAvoidWay collisionAvoidWay) {
+        this.kickMethod = kickMethod;
+        this.kickSize = kickSize;
+        this.livesTake = livesTake;
+        this.collisionAvoidWay = collisionAvoidWay;
+    }
+
+    protected void hueImage(double minRandHueOffset, double maxRandHueOffset) {
+        ImageView iv = new ImageView(spriteImage);
+        ColorAdjust hueEffect = new ColorAdjust();
+        double randHue = (Math.random() * (maxRandHueOffset - minRandHueOffset + 1)) + minRandHueOffset;
+        //todo: tmp
+        System.out.println(randHue);
+        hueEffect.setHue(randHue);
+        iv.setEffect(hueEffect);
+        SnapshotParameters params = new SnapshotParameters();
+        params.setFill(Color.TRANSPARENT);
+        Image huedImage = iv.snapshot(params, null);
+        spriteImage = huedImage;
+    }
+
     @Override
     public void render() {
         renderSpriteWithRotation();
     }
-
 
     abstract public SoundsPlayer getHitSoundOrNull();
 
@@ -56,20 +73,16 @@ public abstract class Monster extends Creature {
 
     abstract public boolean hasActiveShield();
 
-    protected void setProperties(double kickSize, double livesTake, double lives, double velocityX, double velocityY) {
-        setLives(lives);
-        this.kickSize = kickSize;
-        this.livesTake = livesTake;
-        setActualVelocity(velocityX, velocityY);
-    }
 
-    public void update(double elapsedTime, Creature target, ArrayList<Monster> enemiesList) {
-        updateNeedToChangeFrame(elapsedTime);
+    public void update(Creature target, ArrayList<Monster> enemiesList) {
+//        updateNeedToChangeFrame();
+//        setPositionOfNextFrame();
+        updateSpriteSheetFrame();
         collisionAvoidWay.updateCords(target, this, enemiesList);
         updateMonsterRotate(target);
     }
 
-    abstract public void updateMonsterRotate(Creature target);
+    protected abstract void updateMonsterRotate(Creature target);
 
     public void updateByVelocity(Creature target) {
         double dx = this.getPositionX();

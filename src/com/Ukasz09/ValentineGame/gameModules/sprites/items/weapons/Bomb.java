@@ -2,11 +2,10 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-
-import javafx.scene.image.Image;
 
 public class Bomb extends Weapon {
     private static final double DEFAULT_LIVES_TAKES = 2;
@@ -17,27 +16,28 @@ public class Bomb extends Weapon {
     private static final String BOMB_BOOM_SOUND_PREFIX = SoundsPath.BOMB_BOOM_SOUND_PATH_PREFIX;
     private static final String BOMB_SHOT_SOUND_PATH = SoundsPath.BOMB_SHOT_SOUND_PATH;
     private static final SoundsPlayer SHOT_SOUND = new SoundsPlayer(BOMB_SHOT_SOUND_PATH, DEFAULT_SHOT_VOLUME, false);
-    private static final Image[] DEFAULT_BOMB_IMAGES = SpritesImages.getUkaszBombShotImages();
     private static double maxOverheating = DEFAULT_MAX_OVERHEATING;
     private static SoundsPlayer[] bombBoomSound;
 
+    private static double DEFAULT_SPRITE_WIDTH = 50;
+    private static double DEFAULT_SPRITE_HEIGHT = 50;
+
+    private KindOfState actualState;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Bomb(double positionX, double positionY, ViewManager manager) {
-        this(getRandomDefaultImage(), DEFAULT_SHOT_VELOCITY, positionX, positionY, DEFAULT_LIVES_TAKES, DEFAULT_MAX_OVERHEATING, manager);
+    public Bomb(ImageSheetProperty spriteSheetProperty, double positionX, double positionY, ViewManager manager) {
+        this(spriteSheetProperty, DEFAULT_SHOT_VELOCITY, positionX, positionY, DEFAULT_LIVES_TAKES, DEFAULT_MAX_OVERHEATING, manager);
     }
 
-    public Bomb(Image image, double shotVelocity, double positionX, double positionY, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
-        super(image, shotVelocity, shotVelocity, positionX, positionY, howManyLiveTakes, manager);
+    public Bomb(ImageSheetProperty spriteSheetProperty, double shotVelocity, double positionX, double positionY, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
+        super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, shotVelocity, shotVelocity, positionX, positionY, howManyLiveTakes, manager);
         this.maxOverheating = maxOverheating;
         bombBoomSound = getBombBoomSound(DEFAULT_AMOUNT_OF_BOMB_BOOM_SOUNDS);
+        actualState = spriteSheetProperty.getMove();
     }
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    private static Image getRandomDefaultImage() {
-        return (DEFAULT_BOMB_IMAGES[(int) (Math.random() * 2)]);
-    }
-
     @Override
     public void update(double elapsedTime) {
         update(elapsedTime, 0, 1);
@@ -80,6 +80,11 @@ public class Bomb extends Weapon {
             boomSound[i] = new SoundsPlayer(BOMB_BOOM_SOUND_PREFIX + i + ".mp3", DEFAULT_SHOT_VOLUME, false);
 
         return boomSound;
+    }
+
+    @Override
+    protected void setPositionOfNextFrame() {
+        setPositionOfNextFrame(actualState.getMinX(), actualState.getMaxX(), actualState.getMinY(), actualState.getMaxY(), spriteImage.getWidth());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

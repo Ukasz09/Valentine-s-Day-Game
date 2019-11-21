@@ -2,14 +2,14 @@ package com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars;
 
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Creature;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 public abstract class HeartsRender {
-    private static final Image DEFAULT_FULL_HEART = SpritesImages.heartFullImage;
-    private static final Image DEFAULT_HALF_HEART = SpritesImages.heartHalfImage;
-    private static final Image DEFAULT_EMPTY_HEART = SpritesImages.heartEmptyImage;
+    private static final Image DEFAULT_FULL_HEART = SpritesProperties.heartFullImage;
+    private static final Image DEFAULT_HALF_HEART = SpritesProperties.heartHalfImage;
+    private static final Image DEFAULT_EMPTY_HEART = SpritesProperties.heartEmptyImage;
 
     private Image heartFullImage;
     private Image heartHalfImage;

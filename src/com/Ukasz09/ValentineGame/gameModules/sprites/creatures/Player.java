@@ -9,7 +9,10 @@ import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.HeartsRend
 import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.InCorner;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bomb;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bullet;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.Shield;
@@ -30,17 +33,23 @@ public class Player extends Creature {
     private static final int DEFAULT_ANTICOLLISION_TIMER = 4000;
     private static final double DEFAULT_HIT_SOUND_VOLUME = 0.2;
 
-    private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
-    private static final Image PLAYER_SHIELD_IMAGE = SpritesImages.playerShieldImage;
+    //    private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
+//    private static final Image PLAYER_SHIELD_IMAGE = SpritesImages.playerShieldImage;
     private static final double WINGS_SOUND_VOLUME = 1;
     private static final String WINGS_SOUND_PATH = SoundsPath.PLAYER_WINGS_SOUND_PATH;
+
+    private static final double DEFAULT_SPRITE_WIDTH = 170;
+    private static final double DEFAULT_SPRITE_HEIGHT = 200;
+
+    private static final double DEFAULT_SHIELD_WIDTH = 200;
+    private static final double DEFAULT_SHIELD_HEIGHT = 200;
 
     private final double amountOfToPixelRotate = 15;
 
     private ArrayList<Weapon> shotsList;
     private Shield shield;
     private SoundsPlayer[] playerHitSounds;
-    private Image[] batteryImages = SpritesImages.getBatteryImages();
+    private Image[] batteryImages = SpritesProperties.batteryImages();
     private int totalScore;
     private double bombOverheating;
     private double bulletOverheating;
@@ -62,15 +71,18 @@ public class Player extends Creature {
 
     private double velocityXPoints;
     private double velocityYPoints;
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Player(ViewManager manager) {
-        this(PLAYER_RIGHT_IMAGE, PLAYER_SHIELD_IMAGE, manager);
-    }
 
-    public Player(Image spriteImage, Image shieldImage, ViewManager manager) {
-        super(spriteImage, manager);
+    private KindOfState actualState;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//    public Player(ViewManager manager) {
+//        this(PLAYER_RIGHT_IMAGE, PLAYER_SHIELD_IMAGE, manager);
+//    }
+
+    public Player(CreatureSheetProperty spriteSheetProperty, ImageSheetProperty shieldSheetProperty, ViewManager manager) {
+        super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, manager);
         setDefaultProperties();
-        shield = new ManualActivateShield(DEFAULT_SHIELD_DURATION, shieldImage);
+        shield = new ManualActivateShield(shieldSheetProperty,DEFAULT_SHIELD_WIDTH, DEFAULT_SHIELD_HEIGHT, DEFAULT_SHIELD_DURATION,manager);
         playerHitSounds = getPlayerHitSounds();
         heartsRender = new InCorner(manager);
         shotsList = new ArrayList<>();
@@ -86,15 +98,15 @@ public class Player extends Creature {
         pressedKey_S = false;
         setImageDirection(DirectionEnum.RIGHT);
         wingsSound = new SoundsPlayer(WINGS_SOUND_PATH, WINGS_SOUND_VOLUME, true);
+        actualState = spriteSheetProperty.getMove();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Override
     protected void setDefaultProperties() {
         setMaxLives(DEFAULT_LIVES);
         setLives(DEFAULT_LIVES);
-        velocityXPoints=DEFAULT_VELOCITY;
-        velocityYPoints=DEFAULT_VELOCITY;
+        velocityXPoints = DEFAULT_VELOCITY;
+        velocityYPoints = DEFAULT_VELOCITY;
         setActualVelocity(DEFAULT_VELOCITY, DEFAULT_VELOCITY);
         totalScore = 0;
         bombOverheating = 0;
@@ -107,11 +119,11 @@ public class Player extends Creature {
     private void renderShield() {
         GraphicsContext gc = getManager().getGraphicContext();
         if (shield.isActive())
-            shield.render(getPositionX(), getPositionY(), gc);
+            shield.render(getPositionX(),getPositionY());
     }
 
     public void update(double time, ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList) {
-        super.update(time);
+        super.update(time, 1, 1);
         updateAllCollisions(coinsList, enemiesList);
         updateShield();
         updateBattery();
@@ -130,31 +142,14 @@ public class Player extends Creature {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //do NOT touch
-    //todo: naprawic by lepiej pasowaly
+    //todo: naprawic by lepiej pasowaly (rysowanie osobno skrzydel o głowy)
     @Override
     public Rectangle2D getBoundary() {
         double width = getWidth();
         double height = getHeight();
-
         if (getImageDirection().equals(DirectionEnum.RIGHT))
-            return new Rectangle2D(getPositionX() + width / 2.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
-
+            return new Rectangle2D(getPositionX() + width - (width / 5.5) - width / 2.4, getPositionY() + height / 2.8, width / 2.4, height / 2);
         return new Rectangle2D(getPositionX() + width / 5.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
-//        if (getImageDirection().equals(YAxisDirection.RIGHT)) {
-//            if (getActualRotation() == amountOfToPixelRotate)
-//                return new Rectangle2D(getPositionX() + width / 2, getPositionY() + height / 2, width / 2.4, height / 2);
-//            else if (getActualRotation() == -amountOfToPixelRotate)
-//                return new Rectangle2D(getPositionX() + width / 1.8, getPositionY() + height / 2.2, width / 2.3, height / 2.2);
-//            else
-//                return new Rectangle2D(getPositionX() + width / 2.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
-//        } else {
-//            if (getActualRotation() == amountOfToPixelRotate)
-//                return new Rectangle2D(getPositionX() + width / 3.9, getPositionY() + height / 2.3, width / 2.3, height / 2.2);
-//            else if (getActualRotation() == -amountOfToPixelRotate)
-//                return new Rectangle2D(getPositionX() + width / 2.7, getPositionY() + height / 2, width / 2.5, height / 2.1);
-//            else
-//                return new Rectangle2D(getPositionX() + width / 5.5, getPositionY() + height / 2.8, width / 2.4, height / 2);
-//        }
     }
 
     private void addTotalScore(int score) {
@@ -200,7 +195,8 @@ public class Player extends Creature {
 
     public void addBullet() {
         Point2D bulletPosition = getBulletPosition();
-        Bullet bullet = new Bullet(getImageDirection(), bulletPosition.getX(), bulletPosition.getY(), getManager());
+        ImageSheetProperty bulletSheetProperty=SpritesProperties.playerShotBallProperty();
+        Bullet bullet = new Bullet(bulletSheetProperty, getImageDirection(), bulletPosition.getX(), bulletPosition.getY(), getManager());
         shotsList.add(bullet);
         bullet.playShotSound();
         overheatBulletGun();
@@ -222,7 +218,7 @@ public class Player extends Creature {
 
     public void addBomb() {
         Point2D bombPosition = getBombPosition();
-        Bomb bomb = new Bomb(bombPosition.getX(), bombPosition.getY(), getManager());
+        Bomb bomb = new Bomb(SpritesProperties.randomPlayerShotBombPoperty(),bombPosition.getX(), bombPosition.getY(), getManager());
         shotsList.add(bomb);
         bomb.playShotSound();
         overheatBombGun();
@@ -359,20 +355,9 @@ public class Player extends Creature {
         shotsList.clear();
     }
 
-    public boolean canNotDoAnyMove() {
-        if (collisionFromDownSide && collisionFromUpSide && collisionFromLeftSide && collisionFromRightSide)
-            return true;
-        else return false;
+    public boolean cannotDoAnyMove() {
+        return (collisionFromDownSide && collisionFromUpSide && collisionFromLeftSide && collisionFromRightSide);
     }
-
-//    public boolean checkPlayerCanDoAnyMove() {
-////        if (playerCantDoAnyMove()) {
-////            restoreAnticollisionTimer();
-////            return true;
-////        }
-////
-////        return false;
-////    }
 
     public boolean anticollisionModeIsActive() {
         return (anticollisionTimer > 0);
@@ -383,7 +368,7 @@ public class Player extends Creature {
         setAllCollision(false);
     }
 
-    private void setAllCollision(boolean condition) {
+    public void setAllCollision(boolean condition) {
         collisionFromLeftSide = condition;
         collisionFromRightSide = condition;
         collisionFromUpSide = condition;
@@ -409,6 +394,11 @@ public class Player extends Creature {
 //        updateLastRotate();
         double properRotate = RotateEffect.rotateByPressedKey(pressedKey_A, pressedKey_D, pressedKey_W, pressedKey_S, amountOfToPixelRotate);
         setActualRotation(properRotate);
+    }
+
+    @Override
+    protected void setPositionOfNextFrame() {
+        setPositionOfNextFrame(actualState.getMinX(), actualState.getMaxX(), actualState.getMinY(), actualState.getMaxY(), spriteImage.getWidth());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -471,6 +461,21 @@ public class Player extends Creature {
             case RIGHT:
                 setCollisionFromRightSide(condition);
                 break;
+        }
+    }
+
+    public boolean getCollision(DirectionEnum side) {
+        switch (side) {
+            case UP:
+                return collisionFromUpSide;
+            case DOWN:
+                return collisionFromDownSide;
+            case LEFT:
+                return collisionFromLeftSide;
+            case RIGHT:
+                return collisionFromRightSide;
+            default:
+                return false;
         }
     }
 

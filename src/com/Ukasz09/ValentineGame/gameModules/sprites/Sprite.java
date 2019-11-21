@@ -2,6 +2,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites;
 
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -12,110 +13,92 @@ import javafx.scene.transform.Rotate;
 
 public abstract class Sprite {
     private ViewManager manager;
-    protected Image spriteSheet;
+
+    //todo: tmp
+    protected Image spriteImage;
+
     private double positionX;
     private double positionY;
     private double actualVelocityX;
     private double actualVelocityY;
-
     protected double width;
     protected double height;
     private double actualRotation;
     private DirectionEnum imageDirection;
 
-    //todo:
     private double durationPerOneFrame;
-    private double actualDuration;
+    private double remainingTimeOnActualFrame;
 
-    protected double actualFramePositionX;
     protected double actualFramePositionY;
-    private boolean needToChangeFrame;
+    protected double actualFramePositionX;
+
+    //todo:tmp
     protected double widthOfOneFrame;
     protected double heightOfOneFrame;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Sprite(Image spriteSheet, ViewManager manager) {
-        this.spriteSheet = spriteSheet;
-        width = spriteSheet.getWidth();
-        height = spriteSheet.getHeight();
-        this.manager = manager;
-        actualRotation = 0;
-        imageDirection = DirectionEnum.RIGHT;
-        durationPerOneFrame = 0;
-        needToChangeFrame = false;
-    }
-
-    public Sprite(Image spriteSheet, double spriteWidth, double spriteHeight, double widthOfOneFrame, double heightOfOneFrame, double durationPerOneFrame, ViewManager manager) {
-        this.spriteSheet = spriteSheet;
-        this.manager = manager;
+    public Sprite(ImageSheetProperty spriteSheetProperty, double spriteWidth, double spriteHeight, ViewManager manager) {
+        this.spriteImage = spriteSheetProperty.getImage();
         this.width = spriteWidth;
         this.height = spriteHeight;
-
-        this.widthOfOneFrame = widthOfOneFrame;
-        this.heightOfOneFrame = heightOfOneFrame;
-
-        actualRotation = 0;
+        this.manager = manager;
         imageDirection = DirectionEnum.RIGHT;
+        actualRotation = 0;
+        positionX = 0;
+        positionY = 0;
+
+        //todo: tmp
+        widthOfOneFrame = spriteSheetProperty.getWidthOfOneFrame();
+        heightOfOneFrame = spriteSheetProperty.getHeightOfOneFrame();
         actualFramePositionX = 0;
         actualFramePositionY = 0;
-        this.durationPerOneFrame = durationPerOneFrame;
-        needToChangeFrame = false;
 
-        actualDuration = durationPerOneFrame;
+        durationPerOneFrame = 4; //todo: tmp
+        remainingTimeOnActualFrame = 0;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //todo
-    public void setPositionOfNextFrame(double minXPosition, double maxXPosition, double minYPosition, double maxPositionY) {
-        if (!needToChangeFrame)
-            return;
-
+    public void setPositionOfNextFrame(double minXPosition, double maxXPosition, double minYPosition, double maxYPosition, double sheetWidth) {
+        //Finished one cycle
         actualFramePositionX += widthOfOneFrame;
-        if (actualFramePositionX >= maxXPosition) {
+        if (actualFramePositionX >= maxXPosition && actualFramePositionY >= maxYPosition) {
             actualFramePositionX = minXPosition;
-
-            if (actualFramePositionY < maxPositionY)
-                actualFramePositionY += heightOfOneFrame;
-            else actualFramePositionY = minYPosition;
-        } else actualFramePositionX += widthOfOneFrame;
+            actualFramePositionY = minYPosition;
+        }
+        //Steped out of sheet
+        else if (actualFramePositionX >= sheetWidth) {
+            actualFramePositionX = minXPosition;
+            actualFramePositionY += heightOfOneFrame;
+        }
     }
 
-    protected void updateNeedToChangeFrame(double elapsedTime) {
-//        int index = (int) ((elapsedTime % (actualAmountOfFrames * durationPerOneFrame)) / durationPerOneFrame);
-//        System.out.println(index);
-//        if (index != actualIndex){
-//            actualIndex=index;
-//            needToChangeFrame=true;
-//        } else needToChangeFrame=false;
-        actualDuration -= 1;
-        if (actualDuration <= 0) {
-            needToChangeFrame = true;
-            actualDuration = durationPerOneFrame;
-        } else needToChangeFrame = false;
+    protected void updateSpriteSheetFrame() {
+        updateRemainingTimeOnFrame();
+        if (needToChangeFrame()) {
+            setPositionOfNextFrame();
+            restoreRemainingTimeOnFrame();
+        }
     }
 
-//    public Image getFrameIndex(double time)
-//    {
-//        int index = (int)((time % (frames.length * duration)) / duration);
-//        return frames[index];
-//    }
-
-
-    /////////
-
-    public void update(double elapsedTime) {
-        updatePosition(elapsedTime);
-        updateNeedToChangeFrame(elapsedTime);
+    private void updateRemainingTimeOnFrame() {
+        remainingTimeOnActualFrame -= 1;
     }
 
-    private void updatePosition(double time) {
-        positionX += actualVelocityX * time;
-        positionY += actualVelocityY * time;
+    private void restoreRemainingTimeOnFrame() {
+        remainingTimeOnActualFrame = durationPerOneFrame;
     }
 
-    public void update(double time, double multiplierX, double multiplierY) {
-        updatePosition(time, multiplierX, multiplierY);
+    private boolean needToChangeFrame() {
+        return (remainingTimeOnActualFrame <= 0);
     }
+
+    public void update(double elapsedTime, double multiplierX, double multiplierY) {
+        updatePosition(elapsedTime, multiplierX, multiplierY);
+        updateSpriteSheetFrame();
+    }
+
+    //todo: dac actualState w Sprite
+    protected abstract void setPositionOfNextFrame();
 
     private void updatePosition(double time, double multiplierX, double multiplierY) {
         positionX += actualVelocityX * time * multiplierX;
@@ -133,7 +116,7 @@ public abstract class Sprite {
     }
 
     private void drawImageWithoutMirrorReflection() {
-        manager.getGraphicContext().drawImage(spriteSheet, positionX, positionY);
+        manager.getGraphicContext().drawImage(spriteImage, actualFramePositionX, actualFramePositionY, widthOfOneFrame, heightOfOneFrame, positionX, positionY, width, height);
     }
 
     //TEMP
@@ -175,7 +158,7 @@ public abstract class Sprite {
     }
 
     private void drawMirrorReflectedImage() {
-        manager.getGraphicContext().drawImage(spriteSheet, positionX + width, positionY, -width, height);
+        manager.getGraphicContext().drawImage(spriteImage, actualFramePositionX, actualFramePositionY, widthOfOneFrame, heightOfOneFrame, positionX + width, positionY, -width, height);
     }
 
     private boolean needToChangeImageDirection() {
@@ -307,9 +290,7 @@ public abstract class Sprite {
         return imageDirection;
     }
 
-    public void setSpriteSheet(Image spriteSheet) {
-        this.spriteSheet = spriteSheet;
+    public void setDurationPerOneFrame(double durationPerOneFrame) {
+        this.durationPerOneFrame = durationPerOneFrame;
     }
-
-
 }

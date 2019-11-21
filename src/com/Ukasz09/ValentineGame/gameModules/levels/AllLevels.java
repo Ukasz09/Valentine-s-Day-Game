@@ -8,7 +8,9 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Creature;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Weapon;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -20,13 +22,16 @@ import java.util.Iterator;
 public abstract class AllLevels {
 
     private enum CoinTypes {
-        SMALL(25),
-        NORMAL(50),
-        BIG(100);
-        int value;
+        SMALL(25, 20, 20), NORMAL(50, 30, 30), BIG(100, 40, 40);
 
-        CoinTypes(int value) {
+        int value;
+        double width;
+        double height;
+
+        CoinTypes(int value, double width, double height) {
             this.value = value;
+            this.width = width;
+            this.height = height;
         }
     }
 
@@ -63,9 +68,10 @@ public abstract class AllLevels {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     abstract public SoundsPlayer getBackgroundSound();
 
-    public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime) {
+    public void update(Player player, ArrayList<Monster> enemiesList, ArrayList<Coin> coinsList, double elapsedTime) {
         updateShots(player.getShotsList(), elapsedTime);
         updateEnemies(elapsedTime, player, enemiesList);
+        updateCoins(coinsList, elapsedTime);
     }
 
     public boolean levelIsEnd(Player player) {
@@ -78,18 +84,18 @@ public abstract class AllLevels {
 
     public void spawnCoins(ArrayList<Coin> coinsList, int amountOfSmallCoins, int amountOfNormalCoins, int amountOfBigCoins) {
         if (amountOfSmallCoins > 0 && amountOfNormalCoins > 0 && amountOfBigCoins > 0) {
-            Image smallCoinImage = new Image(SpritesPath.SMALL_COIN_PATH);
-            Image normalCoinImage = new Image(SpritesPath.NORMAL_COIN_PATH);
-            Image bigCoinImage = new Image(SpritesPath.BIG_COIN_PATH);
+            ImageSheetProperty smallCoinSheetProperty = SpritesProperties.smallCoinSheetProperty();
+            ImageSheetProperty normalCoinSheetProperty = SpritesProperties.normalCoinSheetProperty();
+            ImageSheetProperty bigCoinSheetProperty = SpritesProperties.bigCoinSheetProperty();
 
             for (int i = 0; i < amountOfSmallCoins; i++)
-                coinsList.add(new Coin(smallCoinImage, CoinTypes.SMALL.value, manager));
+                coinsList.add(new Coin(smallCoinSheetProperty, CoinTypes.SMALL.width, CoinTypes.SMALL.height, CoinTypes.SMALL.value, manager));
 
             for (int i = 0; i < amountOfNormalCoins; i++)
-                coinsList.add(new Coin(normalCoinImage, CoinTypes.NORMAL.value, manager));
+                coinsList.add(new Coin(normalCoinSheetProperty, CoinTypes.NORMAL.width, CoinTypes.NORMAL.height, CoinTypes.NORMAL.value, manager));
 
             for (int i = 0; i < amountOfBigCoins; i++)
-                coinsList.add(new Coin(bigCoinImage, CoinTypes.BIG.value, manager));
+                coinsList.add(new Coin(bigCoinSheetProperty, CoinTypes.BIG.width, CoinTypes.BIG.height, CoinTypes.BIG.value, manager));
         }
     }
 
@@ -98,6 +104,12 @@ public abstract class AllLevels {
             for (Monster m : enemiesList)
                 m.render();
         }
+    }
+
+    private void updateCoins(ArrayList<Coin> coinsList, double elapsedTime) {
+        if (coinsList != null)
+            for (Coin m : coinsList)
+                m.update(elapsedTime, 1, 1);
     }
 
     public void renderCoins(ArrayList<Coin> coinsList) {
@@ -109,7 +121,7 @@ public abstract class AllLevels {
 
     private void updateEnemies(double elapsedTime, Creature target, ArrayList<Monster> enemiesList) {
         for (Monster m : enemiesList)
-            m.update(elapsedTime, target, enemiesList);
+            m.update(target, enemiesList);
     }
 
     /**

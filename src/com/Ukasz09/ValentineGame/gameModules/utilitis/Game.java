@@ -13,7 +13,7 @@ import com.Ukasz09.ValentineGame.gameModules.levels.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesImages;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
 
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.animation.AnimationTimer;
@@ -42,7 +42,7 @@ public class Game extends Application {
     public Game() {
         manager = new ViewManager(); //do NOT touch
         lastNanoTime = new LongValue(System.nanoTime());
-        player = new Player(SpritesImages.playerRightImage, SpritesImages.playerShieldImage, manager);
+        player = new Player(SpritesProperties.playerUkaszSheetProperty(), SpritesProperties.playerShieldSheetProperty(), manager);
         inputsList = new ArrayList<>();
         coinsList = new ArrayList<>();
         enemiesList = new ArrayList<>();
@@ -55,7 +55,6 @@ public class Game extends Application {
         theStage = manager.getMainStage();  //do NOT touch
         manager.readKeyboardAction(inputsList);
 
-        //todo: dodac mozliwosc wczytwywania poziomu z pliku
         int levelNumber = 0;
         if (levelNumber == 0) {
             actualPanel = new StartPanel(manager);
@@ -131,39 +130,41 @@ public class Game extends Application {
     private void checkPlayerMove() {
         player.setActualVelocity(0, 0);
 
-        if (inputsList.contains("A")) {
+        if (inputsList.contains("A"))
             doPlayerMoveAction(DirectionEnum.LEFT, player.getVelocityXPoints());
-        } else player.setPressedKey_A(false);
+        else player.setPressedKey_A(false);
 
-        if (inputsList.contains("D")) {
+        if (inputsList.contains("D"))
             doPlayerMoveAction(DirectionEnum.RIGHT, player.getVelocityXPoints());
-        } else player.setPressedKey_D(false);
+        else player.setPressedKey_D(false);
 
-        if (inputsList.contains("W")) {
+        if (inputsList.contains("W"))
             doPlayerMoveAction(DirectionEnum.UP, player.getVelocityYPoints());
-        } else player.setPressedKey_W(false);
+        else player.setPressedKey_W(false);
 
-        if (inputsList.contains("S")) {
+        if (inputsList.contains("S"))
             doPlayerMoveAction(DirectionEnum.DOWN, player.getVelocityYPoints());
-        } else player.setPressedKey_S(false);
+        else player.setPressedKey_S(false);
+
     }
 
     private void doPlayerMoveAction(DirectionEnum side, double playerVelocity) {
         player.setPressedKey(side.keypadEquivalent, true);
+        player.setImageDirection(side);
 
-        if (!player.anticollisionModeIsActive())
-            if (player.frameCollision(side))
+        if (!player.anticollisionModeIsActive()) {
+            if (player.frameCollision(side) || player.collisionWithMonster(side, enemiesList)) {
                 player.setCollision(side, true);
-            else {
-                player.setImageDirection(side);
-
-                if (player.canNotDoAnyMove())
+                if (player.cannotDoAnyMove()) {
                     player.restoreAnticollisionTimer();
-                else if (player.collisionWithMonster(side, enemiesList))
-                    player.setCollision(side, true);
-                else player.addActualVelocity(side, playerVelocity);
+                    player.setAllCollision(false);
+                }
+            } else {
+                player.setCollision(side, false);
+                player.addActualVelocity(side, playerVelocity);
             }
-        else player.addActualVelocity(side, playerVelocity);
+        } else if (!player.frameCollision(side))
+            player.addActualVelocity(side, playerVelocity);
     }
 
     private void checkPlayerCombatActions() {
@@ -192,8 +193,7 @@ public class Game extends Application {
     }
 
     private boolean playerReadyToGame() {
-        if (inputsList.contains("ENTER")) return true;
-        else return false;
+        return (inputsList.contains("ENTER"));
     }
 
 
@@ -204,7 +204,7 @@ public class Game extends Application {
         checkPlayerActions();
         player.update(elapsedTime, coinsList, enemiesList);
         player.render();
-        level.update(player, enemiesList, elapsedTime);
+        level.update(player, enemiesList, coinsList, elapsedTime);
 
     }
 

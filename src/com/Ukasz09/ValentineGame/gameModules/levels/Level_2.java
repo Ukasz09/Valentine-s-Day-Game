@@ -8,8 +8,7 @@ import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickByBigMonster;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.TeleportKick;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.*;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
@@ -27,7 +26,7 @@ public class Level_2 extends AllLevels {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_2(ViewManager manager) {
-        super(manager,  new Image(BACKGROOUND_IMAGE_PATH));
+        super(manager, new Image(BACKGROOUND_IMAGE_PATH));
         setAmountOfCoins(amountOfSmallCoins, amountOfNormalCoins, amountOfBigCoins);
     }
 
@@ -38,16 +37,18 @@ public class Level_2 extends AllLevels {
     }
 
     private void spawnMonsters(ArrayList<Monster> enemiesList) {
-        Image fishMonsterImage = new Image(SpritesPath.FISH_MONSTER_PATH);
+        CreatureSheetProperty sheetProperty = SpritesProperties.fishMonsterSheetProperty();
+//        Image fishMonsterImage = new Image(SpritesPath.FISH_MONSTER_SHEET_PATH);
         for (int i = 0; i < amountOfMonsters; i++)
-            enemiesList.add(new FishMonster(fishMonsterImage, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid()));
+            enemiesList.add(new FishMonster(sheetProperty, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid()));
     }
 
     private void spawnBosses(ArrayList<Monster> enemiesList) {
-        Image fishMonsterBossImage = new Image(SpritesPath.FISH_MONSTER_BOSS_PATH);
-        Image shieldImage = new Image(SpritesPath.FISH_MONSTER_BOSS_SHIELD_PATH);
+        CreatureSheetProperty sheetProperty = SpritesProperties.fishMonsterSheetProperty();
+//        Image fishMonsterBossImage = new Image(SpritesPath.FISH_MONSTER_BOSS_PATH);
+        ImageSheetProperty shieldProperty = SpritesProperties.fishBossShieldSheetProperty();
         for (int i = 0; i < amountOfBosses; i++)
-            enemiesList.add( new FishMonsterBoss(fishMonsterBossImage, shieldImage, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid()));
+            enemiesList.add(new FishMonsterBoss(sheetProperty, shieldProperty, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid()));
 
     }
 
@@ -59,8 +60,8 @@ public class Level_2 extends AllLevels {
     }
 
     @Override
-    public void update(Player player, ArrayList<Monster> enemiesList, double elapsedTime) {
-        super.update(player, enemiesList, elapsedTime);
+    public void update(Player player, ArrayList<Monster> enemiesList, ArrayList<Coin> coinsList, double elapsedTime) {
+        super.update(player, enemiesList, coinsList, elapsedTime);
         spawnBossIfNeed(player, enemiesList);
     }
 
@@ -91,6 +92,6 @@ public class Level_2 extends AllLevels {
 
     @Override
     public int amountOfSpawnEnemies() {
-        return amountOfBosses+amountOfMonsters;
+        return amountOfBosses + amountOfMonsters;
     }
 }

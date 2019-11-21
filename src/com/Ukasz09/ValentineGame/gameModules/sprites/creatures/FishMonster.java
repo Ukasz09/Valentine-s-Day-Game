@@ -4,6 +4,8 @@ import com.Ukasz09.ValentineGame.gameModules.effects.collisionAvoidEffect.IColli
 import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
@@ -17,23 +19,30 @@ public class FishMonster extends Monster {
     private static final SoundsPlayer HIT_SOUND = new SoundsPlayer(HIT_SOUND_PATH, HIT_SOUND_VOLUME, false);
     private static final SoundsPlayer DEATH_SOUND = new SoundsPlayer(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME, false);
 
-    private final double defaultLives = 2;
-    private final double defaultLivesTake = 0.5;
-    private final int defaultKickSize = 0;
-    private final double defaultVelocityX = 4.2;
-    private final double defaultVelocityY = 4.2;
+    private static final double DEFAULT_SPRITE_WIDTH = 100;
+    private static final double DEFAULT_SPRITE_HEIGHT = 88;
+
+    private static final double DEFAULT_LIVES = 2;
+    private static final double DEFAULT_LIVES_TAKE = 0.5;
+    private static final int DEFAULT_KICK_SIZE = 0;
+    private static final double DEFAULT_VELOCITY_X = 4.2;
+    private static final double DEFAULT_VELOCITY_Y = 4.2;
+
+    //todo:
+    private KindOfState actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public FishMonster(Image imageRight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
-        super(imageRight, kickMethod, manager, collisionAvoidWay);
-        setDefaultProperties();
+    public FishMonster(CreatureSheetProperty spriteSheetProperty, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+        super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, manager);
+        hueImage(-1, 1);
+//        setSpriteSheetProperties(WIDTH_OF_ONE_FRAME, HEIGHT_OF_ONE_FRAME);
+        setCreatureProperties(DEFAULT_LIVES, DEFAULT_VELOCITY_X, DEFAULT_VELOCITY_Y);
+        setMonsterProperties(kickMethod, DEFAULT_KICK_SIZE, DEFAULT_LIVES_TAKE, collisionAvoidWay);
+
+        actualState = spriteSheetProperty.getMove();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @Override
-    protected void setDefaultProperties() {
-        setProperties(defaultKickSize, defaultLivesTake, defaultLives, defaultVelocityX, defaultVelocityY);
-    }
 
     @Override
     public void setStartedPosition() {
@@ -69,5 +78,10 @@ public class FishMonster extends Monster {
     @Override
     public boolean hasActiveShield() {
         return false;
+    }
+
+    @Override
+    protected void setPositionOfNextFrame() {
+        setPositionOfNextFrame(actualState.getMinX(), actualState.getMaxX(), actualState.getMinY(), actualState.getMaxY(), spriteImage.getWidth());
     }
 }

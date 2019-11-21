@@ -2,6 +2,8 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
 import javafx.scene.image.Image;
 
 public abstract class Creature extends Sprite {
@@ -13,27 +15,26 @@ public abstract class Creature extends Sprite {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Creature(Image image, ViewManager manager) {
-        super(image, manager);
-        lives = 3;
-        maxLives = lives;
-    }
+//    public Creature(Image image, ViewManager manager) {
+//        super(image, manager);
+//    }
 
-    public Creature(Image image, double creatureWidth, double creatureHeight, double widthOfOneFrame, double heightOfOneFrame, double durationPerOneFrame, ViewManager manager) {
-        super(image, creatureWidth, creatureHeight, widthOfOneFrame, heightOfOneFrame, durationPerOneFrame, manager);
-        lives = 3;
-        maxLives = lives;
+    public Creature(CreatureSheetProperty spriteSheetProperty, double creatureWidth, double creatureHeight, ViewManager manager) {
+        super(spriteSheetProperty, creatureWidth, creatureHeight, manager);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    protected abstract void setDefaultProperties();
+    protected void setCreatureProperties(double maxLives, double velocityX, double velocityY) {
+        setLives(maxLives);
+        setMaxLives(maxLives);
+        setActualVelocity(velocityX,velocityY);
+    }
 
     protected void setMaxLives(double maxLives) {
         if (maxLives > 0)
             this.maxLives = maxLives;
         else this.maxLives = DEFAULT_MAX_LIVES;
     }
-
 
     protected void setLives(double lives) {
         if (lives > 0)
