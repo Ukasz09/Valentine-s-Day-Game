@@ -37,14 +37,14 @@ public class Level_2 extends AllLevels {
     }
 
     private void spawnMonsters(ArrayList<Monster> enemiesList) {
-        CreatureSheetProperty sheetProperty = SpritesProperties.fishMonsterSheetProperty();
+        ImageSheetProperty sheetProperty = SpritesProperties.fishMonsterSheetProperty();
 //        Image fishMonsterImage = new Image(SpritesPath.FISH_MONSTER_SHEET_PATH);
         for (int i = 0; i < amountOfMonsters; i++)
             enemiesList.add(new FishMonster(sheetProperty, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid()));
     }
 
     private void spawnBosses(ArrayList<Monster> enemiesList) {
-        CreatureSheetProperty sheetProperty = SpritesProperties.fishMonsterSheetProperty();
+        ImageSheetProperty sheetProperty = SpritesProperties.fishMonsterSheetProperty();
 //        Image fishMonsterBossImage = new Image(SpritesPath.FISH_MONSTER_BOSS_PATH);
         ImageSheetProperty shieldProperty = SpritesProperties.fishBossShieldSheetProperty();
         for (int i = 0; i < amountOfBosses; i++)

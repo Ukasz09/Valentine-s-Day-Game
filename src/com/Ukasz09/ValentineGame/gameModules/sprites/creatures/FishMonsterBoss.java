@@ -5,16 +5,13 @@ import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.AutoActivateShield;
 import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.HealthStatusBar;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.Shield;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-import javafx.scene.image.Image;
 
 import java.util.ArrayList;
 
@@ -50,7 +47,7 @@ public class FishMonsterBoss extends Monster {
     private KindOfState actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public FishMonsterBoss(CreatureSheetProperty spriteSheetProperty, ImageSheetProperty shieldSheetProperty, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
+    public FishMonsterBoss(ImageSheetProperty spriteSheetProperty, ImageSheetProperty shieldSheetProperty, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, manager);
         hueImage(-1, 1);
 //        setSpriteSheetProperties(WIDTH_OF_ONE_FRAME, HEIGHT_OF_ONE_FRAME);

@@ -2,7 +2,6 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.sprites.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
 import javafx.scene.image.Image;
 
@@ -19,7 +18,7 @@ public abstract class Creature extends Sprite {
 //        super(image, manager);
 //    }
 
-    public Creature(CreatureSheetProperty spriteSheetProperty, double creatureWidth, double creatureHeight, ViewManager manager) {
+    public Creature(ImageSheetProperty spriteSheetProperty, double creatureWidth, double creatureHeight, ViewManager manager) {
         super(spriteSheetProperty, creatureWidth, creatureHeight, manager);
     }
 

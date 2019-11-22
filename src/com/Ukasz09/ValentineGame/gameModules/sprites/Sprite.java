@@ -67,7 +67,7 @@ public abstract class Sprite {
         }
         //Steped out of sheet
         else if (actualFramePositionX >= sheetWidth) {
-            actualFramePositionX = minXPosition;
+            actualFramePositionX = 0;
             actualFramePositionY += heightOfOneFrame;
         }
     }
@@ -292,5 +292,14 @@ public abstract class Sprite {
 
     public void setDurationPerOneFrame(double durationPerOneFrame) {
         this.durationPerOneFrame = durationPerOneFrame;
+    }
+
+    //todo: tmp
+    public void setActualFramePositionX(double actualFramePositionX) {
+        this.actualFramePositionX = actualFramePositionX;
+    }
+
+    public void setActualFramePositionY(double actualFramePositionY) {
+        this.actualFramePositionY = actualFramePositionY;
     }
 }

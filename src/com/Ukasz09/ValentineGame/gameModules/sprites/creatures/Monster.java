@@ -4,7 +4,7 @@ import com.Ukasz09.ValentineGame.gameModules.effects.collisionAvoidEffect.IColli
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.effect.ColorAdjust;
@@ -31,7 +31,7 @@ public abstract class Monster extends Creature {
 //        setStartedPosition();
 //    }
 
-    public Monster(CreatureSheetProperty spriteSheetProperty, double creatureWidth, double creatureHeight, ViewManager manager) {
+    public Monster(ImageSheetProperty spriteSheetProperty, double creatureWidth, double creatureHeight, ViewManager manager) {
         super(spriteSheetProperty, creatureWidth, creatureHeight, manager);
         setStartedPosition();
     }

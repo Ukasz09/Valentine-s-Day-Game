@@ -10,9 +10,8 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickByLittleMonster;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.TeleportKick;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.BackgroundPath;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 
@@ -40,7 +39,7 @@ public class Level_1 extends AllLevels {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void spawnEnemies(ArrayList<Monster> enemiesList) {
-        CreatureSheetProperty sheetProperty= SpritesProperties.littleMonsterSheetProperty();
+        ImageSheetProperty sheetProperty= SpritesProperties.littleMonsterSheetProperty();
 //        Image littleMonsterImage = new Image(SpritesPath.LITTLE_MONSTER1_SHEET_PATH);
 //        ColorAdjust monochrome = new ColorAdjust();
 ////        monochrome.setSaturation(-1.0);

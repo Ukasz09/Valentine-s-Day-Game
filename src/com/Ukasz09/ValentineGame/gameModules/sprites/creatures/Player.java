@@ -9,7 +9,6 @@ import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.HeartsRend
 import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.InCorner;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bomb;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bullet;
-import com.Ukasz09.ValentineGame.graphicModule.texturesPath.CreatureSheetProperty;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
@@ -79,7 +78,8 @@ public class Player extends Creature {
 //        this(PLAYER_RIGHT_IMAGE, PLAYER_SHIELD_IMAGE, manager);
 //    }
 
-    public Player(CreatureSheetProperty spriteSheetProperty, ImageSheetProperty shieldSheetProperty, ViewManager manager) {
+
+    public Player(ImageSheetProperty spriteSheetProperty, ImageSheetProperty shieldSheetProperty, ViewManager manager) {
         super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, manager);
         setDefaultProperties();
         shield = new ManualActivateShield(shieldSheetProperty,DEFAULT_SHIELD_WIDTH, DEFAULT_SHIELD_HEIGHT, DEFAULT_SHIELD_DURATION,manager);
@@ -99,6 +99,9 @@ public class Player extends Creature {
         setImageDirection(DirectionEnum.RIGHT);
         wingsSound = new SoundsPlayer(WINGS_SOUND_PATH, WINGS_SOUND_VOLUME, true);
         actualState = spriteSheetProperty.getMove();
+
+        setActualFramePositionX(actualState.getMinX());
+        setActualFramePositionY(actualState.getMinY());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
