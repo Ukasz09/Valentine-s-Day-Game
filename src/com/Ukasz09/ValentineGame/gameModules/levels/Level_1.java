@@ -28,7 +28,7 @@ public class Level_1 extends AllLevels {
     private final int amountOfNormalCoins = 3;
     private final int amountOfBigCoins = 2;
 
-    private final int amountOfMonsters = 1;
+    private final int amountOfMonsters = 10;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_1(ViewManager manager) {

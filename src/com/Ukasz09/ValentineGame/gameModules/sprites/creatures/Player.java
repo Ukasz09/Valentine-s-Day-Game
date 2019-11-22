@@ -37,7 +37,7 @@ public class Player extends Creature {
     private static final double WINGS_SOUND_VOLUME = 1;
     private static final String WINGS_SOUND_PATH = SoundsPath.PLAYER_WINGS_SOUND_PATH;
 
-    private static final double DEFAULT_SPRITE_WIDTH = 170;
+    private static final double DEFAULT_SPRITE_WIDTH = 200;
     private static final double DEFAULT_SPRITE_HEIGHT = 200;
 
     private static final double DEFAULT_SHIELD_WIDTH = 200;
