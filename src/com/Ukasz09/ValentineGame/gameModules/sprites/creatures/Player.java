@@ -33,8 +33,6 @@ public class Player extends Creature {
     private static final int DEFAULT_ANTICOLLISION_TIMER = 4000;
     private static final double DEFAULT_HIT_SOUND_VOLUME = 0.2;
 
-    //    private static final Image PLAYER_RIGHT_IMAGE = SpritesImages.playerRightImage;
-//    private static final Image PLAYER_SHIELD_IMAGE = SpritesImages.playerShieldImage;
     private static final double WINGS_SOUND_VOLUME = 1;
     private static final String WINGS_SOUND_PATH = SoundsPath.PLAYER_WINGS_SOUND_PATH;
 
@@ -44,12 +42,14 @@ public class Player extends Creature {
     private static final double DEFAULT_SHIELD_WIDTH = 200;
     private static final double DEFAULT_SHIELD_HEIGHT = 200;
 
-    private final double amountOfToPixelRotate = 15;
+    private final ImageSheetProperty shootBallSheetProperty = SpritesProperties.playerShotBallProperty();
+    private final ImageSheetProperty[] shootBombsSheetProperty = SpritesProperties.playerShotBombsPoperty();
+    private Image[] batteryImages = SpritesProperties.batteryImages();
 
+    private final double amountOfToPixelRotate = 15;
     private ArrayList<Weapon> shotsList;
     private Shield shield;
     private SoundsPlayer[] playerHitSounds;
-    private Image[] batteryImages = SpritesProperties.batteryImages();
     private int totalScore;
     private double bombOverheating;
     private double bulletOverheating;
@@ -75,15 +75,10 @@ public class Player extends Creature {
     private FrameStatePositions actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    public Player(ViewManager manager) {
-//        this(PLAYER_RIGHT_IMAGE, PLAYER_SHIELD_IMAGE, manager);
-//    }
-
-
     public Player(ImageSheetProperty spriteSheetProperty, ImageSheetProperty shieldSheetProperty, ViewManager manager) {
         super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, manager);
         setDefaultProperties();
-        shield = new ManualActivateShield(shieldSheetProperty,DEFAULT_SHIELD_WIDTH, DEFAULT_SHIELD_HEIGHT, DEFAULT_SHIELD_DURATION,manager);
+        shield = new ManualActivateShield(shieldSheetProperty, DEFAULT_SHIELD_WIDTH, DEFAULT_SHIELD_HEIGHT, DEFAULT_SHIELD_DURATION, manager);
         playerHitSounds = getPlayerHitSounds();
         heartsRender = new InCorner(manager);
         shotsList = new ArrayList<>();
@@ -123,7 +118,7 @@ public class Player extends Creature {
     private void renderShield() {
         GraphicsContext gc = getManager().getGraphicContext();
         if (shield.isActive())
-            shield.render(getPositionX(),getPositionY());
+            shield.render(getPositionX(), getPositionY());
     }
 
     public void update(double time, ArrayList<Coin> coinsList, ArrayList<Monster> enemiesList) {
@@ -199,8 +194,7 @@ public class Player extends Creature {
 
     public void addBullet() {
         Point2D bulletPosition = getBulletPosition();
-        ImageSheetProperty bulletSheetProperty=SpritesProperties.playerShotBallProperty();
-        Bullet bullet = new Bullet(bulletSheetProperty, getImageDirection(), bulletPosition.getX(), bulletPosition.getY(), getManager());
+        Bullet bullet = new Bullet(shootBallSheetProperty, getImageDirection(), bulletPosition.getX(), bulletPosition.getY(), getManager());
         shotsList.add(bullet);
         bullet.playShotSound();
         overheatBulletGun();
@@ -222,11 +216,17 @@ public class Player extends Creature {
 
     public void addBomb() {
         Point2D bombPosition = getBombPosition();
-        Bomb bomb = new Bomb(SpritesProperties.randomPlayerShotBombPoperty(),bombPosition.getX(), bombPosition.getY(), getManager());
+        Bomb bomb = new Bomb(randomPlayerShotBombProperty(), bombPosition.getX(), bombPosition.getY(), getManager());
         shotsList.add(bomb);
         bomb.playShotSound();
         overheatBombGun();
     }
+
+    private ImageSheetProperty randomPlayerShotBombProperty() {
+        int randOffset = (int) (Math.random() * shootBombsSheetProperty.length);
+        return shootBombsSheetProperty[randOffset];
+    }
+
 
     public Point2D getBombPosition() {
         double centerPositionRightX = getBoundary().getMaxX() - getWidth() / 3;

@@ -24,6 +24,8 @@ public class Level_1 extends AllLevels {
     public static final String BACKGROUND_SOUND_PATH = SoundsPath.BACKGROUND_SOUND_PATH_1;
     public static final double BACKGROUND_SOUND_VOLUME = 0.1;
 
+    private final ImageSheetProperty littleMonsterSheetProperty = SpritesProperties.littleMonsterSheetProperty();
+
     private final int amountOfSmallCoins = 5;
     private final int amountOfNormalCoins = 3;
     private final int amountOfBigCoins = 2;
@@ -32,32 +34,15 @@ public class Level_1 extends AllLevels {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_1(ViewManager manager) {
-        super(manager,new Image(BACKGROOUND_IMAGE_PATH));
+        super(manager, new Image(BACKGROOUND_IMAGE_PATH));
         setAmountOfCoins(amountOfSmallCoins, amountOfNormalCoins, amountOfBigCoins);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void spawnEnemies(ArrayList<Monster> enemiesList) {
-        ImageSheetProperty sheetProperty= SpritesProperties.littleMonsterSheetProperty();
-//        Image littleMonsterImage = new Image(SpritesPath.LITTLE_MONSTER1_SHEET_PATH);
-//        ColorAdjust monochrome = new ColorAdjust();
-////        monochrome.setSaturation(-1.0);
-//        Random random=new Random();
-//        boolean negative=random.nextInt(1)==0;
-//        double neagativeMul=1;
-//        if (negative)
-//            neagativeMul=-1;
-//        double hue=(double)(random.nextInt(100))/100*neagativeMul;
-//        monochrome.setHue(hue);
-//        ImageView iv =new ImageView(littleMonsterImage);
-//        iv.setEffect(monochrome);
-//        SnapshotParameters params = new SnapshotParameters();
-//        params.setFill(Color.TRANSPARENT);
-//        Image huedImage = iv.snapshot(params, null);
-        LittleMonster littleMonster;
         for (int i = 0; i < amountOfMonsters; i++) {
-            littleMonster = new LittleMonster(sheetProperty, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
+            LittleMonster littleMonster = new LittleMonster(littleMonsterSheetProperty, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid());
             littleMonster.setStartedPosition();
             enemiesList.add(littleMonster);
         }

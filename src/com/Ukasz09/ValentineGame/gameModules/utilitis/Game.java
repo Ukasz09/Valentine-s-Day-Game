@@ -13,6 +13,7 @@ import com.Ukasz09.ValentineGame.gameModules.levels.*;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
 
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
@@ -36,13 +37,16 @@ public class Game extends Application {
 
     private Player player;
     private SoundsPlayer backgroundSound;
-//    private static SoundsPlayer effectSound; //to avoid remove object by garbage collctor before sound effect end
+
+    private final ImageSheetProperty playerSheetProperty=SpritesProperties.playerUkaszSheetProperty();
+    private final ImageSheetProperty playerShieldProperty=SpritesProperties.playerShieldSheetProperty();
+//    private static SoundsPlayer effectSound; //to avoid remove object by garbage collector before sound effect end
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
         manager = new ViewManager(); //do NOT touch
         lastNanoTime = new LongValue(System.nanoTime());
-        player = new Player(SpritesProperties.playerUkaszSheetProperty(), SpritesProperties.playerShieldSheetProperty(), manager);
+        player = new Player(playerSheetProperty, playerShieldProperty, manager);
         inputsList = new ArrayList<>();
         coinsList = new ArrayList<>();
         enemiesList = new ArrayList<>();

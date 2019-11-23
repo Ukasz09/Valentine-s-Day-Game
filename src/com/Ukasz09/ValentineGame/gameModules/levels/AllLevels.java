@@ -22,16 +22,20 @@ import java.util.Iterator;
 public abstract class AllLevels {
 
     private enum CoinTypes {
-        SMALL(25, 20, 20), NORMAL(50, 30, 30), BIG(100, 40, 40);
+        SMALL(25, 20, 20, SpritesProperties.smallCoinSheetProperty()),
+        NORMAL(50, 30, 30, SpritesProperties.normalCoinSheetProperty()),
+        BIG(100, 40, 40, SpritesProperties.bigCoinSheetProperty());
 
         int value;
         double width;
         double height;
+        ImageSheetProperty sheetProperty;
 
-        CoinTypes(int value, double width, double height) {
+        CoinTypes(int value, double width, double height, ImageSheetProperty sheetProperty) {
             this.value = value;
             this.width = width;
             this.height = height;
+            this.sheetProperty = sheetProperty;
         }
     }
 
@@ -84,18 +88,14 @@ public abstract class AllLevels {
 
     public void spawnCoins(ArrayList<Coin> coinsList, int amountOfSmallCoins, int amountOfNormalCoins, int amountOfBigCoins) {
         if (amountOfSmallCoins > 0 && amountOfNormalCoins > 0 && amountOfBigCoins > 0) {
-            ImageSheetProperty smallCoinSheetProperty = SpritesProperties.smallCoinSheetProperty();
-            ImageSheetProperty normalCoinSheetProperty = SpritesProperties.normalCoinSheetProperty();
-            ImageSheetProperty bigCoinSheetProperty = SpritesProperties.bigCoinSheetProperty();
-
             for (int i = 0; i < amountOfSmallCoins; i++)
-                coinsList.add(new Coin(smallCoinSheetProperty, CoinTypes.SMALL.width, CoinTypes.SMALL.height, CoinTypes.SMALL.value, manager));
+                coinsList.add(new Coin(CoinTypes.SMALL.sheetProperty, CoinTypes.SMALL.width, CoinTypes.SMALL.height, CoinTypes.SMALL.value, manager));
 
             for (int i = 0; i < amountOfNormalCoins; i++)
-                coinsList.add(new Coin(normalCoinSheetProperty, CoinTypes.NORMAL.width, CoinTypes.NORMAL.height, CoinTypes.NORMAL.value, manager));
+                coinsList.add(new Coin(CoinTypes.NORMAL.sheetProperty, CoinTypes.NORMAL.width, CoinTypes.NORMAL.height, CoinTypes.NORMAL.value, manager));
 
             for (int i = 0; i < amountOfBigCoins; i++)
-                coinsList.add(new Coin(bigCoinSheetProperty, CoinTypes.BIG.width, CoinTypes.BIG.height, CoinTypes.BIG.value, manager));
+                coinsList.add(new Coin(CoinTypes.BIG.sheetProperty, CoinTypes.BIG.width, CoinTypes.BIG.height, CoinTypes.BIG.value, manager));
         }
     }
 

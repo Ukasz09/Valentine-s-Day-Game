@@ -23,6 +23,8 @@ public class Level_2 extends AllLevels {
 
     private final int amountOfMonsters = 6;
     private final int amountOfBosses = 2;
+    private final ImageSheetProperty fishMonsterSheetProperty = SpritesProperties.fishMonsterSheetProperty();
+    private final ImageSheetProperty fishShieldSheetProperty = SpritesProperties.fishBossShieldSheetProperty();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_2(ViewManager manager) {
@@ -37,18 +39,13 @@ public class Level_2 extends AllLevels {
     }
 
     private void spawnMonsters(ArrayList<Monster> enemiesList) {
-        ImageSheetProperty sheetProperty = SpritesProperties.fishMonsterSheetProperty();
-//        Image fishMonsterImage = new Image(SpritesPath.FISH_MONSTER_SHEET_PATH);
         for (int i = 0; i < amountOfMonsters; i++)
-            enemiesList.add(new FishMonster(sheetProperty, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid()));
+            enemiesList.add(new FishMonster(fishMonsterSheetProperty, new KickByLittleMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid()));
     }
 
     private void spawnBosses(ArrayList<Monster> enemiesList) {
-        ImageSheetProperty sheetProperty = SpritesProperties.fishMonsterSheetProperty();
-//        Image fishMonsterBossImage = new Image(SpritesPath.FISH_MONSTER_BOSS_PATH);
-        ImageSheetProperty shieldProperty = SpritesProperties.fishBossShieldSheetProperty();
         for (int i = 0; i < amountOfBosses; i++)
-            enemiesList.add(new FishMonsterBoss(sheetProperty, shieldProperty, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid()));
+            enemiesList.add(new FishMonsterBoss(fishMonsterSheetProperty, fishShieldSheetProperty, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid()));
 
     }
 

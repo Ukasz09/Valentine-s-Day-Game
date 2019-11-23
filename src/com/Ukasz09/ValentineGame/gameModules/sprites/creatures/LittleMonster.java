@@ -29,7 +29,7 @@ public class LittleMonster extends Monster {
     private static final double DEFAULT_KICK_SIZE = 0;
     private static final double DEFAULT_VELOCITY_X = 1;
     private static final double DEFAULT_VELOCITY_Y = 1;
-    private static final int ROTATE_OFFSET = (int)(Math.random() * (180-45))+45;
+    private final double rotateOffset = (Math.random() * (360));
 
     private FrameStatePositions actualState;
 
@@ -37,7 +37,6 @@ public class LittleMonster extends Monster {
     public LittleMonster(ImageSheetProperty spriteSheetProperty, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, manager);
         hueImage(-1, 1);
-//        setSpriteSheetProperties(WIDTH_OF_ONE_FRAME, HEIGHT_OF_ONE_FRAME);
         setCreatureProperties(DEFAULT_LIVES, DEFAULT_VELOCITY_X, DEFAULT_VELOCITY_Y);
         setMonsterProperties(kickMethod, DEFAULT_KICK_SIZE, DEFAULT_LIVES_TAKE, collisionAvoidWay);
 
@@ -61,7 +60,7 @@ public class LittleMonster extends Monster {
     @Override
     public void updateMonsterRotate(Creature target) {
         double rotate = RotateEffect.setRotateByAngle(this, target);
-        rotate +=ROTATE_OFFSET;
+        rotate += rotateOffset;
         setActualRotation(rotate);
     }
 
