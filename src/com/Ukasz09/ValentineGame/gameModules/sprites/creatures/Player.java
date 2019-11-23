@@ -10,6 +10,7 @@ import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.InCorner;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bomb;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Bullet;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.FrameStatePositions;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
@@ -71,7 +72,7 @@ public class Player extends Creature {
     private double velocityXPoints;
     private double velocityYPoints;
 
-    private KindOfState actualState;
+    private FrameStatePositions actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //    public Player(ViewManager manager) {
@@ -98,7 +99,7 @@ public class Player extends Creature {
         pressedKey_S = false;
         setImageDirection(DirectionEnum.RIGHT);
         wingsSound = new SoundsPlayer(WINGS_SOUND_PATH, WINGS_SOUND_VOLUME, true);
-        actualState = spriteSheetProperty.getMove();
+        actualState = spriteSheetProperty.getAction(KindOfState.MOVE);
 
         setActualFramePositionX(actualState.getMinX());
         setActualFramePositionY(actualState.getMinY());

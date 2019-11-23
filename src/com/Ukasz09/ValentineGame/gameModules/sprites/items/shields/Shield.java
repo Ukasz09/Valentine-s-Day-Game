@@ -3,9 +3,8 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.items.shields;
 import com.Ukasz09.ValentineGame.gameModules.sprites.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.FrameStatePositions;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
 public abstract class Shield extends Sprite {
     public static final int SHIELD_REDUCE_OFFSET = 50;
@@ -16,15 +15,14 @@ public abstract class Shield extends Sprite {
     private int defaultShieldCooldown;
     private int defaultShieldDuration;
 
-    private KindOfState actualState;
+    private FrameStatePositions actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Shield(ImageSheetProperty spriteSheetProperty, double spriteWidth, double spriteHeight, int shieldCooldown, int shieldDuration, ViewManager manager) {
         super(spriteSheetProperty, spriteWidth, spriteHeight, manager);
         this.defaultShieldCooldown = shieldCooldown;
         this.defaultShieldDuration = shieldDuration;
-        actualState=spriteSheetProperty.getMove();
-        setDurationPerOneFrame(0); //todo: TMP
+        actualState=spriteSheetProperty.getAction(KindOfState.MOVE);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

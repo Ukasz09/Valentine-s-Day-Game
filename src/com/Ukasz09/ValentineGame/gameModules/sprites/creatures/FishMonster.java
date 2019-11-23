@@ -5,6 +5,7 @@ import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.FrameStatePositions;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
@@ -28,7 +29,7 @@ public class FishMonster extends Monster {
     private static final double DEFAULT_VELOCITY_Y = 4.2;
 
     //todo:
-    private KindOfState actualState;
+    private FrameStatePositions actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonster(ImageSheetProperty spriteSheetProperty, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
@@ -38,7 +39,7 @@ public class FishMonster extends Monster {
         setCreatureProperties(DEFAULT_LIVES, DEFAULT_VELOCITY_X, DEFAULT_VELOCITY_Y);
         setMonsterProperties(kickMethod, DEFAULT_KICK_SIZE, DEFAULT_LIVES_TAKE, collisionAvoidWay);
 
-        actualState = spriteSheetProperty.getMove();
+        actualState = spriteSheetProperty.getAction(KindOfState.MOVE);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

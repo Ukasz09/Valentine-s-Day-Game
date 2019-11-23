@@ -4,6 +4,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.FrameStatePositions;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
@@ -21,7 +22,7 @@ public class Bullet extends Weapon {
     private static double DEFAULT_SPRITE_WIDTH = 71;
     private static double DEFAULT_SPRITE_HEIGHT = 34;
 
-    private KindOfState actualState;
+    private FrameStatePositions actualState;
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -34,7 +35,7 @@ public class Bullet extends Weapon {
         super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, shotVelocity, shotVelocity, positionX, positionY, howManyLiveTakes, manager);
         this.maxOverheating = maxOverheating;
         this.shotDirection = shotDirection;
-        actualState=spriteSheetProperty.getMove();
+        actualState=spriteSheetProperty.getAction(KindOfState.MOVE);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

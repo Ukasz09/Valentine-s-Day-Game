@@ -11,9 +11,12 @@ public class SpritesProperties {
     public static ImageSheetProperty playerUkaszSheetProperty() {
         if (playerUkaszSheetProperty == null) {
             String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\ukaszAngel.png";
-//            ImageSheetProperty sheetProperty = new ImageSheetProperty(spritePath, 222, 262, 10);
-            ImageSheetProperty sheetProperty = new ImageSheetProperty(spritePath, 256, 256, 10);
-            sheetProperty.setMove(0, 13);
+            ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10,256,256)
+                    .withImagePath(spritePath)
+                    .withSizeOfOneFrame(256, 256)
+                    .withDefaultDurationPerOneFrame(5)
+                    .withAddActionState(KindOfState.MOVE, 0, 13)
+                    .build();
             playerUkaszSheetProperty = sheetProperty;
         }
 
@@ -25,8 +28,12 @@ public class SpritesProperties {
     public static ImageSheetProperty littleMonsterSheetProperty() {
         if (littleMonsterSheetProperty == null) {
             String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\littleMonster1.png";
-            ImageSheetProperty sheetProperty = new ImageSheetProperty(spritePath, 256, 256, 10);
-            sheetProperty.setMove(0, 60);
+            ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10,256,256)
+                    .withImagePath(spritePath)
+                    .withSizeOfOneFrame(256, 256)
+                    .withDefaultDurationPerOneFrame(1)
+                    .withAddActionState(KindOfState.MOVE, 0, 60)
+                    .build();
             littleMonsterSheetProperty = sheetProperty;
         }
 
@@ -38,8 +45,12 @@ public class SpritesProperties {
     public static ImageSheetProperty fishMonsterSheetProperty() {
         if (fishMonsterSheetProperty == null) {
             String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonster.png";
-            ImageSheetProperty sheetProperty = new ImageSheetProperty(spritePath, 256, 256, 10);
-            sheetProperty.setMove(0, 75);
+            ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10,256,256)
+                    .withImagePath(spritePath)
+                    .withSizeOfOneFrame(256, 256)
+                    .withDefaultDurationPerOneFrame(2)
+                    .withAddActionState(KindOfState.MOVE, 0, 75)
+                    .build();
             fishMonsterSheetProperty = sheetProperty;
         }
 
@@ -54,8 +65,12 @@ public class SpritesProperties {
     public static ImageSheetProperty fishBossShieldSheetProperty() {
         if (fishBossShieldSheetProperty == null) {
             String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMinibossShield.png";
-            ImageSheetProperty sheetProperty = new ImageSheetProperty(spritePath, 256, 256, 10);
-            sheetProperty.setMove(0, 30);
+            ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10,256,256)
+                    .withImagePath(spritePath)
+                    .withSizeOfOneFrame(256, 256)
+                    .withDefaultDurationPerOneFrame(0)
+                    .withAddActionState(KindOfState.MOVE, 0, 30)
+                    .build();
             fishBossShieldSheetProperty = sheetProperty;
         }
 
@@ -67,8 +82,12 @@ public class SpritesProperties {
     public static ImageSheetProperty smallCoinSheetProperty() {
         if (smallCoinSheetProperty == null) {
             String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\smallCoin.png";
-            ImageSheetProperty sheetProperty = new ImageSheetProperty(spritePath, 64, 64, 10);
-            sheetProperty.setMove(0, 40);
+            ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10,64,64)
+                    .withImagePath(spritePath)
+                    .withSizeOfOneFrame(64, 64)
+                    .withDefaultDurationPerOneFrame(4)
+                    .withAddActionState(KindOfState.MOVE, 0, 40)
+                    .build();
             smallCoinSheetProperty = sheetProperty;
         }
 
@@ -80,8 +99,12 @@ public class SpritesProperties {
     public static ImageSheetProperty normalCoinSheetProperty() {
         if (normalCoinSheetProperty == null) {
             String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\normalCoin.png";
-            ImageSheetProperty sheetProperty = new ImageSheetProperty(spritePath, 64, 64, 10);
-            sheetProperty.setMove(0, 10);
+            ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10,64,64)
+                    .withImagePath(spritePath)
+                    .withSizeOfOneFrame(64, 64)
+                    .withDefaultDurationPerOneFrame(4)
+                    .withAddActionState(KindOfState.MOVE, 0, 10)
+                    .build();
             normalCoinSheetProperty = sheetProperty;
         }
 
@@ -93,8 +116,12 @@ public class SpritesProperties {
     public static ImageSheetProperty bigCoinSheetProperty() {
         if (bigCoinSheetProperty == null) {
             String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\bigCoin.png";
-            ImageSheetProperty sheetProperty = new ImageSheetProperty(spritePath, 64, 64, 10);
-            sheetProperty.setMove(0, 151);
+            ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10,64,64)
+                    .withImagePath(spritePath)
+                    .withSizeOfOneFrame(64, 64)
+                    .withDefaultDurationPerOneFrame(3)
+                    .withAddActionState(KindOfState.MOVE, 0, 151)
+                    .build();
             bigCoinSheetProperty = sheetProperty;
         }
 
@@ -106,8 +133,12 @@ public class SpritesProperties {
     public static ImageSheetProperty playerShieldSheetProperty() {
         if (playerShieldSheetProperty == null) {
             String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\playerShield.png";
-            ImageSheetProperty sheetProperty = new ImageSheetProperty(spritePath, 256, 256, 10);
-            sheetProperty.setMove(0, 50);
+            ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10,256,256)
+                    .withImagePath(spritePath)
+                    .withSizeOfOneFrame(256, 256)
+                    .withDefaultDurationPerOneFrame(3)
+                    .withAddActionState(KindOfState.MOVE, 0, 50)
+                    .build();
             playerShieldSheetProperty = sheetProperty;
         }
 
@@ -119,8 +150,12 @@ public class SpritesProperties {
     public static ImageSheetProperty playerShotBallProperty() {
         if (playerShotBallProperty == null) {
             String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\iceBallSmall.png";
-            ImageSheetProperty sheetProperty = new ImageSheetProperty(spritePath, 128, 74, 10);
-            sheetProperty.setMove(0, 8);
+            ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10,128,74)
+                    .withImagePath(spritePath)
+                    .withSizeOfOneFrame(128, 74)
+                    .withDefaultDurationPerOneFrame(1)
+                    .withAddActionState(KindOfState.MOVE, 0, 8)
+                    .build();
             playerShotBallProperty = sheetProperty;
         }
 
@@ -134,10 +169,18 @@ public class SpritesProperties {
             String spriteStarPath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\legoStar.png";
             String spriteHeartPath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\legoHeart.png";
             ImageSheetProperty[] sheetProperty = new ImageSheetProperty[2];
-            sheetProperty[0] = new ImageSheetProperty(spriteStarPath, 128, 128, 10);
-            sheetProperty[1] = new ImageSheetProperty(spriteHeartPath, 128, 128, 10);
-            sheetProperty[0].setMove(0, 9);
-            sheetProperty[1].setMove(0, 9);
+            sheetProperty[0] = ImageSheetProperty.bulider(10,128,128)
+                    .withImagePath(spriteStarPath)
+                    .withSizeOfOneFrame(128, 128)
+                    .withDefaultDurationPerOneFrame(5)
+                    .withAddActionState(KindOfState.MOVE, 0, 9)
+                    .build();
+            sheetProperty[1] = ImageSheetProperty.bulider(10,128,128)
+                    .withImagePath(spriteHeartPath)
+                    .withSizeOfOneFrame(128, 128)
+                    .withDefaultDurationPerOneFrame(5)
+                    .withAddActionState(KindOfState.MOVE, 0, 9)
+                    .build();
             playerShotBombPoperty = sheetProperty;
         }
 

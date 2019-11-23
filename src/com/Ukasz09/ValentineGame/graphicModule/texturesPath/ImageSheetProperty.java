@@ -4,37 +4,112 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 import java.security.InvalidParameterException;
+import java.util.EnumMap;
+import java.util.Map;
 
 public class ImageSheetProperty {
-    private final Image imageSheet;
-    private  KindOfState move;
-    private final double widthOfOneFrame;
-    private final double heightOfOneFrame;
-    private final int maxAmountOfFramesInRow;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                               BUILDER
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static final class Builder {
+        private Image imageSheet;
+        private EnumMap<KindOfState, FrameStatePositions> actionStates;
+        private double widthOfOneFrame;
+        private double heightOfOneFrame;
+        private int maxAmountOfFramesInRow;
+        private double durationPerOneFrame;
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    protected ImageSheetProperty(String imagePath, double widthOfOneFrame, double heightOfOneFrame, int maxAmountOfFramesInRow) {
-        this.imageSheet = new Image(imagePath);
-        this.widthOfOneFrame = widthOfOneFrame;
-        this.heightOfOneFrame = heightOfOneFrame;
-        move = null;
-        this.maxAmountOfFramesInRow = maxAmountOfFramesInRow;
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        private Builder(int amountOfFramesInRow, double widthOfOneFrame, double heightOfOneFrame) {
+            maxAmountOfFramesInRow = amountOfFramesInRow;
+            this.widthOfOneFrame = widthOfOneFrame;
+            this.heightOfOneFrame = heightOfOneFrame;
+            durationPerOneFrame = DEFAULT_DURATION_PER_FRAME;
+            actionStates = new EnumMap<>(KindOfState.class);
+        }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        public Builder withImagePath(String imagePath) {
+            this.imageSheet = new Image(imagePath);
+            return this;
+        }
+
+        public Builder withSizeOfOneFrame(double widthOfOneFrame, double heightOfOneFrame) {
+            this.widthOfOneFrame = widthOfOneFrame;
+            this.heightOfOneFrame = heightOfOneFrame;
+            return this;
+        }
+
+        public Builder withDefaultDurationPerOneFrame(double defaultDurationPerOneFrame) {
+            this.durationPerOneFrame = defaultDurationPerOneFrame;
+            return this;
+        }
+
+        public Builder withAddActionState(KindOfState state, int startedIndex, int amountOfFrames) {
+            this.actionStates.put(state, getFrameState(startedIndex, amountOfFrames));
+            return this;
+        }
+
+        private FrameStatePositions getFrameState(int startedIndex, int amountOfFrames) {
+            Point2D startPosOfFirstFrame = getPositionOfIndex(startedIndex);
+            Point2D startPositionOfLastFrame = getPositionOfIndex(startedIndex + amountOfFrames - 1);
+            FrameStatePositions frameState = new FrameStatePositions(startPosOfFirstFrame.getX(), startPositionOfLastFrame.getX() + widthOfOneFrame, startPosOfFirstFrame.getY(), startPositionOfLastFrame.getY());
+            frameState.setIndexes(startedIndex, startedIndex + amountOfFrames - 1);
+            return frameState;
+        }
+
+        private Point2D getPositionOfIndex(int index) {
+            return ImageSheetProperty.getPositionOfIndex(index, maxAmountOfFramesInRow, widthOfOneFrame, heightOfOneFrame);
+        }
+
+        public ImageSheetProperty build() {
+            ImageSheetProperty imageSheetProperty = new ImageSheetProperty();
+            imageSheetProperty.imageSheet = this.imageSheet;
+            imageSheetProperty.widthOfOneFrame = this.widthOfOneFrame;
+            imageSheetProperty.heightOfOneFrame = this.heightOfOneFrame;
+            imageSheetProperty.durationPerFrame = this.durationPerOneFrame;
+            imageSheetProperty.actionStates = this.actionStates;
+            imageSheetProperty.maxAmountOfFramesInRow = this.maxAmountOfFramesInRow;
+            return imageSheetProperty;
+        }
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public Image getImage() {
-        return imageSheet;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                FIELDS
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private static final int DEFAULT_FRAMES_IN_ROW = 10;
+    private static final double DEFAULT_DURATION_PER_FRAME = 3;
+
+    private Image imageSheet;
+    private EnumMap<KindOfState, FrameStatePositions> actionStates;
+    private double widthOfOneFrame;
+    private double heightOfOneFrame;
+    private double durationPerFrame;
+    private int maxAmountOfFramesInRow;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                             CONSTRUCTORS
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private ImageSheetProperty() {
+        //Nothing to do...
     }
 
-    // calculate offset to move from started index pixels to get maxX and maxY
-    // frame which is 'amountOfFrames' counting, started from startIndex
-    protected void setMove(int startedIndex, int amountOfFrames) {
-        Point2D startPosOfFirstFrame = getPositionOfIndex(startedIndex);
-        Point2D startPositionOfLastFrame = getPositionOfIndex(startedIndex + amountOfFrames - 1);
-        move = new KindOfState(startPosOfFirstFrame.getX(), startPositionOfLastFrame.getX() + widthOfOneFrame, startPosOfFirstFrame.getY(), startPositionOfLastFrame.getY());
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //                                                METHODS
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public static Builder bulider(int amountOfFramesInRow, double widthOfOneFrame, double heightOfOneFrame) {
+        return new Builder(amountOfFramesInRow, widthOfOneFrame, heightOfOneFrame);
     }
 
-    protected Point2D getPositionOfIndex(int index) {
+    public static Builder bulider(double widthOfOneFrame, double heightOfOneFrame) {
+        return new Builder(DEFAULT_FRAMES_IN_ROW, widthOfOneFrame, heightOfOneFrame);
+    }
+
+    public Point2D getPositionOfIndex(int index) {
+        return getPositionOfIndex(index, maxAmountOfFramesInRow, widthOfOneFrame, heightOfOneFrame);
+    }
+
+    private static Point2D getPositionOfIndex(int index, int maxAmountOfFramesInRow, double widthOfOneFrame, double heightOfOneFrame) {
         if (index < 0)
             throw new InvalidParameterException();
         if (index == 0) return new Point2D(0, 0);
@@ -57,26 +132,20 @@ public class ImageSheetProperty {
         maxXOffset = widthOfOneFrame * columnsOffset;
         maxYOffset = heightOfOneFrame * rowsOffset;
 
-        System.out.println("OFFSET: " + columnsOffset + ", " + rowsOffset);
-
         return new Point2D(maxXOffset, maxYOffset);
-        /////
-//        Point2D minOffset = calculateOffsetPosition(0, index);
-//        double minX = 0 + minOffset.getX();
-//        double minY = 0 + minOffset.getY();
-//        return new Point2D(minX, minY);
     }
 
-//    private Point2D calculateOffsetPosition(int startedIndex, int amountOfFrames) {
-//
-//
-//        return new Point2D(maxXOffset, maxYOffset);
-//    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    public Image getImage() {
+        return imageSheet;
+    }
 
-    public KindOfState getMove() {
-        if (move == null)
-            throw new UnsupportedOperationException();
-        return move;
+    public double getDurationPerFrame() {
+        return durationPerFrame;
+    }
+
+    public FrameStatePositions getAction(KindOfState kindOfAction) {
+        return actionStates.get(kindOfAction);
     }
 
     public double getWidthOfOneFrame() {

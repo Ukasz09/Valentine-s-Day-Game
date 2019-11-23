@@ -1,13 +1,8 @@
 package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
-import java.lang.reflect.Array;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
-//todo: usunac geographic
 public enum DirectionEnum {
     LEFT("A"), RIGHT("D"), UP("W"), DOWN("S");
 

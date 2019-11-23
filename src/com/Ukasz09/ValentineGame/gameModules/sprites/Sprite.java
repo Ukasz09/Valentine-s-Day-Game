@@ -3,6 +3,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -50,10 +51,12 @@ public abstract class Sprite {
         //todo: tmp
         widthOfOneFrame = spriteSheetProperty.getWidthOfOneFrame();
         heightOfOneFrame = spriteSheetProperty.getHeightOfOneFrame();
-        actualFramePositionX = 0;
-        actualFramePositionY = 0;
 
-        durationPerOneFrame = 4; //todo: tmp
+        //TODO: tmp
+        actualFramePositionX =spriteSheetProperty.getPositionOfIndex((spriteSheetProperty.getAction(KindOfState.MOVE).getRandomIndex())).getX();
+        actualFramePositionY = spriteSheetProperty.getPositionOfIndex((spriteSheetProperty.getAction(KindOfState.MOVE).getRandomIndex())).getY();
+
+        durationPerOneFrame = spriteSheetProperty.getDurationPerFrame(); //todo: tmp
         remainingTimeOnActualFrame = 0;
     }
 

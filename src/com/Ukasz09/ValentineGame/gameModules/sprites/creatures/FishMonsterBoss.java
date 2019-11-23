@@ -6,6 +6,7 @@ import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.FrameStatePositions;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.shields.AutoActivateShield;
@@ -44,7 +45,7 @@ public class FishMonsterBoss extends Monster {
 
     private final Shield shield;
     private final HealthStatusBar healthBar;
-    private KindOfState actualState;
+    private FrameStatePositions actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonsterBoss(ImageSheetProperty spriteSheetProperty, ImageSheetProperty shieldSheetProperty, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
@@ -54,7 +55,7 @@ public class FishMonsterBoss extends Monster {
         setCreatureProperties(DEFAULT_LIVES, DEFAULT_VELOCITY_X, DEFAULT_VELOCITY_Y);
         setMonsterProperties(kickMethod, DEFAULT_KICK_SIZE, DEFAULT_LIVES_TAKE, collisionAvoidWay);
 
-        actualState = spriteSheetProperty.getMove();
+        actualState = spriteSheetProperty.getAction(KindOfState.MOVE);
         shield = new AutoActivateShield(shieldSheetProperty, DEFAULT_SHIELD_WIDTH, DEFAULT_SHIELD_HEIGHT, DEFAULT_SHIELD_COOLDOWN, DEFAULT_SHIELD_DURATION, manager);
         healthBar = new HealthStatusBar(DEFAULT_LIVES, getWidth(), getPositionX(), getPositionY());
     }

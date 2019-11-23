@@ -5,10 +5,10 @@ import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.FrameStatePositions;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
-import javafx.scene.image.Image;
 
 public class LittleMonster extends Monster {
 
@@ -29,9 +29,9 @@ public class LittleMonster extends Monster {
     private static final double DEFAULT_KICK_SIZE = 0;
     private static final double DEFAULT_VELOCITY_X = 1;
     private static final double DEFAULT_VELOCITY_Y = 1;
-    private static final double ROTATE_OFFSET = Math.random() * 360;
+    private static final int ROTATE_OFFSET = (int)(Math.random() * (180-45))+45;
 
-    private KindOfState actualState;
+    private FrameStatePositions actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public LittleMonster(ImageSheetProperty spriteSheetProperty, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
@@ -41,7 +41,7 @@ public class LittleMonster extends Monster {
         setCreatureProperties(DEFAULT_LIVES, DEFAULT_VELOCITY_X, DEFAULT_VELOCITY_Y);
         setMonsterProperties(kickMethod, DEFAULT_KICK_SIZE, DEFAULT_LIVES_TAKE, collisionAvoidWay);
 
-        actualState = spriteSheetProperty.getMove();
+        actualState = spriteSheetProperty.getAction(KindOfState.MOVE);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,7 +61,7 @@ public class LittleMonster extends Monster {
     @Override
     public void updateMonsterRotate(Creature target) {
         double rotate = RotateEffect.setRotateByAngle(this, target);
-        rotate += ROTATE_OFFSET;
+        rotate +=ROTATE_OFFSET;
         setActualRotation(rotate);
     }
 

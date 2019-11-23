@@ -3,6 +3,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
+import com.Ukasz09.ValentineGame.graphicModule.texturesPath.FrameStatePositions;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
@@ -22,7 +23,7 @@ public class Bomb extends Weapon {
     private static double DEFAULT_SPRITE_WIDTH = 50;
     private static double DEFAULT_SPRITE_HEIGHT = 50;
 
-    private KindOfState actualState;
+    private FrameStatePositions actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Bomb(ImageSheetProperty spriteSheetProperty, double positionX, double positionY, ViewManager manager) {
@@ -33,7 +34,7 @@ public class Bomb extends Weapon {
         super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, shotVelocity, shotVelocity, positionX, positionY, howManyLiveTakes, manager);
         this.maxOverheating = maxOverheating;
         bombBoomSound = getBombBoomSound(DEFAULT_AMOUNT_OF_BOMB_BOOM_SOUNDS);
-        actualState = spriteSheetProperty.getMove();
+        actualState = spriteSheetProperty.getAction(KindOfState.MOVE);
     }
 
 
