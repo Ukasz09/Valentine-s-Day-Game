@@ -28,7 +28,7 @@ public class Game extends Application {
     private AllLevels actualLevel;
     private Panels actualPanel;
     private Player player;
-    private SoundsPlayer backgroundSound;
+    private SoundsPlayer backgroundLevelSound;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
@@ -49,8 +49,7 @@ public class Game extends Application {
         int levelNumber = 0;
         if (levelNumber == 0) {
             actualPanel = new StartPanel(manager);
-            backgroundSound = actualPanel.getBackgroundSound();
-            backgroundSound.playSound();
+            actualPanel.playBackgroundSound();
         } else startGame(levelNumber);
 
         class gameAnimationTimer extends AnimationTimer {
@@ -61,7 +60,7 @@ public class Game extends Application {
                         if (!playerReadyToGame())
                             actualPanel.render();
                         else {
-                            backgroundSound.stopSound();
+                            actualPanel.stopBackgroundSound();
                             actualPanel = null;
                             startGame(1);
                         }
@@ -107,11 +106,23 @@ public class Game extends Application {
                             play(currentNanoTime, actualLevel);
                         else {
                             endLevel();
-                            backgroundSound.stopSound();
                             player.stopWingsSound();
-                            actualPanel = new EndPanel(manager);
-                            backgroundSound = actualPanel.getBackgroundSound();
-                            backgroundSound.playSound();
+                            backgroundLevelSound.stopSound();
+                            actualPanel = new EndWinPanel(manager);
+                            actualPanel.playBackgroundSound();
+                        }
+                    }
+                    break;
+
+                    case 5: {
+                        if (!actualLevel.levelIsEnd(player))
+                            play(currentNanoTime, actualLevel);
+                        else {
+                            endLevel();
+                            player.stopWingsSound();
+                            backgroundLevelSound.stopSound();
+                            actualPanel = new EndGameOverPanel(manager);
+                            actualPanel.playBackgroundSound();
                         }
                     }
                     break;
@@ -243,9 +254,8 @@ public class Game extends Application {
     private void startGame(int levelNumber) {
         actualLevel = chooseLevel(levelNumber);
         actualLevel.prepareLevel(coinsList, enemiesList, player);
-        backgroundSound = actualLevel.getBackgroundSound();
-        backgroundSound.playSound();
-
+        backgroundLevelSound= actualLevel.getBackgroundSound();
+        backgroundLevelSound.playSound();
         if (player != null)
             player.playWingsSound();
         else Logger.logError(getClass(), player.toString() + " is null");

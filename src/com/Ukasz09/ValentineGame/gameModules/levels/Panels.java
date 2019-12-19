@@ -20,11 +20,9 @@ public abstract class Panels {
     }
 
     private void drawBackground() {
-        manager.getGraphicContext().drawImage(backgroundImage, 0, 0);
+        manager.getGraphicContext().drawImage(backgroundImage, 0, 0, manager.getRightFrameBorder(),manager.getBottomFrameBorder());
     }
 
-    abstract public SoundsPlayer getBackgroundSound();
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public ViewManager getManager() {
         return manager;
     }
@@ -32,4 +30,8 @@ public abstract class Panels {
     protected void setBackgroundImage(Image backgroundImage) {
         this.backgroundImage = backgroundImage;
     }
+
+    public abstract void playBackgroundSound();
+
+    public abstract void stopBackgroundSound();
 }

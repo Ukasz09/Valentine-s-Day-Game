@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class Level_1 extends AllLevels {
     protected static final String BACKGROUND_IMAGE_PATH = BackgroundPath.BACKGROUD_IMAGE_PATH_L_0;
     protected static final String BACKGROUND_SOUND_PATH = SoundsPath.BACKGROUND_SOUND_PATH_1;
-    protected static final double BACKGROUND_SOUND_VOLUME = 0.1;
+    protected static final double BACKGROUND_SOUND_VOLUME = 0.5;
 
     private final ImageSheetProperty littleMonsterSheetProperty = SpritesProperties.littleMonsterSheetProperty();
 

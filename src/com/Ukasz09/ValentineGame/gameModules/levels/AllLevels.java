@@ -77,7 +77,7 @@ public abstract class AllLevels {
     }
 
     public boolean levelIsEnd(Player player) {
-        return (player.getCollectedCoinsOnLevel() >= getAmountOfAllCoins()) && (player.getKilledEnemiesOnLevel() >= amountOfSpawnEnemies());
+        return ((player.getCollectedCoinsOnLevel() >= getAmountOfAllCoins()) && (player.getKilledEnemiesOnLevel() >= amountOfSpawnEnemies()))||(player.getLives()<=0);
     }
 
     public abstract int amountOfSpawnEnemies();

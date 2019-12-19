@@ -8,7 +8,7 @@ public class SpritesProperties {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static ImageSheetProperty playerUkaszSheetProperty() {
-        String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\ukaszAngel.png";
+        String spritePath = "resources/texturesModel/sprites/ukaszAngel.png";
         ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10, 256, 256)
                 .withImagePath(spritePath)
                 .withSizeOfOneFrame(256, 256)
@@ -19,7 +19,7 @@ public class SpritesProperties {
     }
 
     public static ImageSheetProperty littleMonsterSheetProperty() {
-        String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\littleMonster1.png";
+        String spritePath = "resources/texturesModel/sprites/littleMonster1.png";
         ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10, 256, 256)
                 .withImagePath(spritePath)
                 .withSizeOfOneFrame(256, 256)
@@ -30,7 +30,7 @@ public class SpritesProperties {
     }
 
     public static ImageSheetProperty fishMonsterSheetProperty() {
-        String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMonster.png";
+        String spritePath = "resources/texturesModel/sprites/fishMonster.png";
         ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10, 256, 256)
                 .withImagePath(spritePath)
                 .withSizeOfOneFrame(256, 256)
@@ -45,7 +45,7 @@ public class SpritesProperties {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public static ImageSheetProperty fishBossShieldSheetProperty() {
-        String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\fishMinibossShield.png";
+        String spritePath = "resources/texturesModel/sprites/fishMinibossShield.png";
         ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10, 256, 256)
                 .withImagePath(spritePath)
                 .withSizeOfOneFrame(256, 256)
@@ -56,7 +56,7 @@ public class SpritesProperties {
     }
 
     public static ImageSheetProperty smallCoinSheetProperty() {
-        String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\smallCoin.png";
+        String spritePath = "resources/texturesModel/sprites/smallCoin.png";
         ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10, 64, 64)
                 .withImagePath(spritePath)
                 .withSizeOfOneFrame(64, 64)
@@ -67,7 +67,7 @@ public class SpritesProperties {
     }
 
     public static ImageSheetProperty normalCoinSheetProperty() {
-        String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\normalCoin.png";
+        String spritePath = "resources/texturesModel/sprites/normalCoin.png";
         ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10, 64, 64)
                 .withImagePath(spritePath)
                 .withSizeOfOneFrame(64, 64)
@@ -78,7 +78,7 @@ public class SpritesProperties {
     }
 
     public static ImageSheetProperty bigCoinSheetProperty() {
-        String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\bigCoin.png";
+        String spritePath = "resources/texturesModel/sprites/bigCoin.png";
         ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10, 64, 64)
                 .withImagePath(spritePath)
                 .withSizeOfOneFrame(64, 64)
@@ -89,7 +89,7 @@ public class SpritesProperties {
     }
 
     public static ImageSheetProperty playerShieldSheetProperty() {
-        String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\playerShield.png";
+        String spritePath = "resources/texturesModel/sprites/playerShield.png";
         ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10, 256, 256)
                 .withImagePath(spritePath)
                 .withSizeOfOneFrame(256, 256)
@@ -100,7 +100,7 @@ public class SpritesProperties {
     }
 
     public static ImageSheetProperty playerShotBallProperty() {
-        String spritePath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\iceBallSmall.png";
+        String spritePath = "resources/texturesModel/sprites/iceBallSmall.png";
         ImageSheetProperty sheetProperty = ImageSheetProperty.bulider(10, 128, 74)
                 .withImagePath(spritePath)
                 .withSizeOfOneFrame(128, 74)
@@ -111,8 +111,8 @@ public class SpritesProperties {
     }
 
     public static ImageSheetProperty[] playerShotBombsPoperty() {
-        String spriteStarPath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\legoStar.png";
-        String spriteHeartPath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\legoHeart.png";
+        String spriteStarPath = "resources/texturesModel/sprites/legoStar.png";
+        String spriteHeartPath = "resources/texturesModel/sprites/legoHeart.png";
         ImageSheetProperty[] sheetProperty = new ImageSheetProperty[2];
         sheetProperty[0] = ImageSheetProperty.bulider(10, 128, 128)
                 .withImagePath(spriteStarPath)
@@ -130,7 +130,7 @@ public class SpritesProperties {
     }
 
     public static Image[] batteryImages() {
-        String batteryPrefixPath = "\\com\\Ukasz09\\ValentineGame\\graphicModule\\texturesModel\\sprites\\battery";
+        String batteryPrefixPath = "resources/texturesModel/sprites/battery";
         Image[] batteryImages = new Image[5];
         for (int i = 0; i < batteryImages.length; i++)
             batteryImages[i] = new Image(batteryPrefixPath + (i + 1) + ".png");

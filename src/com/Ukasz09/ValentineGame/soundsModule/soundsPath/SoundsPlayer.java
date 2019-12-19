@@ -1,5 +1,6 @@
 package com.Ukasz09.ValentineGame.soundsModule.soundsPath;
 
+import com.Ukasz09.ValentineGame.SoundResource;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -21,8 +22,8 @@ public class SoundsPlayer {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private void makeSound() {
-        String resource = new File(soundPath).toURI().toString();
-        Media media = new Media(resource);
+        java.net.URL soundURL = SoundResource.class.getResource(soundPath);
+        Media media = new Media(soundURL.toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(volume);
         if (inLoop)

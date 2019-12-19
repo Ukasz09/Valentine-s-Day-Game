@@ -68,7 +68,6 @@ public class Bullet extends Weapon {
     }
 
     public void playShotSound() {
-        shotSound=new SoundsPlayer(SHOT_SOUND_PATH, SHOT_SOUND_VOLUME, false);
         shotSound.playSound();
     }
 

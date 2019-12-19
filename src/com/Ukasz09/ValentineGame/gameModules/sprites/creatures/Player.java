@@ -127,6 +127,12 @@ public class Player extends Creature {
         updateBulletOverheating();
         updateAnticollisionTimer();
         updatePlayerRotate();
+        if (gameIsOver())
+            levelNumber = 5;
+    }
+
+    private boolean gameIsOver() {
+        return getLives() <= 0;
     }
 
     @Override
@@ -399,6 +405,7 @@ public class Player extends Creature {
     }
 
     private SoundsPlayer getRandomHitSound() {
+        getPlayerHitSounds();
         int random = (int) (Math.random() * playerHitSounds.length);
         return playerHitSounds[random];
     }
@@ -527,7 +534,7 @@ public class Player extends Creature {
     }
 
     private SoundsPlayer[] getPlayerHitSounds() {
-        SoundsPlayer hitSounds[] = new SoundsPlayer[2];
+        SoundsPlayer[] hitSounds = new SoundsPlayer[2];
         hitSounds[0] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_1_PATH, DEFAULT_HIT_SOUND_VOLUME, false);
         hitSounds[1] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_2_PATH, DEFAULT_HIT_SOUND_VOLUME, false);
         return hitSounds;
