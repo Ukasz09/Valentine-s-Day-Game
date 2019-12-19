@@ -8,19 +8,18 @@ import javafx.scene.image.Image;
 public class InCorner extends HeartsRender implements IHeartsPosition {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public InCorner(ViewManager manager){
+    public InCorner(ViewManager manager) {
         super(manager);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public Point2D calculateHeartCoords(Creature creature) {
-        double heartWidth=getHeartFullImage().getWidth();
-        double heartHeight=getHeartFullImage().getHeight();
-
+        double heartWidth = getOneHeartWidth();
+        double heartHeight = getOneHeartHeight();
         double positionX = getManager().getRightFrameBorder() - creature.getMaxLives() * heartWidth;
         double positionY = getManager().getBottomFrameBorder() - heartHeight;
-        return new Point2D(positionX,positionY);
+        return new Point2D(positionX, positionY);
     }
 
     @Override

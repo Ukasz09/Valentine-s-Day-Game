@@ -16,8 +16,6 @@ public class FishMonster extends Monster {
     private static final String DEATH_SOUND_PATH = SoundsPath.FISH_MONSTER_DEATH_SOUND_PATH;
     private static final double DEATH_SOUND_VOLUME = 1;
     private static final double HIT_SOUND_VOLUME = 1;
-    private static final SoundsPlayer HIT_SOUND = new SoundsPlayer(HIT_SOUND_PATH, HIT_SOUND_VOLUME, false);
-    private static final SoundsPlayer DEATH_SOUND = new SoundsPlayer(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME, false);
 
     private static final double DEFAULT_SPRITE_WIDTH = 100;
     private static final double DEFAULT_SPRITE_HEIGHT = 88;
@@ -28,22 +26,23 @@ public class FishMonster extends Monster {
     private static final double DEFAULT_VELOCITY_X = 4.2;
     private static final double DEFAULT_VELOCITY_Y = 4.2;
 
-    //todo:
+    private final SoundsPlayer hitSound;
+    private final SoundsPlayer deathSound;
     private FrameStatePositions actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FishMonster(ImageSheetProperty spriteSheetProperty, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
         super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, manager);
         hueImage(-1, 1);
-//        setSpriteSheetProperties(WIDTH_OF_ONE_FRAME, HEIGHT_OF_ONE_FRAME);
         setCreatureProperties(DEFAULT_LIVES, DEFAULT_VELOCITY_X, DEFAULT_VELOCITY_Y);
         setMonsterProperties(kickMethod, DEFAULT_KICK_SIZE, DEFAULT_LIVES_TAKE, collisionAvoidWay);
 
         actualState = spriteSheetProperty.getAction(KindOfState.MOVE);
+        hitSound = new SoundsPlayer(HIT_SOUND_PATH, HIT_SOUND_VOLUME, false);
+        deathSound = new SoundsPlayer(DEATH_SOUND_PATH, DEATH_SOUND_VOLUME, false);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     @Override
     public void setStartedPosition() {
         setPositionByDirection(true, true, true, true, 60);
@@ -51,7 +50,7 @@ public class FishMonster extends Monster {
 
     @Override
     public void actionWhenMissHit() {
-        //nothing
+        //nothing to do
     }
 
     @Override
@@ -62,7 +61,7 @@ public class FishMonster extends Monster {
 
     @Override
     public SoundsPlayer getHitSoundOrNull() {
-        return FishMonster.HIT_SOUND;
+        return hitSound;
     }
 
     @Override
@@ -72,7 +71,7 @@ public class FishMonster extends Monster {
 
     @Override
     public SoundsPlayer getDeathSoundOrNull() {
-        return FishMonster.DEATH_SOUND;
+        return deathSound;
     }
 
     @Override

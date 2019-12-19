@@ -16,9 +16,9 @@ public class Bomb extends Weapon {
     private static final int DEFAULT_AMOUNT_OF_BOMB_BOOM_SOUNDS = 4;
     private static final String BOMB_BOOM_SOUND_PREFIX = SoundsPath.BOMB_BOOM_SOUND_PATH_PREFIX;
     private static final String BOMB_SHOT_SOUND_PATH = SoundsPath.BOMB_SHOT_SOUND_PATH;
-    private static final SoundsPlayer SHOT_SOUND = new SoundsPlayer(BOMB_SHOT_SOUND_PATH, DEFAULT_SHOT_VOLUME, false);
     private static double maxOverheating = DEFAULT_MAX_OVERHEATING;
     private static SoundsPlayer[] bombBoomSound;
+    private final SoundsPlayer shotSound;
 
     private static double DEFAULT_SPRITE_WIDTH = 50;
     private static double DEFAULT_SPRITE_HEIGHT = 50;
@@ -30,11 +30,12 @@ public class Bomb extends Weapon {
         this(spriteSheetProperty, DEFAULT_SHOT_VELOCITY, positionX, positionY, DEFAULT_LIVES_TAKES, DEFAULT_MAX_OVERHEATING, manager);
     }
 
-    public Bomb(ImageSheetProperty spriteSheetProperty, double shotVelocity, double positionX, double positionY, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
+    private Bomb(ImageSheetProperty spriteSheetProperty, double shotVelocity, double positionX, double positionY, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
         super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, shotVelocity, shotVelocity, positionX, positionY, howManyLiveTakes, manager);
-        this.maxOverheating = maxOverheating;
+        Bomb.maxOverheating = maxOverheating;
         bombBoomSound = getBombBoomSound(DEFAULT_AMOUNT_OF_BOMB_BOOM_SOUNDS);
         actualState = spriteSheetProperty.getAction(KindOfState.MOVE);
+        shotSound = new SoundsPlayer(BOMB_SHOT_SOUND_PATH, DEFAULT_SHOT_VOLUME, false);
     }
 
 
@@ -53,7 +54,7 @@ public class Bomb extends Weapon {
     }
 
     public void playShotSound() {
-        Bomb.SHOT_SOUND.playSound();
+        shotSound.playSound();
     }
 
     @Override
@@ -88,7 +89,6 @@ public class Bomb extends Weapon {
         setPositionOfNextFrame(actualState.getMinX(), actualState.getMaxX(), actualState.getMinY(), actualState.getMaxY(), spriteImage.getWidth());
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private SoundsPlayer getRandomBoomSound() {
         int random = (int) (Math.random() * bombBoomSound.length);
         return bombBoomSound[random];

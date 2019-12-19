@@ -8,8 +8,8 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 import javafx.scene.image.Image;
 
 public class EndPanel extends Panels {
-    public static final String BACKGROUND_IMAGE_PATH = BackgroundPath.END_IMAGE_PATH;
-    public static final String BACKGROUND_SOUND_PATH = SoundsPath.END_SOUND_PATH;
+    private static final String BACKGROUND_IMAGE_PATH = BackgroundPath.END_IMAGE_PATH;
+    private static final String BACKGROUND_SOUND_PATH = SoundsPath.END_SOUND_PATH;
     private static final double BACKGROUND_SOUND_VOLUME = 0.3;
     private Image heartFlare;
 
@@ -24,11 +24,11 @@ public class EndPanel extends Panels {
     @Override
     public void render() {
        super.render();
-       renderPrincess();
+       renderFlare();
 
     }
 
-    public void renderPrincess() {
+    private void renderFlare() {
         getManager().getGraphicContext().drawImage(heartFlare, 10, 0);
     }
 

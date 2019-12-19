@@ -8,6 +8,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -31,9 +32,7 @@ public class ViewManager {
     private GraphicsContext gc;
 
     private double rightFrameBorder;
-    private double leftFrameBorder;
     private double bottomFrameBorder;
-    private double topFrameBorder;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public ViewManager() {
@@ -57,28 +56,18 @@ public class ViewManager {
         canvas = new Canvas(mainStage.getWidth(), mainStage.getHeight());
         root.getChildren().add(canvas);
         gc = canvas.getGraphicsContext2D();
-
         setFillColor(DEFAULT_FONT_COLOR);
         setDefaultFont();
         checkWindowBoundary(canvas);
-
-        //todo
-//        canvas.setScaleX(1.187);
-//        scale();
-//        for(Node n: root.getChildren()){
-//            Rectangle2D userResulution= Screen.getPrimary().getBounds();
-////            n.setScaleX(1.05);
-//             no
-////            n.setScaleY(1.05);
-//        }
         scaleToProperResolution();
+        addExitButtonHandler(KeyCode.ESCAPE);
     }
 
-    public void setDefaultFont() {
+    private void setDefaultFont() {
         setFont(DEFAULT_FONT_FAMILY, DEFAULT_FONT_WEIGHT, DEFAULT_FONT_SIZE, DEFAULT_FONT_COLOR);
     }
 
-    public void setFont(String family, FontWeight weight, int size, Color color) {
+    private void setFont(String family, FontWeight weight, int size, Color color) {
         try {
             Font font = Font.font(family, weight, size);
             setFont(font, color);
@@ -92,43 +81,34 @@ public class ViewManager {
         gc.setFill(color);
     }
 
-    public void setFillColor(Color color) {
+    private void setFillColor(Color color) {
         gc.setFill(color);
     }
 
     public void readKeyboardAction(ArrayList<String> input) {
-        mainScene.setOnKeyPressed(
-                new EventHandler<KeyEvent>() {
-                    public void handle(KeyEvent e) {
-                        String code = e.getCode().toString();
-                        if (!input.contains(code))
-                            input.add(code);
-                    }
-                });
-        mainScene.setOnKeyReleased(
-                new EventHandler<KeyEvent>() {
-                    public void handle(KeyEvent e) {
-                        String code = e.getCode().toString();
-                        input.remove(code);
-                    }
-                });
+        mainScene.setOnKeyPressed(e -> {
+            String code = e.getCode().toString();
+            if (!input.contains(code))
+                input.add(code);
+        });
+        mainScene.setOnKeyReleased(e -> {
+            String code = e.getCode().toString();
+            input.remove(code);
+        });
     }
 
     private void checkWindowBoundary(Canvas canvas) {
         Bounds bounds = canvas.getBoundsInLocal();
         rightFrameBorder = bounds.getMaxX();
-        leftFrameBorder = bounds.getMinX();
         bottomFrameBorder = bounds.getMaxY();
-        topFrameBorder = bounds.getMinY();
     }
 
     private void scaleToProperResolution() {
         Point2D userResolution = getUserResolution();
         canvas.setScaleX(userResolution.getX() / DEFAULT_GAME_FRAME_WIDTH);
         canvas.setScaleY(userResolution.getY() / HEIGHT);
-        double translateOffsetX = (userResolution.getX() - DEFAULT_GAME_FRAME_WIDTH) / 2; //todo: nie mnozyc tylko dac userResolution.x
+        double translateOffsetX = (userResolution.getX() - DEFAULT_GAME_FRAME_WIDTH) / 2;
         double translateOffsetY = (userResolution.getY() - HEIGHT) / 2;
-
         translateCanvas(translateOffsetX, translateOffsetY);
     }
 
@@ -140,6 +120,14 @@ public class ViewManager {
     private void translateCanvas(double offsetX, double offsetY) {
         canvas.setTranslateX(offsetX);
         canvas.setTranslateY(offsetY);
+    }
+
+    private void addExitButtonHandler(KeyCode exitCode) {
+        mainStage.addEventHandler(KeyEvent.KEY_RELEASED, (KeyEvent event) -> {
+            if (exitCode == event.getCode()) {
+                mainStage.close();
+            }
+        });
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,16 +143,8 @@ public class ViewManager {
         return rightFrameBorder;
     }
 
-    public double getLeftFrameBorder() {
-        return leftFrameBorder;
-    }
-
     public double getBottomFrameBorder() {
         return bottomFrameBorder;
-    }
-
-    public double getTopFrameBorder() {
-        return topFrameBorder;
     }
 
 }

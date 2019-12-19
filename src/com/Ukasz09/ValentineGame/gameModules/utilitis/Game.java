@@ -1,12 +1,3 @@
-/*
-    todo:
-        - responsywnosc na wszystkie rozdzielczosci
-        - nowe levele
-        - nowi przeciwnicy
-        - ekrany tutorialowe (opis potworow, sterowanie, bonusy, tipy)
-
-*/
-
 package com.Ukasz09.ValentineGame.gameModules.utilitis;
 
 import com.Ukasz09.ValentineGame.gameModules.levels.*;
@@ -24,29 +15,25 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class Game extends Application {
+    private static final ImageSheetProperty PLAYER_SHEET_PROPERTY = SpritesProperties.playerUkaszSheetProperty();
+    private static final ImageSheetProperty PLAYER_SHIELD_PROPERTY = SpritesProperties.playerShieldSheetProperty();
+    private static String GAME_TITLE = "Valentines Game";
+
     private ViewManager manager;
     private ArrayList<Coin> coinsList;
     private ArrayList<Monster> enemiesList;
     private ArrayList<String> inputsList;
-
     private double elapsedTime;
-    private LongValue lastNanoTime;
-
+    private double lastNanoTime;
     private AllLevels actualLevel;
     private Panels actualPanel;
-
     private Player player;
     private SoundsPlayer backgroundSound;
-
-    private final ImageSheetProperty playerSheetProperty=SpritesProperties.playerUkaszSheetProperty();
-    private final ImageSheetProperty playerShieldProperty=SpritesProperties.playerShieldSheetProperty();
-//    private static SoundsPlayer effectSound; //to avoid remove object by garbage collector before sound effect end
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Game() {
         manager = new ViewManager(); //do NOT touch
-        lastNanoTime = new LongValue(System.nanoTime());
-        player = new Player(playerSheetProperty, playerShieldProperty, manager);
+        player = new Player(PLAYER_SHEET_PROPERTY, PLAYER_SHIELD_PROPERTY, manager);
         inputsList = new ArrayList<>();
         coinsList = new ArrayList<>();
         enemiesList = new ArrayList<>();
@@ -55,7 +42,7 @@ public class Game extends Application {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
     public void start(Stage theStage) {
-        manager.initialize("Valentines Game", true); //do NOT touch
+        manager.initialize(GAME_TITLE, true); //do NOT touch
         theStage = manager.getMainStage();  //do NOT touch
         manager.readKeyboardAction(inputsList);
 
@@ -86,13 +73,36 @@ public class Game extends Application {
                             play(currentNanoTime, actualLevel);
                         else {
                             endLevel();
-                            actualLevel = new Level_2(manager);
+                            actualLevel = new Level_1(manager, 30);
                             actualLevel.prepareLevel(coinsList, enemiesList, player);
                         }
                     }
                     break;
 
                     case 2: {
+                        if (!actualLevel.levelIsEnd(player))
+                            play(currentNanoTime, actualLevel);
+                        else {
+                            endLevel();
+                            actualLevel = new Level_2(manager, 15, 0);
+                            actualLevel.prepareLevel(coinsList, enemiesList, player);
+                        }
+                    }
+                    break;
+
+                    case 3: {
+                        if (!actualLevel.levelIsEnd(player))
+                            play(currentNanoTime, actualLevel);
+                        else {
+                            endLevel();
+                            actualLevel = new Level_2(manager);
+                            actualLevel.prepareLevel(coinsList, enemiesList, player);
+                        }
+                    }
+                    break;
+
+
+                    case 4: {
                         if (!actualLevel.levelIsEnd(player))
                             play(currentNanoTime, actualLevel);
                         else {
@@ -200,8 +210,6 @@ public class Game extends Application {
         return (inputsList.contains("ENTER"));
     }
 
-
-    //todo: poprawic
     private void play(long currentNanoTime, AllLevels level) {
         updateTime(currentNanoTime);
         level.render(enemiesList, coinsList, player.getShotsList(), player);
@@ -209,12 +217,11 @@ public class Game extends Application {
         player.update(elapsedTime, coinsList, enemiesList);
         player.render();
         level.update(player, enemiesList, coinsList, elapsedTime);
-
     }
 
     private void updateTime(long currentNanoTime) {
-        elapsedTime = (currentNanoTime - lastNanoTime.getValue()) / 1000000000.0;
-        lastNanoTime.setValue(currentNanoTime);
+        elapsedTime = (currentNanoTime - lastNanoTime) / 1000000000.0;
+        lastNanoTime = currentNanoTime;
     }
 
     private AllLevels chooseLevel(int levelNumber) {
@@ -241,17 +248,11 @@ public class Game extends Application {
 
         if (player != null)
             player.playWingsSound();
-        else System.out.println(player.toString() + " is null");
+        else Logger.logError(getClass(), player.toString() + " is null");
     }
-
-//    public static void playEffectSound(SoundsPlayer sound){
-//        effectSound=sound;
-//        effectSound.playSound();
-//    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public static void main(String[] args) {
-//        Game gameTest = new Game();
         launch(args);
     }
 }

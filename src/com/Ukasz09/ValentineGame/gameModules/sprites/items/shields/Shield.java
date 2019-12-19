@@ -11,10 +11,8 @@ public abstract class Shield extends Sprite {
 
     private int protectDurationTimer;
     private int shieldCooldownTimer;
-
     private int defaultShieldCooldown;
     private int defaultShieldDuration;
-
     private FrameStatePositions actualState;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -39,9 +37,7 @@ public abstract class Shield extends Sprite {
     }
 
     public boolean isActive() {
-        if (protectDurationTimer > 0)
-            return true;
-        return false;
+        return  (protectDurationTimer > 0);
     }
 
     protected boolean canBeActivated() {
@@ -53,7 +49,7 @@ public abstract class Shield extends Sprite {
     }
 
     protected void reduceProtectDurationTimer() {
-        protectDurationTimer -= SHIELD_REDUCE_OFFSET;
+        protectDurationTimer -= SHIELD_REDUCE_OFFSET/((Math.random()*2)+1);
         if (protectDurationTimer < 0)
             protectDurationTimer = 0;
     }

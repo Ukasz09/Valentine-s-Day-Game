@@ -9,18 +9,19 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 
 public class Coin extends Sprite {
-    public static final String COLLECT_SOUND_PATH = SoundsPath.COLLECT_COIN_SOUND_PATH;
-    public static final double SOUND_VOLUME = 0.1;
-    private static final SoundsPlayer COLLECT_SOUND = new SoundsPlayer(COLLECT_SOUND_PATH, SOUND_VOLUME, false);
+    private static final String COLLECT_SOUND_PATH = SoundsPath.COLLECT_COIN_SOUND_PATH;
+    private static final double SOUND_VOLUME = 0.1;
     private int value;
     private FrameStatePositions actualState;
-
+    private final SoundsPlayer collectSound;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public Coin(ImageSheetProperty spriteSheetProperty, double spriteWidth, double spriteHeight, int value, ViewManager manager) {
         super(spriteSheetProperty, spriteWidth, spriteHeight, manager);
         this.value = value;
         setPosition();
-        actualState=spriteSheetProperty.getAction(KindOfState.MOVE);
+        actualState = spriteSheetProperty.getAction(KindOfState.MOVE);
+        collectSound = new SoundsPlayer(COLLECT_SOUND_PATH, SOUND_VOLUME, false);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,13 +31,12 @@ public class Coin extends Sprite {
         this.setPosition(positionX, positionY);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public int getValue() {
         return value;
     }
 
-    public static void playCollectSound() {
-        Coin.COLLECT_SOUND.playSound();
+    public void playCollectSound() {
+        collectSound.playSound();
     }
 
     @Override

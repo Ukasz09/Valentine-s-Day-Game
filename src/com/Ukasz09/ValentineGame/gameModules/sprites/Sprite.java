@@ -7,35 +7,26 @@ import com.Ukasz09.ValentineGame.graphicModule.texturesPath.KindOfState;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
 
 public abstract class Sprite {
     private ViewManager manager;
-
-    //todo: tmp
     protected Image spriteImage;
-
     private double positionX;
     private double positionY;
     private double actualVelocityX;
     private double actualVelocityY;
-    protected double width;
-    protected double height;
+    private double width;
+    private double height;
     private double actualRotation;
     private DirectionEnum imageDirection;
-
     private double durationPerOneFrame;
     private double remainingTimeOnActualFrame;
-
-    protected double actualFramePositionY;
-    protected double actualFramePositionX;
-
-    //todo:tmp
-    protected double widthOfOneFrame;
-    protected double heightOfOneFrame;
+    private double actualFramePositionY;
+    private double actualFramePositionX;
+    private double widthOfOneFrame;
+    private double heightOfOneFrame;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Sprite(ImageSheetProperty spriteSheetProperty, double spriteWidth, double spriteHeight, ViewManager manager) {
@@ -47,21 +38,16 @@ public abstract class Sprite {
         actualRotation = 0;
         positionX = 0;
         positionY = 0;
-
-        //todo: tmp
         widthOfOneFrame = spriteSheetProperty.getWidthOfOneFrame();
         heightOfOneFrame = spriteSheetProperty.getHeightOfOneFrame();
-
-        //TODO: tmp
-        actualFramePositionX =spriteSheetProperty.getPositionOfIndex((spriteSheetProperty.getAction(KindOfState.MOVE).getRandomIndex())).getX();
+        actualFramePositionX = spriteSheetProperty.getPositionOfIndex((spriteSheetProperty.getAction(KindOfState.MOVE).getRandomIndex())).getX();
         actualFramePositionY = spriteSheetProperty.getPositionOfIndex((spriteSheetProperty.getAction(KindOfState.MOVE).getRandomIndex())).getY();
-
-        durationPerOneFrame = spriteSheetProperty.getDurationPerFrame(); //todo: tmp
+        durationPerOneFrame = spriteSheetProperty.getDurationPerFrame();
         remainingTimeOnActualFrame = 0;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void setPositionOfNextFrame(double minXPosition, double maxXPosition, double minYPosition, double maxYPosition, double sheetWidth) {
+    protected void setPositionOfNextFrame(double minXPosition, double maxXPosition, double minYPosition, double maxYPosition, double sheetWidth) {
         //Finished one cycle
         actualFramePositionX += widthOfOneFrame;
         if (actualFramePositionX >= maxXPosition && actualFramePositionY >= maxYPosition) {
@@ -100,7 +86,6 @@ public abstract class Sprite {
         updateSpriteSheetFrame();
     }
 
-    //todo: dac actualState w Sprite
     protected abstract void setPositionOfNextFrame();
 
     private void updatePosition(double time, double multiplierX, double multiplierY) {
@@ -110,33 +95,18 @@ public abstract class Sprite {
 
     public void render() {
         renderSpriteWithoutRotation();
-//        drawBoundaryForTests();
     }
 
     private void renderSpriteWithoutRotation() {
         drawImageWithoutMirrorReflection();
-        drawBoundaryForTests();
     }
 
     private void drawImageWithoutMirrorReflection() {
         manager.getGraphicContext().drawImage(spriteImage, actualFramePositionX, actualFramePositionY, widthOfOneFrame, heightOfOneFrame, positionX, positionY, width, height);
     }
 
-    //TEMP
-    //todo: tmp public
-    public void drawBoundaryForTests() {
-        double tmpPosX = getBoundary().getMinX();
-        double tmpPosY = getBoundary().getMinY();
-        double tmpWidth = getBoundary().getWidth();
-        double tmpHeight = getBoundary().getHeight();
-        Paint p = new Color(0.6, 0.6, 0.6, 0.3);
-        manager.getGraphicContext().setFill(p);
-        manager.getGraphicContext().fillRect(tmpPosX, tmpPosY, tmpWidth, tmpHeight);
-    }
-
-    public void renderSpriteWithRotation() {
+    protected void renderSpriteWithRotation() {
         drawImageWithRotation();
-        drawBoundaryForTests();
     }
 
     private void drawImageWithRotation() {
@@ -146,7 +116,6 @@ public abstract class Sprite {
         if (needToRotate()) {
             double rotationCenterX = positionX + width / 2;
             double rotationCenterY = positionY + height / 2;
-
             gc.save();
             gc.transform(new Affine(new Rotate(actualRotation, rotationCenterX, rotationCenterY)));
             needToRestoreGc = true;
@@ -160,7 +129,7 @@ public abstract class Sprite {
             gc.restore();
     }
 
-    private void drawMirrorReflectedImage() {
+    protected void drawMirrorReflectedImage() {
         manager.getGraphicContext().drawImage(spriteImage, actualFramePositionX, actualFramePositionY, widthOfOneFrame, heightOfOneFrame, positionX + width, positionY, -width, height);
     }
 
@@ -176,7 +145,6 @@ public abstract class Sprite {
         return new Rectangle2D(positionX, positionY, width, height);
     }
 
-    ////////////////////////////////
     public boolean intersects(Sprite s) {
         return (s.getBoundary().intersects(this.getBoundary()));
     }
@@ -196,8 +164,7 @@ public abstract class Sprite {
     }
 
     public boolean topSideFrameCollision() {
-        double topFrameBorder = manager.getTopFrameBorder();
-        return (this.getBoundary().getMinY() <= topFrameBorder);
+        return (this.getBoundary().getMinY() <= 0);
     }
 
     public boolean downSideFrameCollision() {
@@ -206,8 +173,7 @@ public abstract class Sprite {
     }
 
     public boolean leftSideFrameCollision() {
-        double leftFrameBorder = manager.getLeftFrameBorder();
-        return (this.getBoundary().getMinX() <= leftFrameBorder);
+        return (this.getBoundary().getMinX() <= 0);
     }
 
     public boolean rightSideFrameCollision() {
@@ -215,7 +181,6 @@ public abstract class Sprite {
         return (this.getBoundary().getMaxX() >= rightFrameBorder);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public void setPosition(double x, double y) {
         positionX = x;
         positionY = y;
@@ -267,15 +232,11 @@ public abstract class Sprite {
         return width;
     }
 
-    public double getHeight() {
+    protected double getHeight() {
         return height;
     }
 
-    public double getActualRotation() {
-        return actualRotation;
-    }
-
-    public void setActualRotation(double actualRotation) {
+    protected void setActualRotation(double actualRotation) {
         this.actualRotation = actualRotation;
     }
 
@@ -284,25 +245,18 @@ public abstract class Sprite {
             this.imageDirection = imageDirection;
             return true;
         }
-
         return false;
     }
 
-
-    public DirectionEnum getImageDirection() {
+    protected DirectionEnum getImageDirection() {
         return imageDirection;
     }
 
-    public void setDurationPerOneFrame(double durationPerOneFrame) {
-        this.durationPerOneFrame = durationPerOneFrame;
-    }
-
-    //todo: tmp
-    public void setActualFramePositionX(double actualFramePositionX) {
+    protected void setActualFramePositionX(double actualFramePositionX) {
         this.actualFramePositionX = actualFramePositionX;
     }
 
-    public void setActualFramePositionY(double actualFramePositionY) {
+    protected void setActualFramePositionY(double actualFramePositionY) {
         this.actualFramePositionY = actualFramePositionY;
     }
 }

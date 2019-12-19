@@ -4,6 +4,7 @@ import com.Ukasz09.ValentineGame.gameModules.effects.rotateEffect.RotateEffect;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.others.Coin;
 import com.Ukasz09.ValentineGame.gameModules.sprites.items.weapons.Weapon;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.Logger;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.HeartsRender;
 import com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars.InCorner;
@@ -32,15 +33,12 @@ public class Player extends Creature {
     private static final int DEFAULT_SHIELD_DURATION = 7500;
     private static final int DEFAULT_ANTICOLLISION_TIMER = 4000;
     private static final double DEFAULT_HIT_SOUND_VOLUME = 0.2;
-
     private static final double WINGS_SOUND_VOLUME = 1;
-    private static final String WINGS_SOUND_PATH = SoundsPath.PLAYER_WINGS_SOUND_PATH;
-
     private static final double DEFAULT_SPRITE_WIDTH = 200;
     private static final double DEFAULT_SPRITE_HEIGHT = 200;
-
     private static final double DEFAULT_SHIELD_WIDTH = 200;
     private static final double DEFAULT_SHIELD_HEIGHT = 200;
+    private static final String WINGS_SOUND_PATH = SoundsPath.PLAYER_WINGS_SOUND_PATH;
 
     private final ImageSheetProperty shootBallSheetProperty = SpritesProperties.playerShotBallProperty();
     private final ImageSheetProperty[] shootBombsSheetProperty = SpritesProperties.playerShotBombsPoperty();
@@ -101,7 +99,7 @@ public class Player extends Creature {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    protected void setDefaultProperties() {
+    private void setDefaultProperties() {
         setMaxLives(DEFAULT_LIVES);
         setLives(DEFAULT_LIVES);
         velocityXPoints = DEFAULT_VELOCITY;
@@ -139,9 +137,7 @@ public class Player extends Creature {
         renderSpriteWithRotation();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //do NOT touch
-    //todo: naprawic by lepiej pasowaly (rysowanie osobno skrzydel o głowy)
     @Override
     public Rectangle2D getBoundary() {
         double width = getWidth();
@@ -159,13 +155,13 @@ public class Player extends Creature {
         shield.updateShield();
     }
 
-    public void activateShield() {
+    private void activateShield() {
         shield.activateShield();
     }
 
     private void renderBattery(GraphicsContext gc) {
         double overheatingPercents = bombOverheating / Bomb.getMaxOverheating() * 100;
-        double batteryPositionX = getManager().getLeftFrameBorder();
+        double batteryPositionX = 0;
         double batteryPositionY = getManager().getBottomFrameBorder() - batteryImages[0].getHeight();
 
         //100% charge
@@ -227,8 +223,7 @@ public class Player extends Creature {
         return shootBombsSheetProperty[randOffset];
     }
 
-
-    public Point2D getBombPosition() {
+    private Point2D getBombPosition() {
         double centerPositionRightX = getBoundary().getMaxX() - getWidth() / 3;
         return new Point2D(centerPositionRightX, getBoundary().getMaxY());
     }
@@ -261,7 +256,7 @@ public class Player extends Creature {
         while (coinsIterator.hasNext()) {
             Coin coin = coinsIterator.next();
             if (intersects(coin)) {
-                Coin.playCollectSound();
+                coin.playCollectSound();
                 addTotalScore(coin.getValue());
                 coinsIterator.remove();
                 collectedCoinsOnLevel++;
@@ -299,7 +294,6 @@ public class Player extends Creature {
             if (this.intersects(m)) {
                 if (!shield.isActive()) {
                     m.kickPlayer(this);
-
                     removeLives(m.getLivesTake());
                     playRandomHitSound();
                     activateShield();
@@ -394,8 +388,7 @@ public class Player extends Creature {
         getRandomHitSound().playSound();
     }
 
-    public void updatePlayerRotate() {
-//        updateLastRotate();
+    private void updatePlayerRotate() {
         double properRotate = RotateEffect.rotateByPressedKey(pressedKey_A, pressedKey_D, pressedKey_W, pressedKey_S, amountOfToPixelRotate);
         setActualRotation(properRotate);
     }
@@ -405,7 +398,6 @@ public class Player extends Creature {
         setPositionOfNextFrame(actualState.getMinX(), actualState.getMaxX(), actualState.getMinY(), actualState.getMaxY(), spriteImage.getWidth());
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     private SoundsPlayer getRandomHitSound() {
         int random = (int) (Math.random() * playerHitSounds.length);
         return playerHitSounds[random];
@@ -413,10 +405,6 @@ public class Player extends Creature {
 
     public int getTotalScore() {
         return totalScore;
-    }
-
-    public void setShield(Shield shield) {
-        this.shield = shield;
     }
 
     public int getLevelNumber() {
@@ -483,23 +471,23 @@ public class Player extends Creature {
         }
     }
 
-    public void setCollisionFromRightSide(boolean collisionFromRightSide) {
+    private void setCollisionFromRightSide(boolean collisionFromRightSide) {
         this.collisionFromRightSide = collisionFromRightSide;
     }
 
-    public void setCollisionFromLeftSide(boolean collisionFromLeftSide) {
+    private void setCollisionFromLeftSide(boolean collisionFromLeftSide) {
         this.collisionFromLeftSide = collisionFromLeftSide;
     }
 
-    public void setCollisionFromUpSide(boolean collisionFromUpSide) {
+    private void setCollisionFromUpSide(boolean collisionFromUpSide) {
         this.collisionFromUpSide = collisionFromUpSide;
     }
 
-    public void setCollisionFromDownSide(boolean collisionFromDownSide) {
+    private void setCollisionFromDownSide(boolean collisionFromDownSide) {
         this.collisionFromDownSide = collisionFromDownSide;
     }
 
-    public boolean setPressedKey(String literal, boolean keyCondition) {
+    public void setPressedKey(String literal, boolean keyCondition) {
         switch (literal) {
             case "A":
                 setPressedKey_A(keyCondition);
@@ -518,10 +506,8 @@ public class Player extends Creature {
                 break;
 
             default:
-                return false;
         }
 
-        return true;
     }
 
     public void setPressedKey_A(boolean pressedKey_A) {
@@ -540,7 +526,7 @@ public class Player extends Creature {
         this.pressedKey_S = pressedKey_S;
     }
 
-    public SoundsPlayer[] getPlayerHitSounds() {
+    private SoundsPlayer[] getPlayerHitSounds() {
         SoundsPlayer hitSounds[] = new SoundsPlayer[2];
         hitSounds[0] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_1_PATH, DEFAULT_HIT_SOUND_VOLUME, false);
         hitSounds[1] = new SoundsPlayer(SoundsPath.PLAYER_HIT_SOUND_2_PATH, DEFAULT_HIT_SOUND_VOLUME, false);
@@ -550,13 +536,13 @@ public class Player extends Creature {
     public void playWingsSound() {
         if (wingsSound != null)
             wingsSound.playSound();
-        else System.out.println(wingsSound.toString() + " is null");
+        else Logger.logError(getClass(), wingsSound.toString() + " is null");
     }
 
     public void stopWingsSound() {
         if (wingsSound != null)
             wingsSound.stopSound();
-        else System.out.println(wingsSound.toString() + " is null");
+        else Logger.logError(getClass(), wingsSound.toString() + " is null");
     }
 
     public double getVelocityXPoints() {

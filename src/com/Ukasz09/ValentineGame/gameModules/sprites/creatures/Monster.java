@@ -2,6 +2,7 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 
 import com.Ukasz09.ValentineGame.gameModules.effects.collisionAvoidEffect.ICollisionAvoidWay;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.DirectionEnum;
+import com.Ukasz09.ValentineGame.gameModules.utilitis.Logger;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.effects.kickEffect.KickPlayer;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
@@ -21,16 +22,6 @@ public abstract class Monster extends Creature {
     private ICollisionAvoidWay collisionAvoidWay;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    public Monster(CreatureSheetProperty spriteSheetProperty, double spriteWidth, double spriteHeight, KickPlayer kickMethod, ViewManager manager, ICollisionAvoidWay collisionAvoidWay) {
-//        super(spriteSheetProperty, spriteWidth, spriteHeight, manager);
-//        livesTake = 0;
-//        kickSize = 0;
-//        setActualVelocity(0, 0);
-//        this.kickMethod = kickMethod;
-//        this.collisionAvoidWay = collisionAvoidWay;
-//        setStartedPosition();
-//    }
-
     public Monster(ImageSheetProperty spriteSheetProperty, double creatureWidth, double creatureHeight, ViewManager manager) {
         super(spriteSheetProperty, creatureWidth, creatureHeight, manager);
         setStartedPosition();
@@ -48,8 +39,6 @@ public abstract class Monster extends Creature {
         ImageView iv = new ImageView(spriteImage);
         ColorAdjust hueEffect = new ColorAdjust();
         double randHue = (Math.random() * (maxRandHueOffset - minRandHueOffset + 1)) + minRandHueOffset;
-        //todo: tmp
-        System.out.println(randHue);
         hueEffect.setHue(randHue);
         iv.setEffect(hueEffect);
         SnapshotParameters params = new SnapshotParameters();
@@ -73,10 +62,7 @@ public abstract class Monster extends Creature {
 
     abstract public boolean hasActiveShield();
 
-
     public void update(Creature target, ArrayList<Monster> enemiesList) {
-//        updateNeedToChangeFrame();
-//        setPositionOfNextFrame();
         updateSpriteSheetFrame();
         collisionAvoidWay.updateCords(target, this, enemiesList);
         updateMonsterRotate(target);
@@ -93,56 +79,48 @@ public abstract class Monster extends Creature {
         this.setPosition(dx, dy);
     }
 
-    public void kickPlayer(Player p) {
+    protected void kickPlayer(Player p) {
         if (doKick())
-            kickMethod.kickPlayerByMonsterPostion(this, p, getManager());
+            kickMethod.kickPlayerByMonsterPosition(this, p, getManager());
     }
 
     private boolean doKick() {
-        if (kickSize > 0)
-            return true;
-        return false;
+        return (kickSize > 0);
     }
 
-    public void actionWhenDead() {
+    protected void actionWhenDead() {
         if (getDeathSoundOrNull() != null)
             getDeathSoundOrNull().playSound();
-        else System.out.println("Error: deathSound is null");
+        else Logger.logError(getClass(), "DeathSound is null");
     }
 
-    public void actionWhenHit() {
+    protected void actionWhenHit() {
         if (getHitSoundOrNull() != null)
             getHitSoundOrNull().playSound();
-        else System.out.println("Error: hitSound is null");
+        else Logger.logError(getClass(), "HitSound is null");
     }
 
     public void actionWhenMissHit() {
         if (getMissSoundOrNull() != null)
             getMissSoundOrNull().playSound();
-        else System.out.println("Error: missHitSound is null");
+        else Logger.logError(getClass(), "MissHitSound is null");
     }
 
-    public boolean isDead() {
+    protected boolean isDead() {
         return (getLives() <= 0);
     }
 
     public boolean isLeftSideToTarget(Creature target) {
         double creatureMinX = this.getBoundary().getMinX();
-        if (creatureMinX <= target.getBoundary().getMinX())
-            return true;
-
-        return false;
+        return (creatureMinX <= target.getBoundary().getMinX());
     }
 
     public boolean isUpSideToTarget(Creature target) {
         double creatureMinY = this.getBoundary().getMinY();
-        if (creatureMinY <= target.getBoundary().getMinY())
-            return true;
-
-        return false;
+        return creatureMinY <= target.getBoundary().getMinY();
     }
 
-    public void setPositionByDirection(boolean north, boolean south, boolean east, boolean west, double offset) {
+    protected void setPositionByDirection(boolean north, boolean south, boolean east, boolean west, double offset) {
         DirectionEnum direction = DirectionEnum.getRandomDirection(north, south, east, west);
         setPositionByDirection(direction, offset);
     }
@@ -152,26 +130,16 @@ public abstract class Monster extends Creature {
         if (direction.equals(DirectionEnum.UP) || direction.equals(DirectionEnum.DOWN)) {
             positionX = Math.random() * getManager().getRightFrameBorder();
             if (direction.equals(DirectionEnum.UP))
-                positionY = getManager().getTopFrameBorder() - offset;
+                positionY = -offset;
             else positionY = getManager().getBottomFrameBorder() + offset;
         } else {
             positionY = Math.random() * getManager().getBottomFrameBorder();
             if (direction.equals(DirectionEnum.LEFT))
-                positionX = getManager().getLeftFrameBorder() - offset;
+                positionX = -offset;
             else positionX = getManager().getRightFrameBorder() + offset;
         }
 
         this.setPosition(positionX, positionY);
-    }
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    public void setLivesTake(double livesTake) {
-        this.livesTake = livesTake;
-    }
-
-    public void setKickSize(double kickSize) {
-        this.kickSize = kickSize;
     }
 
     public double getKickSize() {
@@ -181,5 +149,4 @@ public abstract class Monster extends Creature {
     public double getLivesTake() {
         return livesTake;
     }
-
 }

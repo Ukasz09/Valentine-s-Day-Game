@@ -10,18 +10,17 @@ import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPath;
 import com.Ukasz09.ValentineGame.soundsModule.soundsPath.SoundsPlayer;
 
 public class Bullet extends Weapon {
-    public static final double DEFAULT_LIVES_TAKES = 1;
-    public static final double DEFAULT_MAX_OVERHEATING = 1000;
-    public static final double DEFAULT_SHOT_VELOCITY = 600;
+    private static final double DEFAULT_LIVES_TAKES = 1;
+    private static final double DEFAULT_MAX_OVERHEATING = 1000;
+    private static final double DEFAULT_SHOT_VELOCITY = 600;
     private static final String SHOT_SOUND_PATH = SoundsPath.BULLET_SHOT_SOUND_PATH;
     private static final double SHOT_SOUND_VOLUME = 0.2;
-    private static final SoundsPlayer SHOT_SOUND = new SoundsPlayer(SHOT_SOUND_PATH, SHOT_SOUND_VOLUME, false);
     private static double maxOverheating = DEFAULT_MAX_OVERHEATING;
+    private static final double DEFAULT_SPRITE_WIDTH = 71;
+    private static final double DEFAULT_SPRITE_HEIGHT = 34;
+
+    private  SoundsPlayer shotSound;
     private DirectionEnum shotDirection;
-
-    private static double DEFAULT_SPRITE_WIDTH = 71;
-    private static double DEFAULT_SPRITE_HEIGHT = 34;
-
     private FrameStatePositions actualState;
 
 
@@ -33,13 +32,13 @@ public class Bullet extends Weapon {
 
     public Bullet(ImageSheetProperty spriteSheetProperty, double shotVelocity, DirectionEnum shotDirection, double positionX, double positionY, double howManyLiveTakes, double maxOverheating, ViewManager manager) {
         super(spriteSheetProperty, DEFAULT_SPRITE_WIDTH, DEFAULT_SPRITE_HEIGHT, shotVelocity, shotVelocity, positionX, positionY, howManyLiveTakes, manager);
-        this.maxOverheating = maxOverheating;
+        Bullet.maxOverheating = maxOverheating;
         this.shotDirection = shotDirection;
-        actualState=spriteSheetProperty.getAction(KindOfState.MOVE);
+        actualState = spriteSheetProperty.getAction(KindOfState.MOVE);
+        shotSound = new SoundsPlayer(SHOT_SOUND_PATH, SHOT_SOUND_VOLUME, false);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     @Override
     protected void setPositionOfNextFrame() {
         setPositionOfNextFrame(actualState.getMinX(), actualState.getMaxX(), actualState.getMinY(), actualState.getMaxY(), spriteImage.getWidth());
@@ -55,10 +54,7 @@ public class Bullet extends Weapon {
 
     @Override
     public boolean isOutOfBoundary() {
-        if ((getPositionX() > getManager().getRightFrameBorder()) || (getPositionX() < getManager().getLeftFrameBorder()))
-            return true;
-
-        return false;
+        return (getPositionX() > getManager().getRightFrameBorder()) || (getPositionX() < 0);
     }
 
     @Override
@@ -72,10 +68,17 @@ public class Bullet extends Weapon {
     }
 
     public void playShotSound() {
-        Bullet.SHOT_SOUND.playSound();
+        shotSound=new SoundsPlayer(SHOT_SOUND_PATH, SHOT_SOUND_VOLUME, false);
+        shotSound.playSound();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @Override
+    public void render() {
+        if (shotDirection == DirectionEnum.LEFT)
+            drawMirrorReflectedImage();
+        else super.render();
+    }
+
     public static double getMaxOverheating() {
         return maxOverheating;
     }

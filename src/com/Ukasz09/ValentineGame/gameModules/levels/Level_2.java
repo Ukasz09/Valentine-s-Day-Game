@@ -15,21 +15,27 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 public class Level_2 extends AllLevels {
-    public static final String BACKGROOUND_IMAGE_PATH = BackgroundPath.BACKGROUD_IMAGE_PATH_L_1;
+    private static final String BACKGROUND_IMAGE_PATH = BackgroundPath.BACKGROUD_IMAGE_PATH_L_1;
 
     private final int amountOfSmallCoins = 3;
     private final int amountOfNormalCoins = 5;
     private final int amountOfBigCoins = 2;
 
-    private final int amountOfMonsters = 6;
-    private final int amountOfBosses = 2;
+    private int amountOfMonsters = 5;
+    private int amountOfBosses = 2;
     private final ImageSheetProperty fishMonsterSheetProperty = SpritesProperties.fishMonsterSheetProperty();
     private final ImageSheetProperty fishShieldSheetProperty = SpritesProperties.fishBossShieldSheetProperty();
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_2(ViewManager manager) {
-        super(manager, new Image(BACKGROOUND_IMAGE_PATH));
+        super(manager, new Image(BACKGROUND_IMAGE_PATH));
         setAmountOfCoins(amountOfSmallCoins, amountOfNormalCoins, amountOfBigCoins);
+    }
+
+    public Level_2(ViewManager manager, int amountOfMonsters, int amountOfBosses) {
+        this(manager);
+        this.amountOfMonsters = amountOfMonsters;
+        this.amountOfBosses = amountOfBosses;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +52,6 @@ public class Level_2 extends AllLevels {
     private void spawnBosses(ArrayList<Monster> enemiesList) {
         for (int i = 0; i < amountOfBosses; i++)
             enemiesList.add(new FishMonsterBoss(fishMonsterSheetProperty, fishShieldSheetProperty, new KickByBigMonster(new TeleportKick()), getManager(), new NormalCollisionAvoid()));
-
     }
 
     @Override
@@ -76,10 +81,8 @@ public class Level_2 extends AllLevels {
      * @param amountOfCollectedCoins - (amount of coins in pcs.)
      */
     private boolean bossesSpawnIsNeed(int amountOfCollectedCoins, boolean playerKillAllMonsters) {
-        boolean playerCollectAllCoins = amountOfCollectedCoins == getAmountOfAllCoins() ? true : false;
-        if (playerCollectAllCoins && playerKillAllMonsters)
-            return true;
-        return false;
+        boolean playerCollectAllCoins = amountOfCollectedCoins == getAmountOfAllCoins();
+        return (playerCollectAllCoins && playerKillAllMonsters);
     }
 
     @Override

@@ -14,11 +14,7 @@ public class SoundsPath {
     public static final String LITTLE_MONSTER_DEATH_SOUND_PATH = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/littleMonsterDeath.mp3";
 
     public static final String BOMB_SHOT_SOUND_PATH = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/bombShotSound2.mp3";
-    //todo: zmienic nazwy efektow zaeby od 0 sie zaczyanly
     public static final String BOMB_BOOM_SOUND_PATH_PREFIX = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/bombBoomEffect";
-//    public static final String BOMB_BOOM_SOUND_PATH_2 = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/bombBoomEffect2.mp3";
-//    public static final String BOMB_BOOM_SOUND_PATH_3 = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/bombBoomEffect3.mp3";
-//    public static final String BOMB_BOOM_SOUND_PATH_4 = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/bombBoomEffect4.mp3";
     public static final String BULLET_SHOT_SOUND_PATH = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/shoot.wav";
 
     public static final String PLAYER_HIT_SOUND_1_PATH = "src/com/Ukasz09/ValentineGame/soundsModule/soundsModel/ukaszHitSound1.mp3";

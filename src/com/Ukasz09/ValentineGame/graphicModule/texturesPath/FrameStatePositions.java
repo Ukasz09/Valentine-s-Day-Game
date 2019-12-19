@@ -1,7 +1,5 @@
 package com.Ukasz09.ValentineGame.graphicModule.texturesPath;
 
-import java.util.Map;
-
 public class FrameStatePositions {
     private double minX;
     private double maxX;
@@ -10,6 +8,7 @@ public class FrameStatePositions {
     private int startIndex;
     private int endIndex;
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public FrameStatePositions(double minX, double maxX, double minY, double maxY) {
         this.minX = minX;
         this.maxX = maxX;
@@ -17,6 +16,7 @@ public class FrameStatePositions {
         this.maxY = maxY;
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public double getMinX() {
         return minX;
     }
@@ -33,7 +33,7 @@ public class FrameStatePositions {
         return maxY;
     }
 
-    public void setIndexes(int startIndex, int endIndex) {
+    protected void setIndexes(int startIndex, int endIndex) {
         this.startIndex = startIndex;
         this.endIndex = endIndex;
     }

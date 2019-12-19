@@ -20,9 +20,9 @@ import javafx.scene.image.Image;
 import java.util.ArrayList;
 
 public class Level_1 extends AllLevels {
-    public static final String BACKGROOUND_IMAGE_PATH = BackgroundPath.BACKGROUD_IMAGE_PATH_L_0;
-    public static final String BACKGROUND_SOUND_PATH = SoundsPath.BACKGROUND_SOUND_PATH_1;
-    public static final double BACKGROUND_SOUND_VOLUME = 0.1;
+    protected static final String BACKGROUND_IMAGE_PATH = BackgroundPath.BACKGROUD_IMAGE_PATH_L_0;
+    protected static final String BACKGROUND_SOUND_PATH = SoundsPath.BACKGROUND_SOUND_PATH_1;
+    protected static final double BACKGROUND_SOUND_VOLUME = 0.1;
 
     private final ImageSheetProperty littleMonsterSheetProperty = SpritesProperties.littleMonsterSheetProperty();
 
@@ -30,12 +30,17 @@ public class Level_1 extends AllLevels {
     private final int amountOfNormalCoins = 3;
     private final int amountOfBigCoins = 2;
 
-    private final int amountOfMonsters = 10;
+    private int amountOfMonsters = 5;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public Level_1(ViewManager manager) {
-        super(manager, new Image(BACKGROOUND_IMAGE_PATH));
+        super(manager, new Image(BACKGROUND_IMAGE_PATH));
         setAmountOfCoins(amountOfSmallCoins, amountOfNormalCoins, amountOfBigCoins);
+    }
+
+    public Level_1(ViewManager manager, int amountOfMonsters) {
+        this(manager);
+        this.amountOfMonsters = amountOfMonsters;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

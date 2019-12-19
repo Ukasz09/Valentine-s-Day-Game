@@ -3,7 +3,6 @@ package com.Ukasz09.ValentineGame.gameModules.sprites.creatures;
 import com.Ukasz09.ValentineGame.gameModules.sprites.Sprite;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
-import javafx.scene.image.Image;
 
 public abstract class Creature extends Sprite {
     private final static double DEFAULT_MAX_LIVES = 0;
@@ -12,12 +11,7 @@ public abstract class Creature extends Sprite {
     private double lives;
     private double maxLives;
 
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//    public Creature(Image image, ViewManager manager) {
-//        super(image, manager);
-//    }
-
     public Creature(ImageSheetProperty spriteSheetProperty, double creatureWidth, double creatureHeight, ViewManager manager) {
         super(spriteSheetProperty, creatureWidth, creatureHeight, manager);
     }

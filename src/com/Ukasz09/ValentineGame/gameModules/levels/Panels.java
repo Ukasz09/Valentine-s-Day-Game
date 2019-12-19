@@ -19,7 +19,7 @@ public abstract class Panels {
      drawBackground();
     }
 
-    public void drawBackground() {
+    private void drawBackground() {
         manager.getGraphicContext().drawImage(backgroundImage, 0, 0);
     }
 
@@ -29,7 +29,7 @@ public abstract class Panels {
         return manager;
     }
 
-    public void setBackgroundImage(Image backgroundImage) {
+    protected void setBackgroundImage(Image backgroundImage) {
         this.backgroundImage = backgroundImage;
     }
 }

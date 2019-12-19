@@ -6,5 +6,5 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 
 public interface KindOfKick {
 
-    void kick(Monster m, Player p, String kickDirection, ViewManager manager);
+    void kick(Monster m, Player p, KickDirection kickDirection, ViewManager manager);
 }

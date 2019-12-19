@@ -137,11 +137,7 @@ public class SpritesProperties {
         return batteryImages;
     }
 
-    ////
     public static Image heartFullImage = new Image(SpritesPath.HEART_FULL_PATH);
     public static Image heartHalfImage = new Image(SpritesPath.HEART_HALF_PATH);
     public static Image heartEmptyImage = new Image(SpritesPath.HEART_EMPTY_PATH);
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 }

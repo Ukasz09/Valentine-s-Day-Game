@@ -6,7 +6,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 
 public interface KickPlayer {
 
-    void kickPlayerByMonsterPostion(Monster m, Player p, ViewManager manager);
+    void kickPlayerByMonsterPosition(Monster m, Player p, ViewManager manager);
 
-    String getKickDirection(Monster m, Player p);
+    KickDirection getKickDirection(Monster m, Player p);
 }

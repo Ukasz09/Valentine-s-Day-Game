@@ -8,8 +8,8 @@ import java.io.File;
 public class SoundsPlayer {
     private String soundPath;
     private MediaPlayer mediaPlayer;
-    double volume;
-    boolean inLoop;
+    private double volume;
+    private boolean inLoop;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public SoundsPlayer(String soundPath, double volume, boolean inLoop) {
@@ -25,7 +25,6 @@ public class SoundsPlayer {
         Media media = new Media(resource);
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(volume);
-
         if (inLoop)
             mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
     }

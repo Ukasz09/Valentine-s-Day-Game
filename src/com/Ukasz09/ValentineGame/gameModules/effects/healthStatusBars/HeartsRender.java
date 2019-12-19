@@ -3,6 +3,7 @@ package com.Ukasz09.ValentineGame.gameModules.effects.healthStatusBars;
 import com.Ukasz09.ValentineGame.gameModules.utilitis.ViewManager;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Creature;
 import com.Ukasz09.ValentineGame.graphicModule.texturesPath.SpritesProperties;
+import com.sun.javaws.security.AppContextUtil;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
@@ -11,18 +12,14 @@ public abstract class HeartsRender {
     private static final Image DEFAULT_HALF_HEART = SpritesProperties.heartHalfImage;
     private static final Image DEFAULT_EMPTY_HEART = SpritesProperties.heartEmptyImage;
 
-    private Image heartFullImage;
-    private Image heartHalfImage;
-    private Image heartEmptyImage;
-
+    private Image heartFullImage = DEFAULT_FULL_HEART;
+    private Image heartHalfImage = DEFAULT_HALF_HEART;
+    private Image heartEmptyImage = DEFAULT_EMPTY_HEART;
     private ViewManager manager;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public HeartsRender(ViewManager manager) {
         this.manager = manager;
-        heartFullImage = DEFAULT_FULL_HEART;
-        heartHalfImage = DEFAULT_HALF_HEART;
-        heartEmptyImage = DEFAULT_EMPTY_HEART;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,20 +53,15 @@ public abstract class HeartsRender {
 
     public abstract void renderHearts(Creature creature, Image heartFull, Image heartHalf, Image heartEmpty);
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public ViewManager getManager() {
         return manager;
     }
 
-    public Image getHeartFullImage() {
-        return heartFullImage;
+    protected double getOneHeartWidth(){
+        return heartFullImage.getWidth();
     }
 
-    public Image getHeartHalfImage() {
-        return heartHalfImage;
-    }
-
-    public Image getHeartEmptyImage() {
-        return heartEmptyImage;
+    protected double getOneHeartHeight(){
+        return heartFullImage.getHeight();
     }
 }

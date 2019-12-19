@@ -5,8 +5,7 @@ import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Monster;
 import com.Ukasz09.ValentineGame.gameModules.sprites.creatures.Player;
 
 public class KickByLittleMonster implements KickPlayer {
-
-    KindOfKick kickMethod;
+    private KindOfKick kickMethod;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public KickByLittleMonster(KindOfKick kickMethod) {
@@ -15,20 +14,12 @@ public class KickByLittleMonster implements KickPlayer {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @Override
-    public void kickPlayerByMonsterPostion(Monster m, Player p, ViewManager manager) {
+    public void kickPlayerByMonsterPosition(Monster m, Player p, ViewManager manager) {
         kickMethod.kick(m, p, getKickDirection(m, p), manager);
     }
 
-    /**
-     * @return: kickDirection
-     * <p>
-     * W - UP
-     * S - DOWN
-     * A - LEFT
-     * D - RIGHT
-     **/
     @Override
-    public String getKickDirection(Monster m, Player p) {
+    public KickDirection getKickDirection(Monster m, Player p) {
         double monsterMinX = m.getBoundary().getMinX();
         double monsterMaxX = m.getBoundary().getMaxX();
         double monsterMaxY = m.getBoundary().getMaxY();
@@ -42,24 +33,24 @@ public class KickByLittleMonster implements KickPlayer {
         //up or down
         if ((monsterMinX > playerMinX) && (monsterMaxX < playerMaxX)) {
             if (monsterMinY < playerMinY)
-                return "S";
-            else return "W";
+                return KickDirection.DOWN;
+            else return KickDirection.UP;
         }
 
         //right kick
         if (monsterMaxX < playerMaxX) {
             if ((monsterMaxY < playerMaxY) && (monsterMinY > playerMinY))
-                return "D";
+                return KickDirection.RIGHT;
             else if (monsterMinY < playerMinY)
-                return "SD";
-            else return "WD";
+                return KickDirection.DOWN_RIGHT;
+            else return KickDirection.UP_RIGHT;
         }
 
         //left kick
         if ((monsterMaxY < playerMaxY) && (monsterMinY > playerMinY))
-            return "A";
+            return KickDirection.LEFT;
         else if (monsterMinY < playerMinY)
-            return "SA";
-        else return "WA";
+            return KickDirection.DOWN_LEFT;
+        else return KickDirection.UP_LEFT;
     }
 }

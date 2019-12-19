@@ -7,7 +7,6 @@ import com.Ukasz09.ValentineGame.graphicModule.texturesPath.ImageSheetProperty;
 import javafx.scene.image.Image;
 
 public abstract class Weapon extends Sprite {
-
     private double howManyLivesTake;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,12 +19,10 @@ public abstract class Weapon extends Sprite {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public double getHowManyLivesTake() {
+    protected double getHowManyLivesTake() {
         return howManyLivesTake;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public abstract void update(double elapsedTime);
 
     public abstract boolean isOutOfBoundary();
