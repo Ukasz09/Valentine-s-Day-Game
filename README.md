@@ -1,10 +1,10 @@
 # Valentine's Game
 Simple 2D game with dedication to my friend Kasia, who was inspiration for this project 
 
-![alt text](https://raw.githubusercontent.com/Ukasz09/PrinterSimulator/master/readmeImages/1.png)
-![alt text](https://raw.githubusercontent.com/Ukasz09/PrinterSimulator/master/readmeImages/2.png)
-![alt text](https://raw.githubusercontent.com/Ukasz09/PrinterSimulator/master/readmeImages/3.png)
-![alt text](https://raw.githubusercontent.com/Ukasz09/PrinterSimulator/master/readmeImages/4.png)
+![alt text](https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/1.png)
+![alt text](https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/2.png)
+![alt text](https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/3.png)
+![alt text](https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/4.png)
 
 # For Devs
 Used Designs Patterns:
