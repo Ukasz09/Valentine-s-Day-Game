@@ -1,7 +1,7 @@
 # Valentine's Game [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/Ukasz09/Valentines-Game) [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://choosealicense.com/licenses/mit/) [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](https://github.com/Ukasz09/Valentines-Game)
 >First game: Fantasy, survivor, shooter 2D PC game written in Java language using JavaFX library 👾💰 👼💣💥 
 
-Simple 2D game with dedication to my friend Kasia, who was inspiration for this project 
+My first simple 2D game with dedication to my friend Kasia, who was inspiration for this project 
 <br/>
 
 ![alt text](https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/1.png)
