@@ -9,7 +9,7 @@
 ---
 # Game controls
 - `Arrows left/right`: flame shot
-- `Space`: bomb
+- `Space`: bomb shot
 - `WSAD`: sprite control
 ---
 # JAR
@@ -29,3 +29,7 @@ java -jar ValentinesGame.jar
 ✔️ 48 classes (including enums and interfaces) <br/>
 ✔️ over 3600 lines of code <br/>
 
+---
+## Contact
+Created by [@Ukasz09](https://github.com/Ukasz09) <br/>
+gajerski.lukasz@gmail.com - feel free to contact me!
