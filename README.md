@@ -1,9 +1,19 @@
 # Valentine's Game [![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](https://choosealicense.com/licenses/mit/) [![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)](https://github.com/Ukasz09/Valentines-Game)
->First game: Fantasy, survivor, shooter 2D PC game written in Java language using JavaFX library 👾💰 👼💣💥 
+>First game: Fantasy, survivor, shooter 2D PC game written in Java language using JavaFX library  👼💣💥 
 
 My first simple 2D game with dedication to my friend Kasia, who was inspiration for this project 
 <br/>
 
+💻 All resolutions support <br/>
+🔉 Sounds and music <br/>
+
+# Gameplay
+<p align="center"><img width=95% src="https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/gameplay1.gif"></p>
+<p align="center"><img width=95% src="https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/gameplay2.gif"></p>
+<p align="center"><img width=95% src="https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/gameplay3.gif"></p>
+<br/>
+
+# Screenshots 
 ![alt text](https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/1.png)
 ![alt text](https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/2.png)
 ![alt text](https://raw.githubusercontent.com/Ukasz09/Valentines-Game/master/readmeImages/3.png)
