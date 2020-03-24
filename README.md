@@ -29,6 +29,26 @@ If there is a problem with running, try to open it by console with command:
 java -jar ValentinesGame.jar
 ```
 
+- Linux 
+
+```bash
+java -jar ValentinesGame.jar
+```
+If you will see errors about not having error like this:
+
+```bash
+java.lang.NoClassDefFoundError: javafx/application/Application
+```
+it means that you don't have javafx libraries and you need to follow this steps: <br/>
+- Download javaFx libraries for linux [javafx-oracle.com](https://www.oracle.com/java/technologies/java-archive-javafx-downloads.html#javafx_sdk-1.3.1-oth-JPR)
+- Unpack files into your java library destination, for example: `/usr/lib/jvm/java-14-oracle`
+- Run script made by myself for you, with java library destination folder, for example
+
+```bash
+./runGame.sh /usr/lib/jvm/java-14-oracle
+```
+
+
 ## Software design stuff
 **Used Designs Patterns:**
 <br/><br/>
