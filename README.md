@@ -42,12 +42,18 @@ java.lang.NoClassDefFoundError: javafx/application/Application
 it means that you don't have javafx libraries and you need to follow this steps: <br/>
 - Download javaFx libraries for linux [javafx-oracle.com](https://www.oracle.com/java/technologies/java-archive-javafx-downloads.html#javafx_sdk-1.3.1-oth-JPR)
 - Unpack files into your java library destination, for example: `/usr/lib/jvm/java-14-oracle`
-- Run script made by myself for you, with java library destination folder, for example
+- Run script made by myself for you:
+  - `-d` or `--default` flag: open with default java installation folder
+  - `-p=JAVA_PATH` or `--path=JAVA_PATH` flag: open with custom java installation folder by JAVA_PATH     
+
+Examples: <br/>
 
 ```bash
-./runGame.sh /usr/lib/jvm/java-14-oracle
+	./runGame.sh --default
+	./runGame.sh -d
+	./runGame.sh -p=/usr/lib/jvm/java-14-oracle
+	./runGame.sh --path=/usr/lib/jvm/java-14-oracle
 ```
-
 
 ## Software design stuff
 **Used Designs Patterns:**
